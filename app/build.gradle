@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "cn.piesat.retrofitframe"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$rootProject.buildToolsVersion"
+    implementation "com.android.support:design:$rootProject.buildToolsVersion"
+    implementation "com.android.support:support-v4:$rootProject.buildToolsVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterKnife_version"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnife_version"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:$rootProject.dbflow_version"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.dbflow_version"
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.dbflow_version"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:$rootProject.dbflow_version"
+    implementation "net.zetetic:android-database-sqlcipher:$rootProject.sqlcipher_version@aar"
+    implementation "com.wuxiaolong.pullloadmorerecyclerview:library:$rootProject.recyclerview_version"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
+    implementation "com.github.HanHuoBin:BaseDialog:$rootProject.dialog_version"
+    implementation 'com.squareup.retrofit2:retrofit:+'
+    implementation 'com.squareup.retrofit2:converter-gson:+'
+    implementation 'io.reactivex.rxjava2:rxjava:+'
+    implementation 'io.reactivex.rxjava2:rxandroid:+'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:+'
+}

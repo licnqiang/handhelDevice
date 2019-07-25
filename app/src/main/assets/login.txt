@@ -1,0 +1,4 @@
+{
+    "status": 1,
+    "data": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhZG1pbiIsImlhdCI6MTU2NDA0Njk3OCwic3ViIjoicm9vdEBwaXNhdC5jb20iLCJpc3MiOiJ3d3cucGllc2F0LmNvbSIsImV4cCI6MTU2NDA1MDU3OH0.5h0K1EVjE5Tx5j3ET86cBH9n_OHH-kHXv6fOtfiEcLg"
+}
