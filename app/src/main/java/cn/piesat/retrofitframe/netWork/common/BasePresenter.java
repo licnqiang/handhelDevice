@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 import cn.piesat.retrofitframe.common.BaseApplication;
-import cn.piesat.retrofitframe.netWork.configuration.NetworkResponse;
 import cn.piesat.retrofitframe.netWork.configuration.UrlConfig;
 import cn.piesat.retrofitframe.netWork.module.NetService;
 import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
@@ -36,6 +35,7 @@ public abstract class BasePresenter extends RetrofitUtils {
     protected static final NetService service = getRetrofit().create(NetService.class);
 
     public <T> void TransmitCommonApi(boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
+
         Log.e("http", "http--url==" + UrlConfig.getURLPreFix() + "part" + "/" + methodName);
         Log.e("http", "http--requestMethod==" + (isPost ? "Post" : "Get"));
         Log.e("http", "http--parameter=="+new Gson().toJson(parameterMap));
@@ -99,6 +99,7 @@ public abstract class BasePresenter extends RetrofitUtils {
                     //获取数据
                     @Override
                     public void onNext(BaseReseponseInfo baseResponse) {
+//                        Log.e("http", "onNext" + new Gson().toJson(baseResponse));
                         responseData(baseResponse, methodName, parameterMap, typeToken);
                     }
                 });
@@ -130,8 +131,8 @@ public abstract class BasePresenter extends RetrofitUtils {
      */
     private void responseData(BaseReseponseInfo baseResponse, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
         Object info = baseResponse.data;
-
-        if (NetworkResponse.REQUEST_SUCCESS_CODE == baseResponse.status) {
+        //成功
+        if (REQUEST_SUCCESS == baseResponse.status) {
             Object object = null;
             if (typeToken != null) {
                 object = requestServer(info.toString(), typeToken);
@@ -139,8 +140,8 @@ public abstract class BasePresenter extends RetrofitUtils {
             //成功回调数据
             onResponse(methodName, null == object ? baseResponse : object, REQUEST_SUCCESS, parameterMap);
 
-
-        } else if (NetworkResponse.REQUEST_SUCCESS_FAILED == baseResponse.status) {
+        //失败
+        } else if (REQUEST_FAILURE == baseResponse.status) {
             onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap);
 
         }

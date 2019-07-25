@@ -53,8 +53,23 @@ public class LoggingInterceptor implements Interceptor {
         Response response = chain.proceed(request);
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - statNs);  //响应时差
         ResponseBody responseBody = response.body();
+        String rBady = null;
+        BufferedSource source = responseBody.source();
+        source.request(Long.MAX_VALUE);   //缓存body体
+        Buffer buffer = source.buffer();
 
-        Log.e("http", "Http--响应==="+ responseBody.string());
+        Charset charset = UTF8;
+        MediaType contentType = responseBody.contentType();
+        if (null != contentType) {
+            try {
+                charset = contentType.charset(UTF8);
+            } catch (UnsupportedCharsetException e) {
+                e.printStackTrace();
+            }
+        }
+        rBady = buffer.clone().readString(charset);
+
+        Log.e("http", "Http--响应==="+ rBady);
 
         return response;
     }
