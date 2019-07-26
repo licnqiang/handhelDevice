@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.contract;
+package cn.piesat.retrofitframe.model.contract;
 
 /**
  * @author lq

@@ -1,16 +1,12 @@
 package cn.piesat.retrofitframe.netWork.module;
 
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.concurrent.TimeUnit;
 
-import cn.piesat.retrofitframe.netWork.configuration.UrlConfig;
+import cn.piesat.retrofitframe.util.Log;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;

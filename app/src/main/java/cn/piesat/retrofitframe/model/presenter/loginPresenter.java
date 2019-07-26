@@ -1,14 +1,10 @@
-package cn.piesat.retrofitframe.presenter;
-
-import android.util.Log;
-
-import com.google.gson.Gson;
+package cn.piesat.retrofitframe.model.presenter;
 
 import java.util.HashMap;
 import java.util.Map;
-import cn.piesat.retrofitframe.contract.LoginContract;
+import cn.piesat.retrofitframe.model.contract.LoginContract;
 import cn.piesat.retrofitframe.netWork.common.CommonPresenter;
-import cn.piesat.retrofitframe.netWork.configuration.ICommonAction;
+import cn.piesat.retrofitframe.netWork.common.ICommonAction;
 
 /**
  * @author lq
@@ -26,9 +22,6 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
         commonPresenter = new CommonPresenter(this);
     }
 
-    @Override
-    public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap) {
-    }
 
     @Override
     public void login(String userName, String passWord) {
@@ -39,4 +32,8 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
                 hashMap, null);
     }
 
+
+    @Override
+    public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap) {
+    }
 }

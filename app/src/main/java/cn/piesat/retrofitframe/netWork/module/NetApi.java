@@ -19,7 +19,7 @@ import retrofit2.http.QueryMap;
 /**
  * 通用接口调用
  */
-public interface NetService {
+public interface NetApi {
 
 //    @FormUrlEncoded
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
@@ -37,8 +37,8 @@ public interface NetService {
      * @return 状态信息
      */
     @Multipart
-    @POST("/dl_laundry/upload")
-    Call<BaseReseponseInfo> uploadFilesWithParts(@Part() List<MultipartBody.Part> parts);
+    @POST("{part}/{methodName}")
+    Call<BaseReseponseInfo> uploadFilesWithParts(@Path("part") String part, @Path("methodName") String methodName,@Part() List<MultipartBody.Part> parts);
 
 
 }

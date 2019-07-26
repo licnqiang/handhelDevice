@@ -1,11 +1,10 @@
 package cn.piesat.retrofitframe.netWork.upLoadFile;
 
-import android.util.Log;
 import java.util.List;
-
 import cn.piesat.retrofitframe.netWork.common.BaseReseponseInfo;
-import cn.piesat.retrofitframe.netWork.module.NetService;
+import cn.piesat.retrofitframe.netWork.module.NetApi;
 import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
+import cn.piesat.retrofitframe.util.Log;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,7 +12,7 @@ import retrofit2.Response;
 
 public class upLoadFile extends RetrofitUtils {
 
-    protected static final NetService service = getRetrofit().create(NetService.class);
+    protected NetApi service = getRetrofit().create(NetApi.class);
 
     public interface ResultCallBack {
         void succeed(Object str);
@@ -26,10 +25,10 @@ public class upLoadFile extends RetrofitUtils {
      *
      * @param paths
      */
-    public static void uploadFile(List<String> paths, final ResultCallBack resultCallBack) {
+    public  void uploadFile(String part,String methodName,List<String> paths, final ResultCallBack resultCallBack) {
         final StringBuffer sbServerPath = new StringBuffer();
         List<MultipartBody.Part> body = UpLoadFileNet.filesToMultipartBodyParts(paths);
-        Call<BaseReseponseInfo> call = service.uploadFilesWithParts(body);
+        Call<BaseReseponseInfo> call = service.uploadFilesWithParts(part,methodName,body);
         call.enqueue(new Callback<BaseReseponseInfo>() {
             @Override
             public void onResponse(Call<BaseReseponseInfo> call, Response<BaseReseponseInfo> response) {

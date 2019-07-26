@@ -12,7 +12,7 @@ import java.io.File;
  * @describe TODO
  */
 public class FileConstant {
-    public static final String PROJECT_NAME = "laundry";
+    public static final String PROJECT_NAME = "retrofitframe";
     public static final String DB_NAME = "DB";
     public static String STR_SDCARD_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
 

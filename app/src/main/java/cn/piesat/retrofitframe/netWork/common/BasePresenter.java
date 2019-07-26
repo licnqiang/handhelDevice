@@ -1,7 +1,6 @@
 package cn.piesat.retrofitframe.netWork.common;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,9 +11,10 @@ import java.util.Map;
 
 import cn.piesat.retrofitframe.common.BaseApplication;
 import cn.piesat.retrofitframe.netWork.configuration.UrlConfig;
-import cn.piesat.retrofitframe.netWork.module.NetService;
+import cn.piesat.retrofitframe.netWork.module.NetApi;
 import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
 import cn.piesat.retrofitframe.util.FileUtil;
+import cn.piesat.retrofitframe.util.Log;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,7 +32,7 @@ public abstract class BasePresenter extends RetrofitUtils {
     public static final int REQUEST_SUCCESS = 1;//请求成功
     public static final int REQUEST_FAILURE = 0;//请求失败
 
-    protected static final NetService service = getRetrofit().create(NetService.class);
+    protected  final NetApi service = getRetrofit().create(NetApi.class);
 
     public <T> void TransmitCommonApi(boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 

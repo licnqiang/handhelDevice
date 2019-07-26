@@ -15,15 +15,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class RetrofitUtils {
 
 
-    private static Retrofit mRetrofit;
-    private static OkHttpClient.Builder mOkHttpClient;
+    private  Retrofit mRetrofit;
+    private  OkHttpClient.Builder mOkHttpClient;
 
     /**
      * 获取Retrofit对象
      *
      * @return
      */
-    protected static Retrofit getRetrofit() {
+    protected  Retrofit getRetrofit() {
 
         if (null == mRetrofit) {
 

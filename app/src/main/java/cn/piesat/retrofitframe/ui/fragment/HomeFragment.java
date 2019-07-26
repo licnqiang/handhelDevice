@@ -40,7 +40,7 @@ public class HomeFragment extends BaseFragment {
         mAdapter = new AutoSwitchAdapter(getActivity(), im);
         loopswitch.setAdapter(mAdapter);
 
-        showLoadingDialog("我的",true);
+//        showLoadingDialog("我的",true);
     }
 
     @Override

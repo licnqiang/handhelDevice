@@ -12,6 +12,10 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+
+import com.hb.dialog.dialog.ConfirmDialog;
+import com.hb.dialog.myDialog.MyAlertDialog;
 
 import cn.piesat.retrofitframe.R;
 import cn.piesat.retrofitframe.common.BaseActivity;
@@ -76,21 +80,19 @@ public class SplashActivity extends BaseActivity {
      * 提示手动开启权限
      */
     private void showPermiDialog() {
-        new AlertDialog.Builder(SplashActivity.this)
+        MyAlertDialog myAlertDialog = new MyAlertDialog(this).builder()
                 .setTitle("提示")
-                .setCancelable(false)
-                .setMessage("需要获取相应权限，否则您的应用将无法正常使用! 请手动开启权限")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setMsg("需要获取相应权限，否则您的应用将无法正常使用! 请手动开启权限")
+                .setPositiveButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         Uri uri = Uri.fromParts("package", SplashActivity.this.getPackageName(), null);
                         intent.setData(uri);
-                        // Start for result
                         SplashActivity.this.startActivityForResult(intent, mRequestCode);
                     }
-                })
-                .create().show();
+                });
+        myAlertDialog.show();
     }
 
     /**

@@ -3,7 +3,6 @@ package cn.piesat.retrofitframe.netWork.common;
 import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.Map;
-import cn.piesat.retrofitframe.netWork.configuration.ICommonAction;
 
 /**
  * 【CommonPresenter presenter】

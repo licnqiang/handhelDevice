@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.netWork.configuration;
+package cn.piesat.retrofitframe.netWork.common;
 
 import java.util.Map;
 
