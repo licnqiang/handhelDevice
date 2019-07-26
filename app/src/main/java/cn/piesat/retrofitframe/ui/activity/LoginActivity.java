@@ -66,9 +66,7 @@ public class LoginActivity extends BaseActivity {
         } else {
             mHashMap.put("userPhone", userName);
             mHashMap.put("userPassword", userPsw);
-//            NetControl.Login(callback, mHashMap);
         }
-//                toActivity(MainActivity.class);
     }
 
 

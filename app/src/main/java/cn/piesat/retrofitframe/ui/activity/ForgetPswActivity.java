@@ -5,16 +5,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.piesat.retrofitframe.R;
 import cn.piesat.retrofitframe.common.BaseActivity;
-import cn.piesat.retrofitframe.common.BaseApplication;
-import cn.piesat.retrofitframe.netWork.common.BaseReseponseInfo;
 import cn.piesat.retrofitframe.ui.view.CountDownTextView;
-import cn.piesat.retrofitframe.util.RxDeviceTool;
+import cn.piesat.retrofitframe.util.DeviceTool;
 import cn.piesat.retrofitframe.util.ToastUtil;
 
 public class ForgetPswActivity extends BaseActivity {
@@ -60,7 +58,7 @@ public class ForgetPswActivity extends BaseActivity {
                     ToastUtil.show(this, "请输入手机号");
                     sendYzm.reset();
                 } else {
-                    if (!RxDeviceTool.isMobileNO(etUserPhone)) {
+                    if (!DeviceTool.isMobileNO(etUserPhone)) {
                         ToastUtil.show(this, "输入手机号有误");
                         sendYzm.reset();
                         return;

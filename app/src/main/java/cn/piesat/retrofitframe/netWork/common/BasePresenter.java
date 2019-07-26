@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import cn.piesat.retrofitframe.common.BaseApplication;
-import cn.piesat.retrofitframe.netWork.configuration.UrlConfig;
+import cn.piesat.retrofitframe.constant.UrlConfig;
 import cn.piesat.retrofitframe.netWork.module.NetApi;
 import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
 import cn.piesat.retrofitframe.util.FileUtil;

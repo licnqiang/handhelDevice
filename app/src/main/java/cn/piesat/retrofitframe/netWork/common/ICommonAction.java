@@ -3,7 +3,7 @@ package cn.piesat.retrofitframe.netWork.common;
 import java.util.Map;
 
 /**
- * Created by Alex on 2015/12/21.
+ * Created by lq on 2015/12/21.
  */
 public interface ICommonAction {
 

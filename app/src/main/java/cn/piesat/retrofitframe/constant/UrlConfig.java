@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.netWork.configuration;
+package cn.piesat.retrofitframe.constant;
 
 /**
  * 用于服务器的切换

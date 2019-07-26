@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.bean;
+package cn.piesat.retrofitframe.data;
 
 /**
  * @author lq

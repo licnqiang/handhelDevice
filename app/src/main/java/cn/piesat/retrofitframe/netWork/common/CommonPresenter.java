@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * 【CommonPresenter presenter】
- * AUTHOR: Alex
+ * AUTHOR: lq
  * DATE: 22/10/2015 10:57
  */
 public class CommonPresenter extends BasePresenter {

@@ -1,6 +1,6 @@
 package cn.piesat.retrofitframe.netWork.module;
 
-import cn.piesat.retrofitframe.netWork.configuration.UrlConfig;
+import cn.piesat.retrofitframe.constant.UrlConfig;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

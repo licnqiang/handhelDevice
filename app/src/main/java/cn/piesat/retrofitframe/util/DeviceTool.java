@@ -52,7 +52,7 @@ import java.util.regex.Pattern;
  * @date 2016/1/24
  */
 
-public class RxDeviceTool {
+public class DeviceTool {
 
     /**
      * 得到屏幕的高
