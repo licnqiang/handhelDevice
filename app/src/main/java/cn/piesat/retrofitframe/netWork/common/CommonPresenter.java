@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 【CommonPresenter presenter】
- * AUTHOR: lq
- * DATE: 22/10/2015 10:57
- */
+  * @Author :lq
+  * @Date   :created at 2019/7/27 11:13
+  * @Description:  Presenter基类
+  */
 public class CommonPresenter extends BasePresenter {
 
 
@@ -25,11 +25,11 @@ public class CommonPresenter extends BasePresenter {
      * @param methodName
      * @param typeToken
      */
-    public void invokeInterfaceObtainData(boolean test,boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
+    public void invokeInterfaceObtainData(boolean Test,boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
         if (parameterMap == null) {
-            TransmitCommonApi(test,isPost, part, methodName, new HashMap<String, String>(), typeToken);
+            TransmitCommonApi(Test,isPost, part, methodName, new HashMap<String, String>(), typeToken);
         } else {
-            TransmitCommonApi(test,isPost, part, methodName, parameterMap, typeToken);
+            TransmitCommonApi(Test,isPost, part, methodName, parameterMap, typeToken);
 
         }
     }

@@ -31,11 +31,8 @@ public abstract class BaseFragment extends Fragment {
         return mContextView;
     }
 
-    public void toActivity(Class<?> cls, Object message) {
+    public void toActivity(Class<?> cls) {
         Intent intent = new Intent(getActivity(), cls);
-        if (null != message) {
-            intent.putExtra(SysContant.sysContats.intent_key, message.toString());
-        }
         startActivity(intent);
     }
 
@@ -45,18 +42,21 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initData();
 
+    //init loading
     protected void initLoadingDialog() {
         if (null == loadingDialog) {
             loadingDialog = new LoadingDialog(getActivity());
         }
     }
 
+    //show loading
     public void showLoadingDialog(String message, boolean cancelable) {
         loadingDialog.setMessage(message);
         loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
     }
 
+    //close loading
     public void dismiss() {
         if (null != loadingDialog && loadingDialog.isShowing()) {
             loadingDialog.dismiss();

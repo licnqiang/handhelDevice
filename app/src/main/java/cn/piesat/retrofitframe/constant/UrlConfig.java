@@ -5,7 +5,6 @@ package cn.piesat.retrofitframe.constant;
  */
 public class UrlConfig {
 
-    // 测试服务器  192.168.0.145/8080  119.23.147.122/  http://123.206.31.206/
     private final static String U1 = "http://112.113.96.30:8080/hydrology/";
 
     // 正式服务器
@@ -17,10 +16,6 @@ public class UrlConfig {
 
     //切换服务器
     public static final String getURLPreFix() {
-        if (flag) {
-            return U1;
-        } else {
-            return U2;
-        }
+        return flag ? U1 : U2;
     }
 }

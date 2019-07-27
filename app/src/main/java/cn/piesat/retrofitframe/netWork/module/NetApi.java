@@ -22,12 +22,12 @@ import retrofit2.http.QueryMap;
 public interface NetApi {
 
 //    @FormUrlEncoded
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+//    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("{part}/{methodName}")
     Observable<BaseReseponseInfo> serviceAPI(@Path("part") String part, @Path("methodName") String methodName, @Body() Map<String, String> map);
 
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+//    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("{part}/{methodName}")
     Observable<BaseReseponseInfo> serviceGetAPI(@Path("part") String part, @Path("methodName") String methodName, @QueryMap() Map<String, String> map);
 

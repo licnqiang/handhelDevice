@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author lq
  * @fileName BasePresenter
  * @data on  2019/7/25 14:24
- * @describe TODO
+ * @describe 网络请求基类
  */
 public abstract class BasePresenter extends RetrofitUtils {
 

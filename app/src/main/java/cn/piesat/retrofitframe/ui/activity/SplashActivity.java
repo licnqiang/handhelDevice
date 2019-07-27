@@ -81,6 +81,7 @@ public class SplashActivity extends BaseActivity {
      */
     private void showPermiDialog() {
         MyAlertDialog myAlertDialog = new MyAlertDialog(this).builder()
+                .setCancelable(false)
                 .setTitle("提示")
                 .setMsg("需要获取相应权限，否则您的应用将无法正常使用! 请手动开启权限")
                 .setPositiveButton("确认", new View.OnClickListener() {

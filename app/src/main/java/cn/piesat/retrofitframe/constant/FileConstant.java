@@ -26,12 +26,21 @@ public class FileConstant {
         return filePath;
     }
 
+    /**
+     * 手机根目录
+     * @return
+     */
     public static String getRootPath() {
         StringBuilder sb = new StringBuilder();
         sb.append(STR_SDCARD_ROOT).append(File.separator);
         return hasFileAndCreate(sb.toString());
     }
 
+    /**
+     * 数据库目录
+     * @param userId   根据用户id 找相应的数据库
+     * @return
+     */
     public static String getDBPath(String userId) {
         StringBuilder sb = new StringBuilder();
         sb.append(getRootPath()).append(File.separator)

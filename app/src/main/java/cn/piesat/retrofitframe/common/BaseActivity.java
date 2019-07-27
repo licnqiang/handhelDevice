@@ -12,7 +12,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.piesat.retrofitframe.common.event.NetworkChangeEvent;
-import cn.piesat.retrofitframe.netWork.common.BaseReseponseInfo;
 import cn.piesat.retrofitframe.util.Log;
 import cn.piesat.retrofitframe.util.NetUtil;
 import cn.piesat.retrofitframe.util.ToastUtil;
@@ -52,17 +51,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         BaseApplication.removeActivityInfoFromMap(this);
     }
 
+    //init loading
     protected void initLoadingDialog() {
         if (null == loadingDialog) {
             loadingDialog = new LoadingDialog(this);
         }
     }
 
+    //show loading
     public void showLoadingDialog(String message, boolean cancelable) {
         loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
     }
 
+    //close loading
     public void dismiss() {
         if (null != loadingDialog && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
