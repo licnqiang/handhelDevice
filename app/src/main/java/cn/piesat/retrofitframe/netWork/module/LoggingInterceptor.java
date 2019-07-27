@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.concurrent.TimeUnit;
 
+import cn.piesat.retrofitframe.netWork.upLoadFile.UploadListener;
 import cn.piesat.retrofitframe.util.Log;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -27,28 +28,34 @@ public class LoggingInterceptor implements Interceptor {
     private final String TAG = getClass().getName();
     private final Charset UTF8 = Charset.forName("UTF-8");
 
+
+    private UploadListener mUploadListener;
+
+    public LoggingInterceptor(UploadListener uploadListener) {
+        mUploadListener = uploadListener;
+    }
+
     @Override
     public Response intercept(Chain chain) throws IOException {
 
         Request request = chain.request();
-        RequestBody requestBody = request.body();
-        String body = null;
-        if (null != requestBody) {
-            Buffer buffer = new Buffer();
-            requestBody.writeTo(buffer);
-            Charset charset = UTF8;
-            MediaType contentType = requestBody.contentType();
-            if (null != contentType) {
-                charset = contentType.charset(UTF8);
-            }
-            body = buffer.readString(charset);
+        if(null == request.body()){
+            return chain.proceed(request);
         }
 
+        //监听请求进度
+        if(null!=mUploadListener){
+            Request build = request.newBuilder()
+                    .method(request.method(),
+                            new CountingRequestBody(request.body(),
+                                    mUploadListener))
+                    .build();
+        }
 
-        long statNs = System.nanoTime(); //计时
         Response response = chain.proceed(request);
-        long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - statNs);  //响应时差
         ResponseBody responseBody = response.body();
+
+
         String rBady = null;
         BufferedSource source = responseBody.source();
         source.request(Long.MAX_VALUE);   //缓存body体
@@ -67,6 +74,6 @@ public class LoggingInterceptor implements Interceptor {
 
         Log.e("http", "Http--响应==="+ rBady);
 
-        return response;
+        return  response;
     }
 }

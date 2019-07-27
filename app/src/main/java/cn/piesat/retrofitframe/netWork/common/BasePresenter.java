@@ -32,7 +32,7 @@ public abstract class BasePresenter extends RetrofitUtils {
     public static final int REQUEST_SUCCESS = 1;//请求成功
     public static final int REQUEST_FAILURE = 0;//请求失败
 
-    protected  final NetApi service = getRetrofit().create(NetApi.class);
+    protected  final NetApi service = getRetrofit(null).create(NetApi.class);
 
     public <T> void TransmitCommonApi(boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 

@@ -1,6 +1,7 @@
 package cn.piesat.retrofitframe.netWork.module;
 
 import cn.piesat.retrofitframe.constant.UrlConfig;
+import cn.piesat.retrofitframe.netWork.upLoadFile.UploadListener;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -23,12 +24,13 @@ public abstract class RetrofitUtils {
      *
      * @return
      */
-    protected  Retrofit getRetrofit() {
+    protected  Retrofit getRetrofit(UploadListener uploadListener) {
 
         if (null == mRetrofit) {
 
             if (null == mOkHttpClient) {
-                mOkHttpClient = OkHttp3Utils.getOkHttpClient();
+                mOkHttpClient = OkHttp3Utils.getOkHttpClient(uploadListener);
+
             }
 
             //Retrofit2后使用build设计模式
