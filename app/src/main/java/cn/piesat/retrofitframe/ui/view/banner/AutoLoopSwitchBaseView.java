@@ -184,7 +184,7 @@ public abstract class AutoLoopSwitchBaseView extends RelativeLayout implements V
 
       mIsDragging = false;
 
-      Log.e("ryze", "onPageScrollStateChanged  " + i);
+//      Log.e("ryze", "onPageScrollStateChanged  " + i);
     }
   }
 
@@ -292,7 +292,7 @@ public abstract class AutoLoopSwitchBaseView extends RelativeLayout implements V
         return;
       }
 
-      Log.e("ryze", "stop: " + mIsStop);
+//      Log.e("ryze", "stop: " + mIsStop);
 
       switch (msg.what) {
         case MSG_UPDATE:
@@ -311,7 +311,7 @@ public abstract class AutoLoopSwitchBaseView extends RelativeLayout implements V
             removeMessages(MSG_UPDATE);
           }
           mIsStop = true;
-          Log.e("ryze", "stop: MSG_STOP " + mIsStop);
+//          Log.e("ryze", "stop: MSG_STOP " + mIsStop);
           break;
         case MSG_REGAIN:
           if (hasMessages(MSG_UPDATE)) {
@@ -319,7 +319,7 @@ public abstract class AutoLoopSwitchBaseView extends RelativeLayout implements V
           }
           sendEmptyMessageDelayed(MSG_UPDATE, mView.getDurtion());
           mIsStop = false;
-          Log.e("ryze", "stop: MSG_REGAIN " + mIsStop);
+//          Log.e("ryze", "stop: MSG_REGAIN " + mIsStop);
           break;
       }
     }
@@ -330,12 +330,12 @@ public abstract class AutoLoopSwitchBaseView extends RelativeLayout implements V
     }
 
     public void onChanged() {
-      Log.e("ryze", "PagerObserver onChanged ");
+//      Log.e("ryze", "PagerObserver onChanged ");
       notifyDataSetChanged();
     }
 
     public void onInvalidated() {
-      Log.e("ryze", "PagerObserver onInvalidated ");
+//      Log.e("ryze", "PagerObserver onInvalidated ");
 
       notifyDataSetChanged();
     }
