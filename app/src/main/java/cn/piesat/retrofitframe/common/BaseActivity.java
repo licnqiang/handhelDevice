@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+
 import com.hb.dialog.dialog.LoadingDialog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cn.piesat.retrofitframe.common.event.NetworkChangeEvent;
+import cn.piesat.retrofitframe.common.netchange.event.NetworkChangeEvent;
 import cn.piesat.retrofitframe.util.Log;
 import cn.piesat.retrofitframe.util.NetUtil;
 import cn.piesat.retrofitframe.util.ToastUtil;

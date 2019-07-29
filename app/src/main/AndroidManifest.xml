@@ -43,7 +43,7 @@
 
 
         <!-- 监听网络状态 -->
-        <receiver android:name=".common.receiver.NetWorkChangReceiver">
+        <receiver android:name=".common.netchange.receiver.NetWorkChangReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>

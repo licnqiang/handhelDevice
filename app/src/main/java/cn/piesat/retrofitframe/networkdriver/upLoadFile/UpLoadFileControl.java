@@ -1,10 +1,10 @@
-package cn.piesat.retrofitframe.netWork.upLoadFile;
+package cn.piesat.retrofitframe.networkdriver.upLoadFile;
 
 import java.util.List;
 
-import cn.piesat.retrofitframe.netWork.common.BaseReseponseInfo;
-import cn.piesat.retrofitframe.netWork.module.NetApi;
-import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
+import cn.piesat.retrofitframe.networkdriver.common.BaseReseponseInfo;
+import cn.piesat.retrofitframe.networkdriver.module.NetApi;
+import cn.piesat.retrofitframe.networkdriver.module.RetrofitUtils;
 import cn.piesat.retrofitframe.util.Log;
 import okhttp3.MultipartBody;
 import retrofit2.Call;

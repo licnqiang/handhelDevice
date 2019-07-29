@@ -1,8 +1,8 @@
-package cn.piesat.retrofitframe.netWork.module;
+package cn.piesat.retrofitframe.networkdriver.module;
 
 import java.io.IOException;
 
-import cn.piesat.retrofitframe.netWork.upLoadFile.UploadListener;
+import cn.piesat.retrofitframe.networkdriver.upLoadFile.UploadListener;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.Buffer;

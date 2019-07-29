@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.netWork.common;
+package cn.piesat.retrofitframe.networkdriver.common;
 
 import android.text.TextUtils;
 
@@ -11,8 +11,8 @@ import java.util.Map;
 
 import cn.piesat.retrofitframe.common.BaseApplication;
 import cn.piesat.retrofitframe.constant.IPConfig;
-import cn.piesat.retrofitframe.netWork.module.NetApi;
-import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
+import cn.piesat.retrofitframe.networkdriver.module.NetApi;
+import cn.piesat.retrofitframe.networkdriver.module.RetrofitUtils;
 import cn.piesat.retrofitframe.util.FileUtil;
 import cn.piesat.retrofitframe.util.Log;
 import io.reactivex.Observable;

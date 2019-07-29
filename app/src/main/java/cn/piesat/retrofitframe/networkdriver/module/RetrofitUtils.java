@@ -1,7 +1,7 @@
-package cn.piesat.retrofitframe.netWork.module;
+package cn.piesat.retrofitframe.networkdriver.module;
 
 import cn.piesat.retrofitframe.constant.IPConfig;
-import cn.piesat.retrofitframe.netWork.upLoadFile.UploadListener;
+import cn.piesat.retrofitframe.networkdriver.upLoadFile.UploadListener;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

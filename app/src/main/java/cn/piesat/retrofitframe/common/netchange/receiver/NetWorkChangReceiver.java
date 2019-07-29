@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.common.receiver;
+package cn.piesat.retrofitframe.common.netchange.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import org.greenrobot.eventbus.EventBus;
 
-import cn.piesat.retrofitframe.common.event.NetworkChangeEvent;
+import cn.piesat.retrofitframe.common.netchange.event.NetworkChangeEvent;
 import cn.piesat.retrofitframe.util.NetUtil;
 
 

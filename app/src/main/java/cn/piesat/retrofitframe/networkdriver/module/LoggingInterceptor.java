@@ -1,17 +1,15 @@
-package cn.piesat.retrofitframe.netWork.module;
+package cn.piesat.retrofitframe.networkdriver.module;
 
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.concurrent.TimeUnit;
 
-import cn.piesat.retrofitframe.netWork.upLoadFile.UploadListener;
+import cn.piesat.retrofitframe.networkdriver.upLoadFile.UploadListener;
 import cn.piesat.retrofitframe.util.Log;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;

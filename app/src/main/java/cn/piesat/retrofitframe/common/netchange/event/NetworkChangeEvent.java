@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.common.event;
+package cn.piesat.retrofitframe.common.netchange.event;
 
 /**
  * 网络连接类

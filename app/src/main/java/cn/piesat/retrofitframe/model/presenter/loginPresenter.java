@@ -3,8 +3,8 @@ package cn.piesat.retrofitframe.model.presenter;
 import java.util.HashMap;
 import java.util.Map;
 import cn.piesat.retrofitframe.model.contract.LoginContract;
-import cn.piesat.retrofitframe.netWork.common.CommonPresenter;
-import cn.piesat.retrofitframe.netWork.common.ICommonAction;
+import cn.piesat.retrofitframe.networkdriver.common.CommonPresenter;
+import cn.piesat.retrofitframe.networkdriver.common.ICommonAction;
 
 /**
  * @author lq

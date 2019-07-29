@@ -1,10 +1,8 @@
-package cn.piesat.retrofitframe.netWork.module;
+package cn.piesat.retrofitframe.networkdriver.module;
 
 import java.util.concurrent.TimeUnit;
 
-import cn.piesat.retrofitframe.BuildConfig;
-import cn.piesat.retrofitframe.netWork.upLoadFile.UploadListener;
-import cn.piesat.retrofitframe.util.Log;
+import cn.piesat.retrofitframe.networkdriver.upLoadFile.UploadListener;
 import okhttp3.OkHttpClient;
 
 /**

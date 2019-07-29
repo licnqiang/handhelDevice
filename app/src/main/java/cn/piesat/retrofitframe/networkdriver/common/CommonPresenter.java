@@ -1,4 +1,4 @@
-package cn.piesat.retrofitframe.netWork.common;
+package cn.piesat.retrofitframe.networkdriver.common;
 
 import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
@@ -25,11 +25,11 @@ public class CommonPresenter extends BasePresenter {
      * @param methodName
      * @param typeToken
      */
-    public void invokeInterfaceObtainData(boolean Test,boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
+    public void invokeInterfaceObtainData(boolean testModel,boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
         if (parameterMap == null) {
-            TransmitCommonApi(Test,isPost, part, methodName, new HashMap<String, String>(), typeToken);
+            TransmitCommonApi(testModel,isPost, part, methodName, new HashMap<String, String>(), typeToken);
         } else {
-            TransmitCommonApi(Test,isPost, part, methodName, parameterMap, typeToken);
+            TransmitCommonApi(testModel,isPost, part, methodName, parameterMap, typeToken);
 
         }
     }

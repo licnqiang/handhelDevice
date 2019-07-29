@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import cn.piesat.retrofitframe.common.receiver.NetWorkChangReceiver;
+import cn.piesat.retrofitframe.common.netchange.receiver.NetWorkChangReceiver;
 import cn.piesat.retrofitframe.database.InitDBUtil;
 import cn.piesat.retrofitframe.util.SpHelper;
 
