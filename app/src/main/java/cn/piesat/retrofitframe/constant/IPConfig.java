@@ -3,7 +3,7 @@ package cn.piesat.retrofitframe.constant;
 /**
  * 用于服务器的切换
  */
-public class UrlConfig {
+public class IPConfig {
 
     private final static String U1 = "http://112.113.96.30:8080/hydrology/";
 

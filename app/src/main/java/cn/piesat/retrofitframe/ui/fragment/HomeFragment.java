@@ -2,6 +2,7 @@ package cn.piesat.retrofitframe.ui.fragment;
 
 
 import android.support.v4.app.Fragment;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.loopswitch)
     AutoSwitchView loopswitch;
+    @BindView(R.id.btn)
+    Button button;
     private AutoSwitchAdapter mAdapter;
     private ArrayList<String> im;
 
@@ -41,6 +44,7 @@ public class HomeFragment extends BaseFragment {
         loopswitch.setAdapter(mAdapter);
 
 //        showLoadingDialog("我的",true);
+
     }
 
     @Override

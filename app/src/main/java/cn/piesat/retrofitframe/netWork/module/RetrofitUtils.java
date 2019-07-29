@@ -1,6 +1,6 @@
 package cn.piesat.retrofitframe.netWork.module;
 
-import cn.piesat.retrofitframe.constant.UrlConfig;
+import cn.piesat.retrofitframe.constant.IPConfig;
 import cn.piesat.retrofitframe.netWork.upLoadFile.UploadListener;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -36,7 +36,7 @@ public abstract class RetrofitUtils {
             //Retrofit2后使用build设计模式
             mRetrofit = new Retrofit.Builder()
                     //设置服务器路径
-                    .baseUrl(UrlConfig.getURLPreFix())
+                    .baseUrl(IPConfig.getURLPreFix())
                     //添加转化库，默认是Gson
                     .addConverterFactory(GsonConverterFactory.create())
                     //添加回调库，采用RxJava

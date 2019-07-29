@@ -8,8 +8,11 @@ package cn.piesat.retrofitframe.constant;
  */
 public class SysContant {
 
-    public interface sysContats{
-        String intent_key="intentData";
+
+
+    public interface Contats{
+        String db_name="AppDatabase";
+        int db_version=1;
     }
 
     /**

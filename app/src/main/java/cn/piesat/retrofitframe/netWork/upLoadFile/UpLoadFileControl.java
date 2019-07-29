@@ -1,6 +1,7 @@
 package cn.piesat.retrofitframe.netWork.upLoadFile;
 
 import java.util.List;
+
 import cn.piesat.retrofitframe.netWork.common.BaseReseponseInfo;
 import cn.piesat.retrofitframe.netWork.module.NetApi;
 import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
@@ -23,7 +24,7 @@ public class UpLoadFileControl extends RetrofitUtils {
      *
      * @param paths
      */
-    public  void uploadFile(String part,String methodName,List<String> paths, final ResultCallBack resultCallBack) {
+    public void uploadFile(String part, String methodName, List<String> paths, final ResultCallBack resultCallBack) {
         final StringBuffer sbServerPath = new StringBuffer();
         List<MultipartBody.Part> body = UpLoadFileNet.filesToMultipartBodyParts(paths);
         Call<BaseReseponseInfo> call = getRetrofit(new UploadListener() {
@@ -31,8 +32,10 @@ public class UpLoadFileControl extends RetrofitUtils {
             @Override
             public void onRequestProgress(long bytesWritten, long contentLength) {
 
+                Log.e("----uploadFile-----", "---文件上传进度----" + (bytesWritten / contentLength));
+
             }
-        }).create(NetApi.class).uploadFilesWithParts(part,methodName,body);
+        }).create(NetApi.class).uploadFilesWithParts(part, methodName, body);
         call.enqueue(new Callback<BaseReseponseInfo>() {
             @Override
             public void onResponse(Call<BaseReseponseInfo> call, Response<BaseReseponseInfo> response) {
@@ -42,15 +45,16 @@ public class UpLoadFileControl extends RetrofitUtils {
                 }
                 BaseReseponseInfo fileInfo = response.body();
 
-                if(null!=fileInfo) {
+                if (null != fileInfo) {
                     resultCallBack.succeed(fileInfo.data);
-                }else {
+                } else {
                     resultCallBack.faild();
                 }
             }
+
             @Override
             public void onFailure(Call<BaseReseponseInfo> call, Throwable t) {
-                Log.e("-----------","---文件上传失败-------"+t.getMessage());
+                Log.e("-----------", "---文件上传失败-------" + t.getMessage());
                 resultCallBack.faild();
             }
         });

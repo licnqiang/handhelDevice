@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import cn.piesat.retrofitframe.common.BaseApplication;
-import cn.piesat.retrofitframe.constant.UrlConfig;
+import cn.piesat.retrofitframe.constant.IPConfig;
 import cn.piesat.retrofitframe.netWork.module.NetApi;
 import cn.piesat.retrofitframe.netWork.module.RetrofitUtils;
 import cn.piesat.retrofitframe.util.FileUtil;
@@ -36,7 +36,7 @@ public abstract class BasePresenter extends RetrofitUtils {
 
     public <T> void TransmitCommonApi(boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
-        Log.e("http", "http--url==" + UrlConfig.getURLPreFix() + "part" + "/" + methodName);
+        Log.e("http", "http--url==" + IPConfig.getURLPreFix() + "part" + "/" + methodName);
         Log.e("http", "http--requestMethod==" + (isPost ? "Post" : "Get"));
         Log.e("http", "http--parameter=="+new Gson().toJson(parameterMap));
 
