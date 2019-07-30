@@ -32,13 +32,13 @@ public abstract class BasePresenter extends RetrofitUtils {
     public static final int REQUEST_SUCCESS = 1;//请求成功
     public static final int REQUEST_FAILURE = 0;//请求失败
 
-    protected  final NetApi service = getRetrofit(null).create(NetApi.class);
+    protected final NetApi service = getRetrofit(null).create(NetApi.class);
 
     public <T> void TransmitCommonApi(boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
         Log.e("http", "http--url==" + IPConfig.getURLPreFix() + "part" + "/" + methodName);
         Log.e("http", "http--requestMethod==" + (isPost ? "Post" : "Get"));
-        Log.e("http", "http--parameter=="+new Gson().toJson(parameterMap));
+        Log.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
 
         /**
          * 判断是否是测试模式
@@ -48,7 +48,7 @@ public abstract class BasePresenter extends RetrofitUtils {
             try {
                 in = BaseApplication.ApplicationContext.getAssets().open(methodName + ".txt");
                 String result = FileUtil.ToString(in);
-                Log.e("http", "Http--本地响应==="+ result);
+                Log.e("http", "Http--本地响应===" + result);
                 BaseReseponseInfo baseResponse = new Gson().fromJson(result, BaseReseponseInfo.class);
                 responseData(baseResponse, methodName, parameterMap, typeToken);
             } catch (IOException e) {
@@ -58,6 +58,9 @@ public abstract class BasePresenter extends RetrofitUtils {
             }
 
         } else {
+            /**
+             *网络请求
+             */
             commonApi(isPost, part, methodName, parameterMap, typeToken);
         }
     }
@@ -124,10 +127,10 @@ public abstract class BasePresenter extends RetrofitUtils {
     /**
      * 详情数据处理
      *
-     * @param baseResponse
-     * @param methodName
-     * @param parameterMap
-     * @param typeToken
+     * @param baseResponse 响应数据
+     * @param methodName   请求方法名
+     * @param parameterMap 请求参数
+     * @param typeToken    返回数据类型
      */
     private void responseData(BaseReseponseInfo baseResponse, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
         Object info = baseResponse.data;
@@ -140,8 +143,9 @@ public abstract class BasePresenter extends RetrofitUtils {
             //成功回调数据
             onResponse(methodName, null == object ? baseResponse : object, REQUEST_SUCCESS, parameterMap);
 
-        //失败
+
         } else if (REQUEST_FAILURE == baseResponse.status) {
+            //失败
             onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap);
 
         }
