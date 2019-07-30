@@ -24,18 +24,10 @@ public class UpLoadFileControl extends RetrofitUtils {
      *
      * @param paths
      */
-    public void uploadFile(String part, String methodName, List<String> paths, final ResultCallBack resultCallBack) {
+    public void uploadFile(String part, String methodName, List<String> paths,UploadListener uploadListener, final ResultCallBack resultCallBack) {
         final StringBuffer sbServerPath = new StringBuffer();
         List<MultipartBody.Part> body = UpLoadFileNet.filesToMultipartBodyParts(paths);
-        Call<BaseReseponseInfo> call = getRetrofit(new UploadListener() {
-            //文件上传进度
-            @Override
-            public void onRequestProgress(long bytesWritten, long contentLength) {
-
-                Log.e("----uploadFile-----", "---文件上传进度----" + (bytesWritten / contentLength));
-
-            }
-        }).create(NetApi.class).uploadFilesWithParts(part, methodName, body);
+        Call<BaseReseponseInfo> call = getRetrofit(uploadListener).create(NetApi.class).uploadFilesWithParts(part, methodName, body);
         call.enqueue(new Callback<BaseReseponseInfo>() {
             @Override
             public void onResponse(Call<BaseReseponseInfo> call, Response<BaseReseponseInfo> response) {
