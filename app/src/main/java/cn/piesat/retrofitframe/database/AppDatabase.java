@@ -12,6 +12,6 @@ import cn.piesat.retrofitframe.constant.SysContant;
  */
 @Database(name = AppDatabase.NAME, version = AppDatabase.VERSION)
 public final  class AppDatabase {
-    public static final String NAME = SysContant.Contats.db_name;
-    public static final int VERSION = SysContant.Contats.db_version;
+    public static final String NAME = SysContant.DBContats.db_name;
+    public static final int VERSION = SysContant.DBContats.db_version;
 }

@@ -9,17 +9,18 @@ package cn.piesat.retrofitframe.constant;
 public class SysContant {
 
 
-
-    public interface Contats{
-        String db_name="AppDatabase";
-        int db_version=1;
+    //数据库相关常量
+    public interface DBContats {
+        String db_name = "AppDatabase";   //数据库名
+        int db_version = 1;               //数据库版本号
+        String db_psw = "walker789";      //数据库密码
     }
 
     /**
      * 用户配置
      */
-   public interface userInfo{
-        String USER_TOKEN="user_token";
+    public interface userInfo {
+        String USER_TOKEN = "user_token";
 
     }
 
