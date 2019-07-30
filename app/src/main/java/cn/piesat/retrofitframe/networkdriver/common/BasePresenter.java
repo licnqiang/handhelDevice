@@ -30,8 +30,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 public abstract class BasePresenter extends RetrofitUtils {
 
-    public static final int REQUEST_SUCCESS = 1;//请求成功
-    public static final int REQUEST_FAILURE = 0;//请求失败
+    public  final int REQUEST_SUCCESS = 1;//请求成功
+    public  final int REQUEST_FAILURE = 0;//请求失败
 
     protected final NetApi service = getRetrofit(null).create(NetApi.class);
 

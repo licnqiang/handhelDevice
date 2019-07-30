@@ -7,6 +7,7 @@
     <cn.piesat.retrofitframe.ui.view.banner.AutoSwitchView
         android:id="@+id/loopswitch"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="175dp">
     </cn.piesat.retrofitframe.ui.view.banner.AutoSwitchView>
     <TextView
@@ -14,11 +15,6 @@
         android:text="首页"
         android:textSize="@dimen/text_16dp"
         android:gravity="center"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </LinearLayout>

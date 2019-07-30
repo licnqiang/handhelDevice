@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements LoginContract.LoginVie
                         R.mipmap.main_ziyuan_sel)
                 .addItem(groupFragment,
                         "群组",
-                        R.mipmap.home_tab_msg_p,
+                        R.mipmap.home_tab_msg_n,
                         R.mipmap.home_tab_msg_p)
                 .addItem(meFragment,
                         "我的",
