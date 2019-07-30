@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.raizlabs.android.dbflow.sql.language.Case;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +38,7 @@ public abstract class BasePresenter extends RetrofitUtils {
     public <T> void TransmitCommonApi(boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
         Log.e("http", "http--url==" + IPConfig.getURLPreFix() + "part" + "/" + methodName);
-        Log.e("http", "http--requestMethod==" + (isPost ? "Post" : "Get"));
+        Log.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
         Log.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
 
         /**
@@ -116,12 +117,17 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param typeToken
      * @return
      */
-    public Object requestServer(String receivedStr, TypeToken<?> typeToken) {
-        Object result = null;
-        if (!TextUtils.isEmpty(receivedStr)) {
-            result = new Gson().fromJson(receivedStr, typeToken.getType());
+    public Object requestServer(Object receivedStr, TypeToken<?> typeToken) {
+        try {
+            Object result = null;
+            if (!TextUtils.isEmpty(receivedStr.toString())) {
+                result = new Gson().fromJson(receivedStr.toString(), typeToken.getType());
+            }
+            return result;
+        } catch (Exception e) {
+            Log.e("gson", "BaseParser--e==" + e);
         }
-        return result;
+        return null;
     }
 
     /**
@@ -133,21 +139,18 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param typeToken    返回数据类型
      */
     private void responseData(BaseReseponseInfo baseResponse, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
-        Object info = baseResponse.data;
-        //成功
-        if (REQUEST_SUCCESS == baseResponse.status) {
-            Object object = null;
-            if (typeToken != null) {
-                object = requestServer(info.toString(), typeToken);
-            }
-            //成功回调数据
-            onResponse(methodName, null == object ? baseResponse : object, REQUEST_SUCCESS, parameterMap);
-
-
-        } else if (REQUEST_FAILURE == baseResponse.status) {
-            //失败
-            onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap);
-
+        switch (baseResponse.status) {
+            case REQUEST_SUCCESS: //成功
+                Object object = null;
+                if (null != typeToken) {
+                    object = requestServer(baseResponse.data, typeToken);
+                }
+                //成功回调数据
+                onResponse(methodName, object, REQUEST_SUCCESS, parameterMap);
+                break;
+            case REQUEST_FAILURE://失败
+                onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap);
+                break;
         }
     }
 
