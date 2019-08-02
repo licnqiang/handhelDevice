@@ -7,6 +7,8 @@ package cn.piesat.retrofitframe.constant;
  * @describe TODO
  */
 public class UrlContant {
+    public static final String part="users";
+
     //登陆
     public static final String login = "login";
     //注册

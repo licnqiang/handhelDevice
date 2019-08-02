@@ -19,8 +19,6 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.loopswitch)
     AutoSwitchView loopswitch;
-    @BindView(R.id.btn)
-    Button button;
     private AutoSwitchAdapter mAdapter;
     private ArrayList<String> im;
 

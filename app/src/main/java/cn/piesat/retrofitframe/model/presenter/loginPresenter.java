@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.piesat.retrofitframe.constant.UrlContant;
 import cn.piesat.retrofitframe.data.User;
 import cn.piesat.retrofitframe.model.contract.LoginContract;
 import cn.piesat.retrofitframe.networkdriver.common.CommonPresenter;
@@ -30,16 +31,17 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
 
     @Override
     public void login(String userName, String passWord) {
-        HashMap<String,String> hashMap=new HashMap<>();
-        hashMap.put("loginName",userName);
-        hashMap.put("password",passWord);
-        commonPresenter.invokeInterfaceObtainData(true, true, "users","login",
-                hashMap, new TypeToken<String>(){});
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("loginName", userName);
+        hashMap.put("password", passWord);
+        commonPresenter.invokeInterfaceObtainData(false, true, UrlContant.part, UrlContant.login,
+                hashMap, new TypeToken<String>() {
+                });
     }
 
 
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap) {
-        Log.e("--obtainData--","---"+data.toString());
+        Log.e("--obtainData--", "---" + data.toString());
     }
 }

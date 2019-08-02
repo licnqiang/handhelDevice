@@ -7,7 +7,6 @@ import okhttp3.OkHttpClient;
 
 /**
  * 类名称：OkHttp3Utils
- * 创建人：wangliteng
  * 创建时间：2017-11-09 14:57:11
  * 类描述：封装一个OkHttp3的获取类
  */
