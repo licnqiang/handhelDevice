@@ -5,6 +5,7 @@
     <dimen name="text_0dp">0dp</dimen>
     <dimen name="text_5dp">5dp</dimen>
     <dimen name="text_1dp">1dp</dimen>
+    <dimen name="text_7dp">7dp</dimen>
     <dimen name="text_8dp">8dp</dimen>
     <dimen name="text_10dp">10dp</dimen>
     <dimen name="text_11dp">11dp</dimen>
@@ -18,6 +19,6 @@
     <dimen name="text_19dp">19dp</dimen>
     <dimen name="text_20dp">20dp</dimen>
     <dimen name="text_24dp">24dp</dimen>
-    <dimen name="text_34dp">30dp</dimen>
+    <dimen name="text_30dp">30dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>

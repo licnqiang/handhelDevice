@@ -1,19 +1,38 @@
 apply plugin: 'com.android.application'
-
+apply from: 'tinker-support.gradle'
 android {
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "cn.piesat.retrofitframe"
+        applicationId "cn.piesat.sanitation"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
+
+    signingConfigs {
+        config {
+            keyAlias 'sanitation'
+            keyPassword 'sanitation'
+            storeFile file('../app/keystore/release_key.jks')
+            storePassword 'sanitation'
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
+            signingConfig signingConfigs.config
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.config
+            minifyEnabled false
         }
     }
 
@@ -22,35 +41,46 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnife_version"
     implementation "com.android.support:appcompat-v7:$rootProject.buildToolsVersion"
-    implementation "com.android.support:design:$rootProject.buildToolsVersion"
     implementation "com.android.support:support-v4:$rootProject.buildToolsVersion"
     implementation "com.jakewharton:butterknife:$rootProject.butterKnife_version"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnife_version"
-    implementation "com.github.Raizlabs.DBFlow:dbflow:$rootProject.dbflow_version"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.dbflow_version"
-    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.dbflow_version"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:$rootProject.dbflow_version"
-    implementation "net.zetetic:android-database-sqlcipher:$rootProject.sqlcipher_version@aar"
-    implementation "com.wuxiaolong.pullloadmorerecyclerview:library:$rootProject.recyclerview_version"
-    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
-    implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
-    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
     implementation "com.github.HanHuoBin:BaseDialog:$rootProject.dialog_version"
-    implementation 'com.squareup.retrofit2:retrofit:+'
-    implementation 'com.squareup.retrofit2:converter-gson:+'
-    implementation 'io.reactivex.rxjava2:rxjava:+'
-    implementation 'io.reactivex.rxjava2:rxandroid:+'
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "com.android.support:design:$rootProject.buildToolsVersion"
+    implementation "com.liaoinstan.springview:library:$springview_version"
+    implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
+
+    //配置数据库
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.dbflow_version"
+    implementation "net.zetetic:android-database-sqlcipher:$rootProject.sqlcipher_version@aar"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:$rootProject.dbflow_version"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.dbflow_version"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:$rootProject.dbflow_version"
+
+    // 配置bugly
+    implementation "com.tencent.tinker:tinker-android-lib:$rootProject.tinker_version"
+    implementation "com.tencent.bugly:crashreport_upgrade:$rootProject.bugly_version"
+    implementation "com.android.support:multidex:$rootProject.multidex_version"
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
+    //网络请求
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
     implementation 'com.squareup.retrofit2:adapter-rxjava2:+'
+    implementation 'com.squareup.retrofit2:converter-gson:+'
+    implementation 'com.squareup.retrofit2:retrofit:+'
+    implementation 'io.reactivex.rxjava2:rxandroid:+'
+    implementation 'io.reactivex.rxjava2:rxjava:+'
 }

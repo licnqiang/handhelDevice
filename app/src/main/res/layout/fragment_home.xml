@@ -4,17 +4,16 @@
     android:layout_height="match_parent"
     android:background="@color/gray5"
     android:orientation="vertical">
-    <cn.piesat.retrofitframe.ui.view.banner.AutoSwitchView
-        android:id="@+id/loopswitch"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="175dp">
-    </cn.piesat.retrofitframe.ui.view.banner.AutoSwitchView>
-    <TextView
-        android:layout_width="match_parent"
-        android:text="首页"
-        android:textSize="@dimen/text_16dp"
-        android:gravity="center"
-        android:layout_height="match_parent" />
 
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/springView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RecylerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

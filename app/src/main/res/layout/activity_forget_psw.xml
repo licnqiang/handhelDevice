@@ -64,7 +64,7 @@
             android:textSize="14sp" />
 
 
-        <cn.piesat.retrofitframe.ui.view.CountDownTextView
+        <cn.piesat.sanitation.ui.view.CountDownTextView
             android:id="@+id/send_yzm"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -72,7 +72,7 @@
             android:gravity="center"
             android:paddingRight="10dp"
             android:text="发送验证码"
-            android:textColor="@color/them_bule" />
+            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout

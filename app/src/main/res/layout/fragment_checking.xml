@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_fcfcfc"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_margin="@dimen/dp_30"
+        android:background="@drawable/block_frame">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="w"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_40" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#26ffffff"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/text_10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="李强"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_28" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="top"
+                android:text="西安航天宏图"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#26ffffff"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="2019"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="top"
+                android:text="10/15"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_40" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_30">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="@dimen/text_14dp"
+                android:layout_height="@dimen/text_14dp"
+                android:background="@drawable/gay_circle" />
+
+            <TextView
+                android:layout_width="@dimen/text_1dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_7dp"
+                android:layout_weight="1"
+                android:background="@color/color_919191" />
+
+            <TextView
+                android:layout_width="@dimen/text_14dp"
+                android:layout_height="@dimen/text_14dp"
+                android:background="@drawable/blue_circle" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/text_20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上班时间08:00"
+                android:textSize="@dimen/text_16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="上班时间08:00"
+                android:textSize="@dimen/text_16dp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:id="@+id/rl_checking"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/blue_circle"
+            android:gravity="center_horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_clock_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="上班打卡"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_24dp" />
+
+            <TextView
+                android:id="@+id/tv_clock_in_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_clock_in"
+                android:layout_centerInParent="true"
+                android:paddingTop="@dimen/text_15dp"
+                android:text="07:50:24"
+                android:textColor="@color/them_tip_font"
+                android:textSize="@dimen/text_16dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
