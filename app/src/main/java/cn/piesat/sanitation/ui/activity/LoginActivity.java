@@ -9,17 +9,19 @@ import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
+import cn.piesat.sanitation.model.contract.LoginContract;
+import cn.piesat.sanitation.model.presenter.loginPresenter;
 import cn.piesat.sanitation.util.ToastUtil;
 
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginContract.LoginView{
 
     @BindView(R.id.et_user_name)
     EditText etUserName;
     @BindView(R.id.et_user_psw)
     EditText etUserPsw;
 
-    HashMap<String, String> mHashMap = new HashMap<>();
+    private loginPresenter loginPresenterImp;
 
     @Override
     protected int getLayoutId() {
@@ -46,10 +48,7 @@ public class LoginActivity extends BaseActivity {
                 toActivity(ForgetPswActivity.class);
                 break;
             case R.id.btn_login:
-                UserInfo_Tab userInfo_tab=new UserInfo_Tab();
-                userInfo_tab.userName="李强";
-                userInfo_tab.save();
-                toActivity(MainActivity.class);
+                login();
                 break;
         }
     }
@@ -61,11 +60,23 @@ public class LoginActivity extends BaseActivity {
         if (userName.isEmpty() || userPsw.isEmpty()) {
             ToastUtil.show(LoginActivity.this, "用户名或密码不能为空");
         } else {
-            mHashMap.put("userPhone", userName);
-            mHashMap.put("userPassword", userPsw);
+            showLoadingDialog("正在登陆",false);
+            loginPresenterImp = new loginPresenter(this);
+            loginPresenterImp.login(userName, userPsw);
         }
     }
 
 
+    @Override
+    public void loginError(String errorMsg) {
+        dismiss();
+        ToastUtil.show(this,"账户或密码错误");
+    }
+
+    @Override
+    public void jumpToMain() {
+        dismiss();
+        toActivity(MainActivity.class);
+    }
 }
 

@@ -8,7 +8,10 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -20,13 +23,13 @@ import retrofit2.http.QueryMap;
  */
 public interface NetApi {
 
-//    @FormUrlEncoded
-//    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @FormUrlEncoded
+//  @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("{part}/{methodName}")
-    Observable<BaseReseponseInfo> serviceAPI(@Path("part") String part, @Path("methodName") String methodName, @Body() Map<String, String> map);
+    Observable<BaseReseponseInfo> serviceAPI(@Path("part") String part, @Path("methodName") String methodName, @FieldMap() Map<String, String> map);
 
 
-//    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("{part}/{methodName}")
     Observable<BaseReseponseInfo> serviceGetAPI(@Path("part") String part, @Path("methodName") String methodName, @QueryMap() Map<String, String> map);
 

@@ -29,17 +29,17 @@ import io.reactivex.schedulers.Schedulers;
  */
 public abstract class BasePresenter extends RetrofitUtils {
 
-    public  final int REQUEST_SUCCESS = 1;//请求成功
-    public  final int REQUEST_FAILURE = 0;//请求失败
+    public static final int REQUEST_SUCCESS = 200;//请求成功
+    public static final int REQUEST_FAILURE = 500;//请求失败
     protected  NetApi service = null;
 
 
     public <T> void TransmitCommonApi(boolean switchService,boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
-        Log.e("http", "http--url==" + (switchService?IPConfig.getURLPreFix():IPConfig.getOutSourceURLPreFix()) + "part" + "/" + methodName);
+        Log.e("http", "http--url==" + (switchService?IPConfig.getURLPreFix():IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
         Log.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
         Log.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
-
+        BaseReseponseInfo  baseResponse=null;
         /**
          * 判断是否是测试模式
          */
@@ -49,11 +49,11 @@ public abstract class BasePresenter extends RetrofitUtils {
                 in = BaseApplication.ApplicationContext.getAssets().open(methodName + ".txt");
                 String result = FileUtil.ToString(in);
                 Log.e("http", "Http--本地响应===" + result);
-                BaseReseponseInfo baseResponse = new Gson().fromJson(result, BaseReseponseInfo.class);
+                baseResponse = new Gson().fromJson(result, BaseReseponseInfo.class);
                 responseData(baseResponse, methodName, parameterMap, typeToken);
             } catch (IOException e) {
                 e.printStackTrace();
-                onResponse(methodName, null, REQUEST_FAILURE, parameterMap);
+                onResponse(methodName, null, REQUEST_FAILURE, parameterMap,null!=baseResponse?baseResponse.msg:"");
                 Log.e("http", "BaseParser--e==" + e);
             }
 
@@ -99,7 +99,7 @@ public abstract class BasePresenter extends RetrofitUtils {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("http", "BaseParser--e==" + e);
-                        onResponse(methodName, null, REQUEST_FAILURE, parameterMap);
+                        onResponse(methodName, null, REQUEST_FAILURE, parameterMap,e.getMessage());
                     }
 
                     //获取数据
@@ -123,7 +123,7 @@ public abstract class BasePresenter extends RetrofitUtils {
         try {
             Object result = null;
             if (!TextUtils.isEmpty(receivedStr.toString())) {
-                result = new Gson().fromJson(receivedStr.toString(), typeToken.getType());
+                result = new Gson().fromJson(new Gson().toJson(receivedStr), typeToken.getType());
             }
             return result;
         } catch (Exception e) {
@@ -141,17 +141,17 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param typeToken    返回数据类型
      */
     private void responseData(BaseReseponseInfo baseResponse, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
-        switch (baseResponse.status) {
+        switch (baseResponse.code) {
             case REQUEST_SUCCESS: //成功
                 Object object = null;
                 if (null != typeToken) {
                     object = requestServer(baseResponse.data, typeToken);
                 }
                 //成功回调数据
-                onResponse(methodName, object, REQUEST_SUCCESS, parameterMap);
+                onResponse(methodName, object, REQUEST_SUCCESS, parameterMap,baseResponse.msg);
                 break;
             case REQUEST_FAILURE://失败
-                onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap);
+                onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap,baseResponse.msg);
                 break;
         }
     }
@@ -165,5 +165,5 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param status     是否成功标识
      */
 
-    public abstract void onResponse(String methodName, Object object, int status, Map<String, String> parameterMap);
+    public abstract void onResponse(String methodName, Object object, int status, Map<String, String> parameterMap,String Msg);
 }

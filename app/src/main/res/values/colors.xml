@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#359bfb</color>
-    <color name="colorPrimaryDark">#359bfb</color>
-    <color name="colorAccent">#359bfb</color>
+    <color name="colorPrimary">#fcfcfc</color>
+    <color name="colorPrimaryDark">#fcfcfc</color>
+    <color name="colorAccent">#fcfcfc</color>
     <color name="white">#ffffff</color>
     <color name="gray5">#f5f5f5</color>
     <color name="gray_fcfcfc">#fcfcfc</color>
@@ -26,7 +26,7 @@
     <!--<color name="txthint_search">#BCCBDB</color>-->
 
     <!--<color name="them_tip_orange">#F09074</color>-->
-    <!--<color name="light_green">#5EDBED</color>-->
+    <color name="light_green">#5EDBED</color>
     <!--<color name="bg_page">#F2F2F2</color>-->
     <!--<color name="black_user">#2D2D2D</color>-->
     <!--<color name="color_background">#fafafa</color>-->

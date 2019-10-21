@@ -68,7 +68,8 @@
         <activity
             android:name=".ui.activity.FaceEnterActivity"
             android:label="@string/title_activity_face_enter"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.OrderListActivity"></activity>
     </application>
 
 </manifest>

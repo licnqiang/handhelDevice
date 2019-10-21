@@ -7,7 +7,7 @@ import java.util.Map;
  */
 public interface ICommonAction {
 
-    void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap);
+    void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap,String Msg);
 
 
 }

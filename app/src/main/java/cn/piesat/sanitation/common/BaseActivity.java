@@ -60,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     //show loading
     public void showLoadingDialog(String message, boolean cancelable) {
+        loadingDialog.setMessage(message);
         loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
     }

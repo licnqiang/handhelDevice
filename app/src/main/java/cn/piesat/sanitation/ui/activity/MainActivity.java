@@ -13,13 +13,15 @@ import cn.piesat.sanitation.ui.fragment.CheckingFragment;
 import cn.piesat.sanitation.ui.fragment.WorkFragment;
 import cn.piesat.sanitation.ui.fragment.HomeFragment;
 import cn.piesat.sanitation.ui.fragment.MeFragment;
+import cn.piesat.sanitation.ui.fragment.WorkStationHeaderFragment;
 import cn.piesat.sanitation.ui.view.BottomBar;
 
 
-public class MainActivity extends BaseActivity implements LoginContract.LoginView {
+public class MainActivity extends BaseActivity {
     private HomeFragment mapFragment = new HomeFragment();
     private CheckingFragment checkingFragment = new CheckingFragment();
     private WorkFragment workFragment = new WorkFragment();
+    private WorkStationHeaderFragment workStationHeaderFragment = new WorkStationHeaderFragment();
     private MeFragment meFragment = new MeFragment();
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
@@ -44,7 +46,7 @@ public class MainActivity extends BaseActivity implements LoginContract.LoginVie
                         "考勤",
                         R.mipmap.home_tab_msg_n,
                         R.mipmap.home_tab_msg_p)
-                .addItem(workFragment,
+                .addItem(workStationHeaderFragment,
                         "工作",
                         R.mipmap.home_tab_msg_n,
                         R.mipmap.home_tab_msg_p)
@@ -58,18 +60,6 @@ public class MainActivity extends BaseActivity implements LoginContract.LoginVie
 
     @Override
     protected void initData() {
-        loginPresenterImp = new loginPresenter(this);
-        loginPresenterImp.login("admin", "123456");
-    }
-
-
-    @Override
-    public void loginError(String errorMsg) {
-
-    }
-
-    @Override
-    public void jumpToMain() {
 
     }
 
@@ -86,8 +76,8 @@ public class MainActivity extends BaseActivity implements LoginContract.LoginVie
         if (meFragment == null && fragment instanceof MeFragment) {
             meFragment = (MeFragment) fragment;
         }
-        if (workFragment == null && fragment instanceof WorkFragment) {
-            workFragment = (WorkFragment) fragment;
+        if (workStationHeaderFragment == null && fragment instanceof WorkFragment) {
+            workStationHeaderFragment = (WorkStationHeaderFragment) fragment;
         }
         super.onAttachFragment(fragment);
     }

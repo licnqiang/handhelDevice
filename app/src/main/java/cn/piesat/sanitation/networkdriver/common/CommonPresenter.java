@@ -42,16 +42,15 @@ public class CommonPresenter extends BasePresenter {
 
 
     @Override
-    public void onResponse(String methodName, Object object, int status, Map<String, String> parameterMap) {
+    public void onResponse(String methodName, Object object, int status, Map<String, String> parameterMap,String Msg) {
 
         switch (methodName) {
             default:
-                iCommonAction.obtainData(object, methodName, status, parameterMap);
+                iCommonAction.obtainData(object, methodName, status, parameterMap,Msg);
                 break;
 
         }
 
     }
-
 
 }

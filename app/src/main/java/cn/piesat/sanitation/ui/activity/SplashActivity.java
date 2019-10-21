@@ -104,7 +104,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 // 启动登录窗口
-                toActivity(MainActivity.class);
+                toActivity(LoginActivity.class);
 //                toActivity(MainActivity.class);
                 // 关闭启动画面
                 finish();

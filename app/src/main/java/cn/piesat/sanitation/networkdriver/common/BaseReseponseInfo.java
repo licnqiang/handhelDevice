@@ -7,8 +7,8 @@ package cn.piesat.sanitation.networkdriver.common;
  */
 public class BaseReseponseInfo<T>{
 
-    public int status;
-//    private String msg;
+    public int code;
+    public String msg;
     public T data;   //业务bean
 
 

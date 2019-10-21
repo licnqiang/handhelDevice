@@ -7,10 +7,23 @@ package cn.piesat.sanitation.constant;
  * @describe TODO
  */
 public class UrlContant {
-    public static final String part="users";
 
-    //登陆
-    public static final String login = "login";
+    /**
+     * 外协提供的接口
+     */
+    public interface OutSourcePart{
+
+          String part="v1";
+
+         String login = "login";
+
+    }
+
+
+
+
+
+
     //注册
     public static final String register = "register";
     //忘记密码

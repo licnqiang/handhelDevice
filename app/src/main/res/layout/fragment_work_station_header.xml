@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:text="事件上报"
+        android:text="常用功能"
         android:textColor="@color/color_black"
         android:textSize="22sp" />
 
@@ -21,13 +21,13 @@
         android:orientation="horizontal">
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/bai_dan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-
             app:work_modul_icon="@mipmap/ic_launcher"
-            app:work_modul_title="垃圾压缩"></cn.piesat.sanitation.ui.view.MyWorkModul>
+            app:work_modul_title="派单"></cn.piesat.sanitation.ui.view.MyWorkModul>
 
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
@@ -35,16 +35,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-
             app:work_modul_icon="@mipmap/ic_launcher"
-            app:work_modul_title="设备清洁"></cn.piesat.sanitation.ui.view.MyWorkModul>
+            app:work_modul_title="人员"></cn.piesat.sanitation.ui.view.MyWorkModul>
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-
+            android:visibility="invisible"
             app:work_modul_icon="@mipmap/ic_launcher"
             app:work_modul_title="设备维护"></cn.piesat.sanitation.ui.view.MyWorkModul>
     </LinearLayout>
@@ -54,7 +53,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:text="服务功能"
+        android:text="审批"
         android:textColor="@color/color_black"
         android:textSize="22sp" />
 
@@ -69,7 +68,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             app:work_modul_icon="@mipmap/ic_launcher"
-            app:work_modul_title="一键呼救"></cn.piesat.sanitation.ui.view.MyWorkModul>
+            app:work_modul_title="垃圾运输"></cn.piesat.sanitation.ui.view.MyWorkModul>
 
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
@@ -77,9 +76,49 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:visibility="invisible"
             app:work_modul_icon="@mipmap/ic_launcher"
-            app:work_modul_title="一键呼救"></cn.piesat.sanitation.ui.view.MyWorkModul>
+            app:work_modul_title="行政报销"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/yun_dan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/ic_launcher"
+            app:work_modul_title="运单"></cn.piesat.sanitation.ui.view.MyWorkModul>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="记录"
+        android:textColor="@color/color_black"
+        android:textSize="22sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="horizontal">
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/ic_launcher"
+            app:work_modul_title="垃圾运输"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/ic_launcher"
+            app:work_modul_title="设备维护"></cn.piesat.sanitation.ui.view.MyWorkModul>
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
             android:layout_width="wrap_content"
