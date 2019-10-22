@@ -47,6 +47,29 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
                 });
     }
 
+    @Override
+    public void QueryCar(int pageNum, int pageSize, int status) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("pageNum", pageNum + "");
+        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("status", status + "");
+        commonPresenter.invokeInterfaceObtainData(false, false, false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_car,
+                hashMap, new TypeToken<CompressStations>() {
+                });
+
+    }
+
+    @Override
+    public void QueryBurnStation(int pageNum, int pageSize) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("pageNum", pageNum + "");
+        hashMap.put("pageSize", pageSize + "");
+        commonPresenter.invokeInterfaceObtainData(false, false, false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_burn_staion,
+                hashMap, new TypeToken<CompressStations>() {
+                });
+
+    }
+
 
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
@@ -56,6 +79,24 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
                 if (status == REQUEST_SUCCESS_TWO) {
                     CompressStations compressStations = (CompressStations) data;
                     QueryView.SuccessFinshByCompress(compressStations);
+                } else {
+                    QueryView.Error(Msg);
+                }
+                break;
+            //车辆
+            case UrlContant.OutSourcePart.query_car:
+                if (status == REQUEST_SUCCESS_TWO) {
+
+                    QueryView.SuccessFinshByCar(null);
+                } else {
+                    QueryView.Error(Msg);
+                }
+                break;
+            //焚烧厂
+            case UrlContant.OutSourcePart.query_burn_staion:
+                if (status == REQUEST_SUCCESS_TWO) {
+
+                    QueryView.SuccessFinshByBurnStation(null);
                 } else {
                     QueryView.Error(Msg);
                 }

@@ -18,6 +18,8 @@ public class UrlContant {
         String login = "login";
 
         String query_compress_station = "getRoleYsz";
+        String query_car = "getRoleCar";
+        String query_burn_staion = "getRoleFsc";
         String upload = "upload";
 
     }

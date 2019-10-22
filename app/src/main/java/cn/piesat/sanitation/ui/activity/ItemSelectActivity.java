@@ -80,9 +80,23 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
         ToastUtil.show(this, errorMsg);
     }
 
+
+    //查询压缩厂
     @Override
     public void SuccessFinshByCompress(CompressStations compressStations) {
         compressStationAdapter.refreshData(compressStations.rows);
+    }
+
+    //查询车辆
+    @Override
+    public void SuccessFinshByCar(CompressStations compressStations) {
+
+    }
+
+    //查询焚烧厂
+    @Override
+    public void SuccessFinshByBurnStation(CompressStations compressStations) {
+
     }
 
 
