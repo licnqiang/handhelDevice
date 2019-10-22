@@ -30,16 +30,17 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class BasePresenter extends RetrofitUtils {
 
     public static final int REQUEST_SUCCESS = 200;//请求成功
+    public static final int REQUEST_SUCCESS_TWO = 0;//请求成功
     public static final int REQUEST_FAILURE = 500;//请求失败
-    protected  NetApi service = null;
+    protected NetApi service = null;
 
 
-    public <T> void TransmitCommonApi(boolean switchService,boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
+    public <T> void TransmitCommonApi(boolean switchService, boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
-        Log.e("http", "http--url==" + (switchService?IPConfig.getURLPreFix():IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
+        Log.e("http", "http--url==" + (switchService ? IPConfig.getURLPreFix() : IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
         Log.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
         Log.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
-        BaseReseponseInfo  baseResponse=null;
+        BaseReseponseInfo baseResponse = null;
         /**
          * 判断是否是测试模式
          */
@@ -53,13 +54,13 @@ public abstract class BasePresenter extends RetrofitUtils {
                 responseData(baseResponse, methodName, parameterMap, typeToken);
             } catch (IOException e) {
                 e.printStackTrace();
-                onResponse(methodName, null, REQUEST_FAILURE, parameterMap,null!=baseResponse?baseResponse.msg:"");
+                onResponse(methodName, null, REQUEST_FAILURE, parameterMap, null != baseResponse ? baseResponse.msg : "");
                 Log.e("http", "BaseParser--e==" + e);
             }
 
         } else {
 
-            service=getRetrofit(switchService,null).create(NetApi.class);
+            service = getRetrofit(switchService, null).create(NetApi.class);
 
             /**
              *网络请求
@@ -99,7 +100,7 @@ public abstract class BasePresenter extends RetrofitUtils {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("http", "BaseParser--e==" + e);
-                        onResponse(methodName, null, REQUEST_FAILURE, parameterMap,e.getMessage());
+                        onResponse(methodName, null, REQUEST_FAILURE, parameterMap, e.getMessage());
                     }
 
                     //获取数据
@@ -141,19 +142,47 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param typeToken    返回数据类型
      */
     private void responseData(BaseReseponseInfo baseResponse, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
-        switch (baseResponse.code) {
-            case REQUEST_SUCCESS: //成功
-                Object object = null;
-                if (null != typeToken) {
-                    object = requestServer(baseResponse.data, typeToken);
-                }
-                //成功回调数据
-                onResponse(methodName, object, REQUEST_SUCCESS, parameterMap,baseResponse.msg);
-                break;
-            case REQUEST_FAILURE://失败
-                onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap,baseResponse.msg);
-                break;
+        if (baseResponse.code == REQUEST_SUCCESS) {
+            Object object = null;
+            if (null != typeToken) {
+                object = requestServer(baseResponse.data, typeToken);
+            }
+            //成功回调数据
+            onResponse(methodName, object, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
+        } else if (baseResponse.code == REQUEST_SUCCESS_TWO) {
+            Object objects = null;
+            if (null != typeToken) {
+                objects = requestServer(baseResponse, typeToken);
+            }
+            onResponse(methodName, objects, REQUEST_SUCCESS_TWO, parameterMap, baseResponse.msg);
+        } else {
+            onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap, baseResponse.msg);
         }
+
+//        switch (baseResponse.code) {
+//            case REQUEST_SUCCESS: //成功
+//                Object object = null;
+//                if (null != typeToken) {
+//                    object = requestServer(baseResponse.data, typeToken);
+//                }
+//                //成功回调数据
+//                onResponse(methodName, object, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
+//                break;
+////            case REQUEST_FAILURE://失败
+////                onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap, baseResponse.msg);
+////                break;
+//            //为了区分分页数据暂定该方法
+//            case REQUEST_SUCCESS_TWO: //成功
+//                onResponse(methodName, baseResponse, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
+//                break;
+//            default:
+//                Object objects = null;
+//                if (null != typeToken) {
+//                    objects = requestServer(new Gson().toJson(baseResponse), typeToken);
+//                }
+//                onResponse(methodName, objects, REQUEST_FAILURE, parameterMap, baseResponse.msg);
+//                break;
+//        }
     }
 
 
@@ -165,5 +194,5 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param status     是否成功标识
      */
 
-    public abstract void onResponse(String methodName, Object object, int status, Map<String, String> parameterMap,String Msg);
+    public abstract void onResponse(String methodName, Object object, int status, Map<String, String> parameterMap, String Msg);
 }

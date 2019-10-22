@@ -13,9 +13,25 @@ public class UrlContant {
      */
     public interface OutSourcePart{
 
-          String part="v1";
+        String part="v1";
 
-         String login = "login";
+        String login = "login";
+
+        String query_compress_station = "getRoleYsz";
+        String upload = "upload";
+
+    }
+
+
+    /**
+     * 王浩提供的接口
+     */
+    public interface MySourcePart{
+
+        String part="punch";
+
+        String check_record = "getOneByUserIdAndCreateDate";
+
 
     }
 

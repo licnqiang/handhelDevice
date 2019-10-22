@@ -16,16 +16,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class RetrofitUtils {
 
 
-    private Retrofit mRetrofit;
-    private Retrofit outSourceRetrofit;
-    private OkHttpClient.Builder mOkHttpClient;
+    private static Retrofit mRetrofit;
+    private static Retrofit outSourceRetrofit;
+    private static OkHttpClient.Builder mOkHttpClient;
 
     /**
      * 获取当前Retrofit对象
      *
      * @return
      */
-    protected Retrofit getRetrofit(boolean switchService, UploadListener uploadListener) {
+    protected static Retrofit getRetrofit(boolean switchService, UploadListener uploadListener) {
         return switchService ? getMyRetrofit(uploadListener) : getOutSourceRetrofit(uploadListener);
     }
 
@@ -35,7 +35,7 @@ public abstract class RetrofitUtils {
      *
      * @return
      */
-    protected Retrofit getOutSourceRetrofit(UploadListener uploadListener) {
+    protected static Retrofit getOutSourceRetrofit(UploadListener uploadListener) {
 
         if (null == outSourceRetrofit) {
 
@@ -65,7 +65,7 @@ public abstract class RetrofitUtils {
      *
      * @return
      */
-    protected Retrofit getMyRetrofit(UploadListener uploadListener) {
+    protected static Retrofit getMyRetrofit(UploadListener uploadListener) {
 
         if (null == mRetrofit) {
 
@@ -76,7 +76,7 @@ public abstract class RetrofitUtils {
             //Retrofit2后使用build设计模式
             mRetrofit = new Retrofit.Builder()
                     //设置服务器路径
-                    .baseUrl(IPConfig.getOutSourceURLPreFix())
+                    .baseUrl(IPConfig.getURLPreFix())
                     //添加转化库，默认是Gson
                     .addConverterFactory(GsonConverterFactory.create())
                     //添加回调库，采用RxJava

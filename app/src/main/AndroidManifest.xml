@@ -69,7 +69,13 @@
             android:name=".ui.activity.FaceEnterActivity"
             android:label="@string/title_activity_face_enter"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.activity.OrderListActivity"></activity>
+        <activity android:name=".ui.activity.OrderListActivity" />
+        <activity
+            android:name=".ui.activity.AssignOrderActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.activity.ItemSelectActivity"></activity>
     </application>
 
 </manifest>

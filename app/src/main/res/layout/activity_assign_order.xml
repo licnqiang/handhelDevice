@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_f2f2f2"
+    android:orientation="vertical"
+    tools:context=".ui.activity.AssignOrderActivity">
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/station_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:comment_item_title="压缩站："
+                app:comment_item_value="西咸新区"></cn.piesat.sanitation.ui.view.CommentItemModul>
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/car_num"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                app:comment_item_title="车牌："
+                app:comment_item_value="陕A.F6213" />
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/car_people"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                app:comment_item_title="驾驶员："
+                app:comment_item_value="秦双" />
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/car_start_time"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                app:comment_item_title="起运时间："
+                app:comment_item_value="2019.1.9" />
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/car_send_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                app:comment_item_title="焚烧厂："
+                app:comment_item_value="沣东" />
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/car_send_address_time"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                app:comment_item_title="抵达时间："
+                app:comment_item_value="2019.10.9" />
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/car_header"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                app:comment_item_title="抵达时间："
+                app:comment_item_value="2019.10.9" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注"
+                    android:textColor="@color/them_black_font"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/white"
+                    android:gravity="left|top"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/them_black_font"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/bule"
+                android:gravity="center"
+                android:text="申请派单"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

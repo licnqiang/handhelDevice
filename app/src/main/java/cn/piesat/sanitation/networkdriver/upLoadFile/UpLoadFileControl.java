@@ -24,7 +24,7 @@ public class UpLoadFileControl extends RetrofitUtils {
      *
      * @param paths
      */
-    public void uploadFile(boolean switchService,String part, String methodName, List<String> paths,UploadListener uploadListener, final ResultCallBack resultCallBack) {
+    public static void uploadFile(boolean switchService,String part, String methodName, List<String> paths,UploadListener uploadListener, final ResultCallBack resultCallBack) {
         List<MultipartBody.Part> body = UpLoadFileNet.filesToMultipartBodyParts(paths);
         Call<BaseReseponseInfo> call = getRetrofit(switchService,uploadListener).create(NetApi.class).uploadFilesWithParts(part, methodName, body);
         call.enqueue(new Callback<BaseReseponseInfo>() {

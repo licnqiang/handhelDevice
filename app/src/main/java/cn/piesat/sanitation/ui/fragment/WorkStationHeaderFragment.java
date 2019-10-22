@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.ui.activity.AssignOrderActivity;
 import cn.piesat.sanitation.ui.activity.OrderListActivity;
 import cn.piesat.sanitation.ui.view.MyWorkModul;
 
@@ -45,6 +46,7 @@ public class WorkStationHeaderFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bai_dan:
+                toActivity(AssignOrderActivity.class);
                 break;
             case R.id.yun_dan:
                 toActivity(OrderListActivity.class);

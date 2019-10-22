@@ -36,8 +36,10 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         bottomBar.setContainer(R.id.fl_container)
-                .setTitleSize(12)
+                .setTitleSize(14)
                 .setTitleBeforeAndAfterColor("#999999", "#1587FD")
+                .setIconHeight(20)
+                .setIconWidth(20)
                 .addItem(mapFragment,
                         "首页",
                         R.mipmap.main_ziyuan,
@@ -48,8 +50,8 @@ public class MainActivity extends BaseActivity {
                         R.mipmap.home_tab_msg_p)
                 .addItem(workStationHeaderFragment,
                         "工作",
-                        R.mipmap.home_tab_msg_n,
-                        R.mipmap.home_tab_msg_p)
+                        R.mipmap.main_work,
+                        R.mipmap.main_work_sel)
                 .addItem(meFragment,
                         "我的",
                         R.mipmap.main_wode,

@@ -58,6 +58,7 @@ public class BaseApplication extends DefaultApplicationLike {
 
         ApplicationContext = getApplication().getApplicationContext();
         SpHelper.init(getApplication().getApplicationContext());
+        SpHelper.setStringValue("token", "");
         registerMessageReceiver();
         //initBuglyCrashReport();
     }

@@ -1,25 +1,28 @@
 package cn.piesat.sanitation.ui.activity;
 
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.hardware.Camera;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
-
+import java.util.ArrayList;
+import java.util.List;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.constant.SysContant;
+import cn.piesat.sanitation.constant.UrlContant;
+import cn.piesat.sanitation.networkdriver.upLoadFile.UpLoadFileControl;
 import cn.piesat.sanitation.ui.view.FaceRoundView;
+import cn.piesat.sanitation.util.BitmapUtils;
+import cn.piesat.sanitation.util.ToastUtil;
 import cn.piesat.sanitation.util.carmera.AutoTexturePreviewView;
 import cn.piesat.sanitation.util.carmera.CameraDataCallback;
 import cn.piesat.sanitation.util.carmera.CameraPreviewManager;
 import cn.piesat.sanitation.util.carmera.GlobalSet;
-import cn.piesat.sanitation.util.carmera.SingleBaseConfig;
 
 public class FaceEnterActivity extends BaseActivity {
     @BindView(R.id.auto_camera_preview_view)
@@ -28,6 +31,7 @@ public class FaceEnterActivity extends BaseActivity {
     // RGB摄像头图像宽和高
     private static final int mWidth = 640;
     private static final int mHeight = 480;
+    private byte[] picData;
 
     @Override
     protected int getLayoutId() {
@@ -41,6 +45,8 @@ public class FaceEnterActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        Intent intent = getIntent();
+        String face_key_type = intent.getStringExtra(SysContant.CommentTag.comment_key);
 
     }
 
@@ -78,12 +84,40 @@ public class FaceEnterActivity extends BaseActivity {
         CameraPreviewManager.getInstance().startPreview(this, mPreviewView, mWidth, mHeight, new CameraDataCallback() {
             @Override
             public void onGetCameraData(byte[] data, Camera camera, int width, int height) {
-
+                picData = data;
 
             }
         });
     }
 
+
+    /**
+     * 显示检测的图片。用于调试，如果人脸sdk检测的人脸需要朝上，可以通过该图片判断。实际应用中可注释掉
+     *
+     * @param rgb
+     */
+    private void showDetectImage(byte[] rgb) {
+        showLoadingDialog("头像正在录入", false);
+        if (rgb == null) {
+            return;
+        }
+        String path = BitmapUtils.saveTakePictureImage(this, rgb);
+        List<String> paths = new ArrayList<>();
+        paths.add(path);
+        UpLoadFileControl.uploadFile(false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.upload, paths, null, new UpLoadFileControl.ResultCallBack() {
+            @Override
+            public void succeed(Object str) {
+                ToastUtil.show(FaceEnterActivity.this, "录入成功");
+                dismiss();
+            }
+
+            @Override
+            public void faild() {
+                ToastUtil.show(FaceEnterActivity.this, "录入失败");
+                dismiss();
+            }
+        });
+    }
 
 
     @Override
@@ -100,8 +134,15 @@ public class FaceEnterActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.tv_back)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.tv_back, R.id.rl_checking})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_back:
+                finish();
+                break;
+            case R.id.rl_checking:
+                showDetectImage(picData);
+                break;
+        }
     }
 }

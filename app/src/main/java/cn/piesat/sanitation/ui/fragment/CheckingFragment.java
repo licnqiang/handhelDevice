@@ -3,10 +3,18 @@ package cn.piesat.sanitation.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import com.google.gson.Gson;
+import com.hb.dialog.dialog.ConfirmDialog;
+import com.hb.dialog.myDialog.MyAlertDialog;
+import com.raizlabs.android.dbflow.sql.language.Select;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,15 +22,22 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.data.CheckRecord;
+import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
+import cn.piesat.sanitation.model.contract.CheckingContract;
+import cn.piesat.sanitation.model.presenter.CheckingPresenter;
 import cn.piesat.sanitation.ui.activity.FaceEnterActivity;
+import cn.piesat.sanitation.util.Log;
+import cn.piesat.sanitation.util.TimeUtils;
+import cn.piesat.sanitation.util.ToastUtil;
 
 /**
  * 考勤
  */
-public class CheckingFragment extends BaseFragment {
-
+public class CheckingFragment extends BaseFragment implements CheckingContract.CheckingView {
     @BindView(R.id.rl_checking)
     RelativeLayout rlChecking;
+    CheckingContract.CheckingPresenter checkingPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -31,6 +46,8 @@ public class CheckingFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        checkingPresenter = new CheckingPresenter(this);
+        checkingPresenter.QueryCheckingState(TimeUtils.getCurrentTime());
     }
 
     @Override
@@ -40,6 +57,38 @@ public class CheckingFragment extends BaseFragment {
 
     @OnClick(R.id.rl_checking)
     public void onViewClicked() {
-        startActivity(new Intent(getActivity(), FaceEnterActivity.class));
+        UserInfo_Tab userInfo_tab = new Select().from(UserInfo_Tab.class).querySingle();
+
+        //判断用户是否录入头像
+        if (null == userInfo_tab.lay1Sysuser || TextUtils.isEmpty(userInfo_tab.lay1Sysuser)) {
+            tipDialog();
+        }else {
+
+        }
+
+    }
+
+    private void tipDialog(){
+        MyAlertDialog myAlertDialog = new MyAlertDialog(getActivity()).builder()
+                .setTitle("提示")
+                .setMsg("请先录入人脸在打卡")
+                .setPositiveButton("开始录入", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(), FaceEnterActivity.class));
+                    }
+                });
+        myAlertDialog.show();
+    }
+
+
+    @Override
+    public void Error(String errorMsg) {
+        ToastUtil.show(getActivity(), errorMsg);
+    }
+
+    @Override
+    public void SuccessFinshByCheckRecord(List<CheckRecord> checkRecords) {
+        Log.e("--------checkRecords------", "-----checkRecords--------" + new Gson().toJson(checkRecords));
     }
 }

@@ -59,6 +59,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></cn.piesat.sanitation.util.carmera.AutoTexturePreviewView>
 
+        <cn.piesat.sanitation.util.carmera.AutoTexturePreviewView
+            android:id="@+id/auto_camera_preview_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></cn.piesat.sanitation.util.carmera.AutoTexturePreviewView>
+
 
     </FrameLayout>
 
@@ -88,10 +93,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="150dp"
+        android:paddingBottom="200dp"
         android:text="人脸录入中"
         android:textColor="@color/color_black"
         android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/rl_checking"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blue_circle"
+        android:gravity="center"
+        android:text="录入"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
 
 
 </RelativeLayout>

@@ -2,6 +2,8 @@ package cn.piesat.sanitation.networkdriver.module;
 
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
@@ -40,6 +42,8 @@ public class LoggingInterceptor implements Interceptor {
         if(null == request.body()){
             return chain.proceed(request);
         }
+
+//        Log.e("-------request------","------request-------"+request.url());
 
         //监听请求进度
         if(null!=mUploadListener){
