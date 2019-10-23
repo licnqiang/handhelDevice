@@ -31,11 +31,11 @@ public class CommonPresenter extends BasePresenter {
      * @param parameterMap      请求参数
      * @param typeToken         响应数据类型
      */
-    public void invokeInterfaceObtainData(boolean switchService,boolean testModel, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
+    public void invokeInterfaceObtainData(boolean switchService,boolean testModel, boolean isPost,boolean isBody, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
         if (parameterMap == null) {
-            TransmitCommonApi(switchService,testModel, isPost, part, methodName, new HashMap<String, String>(), typeToken);
+            TransmitCommonApi(switchService,testModel, isPost,isBody, part, methodName, new HashMap<String, String>(), typeToken);
         } else {
-            TransmitCommonApi(switchService,testModel, isPost, part, methodName, parameterMap, typeToken);
+            TransmitCommonApi(switchService,testModel, isPost,isBody, part, methodName, parameterMap, typeToken);
 
         }
     }

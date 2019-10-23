@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 //import com.meituan.android.walle.WalleChannelReader;
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.interfaces.BetaPatchListener;
@@ -28,6 +29,7 @@ import java.util.Map;
 
 import cn.piesat.sanitation.common.netchange.receiver.NetWorkChangReceiver;
 import cn.piesat.sanitation.database.InitDBUtil;
+import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.util.SpHelper;
 
 /**
@@ -39,6 +41,7 @@ import cn.piesat.sanitation.util.SpHelper;
  * @since 2016/11/7
  */
 public class BaseApplication extends DefaultApplicationLike {
+    static UserInfo_Tab userInfo_tab;
 
     public static final String TAG = "Tinker.BaseApplication";
     public static Map<String, Activity> activityMap = new HashMap<String, Activity>();        //管理activity 的容器
@@ -61,6 +64,14 @@ public class BaseApplication extends DefaultApplicationLike {
         SpHelper.setStringValue("token", "");
         registerMessageReceiver();
         //initBuglyCrashReport();
+    }
+
+    public static void setUserInfo(UserInfo_Tab userInfo) {
+        userInfo_tab = userInfo;
+    }
+
+    public static UserInfo_Tab getUserInfo() {
+        return userInfo_tab;
     }
 
 

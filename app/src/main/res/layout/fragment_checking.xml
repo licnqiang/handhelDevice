@@ -29,6 +29,7 @@
             android:paddingLeft="@dimen/text_10dp">
 
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -38,6 +39,7 @@
                 android:textSize="@dimen/text_size_28" />
 
             <TextView
+                android:id="@+id/user_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -57,6 +59,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -66,6 +69,7 @@
                 android:textSize="@dimen/text_size_16" />
 
             <TextView
+                android:id="@+id/tv_math_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -117,12 +121,14 @@
             android:paddingLeft="@dimen/text_20dp">
 
             <TextView
+                android:id="@+id/start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="上班时间08:00"
                 android:textSize="@dimen/text_16dp" />
 
             <TextView
+                android:id="@+id/end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

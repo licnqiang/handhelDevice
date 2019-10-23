@@ -42,7 +42,7 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("username", userName);
         hashMap.put("password", passWord);
-        commonPresenter.invokeInterfaceObtainData(false, false, true, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.login,
+        commonPresenter.invokeInterfaceObtainData(false, false, true,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.login,
                 hashMap, new TypeToken<LoginInfo_Respose>() {
                 });
     }
@@ -57,6 +57,7 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
             BaseApplication.initDB(loginInfo_respose.user.id);
             //保存用户基本信息
             loginInfo_respose.user.save();
+            BaseApplication.setUserInfo(loginInfo_respose.user);
             SpHelper.setStringValue("token", loginInfo_respose.token);
             mLoginView.jumpToMain();
         } else {

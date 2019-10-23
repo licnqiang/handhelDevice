@@ -59,10 +59,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></cn.piesat.sanitation.util.carmera.AutoTexturePreviewView>
 
-        <cn.piesat.sanitation.util.carmera.AutoTexturePreviewView
-            android:id="@+id/auto_camera_preview_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></cn.piesat.sanitation.util.carmera.AutoTexturePreviewView>
+        <ImageView
+            android:id="@+id/iv_user_pic"
+            android:layout_width="match_parent"
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="match_parent"></ImageView>
 
 
     </FrameLayout>

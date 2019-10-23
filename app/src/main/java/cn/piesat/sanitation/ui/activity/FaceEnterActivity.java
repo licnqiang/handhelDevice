@@ -1,37 +1,56 @@
 package cn.piesat.sanitation.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+
+import com.baidu.idl.main.facesdk.model.BDFaceImageInstance;
+import com.baidu.idl.main.facesdk.model.BDFaceSDKCommon;
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
+import cn.piesat.sanitation.model.contract.CheckingContract;
+import cn.piesat.sanitation.model.contract.UserInfoContract;
+import cn.piesat.sanitation.model.presenter.UserInfoPresenter;
 import cn.piesat.sanitation.networkdriver.upLoadFile.UpLoadFileControl;
 import cn.piesat.sanitation.ui.view.FaceRoundView;
 import cn.piesat.sanitation.util.BitmapUtils;
+import cn.piesat.sanitation.util.Log;
 import cn.piesat.sanitation.util.ToastUtil;
 import cn.piesat.sanitation.util.carmera.AutoTexturePreviewView;
 import cn.piesat.sanitation.util.carmera.CameraDataCallback;
 import cn.piesat.sanitation.util.carmera.CameraPreviewManager;
 import cn.piesat.sanitation.util.carmera.GlobalSet;
+import cn.piesat.sanitation.util.carmera.SingleBaseConfig;
 
-public class FaceEnterActivity extends BaseActivity {
+public class FaceEnterActivity extends BaseActivity implements UserInfoContract.UserInfoView {
     @BindView(R.id.auto_camera_preview_view)
     AutoTexturePreviewView mPreviewView;
+    @BindView(R.id.iv_user_pic)
+    ImageView imageView;
 
     // RGB摄像头图像宽和高
     private static final int mWidth = 640;
     private static final int mHeight = 480;
     private byte[] picData;
+
+    UserInfoPresenter userInfoPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -41,6 +60,7 @@ public class FaceEnterActivity extends BaseActivity {
     @Override
     protected void initView() {
         setCarmera();
+        userInfoPresenter = new UserInfoPresenter(this);
     }
 
     @Override
@@ -56,7 +76,7 @@ public class FaceEnterActivity extends BaseActivity {
         mPreviewView = findViewById(R.id.auto_camera_preview_view);
         // 遮罩
         FaceRoundView rectView = findViewById(R.id.rect_view);
-        rectView.setVisibility(View.VISIBLE);
+        rectView.setVisibility(View.GONE);
         // 需要调整预览 大小
         DisplayMetrics dm = new DisplayMetrics();
         Display display = this.getWindowManager().getDefaultDisplay();
@@ -97,18 +117,35 @@ public class FaceEnterActivity extends BaseActivity {
      * @param rgb
      */
     private void showDetectImage(byte[] rgb) {
+
+        BDFaceImageInstance rgbInstance = new BDFaceImageInstance(rgb, mHeight,
+                mWidth, BDFaceSDKCommon.BDFaceImageType.BDFACE_IMAGE_TYPE_YUV_420,
+                SingleBaseConfig.getBaseConfig().getDetectDirection(),
+                SingleBaseConfig.getBaseConfig().getMirrorRGB());
+        BDFaceImageInstance imageInstance = rgbInstance.getImage();
+        final Bitmap bitmap = BitmapUtils.getInstaceBmp(imageInstance);
+        imageView.setImageBitmap(bitmap);
+        mPreviewView.setVisibility(View.GONE);
+        imageView.setVisibility(View.VISIBLE);
+
         showLoadingDialog("头像正在录入", false);
         if (rgb == null) {
             return;
         }
         String path = BitmapUtils.saveTakePictureImage(this, rgb);
+        Log.e("----path---","---path--"+path);
+
+//        Glide.with(this)
+//                .load(path)
+//                .into(imageView);
+       // imageView.setImageURI(Uri.parse(path));
+
         List<String> paths = new ArrayList<>();
         paths.add(path);
         UpLoadFileControl.uploadFile(false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.upload, paths, null, new UpLoadFileControl.ResultCallBack() {
             @Override
             public void succeed(Object str) {
-                ToastUtil.show(FaceEnterActivity.this, "录入成功");
-                dismiss();
+                userInfoPresenter.ModeyUserPic(str + "");
             }
 
             @Override
@@ -144,5 +181,19 @@ public class FaceEnterActivity extends BaseActivity {
                 showDetectImage(picData);
                 break;
         }
+    }
+
+    @Override
+    public void Error(String errorMsg) {
+        dismiss();
+        ToastUtil.show(FaceEnterActivity.this, "录入失败");
+    }
+
+    @Override
+    public void SuccessFinsh() {
+
+        dismiss();
+        ToastUtil.show(FaceEnterActivity.this, "录入成功");
+        finish();
     }
 }

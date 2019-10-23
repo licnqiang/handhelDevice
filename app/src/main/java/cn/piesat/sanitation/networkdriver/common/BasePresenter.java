@@ -29,16 +29,16 @@ import io.reactivex.schedulers.Schedulers;
  */
 public abstract class BasePresenter extends RetrofitUtils {
 
-    public static final int REQUEST_SUCCESS = 200;//请求成功
-    public static final int REQUEST_SUCCESS_TWO = 0;//请求成功
+    public static final int REQUEST_SUCCESS = 0;//请求成功
     public static final int REQUEST_FAILURE = 500;//请求失败
     protected NetApi service = null;
 
 
-    public <T> void TransmitCommonApi(boolean switchService, boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
+    public <T> void TransmitCommonApi(boolean switchService, boolean TestSwitch, boolean isPost, boolean isBody,String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
         Log.e("http", "http--url==" + (switchService ? IPConfig.getURLPreFix() : IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
         Log.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
+        Log.e("http", "http--requestMethod==" + (isBody ? "body" : "params"));
         Log.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
         BaseReseponseInfo baseResponse = null;
         /**
@@ -65,7 +65,7 @@ public abstract class BasePresenter extends RetrofitUtils {
             /**
              *网络请求
              */
-            commonApi(isPost, part, methodName, parameterMap, typeToken);
+            commonApi(isBody,isPost, part, methodName, parameterMap, typeToken);
         }
     }
 
@@ -77,10 +77,14 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param parameterMap 参数
      * @param typeToken    返回值类型
      */
-    public void commonApi(boolean isPost, final String part, final String methodName, final Map<String, String> parameterMap, final TypeToken<?> typeToken) {
+    public void commonApi(boolean isBody,boolean isPost, final String part, final String methodName, final Map<String, String> parameterMap, final TypeToken<?> typeToken) {
         Observable<BaseReseponseInfo> observable;
         if (isPost) {
-            observable = service.serviceAPI(part, methodName, parameterMap);
+            if(isBody){
+                observable = service.serviceAPIBady(part, methodName, parameterMap);
+            }else {
+                observable = service.serviceAPI(part, methodName, parameterMap);
+            }
         } else {
             observable = service.serviceGetAPI(part, methodName, parameterMap);
         }
@@ -149,13 +153,7 @@ public abstract class BasePresenter extends RetrofitUtils {
             }
             //成功回调数据
             onResponse(methodName, object, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
-        } else if (baseResponse.code == REQUEST_SUCCESS_TWO) {
-            Object objects = null;
-            if (null != typeToken) {
-                objects = requestServer(baseResponse, typeToken);
-            }
-            onResponse(methodName, objects, REQUEST_SUCCESS_TWO, parameterMap, baseResponse.msg);
-        } else {
+        }  else {
             onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap, baseResponse.msg);
         }
 

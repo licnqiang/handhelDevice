@@ -14,11 +14,11 @@ public interface UserInfoContract {
 
     interface UserInfoView {
         void Error(String errorMsg);
-        void SuccessFinshByUserInfo(List<CheckRecord> checkRecords);
+        void SuccessFinsh();
     }
 
     interface UserInfoPresenter {
         //上传头像
-        void uploadByHeadPic(String date);
+        void ModeyUserPic(String userPic);
     }
 }

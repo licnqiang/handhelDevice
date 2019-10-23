@@ -1051,4 +1051,35 @@ public class TimeUtils {
     }
 
 
+    /**
+     * 获取当前年
+     * @return
+     */
+    public static String getCurrentYear(){
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        return sdf.format(d);
+    }
+
+    /**
+     * 获取当前月日
+     * @return
+     */
+    public static String getCurrentMathDay(){
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+        return sdf.format(d);
+    }
+
+    /**
+     * 获取当前月日
+     * @return
+     */
+    public static String getCurrentTimeByHm(){
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(d);
+    }
+
+
 }

@@ -20,7 +20,7 @@ public class UrlContant {
         String query_car = "getRoleCar";
         String query_burn_staion = "getRoleFsc";
         String upload = "upload";
-
+        String mody_user_pic = "editUser";
     }
 
 
@@ -34,7 +34,9 @@ public class UrlContant {
 
 
         String check_record = "getOneByUserIdAndCreateDate";
-        String check_set = "param/listBySiteId";
+        String check_set = "param/listBySiteId";  //获取考勤时间规定
+        String check_user = "save";  //用户打卡
+
 
 
     }

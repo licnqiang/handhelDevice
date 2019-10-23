@@ -7,20 +7,20 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.hb.dialog.dialog.ConfirmDialog;
 import com.hb.dialog.myDialog.MyAlertDialog;
 import com.raizlabs.android.dbflow.sql.language.Select;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.common.BaseFragment;
 import cn.piesat.sanitation.data.CheckRecord;
 import cn.piesat.sanitation.data.StationCheckSet;
@@ -38,7 +38,20 @@ import cn.piesat.sanitation.util.ToastUtil;
 public class CheckingFragment extends BaseFragment implements CheckingContract.CheckingView {
     @BindView(R.id.rl_checking)
     RelativeLayout rlChecking;
-    CheckingContract.CheckingPresenter checkingPresenter;
+    @BindView(R.id.start_time)
+    TextView startTime;
+    @BindView(R.id.end_time)
+    TextView endTime;
+    @BindView(R.id.user_name)
+    TextView userName;
+    @BindView(R.id.user_address)
+    TextView userAddress;
+    @BindView(R.id.tv_year)
+    TextView tvYear;
+    @BindView(R.id.tv_math_day)
+    TextView tvMathDay;
+    CheckingPresenter checkingPresenter;
+    private UserInfo_Tab userInfo_tab;
 
     @Override
     protected int getLayoutId() {
@@ -56,19 +69,28 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
 
     @Override
     protected void initData() {
+        setUserInfo();
+    }
 
+    //设置用户基本信息
+    private void setUserInfo() {
+        userInfo_tab = BaseApplication.getUserInfo();
+        userName.setText(userInfo_tab.name);
+        userAddress.setText(userInfo_tab.address);
+        tvYear.setText(TimeUtils.getCurrentYear());
+        tvMathDay.setText(TimeUtils.getCurrentMathDay());
     }
 
     @OnClick(R.id.rl_checking)
     public void onViewClicked() {
-        UserInfo_Tab userInfo_tab = new Select().from(UserInfo_Tab.class).querySingle();
-
         //判断用户是否录入头像
         if (null == userInfo_tab.lay1Sysuser || TextUtils.isEmpty(userInfo_tab.lay1Sysuser)) {
             tipDialog();
         } else {
 
         }
+
+//        checkingPresenter.WorkChecking("1", TimeUtils.getCurrentTimeByHm());
 
     }
 
@@ -100,6 +122,13 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     //考勤基本设定
     @Override
     public void SuccessFinshByWorKTimeSet(StationCheckSet stationCheckSet) {
-        Log.e("--------StationCheckSet------", "-----StationCheckSet--------" + new Gson().toJson(stationCheckSet));
+        startTime.setText("上班时间" + stationCheckSet.startTime);
+        endTime.setText("上班时间" + stationCheckSet.endTime);
     }
+
+    @Override
+    public void SuccessFinshByWorkCheck() {
+        ToastUtil.show(getActivity(), "打卡成功");
+    }
+
 }

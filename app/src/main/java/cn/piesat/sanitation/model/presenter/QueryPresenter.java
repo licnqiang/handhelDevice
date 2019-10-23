@@ -18,7 +18,6 @@ import cn.piesat.sanitation.networkdriver.common.ICommonAction;
 import cn.piesat.sanitation.util.Log;
 
 import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;
-import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS_TWO;
 
 /**
  * @author lq
@@ -42,7 +41,7 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
         hashMap.put("pageSize", pageSize + "");
-        commonPresenter.invokeInterfaceObtainData(false, false, false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_compress_station,
+        commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_compress_station,
                 hashMap, new TypeToken<CompressStations>() {
                 });
     }
@@ -53,7 +52,7 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
         hashMap.put("pageNum", pageNum + "");
         hashMap.put("pageSize", pageSize + "");
         hashMap.put("status", status + "");
-        commonPresenter.invokeInterfaceObtainData(false, false, false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_car,
+        commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_car,
                 hashMap, new TypeToken<CompressStations>() {
                 });
 
@@ -64,7 +63,7 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
         hashMap.put("pageSize", pageSize + "");
-        commonPresenter.invokeInterfaceObtainData(false, false, false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_burn_staion,
+        commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_burn_staion,
                 hashMap, new TypeToken<CompressStations>() {
                 });
 
@@ -76,7 +75,7 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
         switch (methodIndex) {
             //查询压缩站
             case UrlContant.OutSourcePart.query_compress_station:
-                if (status == REQUEST_SUCCESS_TWO) {
+                if (status == REQUEST_SUCCESS) {
                     CompressStations compressStations = (CompressStations) data;
                     QueryView.SuccessFinshByCompress(compressStations);
                 } else {
@@ -85,7 +84,7 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
                 break;
             //车辆
             case UrlContant.OutSourcePart.query_car:
-                if (status == REQUEST_SUCCESS_TWO) {
+                if (status == REQUEST_SUCCESS) {
 
                     QueryView.SuccessFinshByCar(null);
                 } else {
@@ -94,7 +93,7 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
                 break;
             //焚烧厂
             case UrlContant.OutSourcePart.query_burn_staion:
-                if (status == REQUEST_SUCCESS_TWO) {
+                if (status == REQUEST_SUCCESS) {
 
                     QueryView.SuccessFinshByBurnStation(null);
                 } else {

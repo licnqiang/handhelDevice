@@ -9,6 +9,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.util.Log;
+
+import com.baidu.idl.main.facesdk.model.BDFaceImageInstance;
+import com.baidu.idl.main.facesdk.model.BDFaceSDKCommon;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -139,6 +143,22 @@ public final class BitmapUtils {
         return transformed;
 
     }
+
+    public static Bitmap getInstaceBmp(BDFaceImageInstance newInstance) {
+        Bitmap transBmp = null;
+        if (newInstance.imageType == BDFaceSDKCommon.BDFaceImageType.BDFACE_IMAGE_TYPE_RGBA) {
+            transBmp = Bitmap.createBitmap(newInstance.width, newInstance.height, Bitmap.Config.ARGB_8888);
+            transBmp.copyPixelsFromBuffer(ByteBuffer.wrap(newInstance.data));
+        } else if (newInstance.imageType == BDFaceSDKCommon.BDFaceImageType.BDFACE_IMAGE_TYPE_BGR) {
+            transBmp = BitmapUtils.BGR2Bitmap(newInstance.data, newInstance.width, newInstance.height);
+        } else if (newInstance.imageType == BDFaceSDKCommon.BDFaceImageType.BDFACE_IMAGE_TYPE_YUV_420) {
+            transBmp = BitmapUtils.yuv2Bitmap(newInstance.data, newInstance.width, newInstance.height);
+        } else if (newInstance.imageType == BDFaceSDKCommon.BDFaceImageType.BDFACE_IMAGE_TYPE_GRAY) {
+            transBmp = Depth2Bitmap(newInstance.data, newInstance.width, newInstance.height);
+        }
+        return transBmp;
+    }
+
 
     /**
      * 根据从数据中读到的方向旋转图片
