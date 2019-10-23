@@ -11,13 +11,14 @@ public class UrlContant {
     /**
      * 外协提供的接口
      */
-    public interface OutSourcePart{
+    public interface OutSourcePart {
 
-        String part="v1";
-
+        String part = "v1";
         String login = "login";
 
         String query_compress_station = "getRoleYsz";
+        String query_car = "getRoleCar";
+        String query_burn_staion = "getRoleFsc";
         String upload = "upload";
 
     }
@@ -26,21 +27,20 @@ public class UrlContant {
     /**
      * 王浩提供的接口
      */
-    public interface MySourcePart{
+    public interface MySourcePart {
 
-        String part="punch";
+        String part = "api/punch";
+        String check_set_par = "api/attendance";
+
 
         String check_record = "getOneByUserIdAndCreateDate";
+        String check_set = "param/listBySiteId";
 
         String new_part="news";
         String new_List="list";
 
 
     }
-
-
-
-
 
 
     //注册

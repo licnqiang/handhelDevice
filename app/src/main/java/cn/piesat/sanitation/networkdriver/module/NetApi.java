@@ -26,11 +26,10 @@ public interface NetApi {
     @FormUrlEncoded
 //  @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("{part}/{methodName}")
-    Observable<BaseReseponseInfo> serviceAPI(@Path("part") String part, @Path("methodName") String methodName, @FieldMap() Map<String, String> map);
+    Observable<BaseReseponseInfo> serviceAPI(@Path(value = "part", encoded = true) String part, @Path(value = "methodName", encoded = true) String methodName, @FieldMap() Map<String, String> map);
 
-//    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("{part}/{methodName}")
-    Observable<BaseReseponseInfo> serviceGetAPI(@Path("part") String part, @Path("methodName") String methodName, @QueryMap() Map<String, String> map);
+    Observable<BaseReseponseInfo> serviceGetAPI(@Path(value = "part", encoded = true) String part, @Path(value = "methodName", encoded = true) String methodName, @QueryMap() Map<String, String> map);
 
     /**
      * 通过 List<MultipartBody.Part> 传入多个part实现多文件上传

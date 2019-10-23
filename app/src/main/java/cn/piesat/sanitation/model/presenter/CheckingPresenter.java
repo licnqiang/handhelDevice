@@ -12,6 +12,7 @@ import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.CheckRecord;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.data.LoginInfo_Respose;
+import cn.piesat.sanitation.data.StationCheckSet;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.model.contract.CheckingContract;
 import cn.piesat.sanitation.model.contract.QueryContract;
@@ -46,7 +47,7 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
         hashMap.put("userId", userInfo_tab.id);
         hashMap.put("date", date);
         commonPresenter.invokeInterfaceObtainData(true, false, false, UrlContant.MySourcePart.part, UrlContant.MySourcePart.check_record,
-                hashMap, new TypeToken<List<CheckRecord>>() {
+                hashMap, new TypeToken<CheckRecord>() {
                 });
     }
 
@@ -56,18 +57,37 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
 
     }
 
+    //获取考勤时间位置限制
+    @Override
+    public void WorKTimeSet() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        UserInfo_Tab userInfo_tab = new Select().from(UserInfo_Tab.class).querySingle();
+        hashMap.put("siteId", userInfo_tab.idSysdept);
+        commonPresenter.invokeInterfaceObtainData(true, false, false, UrlContant.MySourcePart.check_set_par, UrlContant.MySourcePart.check_set,
+                hashMap, new TypeToken<StationCheckSet>() {
+                });
+    }
+
 
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex) {
             case UrlContant.MySourcePart.check_record:  //通过时间获取考勤记录
                 if (status == REQUEST_SUCCESS) {//成功
-                    List<CheckRecord> checkRecords = (List<CheckRecord>) data;
+                    CheckRecord checkRecords = (CheckRecord) data;
                     CheckingView.SuccessFinshByCheckRecord(checkRecords);
                 } else {
                     CheckingView.Error(Msg);
                 }
+                break;
 
+            case UrlContant.MySourcePart.check_set:  //通过时间获取考勤记录
+                if (status == REQUEST_SUCCESS) {//成功
+                    StationCheckSet stationCheckSet = (StationCheckSet) data;
+                    CheckingView.SuccessFinshByWorKTimeSet(stationCheckSet);
+                } else {
+                    CheckingView.Error(Msg);
+                }
 
                 break;
 

@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="请输入手机号"
-                android:text="sj"
+                android:text="zhanz"
                 android:paddingLeft="10dp"
                 android:textColor="@color/them_black_font"
                 android:textColorHint="@color/them_black_font"
