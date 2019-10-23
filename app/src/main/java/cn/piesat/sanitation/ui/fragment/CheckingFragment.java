@@ -122,8 +122,8 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     //考勤基本设定
     @Override
     public void SuccessFinshByWorKTimeSet(StationCheckSet stationCheckSet) {
-        startTime.setText("上班时间" + stationCheckSet.startTime);
-        endTime.setText("上班时间" + stationCheckSet.endTime);
+     /*   startTime.setText("上班时间" + stationCheckSet.startTime);
+        endTime.setText("上班时间" + stationCheckSet.endTime);*/
     }
 
     @Override

@@ -21,7 +21,7 @@ public class SpHelper {
     }
 
     public static String getStringValue(String key) {
-        return sp.getString(key, null);
+        return sp.getString(key, "");
     }
 
     public static String getStringValue(String key, String defaultValue) {
