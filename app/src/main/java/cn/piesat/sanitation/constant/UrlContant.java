@@ -36,7 +36,7 @@ public class UrlContant {
         String check_record = "getOneByUserIdAndCreateDate";
         String check_set = "param/listBySiteId";
 
-        String new_part="news";
+        String new_part="api/news";
         String new_List="list";
 
 

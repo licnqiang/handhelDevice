@@ -92,9 +92,7 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     }
 
     //获取考勤记录
-    @Override
-    public void SuccessFinshByCheckRecord(List<CheckRecord> checkRecords) {
-        LogUtil.e("--------checkRecords------", "-----checkRecords--------" + new Gson().toJson(checkRecords));
+
     public void SuccessFinshByCheckRecord(CheckRecord checkRecord) {
         LogUtil.e("--------checkRecords------", "-----checkRecords--------" + new Gson().toJson(checkRecord));
     }

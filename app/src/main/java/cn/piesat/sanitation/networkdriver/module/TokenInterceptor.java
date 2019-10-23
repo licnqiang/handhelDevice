@@ -7,7 +7,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
 import cn.piesat.sanitation.networkdriver.upLoadFile.UploadListener;
-import cn.piesat.sanitation.util.Log;
 import cn.piesat.sanitation.util.SpHelper;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
