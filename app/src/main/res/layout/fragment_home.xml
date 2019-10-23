@@ -13,7 +13,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/RecylerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/dp_10"></android.support.v7.widget.RecyclerView>
 
     </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

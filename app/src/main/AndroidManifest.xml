@@ -76,6 +76,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.ItemSelectActivity"></activity>
+
+        <activity android:name=".ui.activity.NewsWebViewActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

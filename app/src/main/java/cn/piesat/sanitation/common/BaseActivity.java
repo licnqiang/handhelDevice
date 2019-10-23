@@ -2,8 +2,10 @@ package cn.piesat.sanitation.common;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.hb.dialog.dialog.LoadingDialog;
 import org.greenrobot.eventbus.EventBus;
@@ -24,6 +26,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //全部禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        }
+
         BaseApplication.putActivityInfoToMap(this);
         EventBus.getDefault().register(this);
         setContentView(getLayoutId());

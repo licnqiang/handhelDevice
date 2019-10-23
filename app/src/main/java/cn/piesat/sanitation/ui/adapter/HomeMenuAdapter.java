@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.data.HomeNewsBean;
+import cn.piesat.sanitation.ui.activity.NewsWebViewActivity;
 import cn.piesat.sanitation.ui.view.banner.AutoSwitchAdapter;
 import cn.piesat.sanitation.ui.view.banner.AutoSwitchView;
 
@@ -80,6 +82,12 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.tvContent.setText(homeBean.title);
         holder.tvDate.setText(homeBean.createTime);
         holder.tvReadCount.setText("已读 "+homeBean.readCount);
+
+        holder.itemView.setOnClickListener(view -> {
+            context.startActivity(new Intent(context, NewsWebViewActivity.class)
+                    .putExtra("url",homeBean.context)
+                    .putExtra("title",homeBean.title));
+        });
 
     }
 
