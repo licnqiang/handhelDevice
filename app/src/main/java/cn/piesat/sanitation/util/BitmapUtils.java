@@ -56,11 +56,11 @@ public final class BitmapUtils {
      */
     public static final int MAXLENTH = 1024;
     /**
-     * Log TAG
+     * LogUtil TAG
      */
     private static final String TAG = "ImageUtils";
     /**
-     * Log switch
+     * LogUtil switch
      */
     private static final boolean DEBUG = false;
     /**

@@ -1,8 +1,6 @@
 package cn.piesat.sanitation.model.presenter;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,12 +8,9 @@ import java.util.Map;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.LoginInfo_Respose;
-import cn.piesat.sanitation.data.User;
 import cn.piesat.sanitation.model.contract.LoginContract;
-import cn.piesat.sanitation.networkdriver.common.BasePresenter;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
-import cn.piesat.sanitation.util.Log;
 import cn.piesat.sanitation.util.SpHelper;
 
 import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;

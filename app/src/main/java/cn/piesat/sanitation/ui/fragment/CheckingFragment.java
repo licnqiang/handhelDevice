@@ -2,24 +2,18 @@ package cn.piesat.sanitation.ui.fragment;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
-import com.hb.dialog.dialog.ConfirmDialog;
 import com.hb.dialog.myDialog.MyAlertDialog;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
 import cn.piesat.sanitation.data.CheckRecord;
@@ -27,7 +21,7 @@ import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.model.contract.CheckingContract;
 import cn.piesat.sanitation.model.presenter.CheckingPresenter;
 import cn.piesat.sanitation.ui.activity.FaceEnterActivity;
-import cn.piesat.sanitation.util.Log;
+import cn.piesat.sanitation.util.LogUtil;
 import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
@@ -89,6 +83,6 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
 
     @Override
     public void SuccessFinshByCheckRecord(List<CheckRecord> checkRecords) {
-        Log.e("--------checkRecords------", "-----checkRecords--------" + new Gson().toJson(checkRecords));
+        LogUtil.e("--------checkRecords------", "-----checkRecords--------" + new Gson().toJson(checkRecords));
     }
 }

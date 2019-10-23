@@ -2,19 +2,11 @@ package cn.piesat.sanitation.networkdriver.module;
 
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
 
-import cn.piesat.sanitation.networkdriver.upLoadFile.UploadListener;
-import cn.piesat.sanitation.util.Log;
 import cn.piesat.sanitation.util.SpHelper;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import okio.BufferedSource;
 
 /**
  * 网络拦截器
@@ -31,7 +23,7 @@ public class TokenInterceptor implements Interceptor {
 
         Request originalRequest = chain.request();
 
-//        Log.e("-------request------","------originalRequest-------"+originalRequest.url());
+//        LogUtil.e("-------request------","------originalRequest-------"+originalRequest.url());
 
         Request.Builder requestBuilder = originalRequest.newBuilder()
                 .addHeader("Accept-Encoding", "UTF-8")

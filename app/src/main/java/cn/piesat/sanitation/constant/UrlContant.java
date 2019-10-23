@@ -32,6 +32,9 @@ public class UrlContant {
 
         String check_record = "getOneByUserIdAndCreateDate";
 
+        String new_part="news";
+        String new_List="list";
+
 
     }
 

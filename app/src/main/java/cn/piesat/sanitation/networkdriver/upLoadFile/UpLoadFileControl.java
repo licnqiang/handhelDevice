@@ -5,7 +5,7 @@ import java.util.List;
 import cn.piesat.sanitation.networkdriver.common.BaseReseponseInfo;
 import cn.piesat.sanitation.networkdriver.module.NetApi;
 import cn.piesat.sanitation.networkdriver.module.RetrofitUtils;
-import cn.piesat.sanitation.util.Log;
+import cn.piesat.sanitation.util.LogUtil;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +45,7 @@ public class UpLoadFileControl extends RetrofitUtils {
 
             @Override
             public void onFailure(Call<BaseReseponseInfo> call, Throwable t) {
-                Log.e("-----------", "---文件上传失败-------" + t.getMessage());
+                LogUtil.e("-----------", "---文件上传失败-------" + t.getMessage());
                 resultCallBack.faild();
             }
         });

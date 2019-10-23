@@ -5,8 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import cn.piesat.sanitation.R;
+import cn.piesat.sanitation.data.HomeNewsBean;
 import cn.piesat.sanitation.ui.view.banner.AutoSwitchAdapter;
 import cn.piesat.sanitation.ui.view.banner.AutoSwitchView;
 
@@ -17,11 +23,11 @@ import cn.piesat.sanitation.ui.view.banner.AutoSwitchView;
 
 public class HomeMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<String> listData;
+    private ArrayList<HomeNewsBean.NewsList> homeNewsList;
 
-    public HomeMenuAdapter(Context context, ArrayList<String> listData) {
+    public HomeMenuAdapter(Context context, ArrayList<HomeNewsBean.NewsList> homeNewsList) {
         this.context = context;
-        this.listData = listData;
+        this.homeNewsList = homeNewsList;
     }
 
 
@@ -69,12 +75,17 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void bindNewsHolder(NewsHolder holder, int position) {
+        HomeNewsBean.NewsList homeBean=homeNewsList.get(position-2);
+        Glide.with(context).load(homeBean.cover).into(holder.imgPic);
+        holder.tvContent.setText(homeBean.title);
+        holder.tvDate.setText(homeBean.createTime);
+        holder.tvReadCount.setText("已读 "+homeBean.readCount);
 
     }
 
     @Override
     public int getItemCount() {
-        return 9;
+        return homeNewsList.size()+2;
     }
 
 
@@ -105,9 +116,15 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class NewsHolder extends RecyclerView.ViewHolder {
-
+        TextView tvReadCount,tvDate,tvContent;
+        ImageView imgPic;
         public NewsHolder(View itemView) {
             super(itemView);
+
+             tvReadCount =itemView.findViewById(R.id.tvReadCount);
+             tvDate =itemView.findViewById(R.id.tvDate);
+             tvContent =itemView.findViewById(R.id.tvContent);
+            imgPic=itemView.findViewById(R.id.imgPic);
         }
     }
 

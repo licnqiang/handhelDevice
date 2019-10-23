@@ -12,7 +12,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.piesat.sanitation.common.netchange.event.NetworkChangeEvent;
-import cn.piesat.sanitation.util.Log;
 import cn.piesat.sanitation.util.NetUtil;
 import cn.piesat.sanitation.util.ToastUtil;
 

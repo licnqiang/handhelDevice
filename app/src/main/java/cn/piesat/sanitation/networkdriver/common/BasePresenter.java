@@ -14,7 +14,7 @@ import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.networkdriver.module.NetApi;
 import cn.piesat.sanitation.networkdriver.module.RetrofitUtils;
 import cn.piesat.sanitation.util.FileUtil;
-import cn.piesat.sanitation.util.Log;
+import cn.piesat.sanitation.util.LogUtil;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,9 +37,9 @@ public abstract class BasePresenter extends RetrofitUtils {
 
     public <T> void TransmitCommonApi(boolean switchService, boolean TestSwitch, boolean isPost, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
-        Log.e("http", "http--url==" + (switchService ? IPConfig.getURLPreFix() : IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
-        Log.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
-        Log.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
+        LogUtil.e("http", "http--url==" + (switchService ? IPConfig.getURLPreFix() : IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
+        LogUtil.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
+        LogUtil.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
         BaseReseponseInfo baseResponse = null;
         /**
          * 判断是否是测试模式
@@ -49,13 +49,13 @@ public abstract class BasePresenter extends RetrofitUtils {
             try {
                 in = BaseApplication.ApplicationContext.getAssets().open(methodName + ".txt");
                 String result = FileUtil.ToString(in);
-                Log.e("http", "Http--本地响应===" + result);
+                LogUtil.e("http", "Http--本地响应===" + result);
                 baseResponse = new Gson().fromJson(result, BaseReseponseInfo.class);
                 responseData(baseResponse, methodName, parameterMap, typeToken);
             } catch (IOException e) {
                 e.printStackTrace();
                 onResponse(methodName, null, REQUEST_FAILURE, parameterMap, null != baseResponse ? baseResponse.msg : "");
-                Log.e("http", "BaseParser--e==" + e);
+                LogUtil.e("http", "BaseParser--e==" + e);
             }
 
         } else {
@@ -99,14 +99,14 @@ public abstract class BasePresenter extends RetrofitUtils {
                     //网络通讯失败
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("http", "BaseParser--e==" + e);
+                        LogUtil.e("http", "BaseParser--e==" + e);
                         onResponse(methodName, null, REQUEST_FAILURE, parameterMap, e.getMessage());
                     }
 
                     //获取数据
                     @Override
                     public void onNext(BaseReseponseInfo baseResponse) {
-//                        Log.e("http", "onNext" + new Gson().toJson(baseResponse));
+                        LogUtil.e("http", "onNext" + new Gson().toJson(baseResponse));
                         responseData(baseResponse, methodName, parameterMap, typeToken);
                     }
                 });
@@ -128,7 +128,7 @@ public abstract class BasePresenter extends RetrofitUtils {
             }
             return result;
         } catch (Exception e) {
-            Log.e("gson", "BaseParser--e==" + e);
+            LogUtil.e("gson", "BaseParser--e==" + e);
         }
         return null;
     }

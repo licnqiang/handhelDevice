@@ -2,13 +2,11 @@ package cn.piesat.sanitation.networkdriver.module;
 
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
 import cn.piesat.sanitation.networkdriver.upLoadFile.UploadListener;
-import cn.piesat.sanitation.util.Log;
+import cn.piesat.sanitation.util.LogUtil;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -43,7 +41,7 @@ public class LoggingInterceptor implements Interceptor {
             return chain.proceed(request);
         }
 
-//        Log.e("-------request------","------request-------"+request.url());
+//        LogUtil.e("-------request------","------request-------"+request.url());
 
         //监听请求进度
         if(null!=mUploadListener){
@@ -74,7 +72,7 @@ public class LoggingInterceptor implements Interceptor {
         }
         rBady = buffer.clone().readString(charset);
 
-        Log.e("http", "Http--响应==="+ rBady);
+        LogUtil.e("http", "Http--响应==="+ rBady);
 
         return  response;
     }
