@@ -1,28 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray5"
-    android:orientation="vertical">
+    android:background="@color/color_background">
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:text="我的"
-        android:textSize="@dimen/text_16dp"
-        android:gravity="center"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:text="开启"
-        android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.35"
+            android:background="@color/white">
 
-    <Button
-        android:id="@+id/btn_stop"
-        android:text="关闭"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:scaleType="centerCrop"
+                android:background="@color/bule"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_10"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_head_default"/>
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户名"
+                    android:textColor="@color/color_3c3c3c"
+                    android:textSize="@dimen/text_15dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvUserUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXX部门"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/color_888888"
+                    android:textSize="@dimen/text_12dp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_0dp"
+            android:orientation="vertical"
+            android:layout_weight="0.65"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white">
+
+
+
+            <LinearLayout
+                android:id="@+id/layoutInquire"
+                style="@style/linear_layout_default"
+
+                >
+                <TextView
+                    style="@style/text_14_33"
+                    android:text="我的考勤"
+                    android:drawableLeft="@mipmap/icon_kaoqin"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_3c3c3c"
+
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:visibility="invisible"
+                    android:src="@mipmap/icon_arraw_next"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_background"
+                android:layout_marginLeft="25dp"/>
+            <LinearLayout
+                android:id="@+id/layoutModify"
+                style="@style/linear_layout_default"
+
+                >
+                <TextView
+                    style="@style/text_14_33"
+                    android:text="我的上报"
+                    android:drawableLeft="@mipmap/icon_shangbao"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_3c3c3c"
+
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:visibility="invisible"
+                    android:src="@mipmap/icon_arraw_next"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_background"
+                android:layout_marginLeft="25dp"/>
+            <!--    <LinearLayout
+                    style="@style/linear_layout_default"
+
+                    >
+                    <TextView
+                        style="@style/text_14_33"
+                        android:text="关于我们"
+                        android:drawableLeft="@mipmap/icon_mine_about"
+                        android:drawablePadding="@dimen/size_10dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/color_3c3c3c"
+
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_10dp"
+                        android:visibility="invisible"
+                        android:src="@mipmap/icon_arraw_next"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_1dp"
+                    android:background="@color/color_background"
+                    android:layout_marginLeft="25dp"/>-->
+
+
+
+            <Button
+                android:id="@+id/btExit"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:background="@drawable/shape_button_blue_bg"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="退出"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
