@@ -12,6 +12,10 @@
         android:layout_weight="1">
 
     </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/default_line_color"/>
     <cn.piesat.sanitation.ui.view.BottomBar
         android:background="#FFFFFF"
         android:id="@+id/bottom_bar"

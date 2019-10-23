@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply from: 'tinker-support.gradle'
 android {
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion  28
     defaultConfig {
         applicationId "cn.piesat.sanitation"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -14,6 +14,12 @@ android {
             // 设置支持的SO库架构
             abiFilters 'armeabi-v7a' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "79ddf9ac5038d24f74dcf463", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     signingConfigs {
@@ -42,8 +48,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 
 }
@@ -84,7 +90,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:+'
     implementation 'io.reactivex.rxjava2:rxjava:+'
 
-    implementation files('libs/facesdk.3.1.jar')
-    implementation files('libs/license.jar')
-    implementation files('libs/online_liantian_3-1-6-5-655_0312.jar')
+    //极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.3.6'
+    implementation 'cn.jiguang.sdk:jcore:2.1.6'
 }

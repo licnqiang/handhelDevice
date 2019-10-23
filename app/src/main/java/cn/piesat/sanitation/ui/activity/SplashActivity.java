@@ -12,13 +12,17 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hb.dialog.dialog.ConfirmDialog;
 import com.hb.dialog.myDialog.MyAlertDialog;
 
+import cn.jpush.android.cache.Sp;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.util.SpHelper;
 
 public class SplashActivity extends BaseActivity {
     String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
@@ -63,16 +67,19 @@ public class SplashActivity extends BaseActivity {
         if (requestCode == 1) {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+//                    starMain();
                     j++;
                     if (j == 4) {
                         starMain();
                     }
+                }else {
+                    showPermiDialog();
                 }
             }
 
-            if(j!=4){
+          /*  if(j!=4){
                 showPermiDialog();
-            }
+            }*/
         }
     }
 
@@ -100,16 +107,24 @@ public class SplashActivity extends BaseActivity {
      * 两秒跳转
      */
     private void starMain() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // 启动登录窗口
-                toActivity(LoginActivity.class);
-//                toActivity(MainActivity.class);
-                // 关闭启动画面
-                finish();
-            }
-        }, DELAY_TIME);
+        if (!TextUtils.isEmpty(SpHelper.getStringValue("token"))){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // 启动登录窗口
+                    toActivity(MainActivity.class);
+                    // 关闭启动画面
+                    finish();
+                }
+            }, DELAY_TIME);
+        }else {
+            toActivity(LoginActivity.class);
+            finish();
+
+        }
+
+
+
     }
 
 }

@@ -13,9 +13,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 //import com.meituan.android.walle.WalleChannelReader;
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.interfaces.BetaPatchListener;
+import com.tencent.tinker.entry.DefaultApplicationLike;
+
 import com.tencent.tinker.entry.DefaultApplicationLike;
 
 import java.util.Collection;
@@ -27,9 +30,9 @@ import java.util.Map;
 import cn.piesat.sanitation.common.netchange.receiver.NetWorkChangReceiver;
 import cn.piesat.sanitation.database.InitDBUtil;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
+import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.faceUtil.FaceSDKManager;
 import cn.piesat.sanitation.util.faceUtil.SdkInitListener;
-import cn.piesat.sanitation.util.SpHelper;
 
 /**
  * 自定义ApplicationLike类.
@@ -60,9 +63,15 @@ public class BaseApplication extends DefaultApplicationLike {
 
         ApplicationContext = getApplication().getApplicationContext();
         SpHelper.init(getApplication().getApplicationContext());
-        SpHelper.setStringValue("token", "");
+//        SpHelper.setStringValue("token", "");
         registerMessageReceiver();
         //initBuglyCrashReport();
+        initJPush();
+    }
+
+    private void initJPush() {
+//        JPushInterface.setDebugMode(true);
+//        JPushInterface.init(ApplicationContext);
         initLicense();
     }
 

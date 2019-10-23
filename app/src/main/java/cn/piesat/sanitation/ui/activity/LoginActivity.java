@@ -77,6 +77,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
     public void jumpToMain() {
         dismiss();
         toActivity(MainActivity.class);
+        finish();
     }
 }
 

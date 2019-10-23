@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="置顶"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/bule"
             android:textSize="@dimen/text_size_14" />
 
         <TextView

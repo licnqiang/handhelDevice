@@ -45,10 +45,10 @@ public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter {
             .placeholder(R.mipmap.banner_2)
             .error(R.mipmap.banner_2)
             .fallback(R.mipmap.banner_2);
-    Glide.with(mContext)
+ /*   Glide.with(mContext)
             .load(mDatas.get(position))
             .apply(requestOptions)
-            .into(imageView);
+            .into(imageView);*/
 
     return imageView;
   }

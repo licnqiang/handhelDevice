@@ -13,6 +13,27 @@
     <color name="gray_DBE0E6">#DBE0E6</color>
     <color name="color_black">#000000</color>
     <color name="bule">#2BB2E9</color>
+    <color name="bule_gray">#10A9E7</color>
+    <color name="color_222222">#222222</color>
+    <color name="color_background">#F5F5F5</color>
+    <color name="default_line_color">#f2f2f2</color>
+    <color name="color_3c3c3c">#3c3c3c</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_pressed">#FFE9E5E5</color>
+    <!--<color name="bg_title">#FF4081</color>-->
+    <!--<color name="transparent">#00000000</color>-->
+    <!--<color name="transparent_blue">#99D8DFEF</color>-->
+    <!--<color name="transparent_white">#E6ffffff</color>-->
+    <!--<color name="all_transparent_white">#ffffffff</color>-->
+
+    <!--<color name="light_gray">#E2E9EF</color>-->
+    <!--<color name="grayB">#BDBBBC</color>-->
+    <!--<color name="query_text">#adb5c2</color>-->
+
+    <!--<color name="home_address_textcolor">#5C6275</color>-->
+    <!--<color name="txthint_search">#BCCBDB</color>-->
+
+    <!--<color name="them_tip_orange">#F09074</color>-->
     <color name="light_green">#5EDBED</color>
 
     <color name="bg_title">#FF4081</color>
@@ -31,14 +52,11 @@
     <color name="them_tip_orange">#F09074</color>
     <color name="bg_page">#F2F2F2</color>
     <color name="black_user">#2D2D2D</color>
-    <color name="color_background">#fafafa</color>
     <color name="color_666666">#666666</color>
-    <color name="color_888888">#888888</color>
     <color name="color_999999">#999999</color>
 
     <color name="color_f3f3f3">#f3f3f3</color>
     <color name="color_f2f2f2">#F2F2F2</color>
-    <color name="color_3c3c3c">#3c3c3c</color>
     <color name="color_b9b9b9">#b9b9b9</color>
     <color name="color_17070A">#17070A</color>
     <color name="color_9e9e9e">#9E9E9E</color>
