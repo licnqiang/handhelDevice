@@ -2,6 +2,7 @@ package cn.piesat.sanitation.util;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
+import android.text.format.Time;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,7 +23,7 @@ import java.util.Locale;
  * formatDate( before, beforepattern, afterpattern);String类型的日期时间 从一个格式转换到另一个格式
  * getStringByFormat( date,  format);Date类型转化为String类型.
  * getCurrentDate(format);获取表示当前日期时间的字符串.
- *
+ * <p>
  * getDaysByYearMonth( year,  month) ;根据年 月 获取对应的月份 天数
  */
 public class TimeUtils {
@@ -124,12 +125,14 @@ public class TimeUtils {
             return new SimpleDateFormat("yyyy-MM-dd");
         }
     };
+
     /**
      * 获取时间戳
      */
-    public static long currentTimeMillis(){
-      return   System.currentTimeMillis()/SEC;
+    public static long currentTimeMillis() {
+        return System.currentTimeMillis() / SEC;
     }
+
     /**
      * 时间戳转特定格式时间
      */
@@ -1042,9 +1045,10 @@ public class TimeUtils {
 
     /**
      * 获取当前年月日
+     *
      * @return
      */
-    public static String getCurrentTime(){
+    public static String getCurrentTime() {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(d);
@@ -1053,9 +1057,10 @@ public class TimeUtils {
 
     /**
      * 获取当前年
+     *
      * @return
      */
-    public static String getCurrentYear(){
+    public static String getCurrentYear() {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
         return sdf.format(d);
@@ -1063,9 +1068,10 @@ public class TimeUtils {
 
     /**
      * 获取当前月日
+     *
      * @return
      */
-    public static String getCurrentMathDay(){
+    public static String getCurrentMathDay() {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
         return sdf.format(d);
@@ -1073,13 +1079,53 @@ public class TimeUtils {
 
     /**
      * 获取当前月日
+     *
      * @return
      */
-    public static String getCurrentTimeByHm(){
+    public static String getCurrentTimeByHm() {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(d);
     }
 
+
+    //
+    //         * 判断当前系统时间是否在指定时间的范围内
+    //         *
+    //         * beginHour 开始小时,例如22
+    //         * beginMin  开始小时的分钟数,例如30
+    //         * endHour   结束小时,例如 8
+    //         * endMin    结束小时的分钟数,例如0
+    //         * true表示在范围内, 否则false
+    //
+    public static boolean isCurrentInTimeScope(int beginHour, int beginMin, int endHour, int endMin) {
+        boolean result = false;
+        final long aDayInMillis = 1000 * 60 * 60 * 24;
+        final long currentTimeMillis = System.currentTimeMillis();
+        Time now = new Time();
+        now.set(currentTimeMillis);
+        Time startTime = new Time();
+        startTime.set(currentTimeMillis);
+        startTime.hour = beginHour;
+        startTime.minute = beginMin;
+        Time endTime = new Time();
+        endTime.set(currentTimeMillis);
+        endTime.hour = endHour;
+        endTime.minute = endMin;
+        // 跨天的特殊情况(比如22:00-8:00)
+        if (!startTime.before(endTime)) {
+            startTime.set(startTime.toMillis(true) - aDayInMillis);
+            result = !now.before(startTime) && !now.after(endTime); // startTime <= now <= endTime
+            Time startTimeInThisDay = new Time();
+            startTimeInThisDay.set(startTime.toMillis(true) + aDayInMillis);
+            if (!now.before(startTimeInThisDay)) {
+                result = true;
+            }
+        } else {
+            //普通情况(比如 8:00 - 14:00)
+            result = !now.before(startTime) && !now.after(endTime); // startTime <= now <= endTime
+        }
+        return result;
+    }
 
 }

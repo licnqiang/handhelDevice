@@ -1,5 +1,6 @@
 package cn.piesat.sanitation.model.contract;
 
+import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
 
 /**
@@ -13,7 +14,7 @@ public interface QueryContract {
     interface QueryView {
         void Error(String errorMsg);
         void SuccessFinshByCompress(CompressStations compressStations);
-        void SuccessFinshByCar(CompressStations compressStations);
+        void SuccessFinshByCar(CarInfo carInfo);
         void SuccessFinshByBurnStation(CompressStations compressStations);
     }
 

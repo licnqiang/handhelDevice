@@ -31,6 +31,7 @@ public class UrlContant {
 
         String part = "api/punch";
         String check_set_par = "api/attendance";
+        String face_part = "api/piesat/face";
 
 
         String check_record = "getOneByUserIdAndCreateDate";
@@ -40,6 +41,8 @@ public class UrlContant {
 
         String new_part="api/news";
         String new_List="list";
+
+        String face="contrast";
 
 
     }

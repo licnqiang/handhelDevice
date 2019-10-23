@@ -41,7 +41,6 @@ public class LoggingInterceptor implements Interceptor {
             return chain.proceed(request);
         }
 
-//        LogUtil.e("-------request------","------request-------"+request.url());
 
         //监听请求进度
         if(null!=mUploadListener){

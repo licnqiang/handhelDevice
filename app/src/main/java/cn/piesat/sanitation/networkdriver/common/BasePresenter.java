@@ -34,7 +34,7 @@ public abstract class BasePresenter extends RetrofitUtils {
     protected NetApi service = null;
 
 
-    public <T> void TransmitCommonApi(boolean switchService, boolean TestSwitch, boolean isPost, boolean isBody,String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
+    public <T> void TransmitCommonApi(boolean switchService, boolean TestSwitch, boolean isPost, boolean isBody, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
         LogUtil.e("http", "http--url==" + (switchService ? IPConfig.getURLPreFix() : IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
         LogUtil.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
@@ -65,7 +65,7 @@ public abstract class BasePresenter extends RetrofitUtils {
             /**
              *网络请求
              */
-            commonApi(isBody,isPost, part, methodName, parameterMap, typeToken);
+            commonApi(isBody, isPost, part, methodName, parameterMap, typeToken);
         }
     }
 
@@ -77,12 +77,12 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param parameterMap 参数
      * @param typeToken    返回值类型
      */
-    public void commonApi(boolean isBody,boolean isPost, final String part, final String methodName, final Map<String, String> parameterMap, final TypeToken<?> typeToken) {
+    public void commonApi(boolean isBody, boolean isPost, final String part, final String methodName, final Map<String, String> parameterMap, final TypeToken<?> typeToken) {
         Observable<BaseReseponseInfo> observable;
         if (isPost) {
-            if(isBody){
+            if (isBody) {
                 observable = service.serviceAPIBady(part, methodName, parameterMap);
-            }else {
+            } else {
                 observable = service.serviceAPI(part, methodName, parameterMap);
             }
         } else {
@@ -127,7 +127,7 @@ public abstract class BasePresenter extends RetrofitUtils {
     public Object requestServer(Object receivedStr, TypeToken<?> typeToken) {
         try {
             Object result = null;
-            if (!TextUtils.isEmpty(receivedStr.toString())) {
+            if (!TextUtils.isEmpty(receivedStr+"")) {
                 result = new Gson().fromJson(new Gson().toJson(receivedStr), typeToken.getType());
             }
             return result;
@@ -149,38 +149,17 @@ public abstract class BasePresenter extends RetrofitUtils {
         if (baseResponse.code == REQUEST_SUCCESS) {
             Object object = null;
             if (null != typeToken) {
-                object = requestServer(baseResponse.data, typeToken);
+                if (null == baseResponse.rows||TextUtils.isEmpty(baseResponse.rows+"")) {
+                    object = requestServer(baseResponse.data, typeToken);
+                } else {
+                    object = requestServer(baseResponse, typeToken);
+                }
             }
             //成功回调数据
             onResponse(methodName, object, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
-        }  else {
+        } else {
             onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap, baseResponse.msg);
         }
-
-//        switch (baseResponse.code) {
-//            case REQUEST_SUCCESS: //成功
-//                Object object = null;
-//                if (null != typeToken) {
-//                    object = requestServer(baseResponse.data, typeToken);
-//                }
-//                //成功回调数据
-//                onResponse(methodName, object, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
-//                break;
-////            case REQUEST_FAILURE://失败
-////                onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap, baseResponse.msg);
-////                break;
-//            //为了区分分页数据暂定该方法
-//            case REQUEST_SUCCESS_TWO: //成功
-//                onResponse(methodName, baseResponse, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
-//                break;
-//            default:
-//                Object objects = null;
-//                if (null != typeToken) {
-//                    objects = requestServer(new Gson().toJson(baseResponse), typeToken);
-//                }
-//                onResponse(methodName, objects, REQUEST_FAILURE, parameterMap, baseResponse.msg);
-//                break;
-//        }
     }
 
 

@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.baidu.idl.main.facesdk.FaceAuth;
+import com.baidu.idl.main.facesdk.callback.Callback;
 import com.baidu.idl.main.facesdk.model.BDFaceImageInstance;
 import com.baidu.idl.main.facesdk.model.BDFaceSDKCommon;
 import com.bumptech.glide.Glide;
@@ -23,15 +25,15 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
-import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
-import cn.piesat.sanitation.model.contract.CheckingContract;
 import cn.piesat.sanitation.model.contract.UserInfoContract;
 import cn.piesat.sanitation.model.presenter.UserInfoPresenter;
 import cn.piesat.sanitation.networkdriver.upLoadFile.UpLoadFileControl;
 import cn.piesat.sanitation.ui.view.FaceRoundView;
 import cn.piesat.sanitation.util.BitmapUtils;
+import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 import cn.piesat.sanitation.util.carmera.AutoTexturePreviewView;
 import cn.piesat.sanitation.util.carmera.CameraDataCallback;
@@ -51,6 +53,7 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
     private byte[] picData;
 
     UserInfoPresenter userInfoPresenter;
+    private String type = null;
 
     @Override
     protected int getLayoutId() {
@@ -65,8 +68,6 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
 
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        String face_key_type = intent.getStringExtra(SysContant.CommentTag.comment_key);
 
     }
 
@@ -76,7 +77,6 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
         mPreviewView = findViewById(R.id.auto_camera_preview_view);
         // 遮罩
         FaceRoundView rectView = findViewById(R.id.rect_view);
-        rectView.setVisibility(View.GONE);
         // 需要调整预览 大小
         DisplayMetrics dm = new DisplayMetrics();
         Display display = this.getWindowManager().getDefaultDisplay();
@@ -105,10 +105,10 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
             @Override
             public void onGetCameraData(byte[] data, Camera camera, int width, int height) {
                 picData = data;
-
             }
         });
     }
+
 
 
     /**
@@ -117,6 +117,7 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
      * @param rgb
      */
     private void showDetectImage(byte[] rgb) {
+        showLoadingDialog("头像采集中", false);
 
         BDFaceImageInstance rgbInstance = new BDFaceImageInstance(rgb, mHeight,
                 mWidth, BDFaceSDKCommon.BDFaceImageType.BDFACE_IMAGE_TYPE_YUV_420,
@@ -124,28 +125,31 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
                 SingleBaseConfig.getBaseConfig().getMirrorRGB());
         BDFaceImageInstance imageInstance = rgbInstance.getImage();
         final Bitmap bitmap = BitmapUtils.getInstaceBmp(imageInstance);
-        imageView.setImageBitmap(bitmap);
-        mPreviewView.setVisibility(View.GONE);
-        imageView.setVisibility(View.VISIBLE);
+        String path = BitmapUtils.getFileFromBytes(this, bitmap);
 
-        showLoadingDialog("头像正在录入", false);
-        if (rgb == null) {
-            return;
-        }
-        String path = BitmapUtils.saveTakePictureImage(this, rgb);
-        Log.e("----path---","---path--"+path);
-
-//        Glide.with(this)
-//                .load(path)
-//                .into(imageView);
-       // imageView.setImageURI(Uri.parse(path));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                imageView.setVisibility(View.VISIBLE);
+                imageView.setImageBitmap(bitmap);
+            }
+        });
 
         List<String> paths = new ArrayList<>();
         paths.add(path);
         UpLoadFileControl.uploadFile(false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.upload, paths, null, new UpLoadFileControl.ResultCallBack() {
             @Override
             public void succeed(Object str) {
-                userInfoPresenter.ModeyUserPic(str + "");
+                Intent intent = getIntent();
+                String face_key_type = intent.getStringExtra(SysContant.CommentTag.comment_key);
+                type = intent.getStringExtra("type");
+                if (face_key_type.equals(SysContant.CommentTag.face_tag_entering)) {
+                    userInfoPresenter.ModeyUserPic(str + "");
+                } else {
+                    userInfoPresenter.UserPicVers(IPConfig.getOutSourceURLPreFix() + str);
+                }
+
+
             }
 
             @Override
@@ -185,15 +189,27 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
 
     @Override
     public void Error(String errorMsg) {
+        imageView.setVisibility(View.GONE);
         dismiss();
-        ToastUtil.show(FaceEnterActivity.this, "录入失败");
+        ToastUtil.show(FaceEnterActivity.this, errorMsg);
     }
 
     @Override
     public void SuccessFinsh() {
-
         dismiss();
         ToastUtil.show(FaceEnterActivity.this, "录入成功");
         finish();
+    }
+
+    @Override
+    public void SuccessFinshPicVers() {
+        userInfoPresenter.WorkChecking(type, TimeUtils.getCurrentTimeByHm());
+    }
+
+    @Override
+    public void SuccessFinshByWorkCheck() {
+        finish();
+        dismiss();
+        ToastUtil.show(FaceEnterActivity.this, "打卡成功");
     }
 }

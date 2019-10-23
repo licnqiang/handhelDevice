@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +19,17 @@ import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.constant.SysContant;
+import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.model.contract.QueryContract;
 import cn.piesat.sanitation.model.presenter.QueryPresenter;
+import cn.piesat.sanitation.ui.adapter.CarAdapter;
 import cn.piesat.sanitation.ui.adapter.CompressStationAdapter;
 import cn.piesat.sanitation.util.ToastUtil;
 
 
-public class ItemSelectActivity extends BaseActivity implements QueryContract.QueryView, CompressStationAdapter.OnRecyclerViewItemClickListener {
+public class ItemSelectActivity extends BaseActivity implements QueryContract.QueryView, CompressStationAdapter.OnRecyclerViewItemClickListener
+        , CarAdapter.OnRecyclerViewItemClickListener{
 
     QueryPresenter queryPresenter;
     @BindView(R.id.tv_title)
@@ -32,8 +38,10 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
     RecyclerView RecylerView;
     private String queryType; //查询类型
     private CompressStationAdapter compressStationAdapter;
+    private CarAdapter carAdapter;
     CompressStations compressStations;
     List<CompressStations.RowsBean> rowsBeanList;
+    List<CarInfo.RowsBean> carInfos;
 
     @Override
     protected int getLayoutId() {
@@ -42,11 +50,6 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
 
     @Override
     protected void initView() {
-        rowsBeanList = new ArrayList<>();
-        compressStationAdapter = new CompressStationAdapter(this, rowsBeanList);
-        compressStationAdapter.setOnItemClickListener(this);
-        RecylerView.setLayoutManager(new LinearLayoutManager(this));
-        RecylerView.setAdapter(compressStationAdapter);
     }
 
 
@@ -63,11 +66,48 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
             switch (queryType) {
                 case SysContant.QueryType.compress_station_key:  //压缩站
                     tvTitle.setText("选择压缩站");
+                    setCompressStationAdapter();
                     queryPresenter.QueryCompress(1, -1);
+                    break;
+                case SysContant.QueryType.car_key:  //车辆
+                    tvTitle.setText("选择车辆");
+                    setCarAdapter();
+                    queryPresenter.QueryCar(1, -1,0);
+                    break;
+                case SysContant.QueryType.driver_key:  //司机
+                    tvTitle.setText("选择驾驶员");
+                    queryPresenter.QueryCompress(1, -1);
+
+                case SysContant.QueryType.burn_key:  //焚烧厂
+                    tvTitle.setText("选择焚烧厂");
+                    queryPresenter.QueryBurnStation(1, -1);
                     break;
             }
         }
     }
+
+    /**
+     * 设置压缩站列表
+     */
+    private void setCompressStationAdapter(){
+        rowsBeanList = new ArrayList<>();
+        compressStationAdapter = new CompressStationAdapter(this, rowsBeanList);
+        compressStationAdapter.setOnItemClickListener(this);
+        RecylerView.setLayoutManager(new LinearLayoutManager(this));
+        RecylerView.setAdapter(compressStationAdapter);
+    }
+
+    /**
+     * 设置车辆列表
+     */
+    private void setCarAdapter(){
+        rowsBeanList = new ArrayList<>();
+        compressStationAdapter = new  CompressStationAdapter(this, rowsBeanList);
+        compressStationAdapter.setOnItemClickListener(this);
+        RecylerView.setLayoutManager(new LinearLayoutManager(this));
+        RecylerView.setAdapter(compressStationAdapter);
+    }
+
 
     @Override
     public void Error(String errorMsg) {
@@ -83,8 +123,8 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
 
     //查询车辆
     @Override
-    public void SuccessFinshByCar(CompressStations compressStations) {
-
+    public void SuccessFinshByCar(CarInfo carInfo) {
+        carAdapter.refreshData(carInfo.rows);
     }
 
     //查询焚烧厂
@@ -107,6 +147,17 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
         bundle.putSerializable(SysContant.QueryType.query_type, rowsBeanList.get(position));
         resultIntent.putExtras(bundle);
         setResult(SysContant.QueryType.compress_station_code, resultIntent);
+        finish();
+    }
+
+    //车辆列表点击
+    @Override
+    public void onCarItemClick(View view, int position) {
+        Intent resultIntent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(SysContant.QueryType.query_type, carInfos.get(position));
+        resultIntent.putExtras(bundle);
+        setResult(SysContant.QueryType.car_code, resultIntent);
         finish();
     }
 }

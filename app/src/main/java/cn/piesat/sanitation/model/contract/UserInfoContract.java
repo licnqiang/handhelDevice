@@ -15,10 +15,17 @@ public interface UserInfoContract {
     interface UserInfoView {
         void Error(String errorMsg);
         void SuccessFinsh();
+        void SuccessFinshPicVers();
+        void SuccessFinshByWorkCheck();
+
     }
 
     interface UserInfoPresenter {
         //上传头像
         void ModeyUserPic(String userPic);
+        //头像对比
+        void UserPicVers(String userPic);
+        //打卡
+        void WorkChecking(String type,String time);
     }
 }

@@ -12,7 +12,7 @@ import cn.piesat.sanitation.database.AppDatabase;
 
 @Table(database = AppDatabase.class)
 public class UserInfo_Tab extends BaseModel implements Serializable {
-   @PrimaryKey(autoincrement = true)//ID自增
+    @PrimaryKey(autoincrement = true)//ID自增
     public long _id;
     @Column
     public String id;
@@ -42,6 +42,8 @@ public class UserInfo_Tab extends BaseModel implements Serializable {
     public String token;     //用户标识
     @Column
     public String status;    //1 正常 0 禁用
+    @Column
+    public String yszIdCount; //站点id
     @Column
     public String updateTimeSysuser;
     @Column

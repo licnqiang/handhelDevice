@@ -1,5 +1,6 @@
 package cn.piesat.sanitation.model.presenter;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
@@ -19,6 +20,7 @@ import cn.piesat.sanitation.model.contract.QueryContract;
 import cn.piesat.sanitation.networkdriver.common.BaseReseponseInfo;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
+import cn.piesat.sanitation.util.LogUtil;
 import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.TimeUtils;
 
@@ -47,24 +49,10 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
         hashMap.put("userId", BaseApplication.getUserInfo().id);
         hashMap.put("date", date);
         commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.part, UrlContant.MySourcePart.check_record,
-                hashMap, new TypeToken<CheckRecord>() {
+                hashMap, new TypeToken<List<CheckRecord>>() {
                 });
     }
 
-    //打卡
-    @Override
-    public void WorkChecking(String type,String time) {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("id", BaseApplication.getUserInfo().idSysdept);
-        hashMap.put("time", time);
-        hashMap.put("createDate", TimeUtils.getCurrentTime());
-        hashMap.put("type", type);
-        hashMap.put("siteId", BaseApplication.getUserInfo().idSysdept);
-        hashMap.put("serialVersionUID","1");
-        commonPresenter.invokeInterfaceObtainData(true, false, true,true, UrlContant.MySourcePart.part, UrlContant.MySourcePart.check_user,
-                hashMap, new TypeToken<BaseReseponseInfo>() {
-                });
-    }
 
     //获取考勤时间位置限制
     @Override
@@ -82,7 +70,8 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
         switch (methodIndex) {
             case UrlContant.MySourcePart.check_record:  //通过时间获取考勤记录
                 if (status == REQUEST_SUCCESS) {//成功
-                    CheckRecord checkRecords = (CheckRecord) data;
+                    List<CheckRecord> checkRecords = (List<CheckRecord>) data;
+                    LogUtil.e("---------","----checkRecords-----"+new Gson().toJson(checkRecords));
                     CheckingView.SuccessFinshByCheckRecord(checkRecords);
                 } else {
                     CheckingView.Error(Msg);
@@ -93,15 +82,6 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
                 if (status == REQUEST_SUCCESS) {//成功
                     StationCheckSet stationCheckSet = (StationCheckSet) data;
                     CheckingView.SuccessFinshByWorKTimeSet(stationCheckSet);
-                } else {
-                    CheckingView.Error(Msg);
-                }
-
-                break;
-
-            case UrlContant.MySourcePart.check_user:  //打卡
-                if (status == REQUEST_SUCCESS) {//成功
-                    CheckingView.SuccessFinshByWorkCheck();
                 } else {
                     CheckingView.Error(Msg);
                 }

@@ -63,7 +63,7 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
     private Camera mCamera;
     private int mCameraNum;
 
-    private int displayOrientation = 0;
+    private int displayOrientation = 90;
     private int cameraId = 0;
     private int mirror = 1; // 镜像处理
     private CameraDataCallback mCameraDataCallback;

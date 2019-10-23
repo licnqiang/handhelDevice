@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.constant.SysContant;
+import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
 
@@ -70,16 +71,33 @@ public class AssignOrderActivity extends BaseActivity {
                 break;
             //车牌
             case R.id.car_num:
+                Intent intentcar = new Intent();
+                intentcar.setClass(this, ItemSelectActivity.class);
+                Bundle bundlecar = new Bundle();
+                bundlecar.putString(SysContant.QueryType.query_type, SysContant.QueryType.car_key);
+                intentcar.putExtras(bundlecar);
+                startActivityForResult(intentcar, 0);
                 break;
             //驾驶员
             case R.id.car_people:
+                Intent intentDriver = new Intent();
+                intentDriver.setClass(this, ItemSelectActivity.class);
+                Bundle bundleDriver = new Bundle();
+                bundleDriver.putString(SysContant.QueryType.query_type, SysContant.QueryType.driver_key);
+                intentDriver.putExtras(bundleDriver);
+                startActivityForResult(intentDriver, 0);
                 break;
             //起运时间
             case R.id.car_start_time:
                 break;
             //焚烧厂
             case R.id.car_send_address:
-                break;
+                Intent intentBurn = new Intent();
+                intentBurn.setClass(this, ItemSelectActivity.class);
+                Bundle bundleBurn = new Bundle();
+                bundleBurn.putString(SysContant.QueryType.query_type, SysContant.QueryType.burn_key);
+                intentBurn.putExtras(bundleBurn);
+                startActivityForResult(intentBurn, 0);
             //抵达时间
             case R.id.car_send_address_time:
                 break;
@@ -100,6 +118,11 @@ public class AssignOrderActivity extends BaseActivity {
                 Bundle bundle = data.getExtras();
                 CompressStations.RowsBean rowsBean = (CompressStations.RowsBean) bundle.getSerializable(SysContant.QueryType.query_type);
                 stationName.setText(rowsBean.nameYsz);
+                break;
+            case SysContant.QueryType.car_code:  //选择车辆
+                Bundle bundlecar = data.getExtras();
+                CarInfo.RowsBean carRowsBean = (CarInfo.RowsBean) bundlecar.getSerializable(SysContant.QueryType.query_type);
+                carNum.setText(carRowsBean.licensePlate);
                 break;
         }
     }

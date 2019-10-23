@@ -62,7 +62,7 @@
         <ImageView
             android:id="@+id/iv_user_pic"
             android:layout_width="match_parent"
-            android:src="@mipmap/ic_launcher"
+            android:visibility="gone"
             android:layout_height="match_parent"></ImageView>
 
 
@@ -76,9 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="220dp"
-        android:layout_marginTop="110dp"
-        android:visibility="invisible" />
-
+        android:layout_marginTop="110dp"></cn.piesat.sanitation.ui.view.FaceRoundView>
 
     <TextView
         android:layout_width="wrap_content"

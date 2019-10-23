@@ -8,6 +8,7 @@ import java.util.Map;
 
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.UrlContant;
+import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.data.LoginInfo_Respose;
 import cn.piesat.sanitation.model.contract.LoginContract;
@@ -52,7 +53,7 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
         hashMap.put("pageSize", pageSize + "");
         hashMap.put("status", status + "");
         commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_car,
-                hashMap, new TypeToken<CompressStations>() {
+                hashMap, new TypeToken<CarInfo>() {
                 });
 
     }
@@ -84,8 +85,8 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
             //车辆
             case UrlContant.OutSourcePart.query_car:
                 if (status == REQUEST_SUCCESS) {
-
-                    QueryView.SuccessFinshByCar(null);
+                    CarInfo carInfo = (CarInfo) data;
+                    QueryView.SuccessFinshByCar(carInfo);
                 } else {
                     QueryView.Error(Msg);
                 }
@@ -93,7 +94,6 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
             //焚烧厂
             case UrlContant.OutSourcePart.query_burn_staion:
                 if (status == REQUEST_SUCCESS) {
-
                     QueryView.SuccessFinshByBurnStation(null);
                 } else {
                     QueryView.Error(Msg);

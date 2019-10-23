@@ -3,6 +3,7 @@
  */
 
 package cn.piesat.sanitation.util;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import com.baidu.idl.main.facesdk.model.BDFaceImageInstance;
 import com.baidu.idl.main.facesdk.model.BDFaceSDKCommon;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -319,6 +321,29 @@ public final class BitmapUtils {
         return resBitmap;
     }
 
+    //     * 把字节数组保存为一个文件
+
+    public static String getFileFromBytes(Context context, Bitmap bitmap) {
+        File file = context.getExternalFilesDir("file2");
+        file = new File(file.getAbsolutePath() + File.separator + System.currentTimeMillis() + ".jpg");
+        if (file.exists()) {
+            file.delete();
+        }
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(file);
+            if (bitmap.compress(Bitmap.CompressFormat.PNG, 90, out)) {
+                out.flush();
+                out.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.getAbsolutePath();
+    }
+
 
     public static String saveTakePictureImage(Context context, byte[] data) {
         File file = context.getExternalFilesDir("file1");
@@ -330,7 +355,6 @@ public final class BitmapUtils {
             fout.flush();
         } catch (Exception e) {
             e.printStackTrace();
-
             // 异常时删除保存失败的文件
             try {
                 if (file != null && file.exists() && file.isFile()) {

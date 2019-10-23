@@ -16,16 +16,13 @@ public interface CheckingContract {
 
     interface CheckingView {
         void Error(String errorMsg);
-        void SuccessFinshByCheckRecord(CheckRecord checkRecord);
+        void SuccessFinshByCheckRecord(List<CheckRecord> checkRecord);
         void SuccessFinshByWorKTimeSet(StationCheckSet stationCheckSet);
-        void SuccessFinshByWorkCheck();
     }
 
     interface CheckingPresenter {
         //查询考勤情况
         void QueryCheckingState(String date);
-        //打卡
-        void WorkChecking(String type,String time);
         //考勤时间段设置
         void WorKTimeSet();
     }

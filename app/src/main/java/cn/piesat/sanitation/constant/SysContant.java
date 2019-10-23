@@ -28,7 +28,11 @@ public class SysContant {
     public interface QueryType {
         String query_type = "query_type"; //key
         String compress_station_key = "compress_station_key"; //压缩站标识
+        String car_key = "car_key"; //车辆标识
+        String driver_key = "driver_key"; //司机标识
+        String burn_key = "burn_key"; //焚烧厂标识
         int compress_station_code=100;  //压缩站传递数据给上个界面
+        int car_code=101;  //压缩站传递数据给上个界面
 
     }
 
@@ -40,7 +44,6 @@ public class SysContant {
         String comment_key = "comment_key"; //key
         String face_tag_entering = "face_tag_entering"; //头像录入
         String face_tag_verify = "face_tag_verify"; //头像验证
-
 
     }
 

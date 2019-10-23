@@ -9,18 +9,12 @@ import java.util.List;
  * @describe TODO
  */
 public class CheckRecord {
-
-    public List<RecordBean> RecordBeans;
-
-    public class RecordBean {
-        public String id;
-        public String userId;
-        public String time;
-        public String createDate;
-        public int type;   //1为早上  2为下午
-        public String remark;
-        public String siteId;
-
-    }
+    public String id;
+    public String userId;
+    public String time;
+    public String createDate;
+    public int type;   //1为早上  2为下午
+    public String remark;
+    public String siteId;
 
 }

@@ -13,12 +13,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 //import com.meituan.android.walle.WalleChannelReader;
-import com.raizlabs.android.dbflow.sql.language.Select;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.interfaces.BetaPatchListener;
-import com.tencent.tinker.entry.DefaultApplicationLike;
-
 import com.tencent.tinker.entry.DefaultApplicationLike;
 
 import java.util.Collection;
@@ -30,6 +27,8 @@ import java.util.Map;
 import cn.piesat.sanitation.common.netchange.receiver.NetWorkChangReceiver;
 import cn.piesat.sanitation.database.InitDBUtil;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
+import cn.piesat.sanitation.util.faceUtil.FaceSDKManager;
+import cn.piesat.sanitation.util.faceUtil.SdkInitListener;
 import cn.piesat.sanitation.util.SpHelper;
 
 /**
@@ -64,6 +63,7 @@ public class BaseApplication extends DefaultApplicationLike {
         SpHelper.setStringValue("token", "");
         registerMessageReceiver();
         //initBuglyCrashReport();
+        initLicense();
     }
 
     public static void setUserInfo(UserInfo_Tab userInfo) {
@@ -220,6 +220,39 @@ public class BaseApplication extends DefaultApplicationLike {
         // Bugly.setAppChannel(getApplication(), channel);
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
         Bugly.init(getApplication(), "ff00511d2a", true);
+    }
+
+
+    /**
+     * 启动应用程序，如果之前初始过，自动初始化鉴权和模型（可以添加到Application 中）
+     */
+    private void initLicense() {
+        if (FaceSDKManager.initStatus != FaceSDKManager.SDK_MODEL_LOAD_SUCCESS) {
+            FaceSDKManager.getInstance().init(getApplication(), new SdkInitListener() {
+                @Override
+                public void initStart() {
+
+                }
+
+                @Override
+                public void initLicenseSuccess() {
+
+                }
+
+                @Override
+                public void initLicenseFail(int errorCode, String msg) {
+                }
+
+                @Override
+                public void initModelSuccess() {
+                }
+
+                @Override
+                public void initModelFail(int errorCode, String msg) {
+
+                }
+            });
+        }
     }
 
 
