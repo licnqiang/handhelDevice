@@ -2,6 +2,7 @@ package cn.piesat.sanitation.networkdriver.module;
 
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
@@ -31,7 +32,6 @@ public class TokenInterceptor implements Interceptor {
 
         Request originalRequest = chain.request();
 
-//        Log.e("-------request------","------originalRequest-------"+originalRequest.url());
 
         Request.Builder requestBuilder = originalRequest.newBuilder()
                 .addHeader("Accept-Encoding", "UTF-8")

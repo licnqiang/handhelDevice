@@ -40,12 +40,17 @@ public class UserInfoPresenter implements ICommonAction, CheckingContract.Checki
         hashMap.put("userId", userInfo_tab.id);
         hashMap.put("date", date);
         commonPresenter.invokeInterfaceObtainData(true, false, false, UrlContant.MySourcePart.part, UrlContant.MySourcePart.check_record,
-                hashMap, new TypeToken<List<CheckRecord>>() {
+                hashMap, new TypeToken<CheckRecord>() {
                 });
     }
 
     @Override
     public void WorkChecking(String date) {
+
+    }
+
+    @Override
+    public void WorKTimeSet() {
 
     }
 
@@ -55,7 +60,7 @@ public class UserInfoPresenter implements ICommonAction, CheckingContract.Checki
         switch (methodIndex) {
             case UrlContant.MySourcePart.check_record:  //通过时间获取考勤记录
                 if (status == REQUEST_SUCCESS) {//成功
-                    List<CheckRecord> checkRecords = (List<CheckRecord>) data;
+                    CheckRecord checkRecords = (CheckRecord) data;
                     CheckingView.SuccessFinshByCheckRecord(checkRecords);
                 } else {
                     CheckingView.Error(Msg);

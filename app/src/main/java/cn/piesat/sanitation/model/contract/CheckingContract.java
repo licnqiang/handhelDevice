@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.piesat.sanitation.data.CheckRecord;
 import cn.piesat.sanitation.data.CompressStations;
+import cn.piesat.sanitation.data.StationCheckSet;
 
 /**
  * @author lq
@@ -15,7 +16,8 @@ public interface CheckingContract {
 
     interface CheckingView {
         void Error(String errorMsg);
-        void SuccessFinshByCheckRecord(List<CheckRecord> checkRecords);
+        void SuccessFinshByCheckRecord(CheckRecord checkRecord);
+        void SuccessFinshByWorKTimeSet(StationCheckSet stationCheckSet);
     }
 
     interface CheckingPresenter {
@@ -23,5 +25,7 @@ public interface CheckingContract {
         void QueryCheckingState(String date);
         //打卡
         void WorkChecking(String date);
+        //考勤时间段设置
+        void WorKTimeSet();
     }
 }
