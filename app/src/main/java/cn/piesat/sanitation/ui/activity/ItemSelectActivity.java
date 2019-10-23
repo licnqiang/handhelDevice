@@ -8,13 +8,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
@@ -23,9 +20,6 @@ import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.model.contract.QueryContract;
 import cn.piesat.sanitation.model.presenter.QueryPresenter;
 import cn.piesat.sanitation.ui.adapter.CompressStationAdapter;
-import cn.piesat.sanitation.ui.adapter.OrderAdapter;
-import cn.piesat.sanitation.util.Log;
-import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
 

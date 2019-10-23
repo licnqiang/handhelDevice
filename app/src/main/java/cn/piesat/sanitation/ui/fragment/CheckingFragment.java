@@ -4,6 +4,7 @@ package cn.piesat.sanitation.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,6 @@ import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.model.contract.CheckingContract;
 import cn.piesat.sanitation.model.presenter.CheckingPresenter;
 import cn.piesat.sanitation.ui.activity.FaceEnterActivity;
-import cn.piesat.sanitation.util.Log;
 import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 

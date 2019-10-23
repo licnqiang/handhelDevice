@@ -7,14 +7,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
-import cn.piesat.sanitation.util.Log;
 
 /**
  * 站长派单

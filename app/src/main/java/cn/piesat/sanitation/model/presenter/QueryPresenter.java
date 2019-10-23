@@ -15,7 +15,6 @@ import cn.piesat.sanitation.model.contract.QueryContract;
 import cn.piesat.sanitation.networkdriver.common.BasePresenter;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
-import cn.piesat.sanitation.util.Log;
 
 import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;
 

@@ -8,7 +8,7 @@ import cn.piesat.sanitation.BuildConfig;
  *
  * @author lq
  */
-public class Log {
+public class LogUtil {
 
     private static boolean flag = BuildConfig.DEBUG;
 
@@ -23,7 +23,7 @@ public class Log {
             int max_str_length = 2001 - name.length();
 
 //            if(null==value){
-//                android.util.Log.e(name, "null");
+//                android.util.LogUtil.e(name, "null");
 //                return;
 //            }
 

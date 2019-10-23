@@ -105,7 +105,7 @@ public class FileUtil {
                     fis = new FileInputStream(file);
                     fileLength = fis.available();
                 } else {
-                    Log.e("info", "文件不存在");
+                    LogUtil.e("info", "文件不存在");
                 }
             } catch (Exception e) {
                 // TODO: handle exception
@@ -136,7 +136,7 @@ public class FileUtil {
      * 将流写到文件
      */
     public static boolean saveToFile(InputStream inputStream, String absFileName) {
-        Log.e("info", "absFileName==" + absFileName);
+        LogUtil.e("info", "absFileName==" + absFileName);
 
         final int FILESIZE = 1024 * 4;
         try {
@@ -151,7 +151,7 @@ public class FileUtil {
             inputStream.close();
 
         } catch (Exception e) {
-            Log.e("info", "e==" + e);
+            LogUtil.e("info", "e==" + e);
             e.printStackTrace();
             return false;
         }

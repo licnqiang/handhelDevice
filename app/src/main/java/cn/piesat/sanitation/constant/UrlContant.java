@@ -38,6 +38,9 @@ public class UrlContant {
         String check_user = "save";  //用户打卡
 
 
+        String new_part="api/news";
+        String new_List="list";
+
 
     }
 
