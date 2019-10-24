@@ -252,6 +252,10 @@
 
         <activity android:name=".ui.activity.NewsWebViewActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.MyAttendanceListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.UserListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -21,6 +21,7 @@ public class UrlContant {
         String query_burn_staion = "getRoleFsc";
         String upload = "upload";
         String mody_user_pic = "editUser";
+        String user_list="findAllUser";
     }
 
 
@@ -43,6 +44,9 @@ public class UrlContant {
         String new_List="list";
 
         String face="contrast";
+
+        String attendance_part="api/punch";
+        String attendance_List="getDataOfMonthByUserId";
 
 
     }

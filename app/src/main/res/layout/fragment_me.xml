@@ -85,11 +85,12 @@
 
 
             <LinearLayout
-                android:id="@+id/layoutInquire"
+                android:id="@+id/layoutAttendance"
                 style="@style/linear_layout_default"
 
                 >
                 <TextView
+                    android:id="@+id/tvAttendance"
                     style="@style/text_14_33"
                     android:text="我的考勤"
                     android:drawableLeft="@mipmap/icon_kaoqin"

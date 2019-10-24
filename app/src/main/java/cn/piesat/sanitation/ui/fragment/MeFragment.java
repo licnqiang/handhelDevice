@@ -12,7 +12,9 @@ import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.ui.activity.MyAttendanceListActivity;
 import cn.piesat.sanitation.ui.activity.SplashActivity;
+import cn.piesat.sanitation.ui.activity.UserListActivity;
 import cn.piesat.sanitation.util.DialogUtils;
 import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.UiUtils;
@@ -25,6 +27,8 @@ public class MeFragment extends BaseFragment {
     TextView tvUserName;
     @BindView(R.id.tvHead)
     TextView tvHead;
+    @BindView(R.id.tvAttendance)
+    TextView tvAttendance;
 
  /*   @BindView(R.id.tvUserUnit)
     TextView tvUserUnit;*/
@@ -44,6 +48,13 @@ public class MeFragment extends BaseFragment {
             tvUserName.setText(name);
             tvHead.setText(UiUtils.getPinYinHeadChar(name.substring(0,1)));
         }
+
+        if (BaseApplication.getUserInfo().userType==4){
+            tvAttendance.setText("考勤查询");
+        }else {
+            tvAttendance.setText("我的考勤");
+        }
+
 
 /*        int type =BaseApplication.getUserInfo().userType;
         switch (type){
@@ -75,7 +86,7 @@ public class MeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.imgExit})
+    @OnClick({R.id.imgExit,R.id.layoutAttendance})
     public void onViewClick(View view){
         switch (view.getId()){
             case R.id.imgExit:
@@ -87,6 +98,15 @@ public class MeFragment extends BaseFragment {
                         getActivity().finish();
                     }
                 });
+                break;
+            case R.id.layoutAttendance:
+                //站长角色先查询人员
+                if (BaseApplication.getUserInfo().userType==4){
+                    startActivity(new Intent(getActivity(), UserListActivity.class));
+                }else {
+
+                    startActivity(new Intent(getActivity(), MyAttendanceListActivity.class));
+                }
                 break;
         }
     }
