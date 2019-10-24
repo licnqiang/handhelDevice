@@ -14,6 +14,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.hb.dialog.dialog.ConfirmDialog;
 import com.hb.dialog.myDialog.MyAlertDialog;
@@ -32,6 +34,11 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         return R.layout.activity_splash;
     }
 

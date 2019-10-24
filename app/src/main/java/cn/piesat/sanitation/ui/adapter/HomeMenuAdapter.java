@@ -69,14 +69,16 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void bindBannerHolder(BannerHolder holder, int position) {
         ArrayList<String> im = new ArrayList<String>();
-        im.add("");
-        im.add("");
-        im.add("");
+        im.add("http://www.xixianxinqu.gov.cn/images/zt/yjhj/banner1440.png");
+        im.add("http://www.xixianxinqu.gov.cn/images/zt/bwcx.files/banner.png");
+        im.add("http://www.xixianxinqu.gov.cn/images/zt/zl70zn/banner.png");
         AutoSwitchAdapter mAdapter = new AutoSwitchAdapter(context, im);
         holder.loopswitch.setAdapter(mAdapter);
     }
 
     private void bindNoticeHolder(NoticeHolder holder, int position) {
+        holder.tvTwoTitle.setText("咸阳垃圾一站获得领导表扬");
+        holder.tvTwoType.setText("公告");
 
 
     }
@@ -125,8 +127,12 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     class NoticeHolder extends RecyclerView.ViewHolder {
 
+        TextView tvTwoType,tvTwoTitle;
         public NoticeHolder(View itemView) {
             super(itemView);
+            tvTwoTitle=itemView.findViewById(R.id.tvTwoTitle);
+            tvTwoType=itemView.findViewById(R.id.tvTwoType);
+
         }
     }
 

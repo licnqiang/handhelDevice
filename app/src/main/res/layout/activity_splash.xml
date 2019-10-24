@@ -5,4 +5,12 @@
     android:padding="@dimen/text_10dp"
     android:background="@color/colorPrimary">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dp_30"
+        android:text="欢迎你"
+        android:layout_centerInParent="true"
+        />
+
 </RelativeLayout>

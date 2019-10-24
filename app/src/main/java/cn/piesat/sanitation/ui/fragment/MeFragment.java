@@ -15,6 +15,7 @@ import cn.piesat.sanitation.common.BaseFragment;
 import cn.piesat.sanitation.ui.activity.SplashActivity;
 import cn.piesat.sanitation.util.DialogUtils;
 import cn.piesat.sanitation.util.SpHelper;
+import cn.piesat.sanitation.util.UiUtils;
 
 /**
  * 个人中心
@@ -22,8 +23,11 @@ import cn.piesat.sanitation.util.SpHelper;
 public class MeFragment extends BaseFragment {
     @BindView(R.id.tvUserName)
     TextView tvUserName;
-    @BindView(R.id.tvUserUnit)
-    TextView tvUserUnit;
+    @BindView(R.id.tvHead)
+    TextView tvHead;
+
+ /*   @BindView(R.id.tvUserUnit)
+    TextView tvUserUnit;*/
 
     @Override
     protected int getLayoutId() {
@@ -36,9 +40,12 @@ public class MeFragment extends BaseFragment {
             return;
         }
         if (BaseApplication.getUserInfo().name!=null){
-            tvUserName.setText(BaseApplication.getUserInfo().name);
+            String name=BaseApplication.getUserInfo().name;
+            tvUserName.setText(name);
+            tvHead.setText(UiUtils.getPinYinHeadChar(name.substring(0,1)));
         }
-        int type =BaseApplication.getUserInfo().userType;
+
+/*        int type =BaseApplication.getUserInfo().userType;
         switch (type){
             case 1:
                 tvUserUnit.setText("管理员");
@@ -64,14 +71,14 @@ public class MeFragment extends BaseFragment {
             default:
                 tvUserUnit.setText("普通用户");
                 break;
-        }
+        }*/
 
     }
 
-    @OnClick({R.id.btExit})
+    @OnClick({R.id.imgExit})
     public void onViewClick(View view){
         switch (view.getId()){
-            case R.id.btExit:
+            case R.id.imgExit:
                 DialogUtils.generalDialog(getActivity(), "确认退出当前账号吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

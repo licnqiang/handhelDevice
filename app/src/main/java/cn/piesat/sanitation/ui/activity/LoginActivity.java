@@ -3,6 +3,8 @@ package cn.piesat.sanitation.ui.activity;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import java.util.HashMap;
 import java.util.Set;
@@ -32,6 +34,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
 
     @Override
     protected int getLayoutId() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.activity_login;
     }
 

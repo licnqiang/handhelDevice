@@ -40,15 +40,9 @@ public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter {
     ImageView imageView = new ImageView(BaseApplication.ApplicationContext);
     imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-    RequestOptions requestOptions = new RequestOptions()
-            .placeholder(R.mipmap.banner_2)
-            .error(R.mipmap.banner_2)
-            .fallback(R.mipmap.banner_2);
- /*   Glide.with(mContext)
+    Glide.with(mContext)
             .load(mDatas.get(position))
-            .apply(requestOptions)
-            .into(imageView);*/
+            .into(imageView);
 
     return imageView;
   }

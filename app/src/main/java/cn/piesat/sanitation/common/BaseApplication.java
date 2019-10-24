@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.piesat.sanitation.common.netchange.receiver.NetWorkChangReceiver;
 import cn.piesat.sanitation.database.InitDBUtil;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
@@ -70,8 +71,8 @@ public class BaseApplication extends DefaultApplicationLike {
     }
 
     private void initJPush() {
-//        JPushInterface.setDebugMode(true);
-//        JPushInterface.init(ApplicationContext);
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(ApplicationContext);
         initLicense();
     }
 

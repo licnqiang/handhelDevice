@@ -31,8 +31,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeNewsV
     SpringView springView;
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
-    HomeMenuAdapter adapter;
 
+    private HomeMenuAdapter adapter;
     private HomePresenter homePresenter;
     private ArrayList<HomeNewsBean.NewsList>homeBeanList;
 
@@ -71,6 +71,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeNewsV
 
     @Override
     protected void initData() {
+        showLoadingDialog();
         homePresenter.GetNewsList();
 
 
@@ -78,6 +79,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeNewsV
 
     @Override
     public void Error(String msg) {
+        dismiss();
         ToastUtil.show(getActivity(),msg);
         if (springView!=null){
             springView.onFinishFreshAndLoad();
@@ -86,7 +88,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeNewsV
 
     @Override
     public void SuccessOnNewsList(HomeNewsBean homeNewsBean) {
-
+        dismiss();
         if (homeNewsBean.list!=null&&homeNewsBean.list.size()>0){
             homeBeanList.addAll(homeNewsBean.list);
             adapter.notifyDataSetChanged();

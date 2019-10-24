@@ -6,7 +6,7 @@
     <cn.piesat.sanitation.ui.view.banner.AutoSwitchView
         android:id="@+id/loopswitch"
         android:layout_width="match_parent"
-        android:layout_height="175dp"></cn.piesat.sanitation.ui.view.banner.AutoSwitchView>
+        android:layout_height="220dp"></cn.piesat.sanitation.ui.view.banner.AutoSwitchView>
 
 </LinearLayout>
 

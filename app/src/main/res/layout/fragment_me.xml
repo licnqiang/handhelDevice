@@ -13,15 +13,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.35"
-            android:background="@color/white">
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:scaleType="centerCrop"
-                android:background="@color/bule"/>
+            android:layout_weight="0.2"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/dp_30">
 
 
             <LinearLayout
@@ -32,33 +26,50 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:paddingBottom="@dimen/dp_10"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-
-                <ImageView
+               <!-- <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_head_default"/>
+                    android:src="@mipmap/icon_head_default"/>-->
+
+                <RelativeLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/shape_user_head_bg"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="w"
+                        android:textColor="@color/white"
+                        android:textSize="38dp" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="用户名"
+                    android:layout_marginLeft="@dimen/dp_15"
                     android:textColor="@color/color_3c3c3c"
-                    android:textSize="@dimen/text_15dp"
+                    android:textSize="@dimen/text_18dp"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/tvUserUnit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="XXX部门"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:textColor="@color/color_888888"
-                    android:textSize="@dimen/text_12dp"/>
+
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_exit"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/dp_10"
+                />
 
         </RelativeLayout>
 
@@ -67,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_0dp"
             android:orientation="vertical"
-            android:layout_weight="0.65"
+            android:layout_weight="0.8"
             android:layout_marginTop="@dimen/dp_10"
             android:background="@color/white">
 
@@ -91,7 +102,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_10"
-                    android:visibility="invisible"
                     android:src="@mipmap/icon_arraw_next"/>
 
             </LinearLayout>
@@ -119,7 +129,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_10"
-                    android:visibility="invisible"
+                    android:src="@mipmap/icon_arraw_next"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_background"
+                android:layout_marginLeft="25dp"/>
+            <LinearLayout
+                android:id="@+id/layoutEdit"
+                style="@style/linear_layout_default"
+
+                >
+                <TextView
+                    style="@style/text_14_33"
+                    android:text="信息修改"
+                    android:drawableLeft="@mipmap/icon_edit"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_3c3c3c"
+
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
                     android:src="@mipmap/icon_arraw_next"/>
 
             </LinearLayout>
@@ -159,7 +195,7 @@
 
 
 
-            <Button
+          <!--  <Button
                 android:id="@+id/btExit"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
@@ -167,7 +203,7 @@
                 android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dp_20"
-                android:text="退出"/>
+                android:text="退出"/>-->
 
         </LinearLayout>
 

@@ -56,6 +56,13 @@ public abstract class BaseFragment extends Fragment {
         loadingDialog.show();
     }
 
+    //默认
+    public void showLoadingDialog() {
+        loadingDialog.setMessage("加载中");
+        loadingDialog.setCancelable(false);
+        loadingDialog.show();
+    }
+
     //close loading
     public void dismiss() {
         if (null != loadingDialog && loadingDialog.isShowing()) {
