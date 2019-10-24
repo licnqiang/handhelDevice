@@ -93,4 +93,6 @@ dependencies {
     //极光推送
     implementation 'cn.jiguang.sdk:jpush:3.3.6'
     implementation 'cn.jiguang.sdk:jcore:2.1.6'
+    //汉字转拼音
+    implementation 'com.belerweb:pinyin4j:2.5.0'
 }

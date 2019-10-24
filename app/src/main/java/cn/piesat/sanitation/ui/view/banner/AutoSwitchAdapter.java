@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.view.banner;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -37,20 +38,18 @@ public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter {
 
   @Override
   public View getView(int position) {
-    ImageView imageView = new ImageView(BaseApplication.ApplicationContext);
+
+    View view = LayoutInflater.from(mContext).inflate(R.layout.item_banner_child,null);
+    ImageView imageView =view.findViewById(R.id.imgBanner);
+/*    ImageView imageView = new ImageView(mContext);
     imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT));
-    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-    RequestOptions requestOptions = new RequestOptions()
-            .placeholder(R.mipmap.banner_2)
-            .error(R.mipmap.banner_2)
-            .fallback(R.mipmap.banner_2);
- /*   Glide.with(mContext)
+    imageView.setScaleType(ImageView.ScaleType.FIT_XY);*/
+//    imageView.setTag(null);
+    Glide.with(mContext)
             .load(mDatas.get(position))
-            .apply(requestOptions)
-            .into(imageView);*/
+            .into(imageView);
 
-    return imageView;
+    return view;
   }
 
   @Override

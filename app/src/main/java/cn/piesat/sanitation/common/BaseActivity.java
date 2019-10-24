@@ -70,6 +70,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
     }
+    public void showLoadingDialog() {
+        loadingDialog.setMessage("加载中");
+        loadingDialog.setCancelable(false);
+        loadingDialog.show();
+    }
+
+
 
     //close loading
     public void dismiss() {

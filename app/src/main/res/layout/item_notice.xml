@@ -8,11 +8,11 @@
     android:paddingRight="@dimen/text_10dp">
 
     <TextView
+        android:id="@+id/tvTwoTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_vertical"
-        android:text="咸阳垃圾一站获得领导表扬"
         android:textColor="@color/them_black_font"
         android:textSize="@dimen/text_size_16" />
 
@@ -32,11 +32,11 @@
             android:textSize="@dimen/text_size_14" />
 
         <TextView
+            android:id="@+id/tvTwoType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_20"
             android:gravity="center_vertical"
-            android:text="公告"
             android:textColor="@color/color_919191"
             android:textSize="@dimen/text_size_14" />
 

@@ -12,9 +12,12 @@ import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.ui.activity.MyAttendanceListActivity;
 import cn.piesat.sanitation.ui.activity.SplashActivity;
+import cn.piesat.sanitation.ui.activity.UserListActivity;
 import cn.piesat.sanitation.util.DialogUtils;
 import cn.piesat.sanitation.util.SpHelper;
+import cn.piesat.sanitation.util.UiUtils;
 
 /**
  * 个人中心
@@ -22,8 +25,13 @@ import cn.piesat.sanitation.util.SpHelper;
 public class MeFragment extends BaseFragment {
     @BindView(R.id.tvUserName)
     TextView tvUserName;
-    @BindView(R.id.tvUserUnit)
-    TextView tvUserUnit;
+    @BindView(R.id.tvHead)
+    TextView tvHead;
+    @BindView(R.id.tvAttendance)
+    TextView tvAttendance;
+
+ /*   @BindView(R.id.tvUserUnit)
+    TextView tvUserUnit;*/
 
     @Override
     protected int getLayoutId() {
@@ -36,9 +44,19 @@ public class MeFragment extends BaseFragment {
             return;
         }
         if (BaseApplication.getUserInfo().name!=null){
-            tvUserName.setText(BaseApplication.getUserInfo().name);
+            String name=BaseApplication.getUserInfo().name;
+            tvUserName.setText(name);
+            tvHead.setText(UiUtils.getPinYinHeadChar(name.substring(0,1)));
         }
-        int type =BaseApplication.getUserInfo().userType;
+
+        if (BaseApplication.getUserInfo().userType==4){
+            tvAttendance.setText("考勤查询");
+        }else {
+            tvAttendance.setText("我的考勤");
+        }
+
+
+/*        int type =BaseApplication.getUserInfo().userType;
         switch (type){
             case 1:
                 tvUserUnit.setText("管理员");
@@ -64,14 +82,14 @@ public class MeFragment extends BaseFragment {
             default:
                 tvUserUnit.setText("普通用户");
                 break;
-        }
+        }*/
 
     }
 
-    @OnClick({R.id.btExit})
+    @OnClick({R.id.imgExit,R.id.layoutAttendance})
     public void onViewClick(View view){
         switch (view.getId()){
-            case R.id.btExit:
+            case R.id.imgExit:
                 DialogUtils.generalDialog(getActivity(), "确认退出当前账号吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -80,6 +98,15 @@ public class MeFragment extends BaseFragment {
                         getActivity().finish();
                     }
                 });
+                break;
+            case R.id.layoutAttendance:
+                //站长角色先查询人员
+                if (BaseApplication.getUserInfo().userType==4){
+                    startActivity(new Intent(getActivity(), UserListActivity.class));
+                }else {
+
+                    startActivity(new Intent(getActivity(), MyAttendanceListActivity.class));
+                }
                 break;
         }
     }

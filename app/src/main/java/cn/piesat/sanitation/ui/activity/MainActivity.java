@@ -3,6 +3,8 @@ package cn.piesat.sanitation.ui.activity;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.view.Window;
+import android.view.WindowManager;
 
 import butterknife.BindView;
 import cn.piesat.sanitation.R;

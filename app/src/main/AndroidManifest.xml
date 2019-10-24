@@ -259,6 +259,11 @@
         <activity android:name=".ui.activity.DriverOrderListActivity" />
         <activity android:name=".ui.activity.DriverOrderDetailActivity" />
         <activity android:name=".ui.activity.HeaderOrderDetailActivity" />
+
+        <activity android:name=".ui.activity.MyAttendanceListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.UserListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

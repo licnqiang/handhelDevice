@@ -30,6 +30,7 @@ public class UrlContant {
         String query_save_bd = "saveBDTyd";  //榜单
         String query_finish_bd = "finishTyd";  //过磅确认
         String query_cancel_order = "cancelTyd";  //订单取消
+        String user_list="findAllUser";
     }
 
 
@@ -52,6 +53,9 @@ public class UrlContant {
         String new_List="list";
 
         String face="contrast";
+
+        String attendance_part="api/punch";
+        String attendance_List="getDataOfMonthByUserId";
 
 
     }
