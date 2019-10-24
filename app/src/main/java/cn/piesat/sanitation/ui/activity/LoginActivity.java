@@ -1,16 +1,23 @@
 package cn.piesat.sanitation.ui.activity;
 
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import java.util.HashMap;
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.model.contract.LoginContract;
 import cn.piesat.sanitation.model.presenter.loginPresenter;
+import cn.piesat.sanitation.util.LogUtil;
 import cn.piesat.sanitation.util.ToastUtil;
 
 
@@ -75,9 +82,35 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
 
     @Override
     public void jumpToMain() {
-        dismiss();
-        toActivity(MainActivity.class);
-        finish();
+
+
+
+        if (BaseApplication.getUserInfo()!=null&!TextUtils.isEmpty(BaseApplication.getUserInfo().id)){
+            setJPushAlias("user_"+BaseApplication.getUserInfo().id);
+        }else {
+            dismiss();
+            ToastUtil.show(this,"推送Alias设置失败");
+            toActivity(MainActivity.class);
+            finish();
+        }
+
+
+    }
+
+    /**
+     * 登录成功后设置推送标签
+     */
+    private void setJPushAlias(String aliasId) {
+        JPushInterface.setAlias(this, aliasId, new TagAliasCallback() {
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+                dismiss();
+                toActivity(MainActivity.class);
+                finish();
+                LogUtil.e("设置别名结果：","i:"+i+"/s:"+s+"/set:"+set);
+            }
+        });
+
     }
 }
 
