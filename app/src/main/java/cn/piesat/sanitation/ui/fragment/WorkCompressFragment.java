@@ -1,19 +1,17 @@
 package cn.piesat.sanitation.ui.fragment;
 
 
-import android.support.v4.app.Fragment;
-
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
 
 /**
- * 工作
+ * 压缩工
  */
-public class WorkFragment extends BaseFragment {
+public class WorkCompressFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_work;
+        return R.layout.fragment_work_compress;
     }
 
     @Override

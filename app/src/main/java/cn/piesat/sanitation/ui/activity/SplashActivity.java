@@ -72,7 +72,7 @@ public class SplashActivity extends BaseActivity {
                     if (j == 4) {
                         starMain();
                     }
-                }else {
+                } else {
                     showPermiDialog();
                 }
             }
@@ -107,22 +107,21 @@ public class SplashActivity extends BaseActivity {
      * 两秒跳转
      */
     private void starMain() {
-        if (!TextUtils.isEmpty(SpHelper.getStringValue("token"))){
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // 启动登录窗口
-                    toActivity(MainActivity.class);
-                    // 关闭启动画面
-                    finish();
-                }
-            }, DELAY_TIME);
-        }else {
-            toActivity(LoginActivity.class);
-            finish();
-
-        }
-
+//        if (!TextUtils.isEmpty(SpHelper.getStringValue("token"))){
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+        // 启动登录窗口
+        toActivity(LoginActivity.class);
+        // 关闭启动画面
+        finish();
+//                }
+//            }, DELAY_TIME);
+//        }else {
+//            toActivity(LoginActivity.class);
+//            finish();
+//
+//        }
 
 
     }

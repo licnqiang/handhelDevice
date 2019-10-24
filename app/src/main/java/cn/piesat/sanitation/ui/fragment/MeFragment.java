@@ -38,27 +38,27 @@ public class MeFragment extends BaseFragment {
         if (BaseApplication.getUserInfo().name!=null){
             tvUserName.setText(BaseApplication.getUserInfo().name);
         }
-        String type =BaseApplication.getUserInfo().userType;
+        int type =BaseApplication.getUserInfo().userType;
         switch (type){
-            case "1":
+            case 1:
                 tvUserUnit.setText("管理员");
                 break;
-            case "2":
+            case 2:
                 tvUserUnit.setText("普通用户");
                 break;
-            case "3":
+            case 3:
                 tvUserUnit.setText("环卫集团员工");
                 break;
-            case "4":
+            case 4:
                 tvUserUnit.setText("站长");
                 break;
-            case "5":
+            case 5:
                 tvUserUnit.setText("操作工");
                 break;
-            case "6":
+            case 6:
                 tvUserUnit.setText("扫保人员");
                 break;
-            case "7":
+            case 7:
                 tvUserUnit.setText("司机");
                 break;
             default:

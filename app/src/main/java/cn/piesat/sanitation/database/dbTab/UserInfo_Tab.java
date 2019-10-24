@@ -17,7 +17,7 @@ public class UserInfo_Tab extends BaseModel implements Serializable {
     @Column
     public String id;
     @Column
-    public String userType; // 1管理员 2普通用户 3环卫集团员工 4站长 5操作工 6扫保人员 7司机
+    public int userType; // 1管理员 2普通用户 3环卫集团员工 4站长 5操作工 6扫保人员 7司机
     @Column
     public String account;  //账号
     @Column
