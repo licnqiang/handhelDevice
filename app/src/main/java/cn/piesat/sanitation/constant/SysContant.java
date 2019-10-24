@@ -33,6 +33,8 @@ public class SysContant {
         String burn_key = "burn_key"; //焚烧厂标识
         int compress_station_code=100;  //压缩站传递数据给上个界面
         int car_code=101;  //压缩站传递数据给上个界面
+        int driver_code=102;  //司机传递数据给上个界面
+        int burn_code=103;  //焚烧厂传递数据给上个界面
 
     }
 

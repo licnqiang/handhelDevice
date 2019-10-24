@@ -27,7 +27,7 @@ task clean(type: Delete) {
 
 ext {
     compileSdkVersion = 28
-    buildToolsVersion = "26+"
+    buildToolsVersion = "26"
     minSdkVersion = 19
     targetSdkVersion = 28
     versionCode = 1
@@ -40,6 +40,7 @@ ext {
     glide_version="4.1.1"
     eventbus_version="3.1.1"
     dialog_version="1.2.0"
+    pickerview_version="2.1.1"
 
     bugly_version="1.3.6"
     tinker_version="1.9.9"

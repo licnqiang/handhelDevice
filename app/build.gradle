@@ -67,7 +67,7 @@ dependencies {
     implementation "com.android.support:design:$rootProject.buildToolsVersion"
     implementation "com.liaoinstan.springview:library:$springview_version"
     implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
-
+    implementation "com.bigkoo:pickerview:$rootProject.pickerview_version"
     //配置数据库
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.dbflow_version"
     implementation "net.zetetic:android-database-sqlcipher:$rootProject.sqlcipher_version@aar"

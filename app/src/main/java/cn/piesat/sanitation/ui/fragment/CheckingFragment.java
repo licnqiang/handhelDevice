@@ -119,6 +119,8 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
                 } else {
                     ToastUtil.show(getActivity(), "暂不支持迟到或早退卡");
                 }
+            }else {
+                ToastUtil.show(getActivity(), "暂不支持迟到或早退卡");
             }
 
 

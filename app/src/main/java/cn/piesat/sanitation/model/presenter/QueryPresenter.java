@@ -8,8 +8,10 @@ import java.util.Map;
 
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.UrlContant;
+import cn.piesat.sanitation.data.BurnStationInfo;
 import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
+import cn.piesat.sanitation.data.DriverInfo;
 import cn.piesat.sanitation.data.LoginInfo_Respose;
 import cn.piesat.sanitation.model.contract.LoginContract;
 import cn.piesat.sanitation.model.contract.QueryContract;
@@ -64,9 +66,28 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
         hashMap.put("pageNum", pageNum + "");
         hashMap.put("pageSize", pageSize + "");
         commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_burn_staion,
-                hashMap, new TypeToken<CompressStations>() {
+                hashMap, new TypeToken<BurnStationInfo>() {
                 });
 
+    }
+
+    /**
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param userType    查询用户类型 1管理员2普通用户3环卫集团员工4站长5操作工6扫保人员7司机
+     * @param idSysdept   组织机构id
+     */
+    @Override
+    public void QueryDriver(int pageNum, int pageSize, int userType, String idSysdept) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("pageNum", pageNum + "");
+        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("userType", userType + "");
+        hashMap.put("idSysdept", idSysdept);
+        commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_driver,
+                hashMap, new TypeToken<DriverInfo>() {
+                });
     }
 
 
@@ -94,7 +115,17 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
             //焚烧厂
             case UrlContant.OutSourcePart.query_burn_staion:
                 if (status == REQUEST_SUCCESS) {
-                    QueryView.SuccessFinshByBurnStation(null);
+                    BurnStationInfo burnStationInfo=(BurnStationInfo)data;
+                    QueryView.SuccessFinshByBurnStation(burnStationInfo);
+                } else {
+                    QueryView.Error(Msg);
+                }
+                break;
+            //司机
+            case UrlContant.OutSourcePart.query_driver:
+                if (status == REQUEST_SUCCESS) {
+                    DriverInfo driverInfo=(DriverInfo)data;
+                    QueryView.SuccessFinshByDriver(driverInfo);
                 } else {
                     QueryView.Error(Msg);
                 }

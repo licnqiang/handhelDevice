@@ -10,11 +10,6 @@
 
     <include layout="@layout/common_title" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="60dp"></LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,13 +17,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
             <RelativeLayout
+                android:id="@+id/rl_order_state"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/iv_order_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:src="@mipmap/order_state_1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/comment_click_state"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp">
@@ -43,7 +53,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/comment_item_value"
+                    android:id="@+id/compress_station"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -71,6 +81,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_car"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -98,6 +109,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_driver"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -125,6 +137,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -152,6 +165,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/burn_station"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -179,6 +193,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/send_time"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -189,23 +204,168 @@
                     android:textSize="16sp" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/bangdan_info"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
-                <Button
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@color/bule"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center"
-                    android:text="申请派单"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:layout_height="50dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/comment_click_state"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp">
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="毛重:"
+                        android:textColor="@color/them_black_font"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_maozhong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="100kg"
+                        android:textColor="@color/color_black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/comment_click_state"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="皮重:"
+                        android:textColor="@color/them_black_font"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_pizhong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="100kg"
+                        android:textColor="@color/color_black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/comment_click_state"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="净重:"
+                        android:textColor="@color/them_black_font"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_jingzhong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="100kg"
+                        android:textColor="@color/color_black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/comment_click_state"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="运单:"
+                        android:textColor="@color/them_black_font"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_yundanhao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="100kg"
+                        android:textColor="@color/color_black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/comment_click_state"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="图片"
+                        android:textColor="@color/them_black_font"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_paizhao"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/paizhao" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_get"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/user_edit"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_click_state"
+                android:text="接单"
+                android:textColor="@color/white" />
 
 
         </LinearLayout>

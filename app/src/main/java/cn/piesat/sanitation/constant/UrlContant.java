@@ -14,13 +14,22 @@ public class UrlContant {
     public interface OutSourcePart {
 
         String part = "v1";
+        String assigin_order_part = "tyd";
         String login = "login";
 
         String query_compress_station = "getRoleYsz";
         String query_car = "getRoleCar";
-        String query_burn_staion = "getRoleFsc";
+        String query_burn_staion = "getAllFsc";
+        String query_driver = "findAllUser";
         String upload = "upload";
         String mody_user_pic = "editUser";
+        String assigin_order = "toTyd";
+        String query_order_list = "searchTyd";
+        String query_take_order = "driverTyd";
+        String query_start_strans = "startTyd";  //起运
+        String query_save_bd = "saveBDTyd";  //榜单
+        String query_finish_bd = "finishTyd";  //过磅确认
+        String query_cancel_order = "cancelTyd";  //订单取消
     }
 
 

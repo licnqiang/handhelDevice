@@ -47,8 +47,12 @@ public class CommentItemModul extends LinearLayout {
     }
 
 
-    public void setText(String msg){
+    public void setText(String msg) {
         itemValue.setText(msg);
+    }
+
+    public String getText() {
+        return itemValue.getText()+"";
     }
 
 

@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 
-
     <!-- Optional for location -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
@@ -57,24 +56,23 @@
         android:theme="@style/AppTheme">
 
 
-
         <!--极光配置开始-->
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
-            android:theme="@style/MyDialogStyle"
-            android:exported="false">
-        </activity>
+            android:exported="false"
+            android:theme="@style/MyDialogStyle"></activity>
 
         <!-- Required SDK核心功能-->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="cn.piesat.sanitation" />
             </intent-filter>
@@ -84,8 +82,8 @@
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
             android:name="cn.jpush.android.service.PushService"
-            android:process=":pushcore"
-            android:exported="false">
+            android:exported="false"
+            android:process=":pushcore">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -95,11 +93,10 @@
         </service>
         <!-- since 3.0.9 Required SDK 核心功能-->
         <provider
-            android:authorities="cn.piesat.sanitation.DataProvider"
             android:name="cn.jpush.android.service.DataProvider"
-            android:process=":pushcore"
+            android:authorities="cn.piesat.sanitation.DataProvider"
             android:exported="false"
-            />
+            android:process=":pushcore" />
 
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
         <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
@@ -115,10 +112,9 @@
         </service>
         <!-- since 3.1.0 Required SDK 核心功能-->
         <provider
-            android:authorities="cn.piesat.sanitation.DownloadProvider"
             android:name="cn.jpush.android.service.DownloadProvider"
-            android:exported="true"
-            />
+            android:authorities="cn.piesat.sanitation.DownloadProvider"
+            android:exported="true" />
         <!-- Required SDK核心功能-->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
@@ -142,7 +138,9 @@
         </receiver>
 
         <!-- Required SDK核心功能-->
-        <receiver android:name="cn.jpush.android.service.AlarmReceiver" android:exported="false"/>
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
 
         <!--since 3.3.0 Required SDK核心功能-->
         <activity
@@ -158,7 +156,8 @@
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->
         <!-- 这个Service要继承JCommonService -->
-        <service android:name=".service.PushCommonService"
+        <service
+            android:name=".service.PushCommonService"
             android:process=":pushcore">
             <intent-filter>
                 <action android:name="cn.jiguang.user.service.action" />
@@ -168,8 +167,8 @@
         <!--自定义广播接收器-->
         <receiver
             android:name=".service.PushMyReceiver"
-            android:exported="false"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
@@ -182,8 +181,8 @@
 
         <receiver
             android:name=".service.PushMsgReceiver"
-            android:exported="false"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
@@ -196,8 +195,12 @@
 
 
         <!-- Required  . Enable it you can get statistics data with channel -->
-        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="79ddf9ac5038d24f74dcf463" /> <!--  </>值来自开发者平台取得的AppKey-->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="79ddf9ac5038d24f74dcf463" /> <!--  </>值来自开发者平台取得的AppKey-->
 
         <!--极光配置结束-->
 
@@ -216,9 +219,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".ui.activity.MainActivity"
-            android:launchMode="singleTop"
-            />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.ForgetPswActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
@@ -250,8 +253,12 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.ItemSelectActivity"></activity>
 
-        <activity android:name=".ui.activity.NewsWebViewActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.NewsWebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.DriverOrderListActivity" />
+        <activity android:name=".ui.activity.DriverOrderDetailActivity" />
+        <activity android:name=".ui.activity.HeaderOrderDetailActivity" />
     </application>
 
 </manifest>

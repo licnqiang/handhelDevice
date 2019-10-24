@@ -1,7 +1,9 @@
 package cn.piesat.sanitation.model.contract;
 
+import cn.piesat.sanitation.data.BurnStationInfo;
 import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
+import cn.piesat.sanitation.data.DriverInfo;
 
 /**
  * @author lq
@@ -15,7 +17,8 @@ public interface QueryContract {
         void Error(String errorMsg);
         void SuccessFinshByCompress(CompressStations compressStations);
         void SuccessFinshByCar(CarInfo carInfo);
-        void SuccessFinshByBurnStation(CompressStations compressStations);
+        void SuccessFinshByBurnStation(BurnStationInfo burnStationInfo);
+        void SuccessFinshByDriver(DriverInfo driverInfo);
     }
 
     interface QueryPresenter {
@@ -25,5 +28,7 @@ public interface QueryContract {
         void QueryCar(int pageNum, int pageSize,int status);
         //查询焚烧厂
         void QueryBurnStation(int pageNum, int pageSize);
+        //查询司机
+        void QueryDriver(int pageNum, int pageSize,int userType,String idSysdept);
     }
 }

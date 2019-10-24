@@ -115,6 +115,7 @@
         android:orientation="horizontal">
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/one_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
