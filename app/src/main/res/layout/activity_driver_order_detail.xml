@@ -50,7 +50,7 @@
                     android:gravity="center"
                     android:text="压缩站:"
                     android:textColor="@color/them_black_font"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/compress_station"
@@ -61,7 +61,7 @@
                     android:gravity="center"
                     android:text="西咸新区"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -78,7 +78,7 @@
                     android:gravity="center"
                     android:text="车牌:"
                     android:textColor="@color/them_black_font"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_car"
@@ -89,7 +89,7 @@
                     android:gravity="center"
                     android:text="陕A：68431"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -106,7 +106,7 @@
                     android:gravity="center"
                     android:text="运输人:"
                     android:textColor="@color/them_black_font"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_driver"
@@ -117,7 +117,7 @@
                     android:gravity="center"
                     android:text="李强"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -134,7 +134,7 @@
                     android:gravity="center"
                     android:text="起运时间:"
                     android:textColor="@color/them_black_font"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_start_time"
@@ -145,7 +145,7 @@
                     android:gravity="center"
                     android:text="2019.10.9"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -162,7 +162,7 @@
                     android:gravity="center"
                     android:text="焚烧厂:"
                     android:textColor="@color/them_black_font"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/burn_station"
@@ -173,7 +173,7 @@
                     android:gravity="center"
                     android:text="秦双"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -190,7 +190,7 @@
                     android:gravity="center"
                     android:text="抵达时间:"
                     android:textColor="@color/them_black_font"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/send_time"
@@ -201,8 +201,67 @@
                     android:gravity="center"
                     android:text="2019.10.9"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/comment_click_state"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="运单:"
+                    android:textColor="@color/them_black_font"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_yundanhao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="xxx"
+                    android:textColor="@color/color_black"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_bz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注"
+                    android:textColor="@color/them_black_font"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/order_bz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="left|top"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/them_black_font"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/bangdan_info"
@@ -223,20 +282,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="毛重:"
+                        android:text="毛重(吨):"
                         android:textColor="@color/them_black_font"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_maozhong"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
+                        android:background="@color/white"
                         android:layout_marginRight="20dp"
-                        android:gravity="center"
-                        android:text="100kg"
+                        android:gravity="right|center_vertical"
+                        android:hint="输入毛重"
                         android:textColor="@color/color_black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
 
@@ -252,20 +312,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="皮重:"
+                        android:text="皮重(吨):"
                         android:textColor="@color/them_black_font"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_pizhong"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
-                        android:gravity="center"
-                        android:text="100kg"
+                        android:hint="输入皮重"
+                        android:background="@color/white"
+                        android:gravity="right|center_vertical"
                         android:textColor="@color/color_black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
 
@@ -281,51 +342,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="净重:"
+                        android:text="净重(吨):"
                         android:textColor="@color/them_black_font"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_jingzhong"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
-                        android:gravity="center"
-                        android:text="100kg"
+                        android:gravity="right|center_vertical"
+                        android:hint="输入净重"
+                        android:background="@color/white"
                         android:textColor="@color/color_black"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="1dp"
-                    android:background="@drawable/comment_click_state"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="运单:"
-                        android:textColor="@color/them_black_font"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tv_yundanhao"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
-                        android:gravity="center"
-                        android:text="100kg"
-                        android:textColor="@color/color_black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_pic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
@@ -341,12 +376,13 @@
                         android:gravity="center"
                         android:text="图片"
                         android:textColor="@color/them_black_font"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/iv_paizhao"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="80dp"
+                        android:scaleType="fitXY"
+                        android:layout_height="80dp"
                         android:src="@mipmap/paizhao" />
 
                 </LinearLayout>

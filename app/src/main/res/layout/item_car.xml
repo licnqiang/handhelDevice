@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/comment_click_state"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/car_num"
@@ -39,7 +39,7 @@
             android:layout_alignParentRight="true"
             android:text="高桥压缩站"
             android:textColor="@color/color_black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
