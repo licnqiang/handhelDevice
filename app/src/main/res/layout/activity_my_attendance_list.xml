@@ -5,6 +5,19 @@
     android:background="@color/white">
     <include layout="@layout/common_title"/>
 
+    <TextView
+        android:id="@+id/tvPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="@dimen/dp_10"
+        android:textColor="@color/white"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:background="@color/them_tip_orange"/>
+
 
     <com.liaoinstan.springview.widget.SpringView
         android:id="@+id/springView"
@@ -15,7 +28,7 @@
             android:id="@+id/lvAttendance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/color_333333"
+            android:divider="@color/gray5"
             android:dividerHeight="@dimen/dp_10">
 
         </ListView>

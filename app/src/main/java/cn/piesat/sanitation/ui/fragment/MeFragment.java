@@ -104,7 +104,6 @@ public class MeFragment extends BaseFragment {
                 if (BaseApplication.getUserInfo().userType==4){
                     startActivity(new Intent(getActivity(), UserListActivity.class));
                 }else {
-
                     startActivity(new Intent(getActivity(), MyAttendanceListActivity.class));
                 }
                 break;
