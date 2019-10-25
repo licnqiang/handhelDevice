@@ -17,7 +17,7 @@ public class CarInfo implements Serializable{
     public List<RowsBean> rows;
 
     public static class RowsBean implements Serializable{
-        public String vid;
+        public long vid;
         public String licensePlate;
         public String licensePlateColor;
         public String vtId;

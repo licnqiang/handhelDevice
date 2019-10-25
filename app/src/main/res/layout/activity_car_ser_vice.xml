@@ -15,29 +15,55 @@
         android:orientation="vertical">
 
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/tv_car"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            app:comment_item_title="维修车辆："
+            app:comment_item_value="陕A：1256325" />
+        <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/tv_type"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
             app:comment_item_title="维修类型："
             app:comment_item_value="维修" />
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
             app:comment_item_title="保养单位："
             app:comment_item_value="修理厂" />
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/tv_car_par"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            app:comment_item_title="保养部位："
+            app:comment_item_value="修理厂" />
+        <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
             app:comment_item_title="时间："
             app:comment_item_value="2019.10.9" />
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/tv_money"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="地点："
-            app:comment_item_value="沣东大道" />
+            app:comment_item_title="金额："
+            app:comment_item_value="100元" />
+
+        <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/end_time"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            app:comment_item_title="完成时间："
+            app:comment_item_value="2019.10.9" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -56,6 +82,7 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/et_bz"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"

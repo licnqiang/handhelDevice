@@ -15,35 +15,44 @@
         android:orientation="vertical">
 
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/fault_car"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            app:comment_item_title="故障车辆："
+            app:comment_item_value="陕A：458568" />
+
+        <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/fault_type"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
             app:comment_item_title="类型："
             app:comment_item_value="维修" />
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/fault_time_start"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="时间："
+            app:comment_item_title="上报时间："
             app:comment_item_value="2019.10.9" />
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/fault_address"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
             app:comment_item_title="地点："
             app:comment_item_value="沣东大道" />
+
         <cn.piesat.sanitation.ui.view.CommentItemModul
+            android:id="@+id/fault_time_end"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="维修金额："
-            app:comment_item_value="1000元" />
-        <cn.piesat.sanitation.ui.view.CommentItemModul
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="1dp"
-            app:comment_item_title="维修部件："
-            app:comment_item_value="1000元" />
+            app:comment_item_title="完成时间："
+            app:comment_item_value="2019.10.9" />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -62,6 +71,7 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/et_bz"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"

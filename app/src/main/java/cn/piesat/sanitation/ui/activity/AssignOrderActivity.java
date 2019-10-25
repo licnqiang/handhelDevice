@@ -2,6 +2,8 @@ package cn.piesat.sanitation.ui.activity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -93,7 +95,7 @@ public class AssignOrderActivity extends BaseActivity implements OrderContract.A
                     ToastUtil.show(this,"亲，信息不全不能派单哦！");
                 }else {
                     showLoadingDialog("正在派单中",false);
-                    orderPresenter.AssignOrder(burnRowsBean.idFsc, burnRowsBean.nameFsc, carRowsBean.vid, sendAddressTime, startTime,
+                    orderPresenter.AssignOrder(burnRowsBean.idFsc, burnRowsBean.nameFsc, carRowsBean.vid+"", sendAddressTime, startTime,
                             orderBz.getText()+"", driverRowsBean.id, rowsBean.idYsz, rowsBean.nameYsz);
                 }
 
@@ -169,6 +171,7 @@ public class AssignOrderActivity extends BaseActivity implements OrderContract.A
         });
         pvTime.show();
     }
+
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
