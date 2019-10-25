@@ -95,4 +95,6 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:2.1.6'
     //汉字转拼音
     implementation 'com.belerweb:pinyin4j:2.5.0'
+    //双日期选择器
+    implementation 'com.github.darrenfantasy:DoubleDatePicker:1.0'
 }

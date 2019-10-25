@@ -46,6 +46,7 @@ public class SysContant {
         String comment_key = "comment_key"; //key
         String face_tag_entering = "face_tag_entering"; //头像录入
         String face_tag_verify = "face_tag_verify"; //头像验证
+        String pageSize="20";//
 
     }
 

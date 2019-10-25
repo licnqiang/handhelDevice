@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/tvDate"
+        style="@style/text_14_33"
+        android:textSize="@dimen/text_16dp"
+        android:textStyle="bold"
+        android:text="日期："
+        />
+
+    <TextView
+        android:id="@+id/tvGoWorkTime"
+        style="@style/text_14_33"
+        android:text="上班打卡："
+        android:layout_marginTop="@dimen/dp_5"
+        />
+    <TextView
+        android:id="@+id/tvOffWorkTime"
+        style="@style/text_14_33"
+        android:text="下班打卡："
+        android:layout_marginTop="@dimen/dp_5"
+        />
+
 
 </LinearLayout>

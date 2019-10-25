@@ -1,0 +1,97 @@
+{
+    "code": "0",
+    "msg": "操作成功",
+    "data": [
+        [
+            {
+                "id": "a621b8f414e36dfb233407fed3b225a4",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "07:56:45",
+                "createDate": "2019-10-23",
+                "type": 1,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            },
+            {
+                "id": "a621b8f414e36dfb233407fed3b225a5",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "20:35:35",
+                "createDate": "2019-10-23",
+                "type": 2,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            }
+        ],
+        [
+            {
+                "id": "5f3b96b5808bbb53818087cc1f48c4c0",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "07:35:35",
+                "createDate": "2019-10-24",
+                "type": 1,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            }
+        ],
+        [
+            {
+                "id": "98def65aa49def1f1ef1241c68e2426f",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "07:35:35",
+                "createDate": "2019-10-20",
+                "type": 1,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            },
+            {
+                "id": "95ea448ce8b62286164cb89e3f0d6873",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "20:35:35",
+                "createDate": "2019-10-20",
+                "type": 2,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            }
+        ],
+        [
+            {
+                "id": "5bd5ab4330b84b68574cd35627eebc01",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "07:35:35",
+                "createDate": "2019-10-21",
+                "type": 1,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            },
+            {
+                "id": "60af9565544a32e9ba3ee7d65274550f",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "20:35:35",
+                "createDate": "2019-10-21",
+                "type": 2,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            }
+        ],
+        [
+            {
+                "id": "cb58ef211c0ef8450806d1c131ef5e2c",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "07:56:45",
+                "createDate": "2019-10-22",
+                "type": 1,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            },
+            {
+                "id": "5351b00d7d3ae85096833ed4d052397d",
+                "userId": "1728D88EABB241EF8035DCDB8DCB8148",
+                "time": "20:35:35",
+                "createDate": "2019-10-22",
+                "type": 2,
+                "remark": null,
+                "siteId": "9519295C29644324E05011AC03010AF7"
+            }
+        ]
+    ]
+}

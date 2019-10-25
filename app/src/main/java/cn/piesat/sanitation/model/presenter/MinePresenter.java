@@ -2,6 +2,7 @@ package cn.piesat.sanitation.model.presenter;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import cn.piesat.sanitation.constant.UrlContant;
@@ -68,7 +69,7 @@ public class MinePresenter implements ICommonAction,MineContract.MyAttendancePre
     @Override
     public void getMyAttendanceList(Map<String, String> map) {
         commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.attendance_part, UrlContant.MySourcePart.attendance_List,
-                map, new TypeToken<MyAttendanceLBean>() {
+                map, new TypeToken< MyAttendanceLBean>() {
                 });
     }
 

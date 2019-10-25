@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.data.UserListBean;
+import cn.piesat.sanitation.ui.activity.MyAttendanceListActivity;
 
 /**
  * Created by sen.luo on 2019/10/24.
@@ -94,6 +96,13 @@ public class UserListAdapter extends BaseAdapter {
                 holder.tvUserType.setText("人员类型：普通用户");
                 break;
         }
+
+        convertView.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, MyAttendanceListActivity.class)
+                .putExtra("userId",userBean.id)
+                    .putExtra("userName",userBean.name)
+            );
+        });
 
 
         return convertView;
