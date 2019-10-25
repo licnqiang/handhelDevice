@@ -17,7 +17,7 @@
             android:gravity="center"
             android:text="压缩站:"
             android:textColor="@color/them_black_font"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/comment_item_value"
@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="西咸新区"
             android:textColor="@color/color_black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/iv_next"
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:src="@mipmap/next"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
 
     </RelativeLayout>
 </LinearLayout>

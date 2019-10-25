@@ -69,6 +69,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.SelectedPicV
         TextView orderSendAddress;
         @BindView(R.id.time)
         TextView time;
+        @BindView(R.id.tv_tag)
+        TextView tv_tag;
 
         private int clickPosition;
 
@@ -89,15 +91,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.SelectedPicV
             if (rowsBean.status == 0) {             //0 -指派取消
                 orderState.setText("已取消");
                 orderState.setBackgroundResource(R.drawable.block_frame);
+                tv_tag.setBackgroundResource(R.drawable.block_frame);
             } else if (rowsBean.status == 1) {      //1-已指派未接单
                 orderState.setText("未接单");
                 orderState.setBackgroundResource(R.drawable.orange_frame);
+                tv_tag.setBackgroundResource(R.drawable.orange_frame);
             } else if (rowsBean.status == 5) {      //2-已完成
                 orderState.setText("已完成");
                 orderState.setBackgroundResource(R.drawable.green_frame);
+                tv_tag.setBackgroundResource(R.drawable.green_frame);
             } else {
                 orderState.setText("进行中");
                 orderState.setBackgroundResource(R.drawable.blue_frame);
+                tv_tag.setBackgroundResource(R.drawable.blue_frame);
             }
 
         }

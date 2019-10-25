@@ -15,7 +15,7 @@ public class IPConfig {
     public static boolean flag = true;
 
     // 外协服务器
-    private final static String U3 = " http://116.117.157.183:28101/";
+    private final static String U3 = "http://116.117.157.183:28101/";
 
 
     //切换自己服务器

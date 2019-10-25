@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:visibility="invisible"
             app:work_modul_icon="@mipmap/people"
             app:work_modul_title="人员"></cn.piesat.sanitation.ui.view.MyWorkModul>
 

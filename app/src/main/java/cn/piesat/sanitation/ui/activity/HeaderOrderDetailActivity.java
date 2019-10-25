@@ -2,6 +2,7 @@ package cn.piesat.sanitation.ui.activity;
 
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -9,12 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hb.dialog.myDialog.ActionSheetDialog;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.OrderList;
 import cn.piesat.sanitation.model.contract.ChangeOrderStateContract;
@@ -59,13 +62,18 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
     Button btnGet;
     @BindView(R.id.iv_paizhao)
     ImageView ivPaizhao;
+    @BindView(R.id.order_bz)
+    TextView orderBz;
+    @BindView(R.id.ll_pic)
+    LinearLayout ll_pic;
+    @BindView(R.id.ll_bz)
+    LinearLayout ll_bz;
     private OrderList.RowsBean rowsBean;
-
     private ChangeOrderStatePresenter changeOrderStatePresenter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_order_detail;
+        return R.layout.activity_header_order_detail;
     }
 
     @Override
@@ -78,17 +86,10 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
     private void GetIntentValue() {
         Intent intent = getIntent();
         rowsBean = (OrderList.RowsBean) intent.getSerializableExtra(SysContant.CommentTag.comment_key);
-        compressStation.setText(rowsBean.yszName);
-        tvCar.setText(rowsBean.licensePlate);
-        tvDriver.setText(rowsBean.name);
-        tvStartTime.setText(rowsBean.jhqysjBiztyd);
-        burnStation.setText(rowsBean.fscmc);
-        sendTime.setText(rowsBean.jhddsjBiztyd);
-        tvMaozhong.setText(rowsBean.mzBizgbd);
-        tvPizhong.setText(rowsBean.pzBizgbd);
-        tvJingzhong.setText(rowsBean.jzBizgbd);
-        tvYundanhao.setText(rowsBean.ydhBiztyd);
-
+        if(null==rowsBean){
+            return;
+        }
+        showBaseInfo();
         if (null != rowsBean) {
             switch (rowsBean.status) {
                 case 0:  //取消
@@ -103,20 +104,25 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
                 case 2:  //已接单未起运
                     bangdanInfo.setVisibility(View.GONE);
                     rlOrderState.setVisibility(View.VISIBLE);
-                    rlOrderState.setVisibility(View.GONE);
                     ivOrderState.setImageResource(R.mipmap.order_state_1);
                     btnGet.setText("取消订单");
                     break;
                 case 3:  //已起运未过磅
+                    bangdanInfo.setVisibility(View.GONE);
                     btnGet.setVisibility(View.GONE);
+                    rlOrderState.setVisibility(View.VISIBLE);
+                    ivOrderState.setImageResource(R.mipmap.order_state_2);
                     break;
                 case 4:  //已过磅未确认
+                    showBDInfo();
                     bangdanInfo.setVisibility(View.VISIBLE);
-                    rlOrderState.setVisibility(View.GONE);
+                    rlOrderState.setVisibility(View.VISIBLE);
+                    ivOrderState.setImageResource(R.mipmap.order_state_3);
                     btnGet.setVisibility(View.VISIBLE);
                     btnGet.setText("确认");
                     break;
                 case 5:  //已完成
+                    showBDInfo();
                     rlOrderState.setVisibility(View.GONE);
                     btnGet.setVisibility(View.GONE);
                     break;
@@ -127,7 +133,51 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
 
     @Override
     protected void initData() {
+    }
 
+    private void showBaseInfo(){
+        //显示基础数据
+        compressStation.setText(rowsBean.yszName);      //压缩站
+        tvCar.setText(rowsBean.licensePlate);           //车牌号
+        tvDriver.setText(rowsBean.name);                //司机名
+        tvStartTime.setText(rowsBean.jhqysjBiztyd);     //起运时间
+        burnStation.setText(rowsBean.fscmc);            //焚烧厂
+        sendTime.setText(rowsBean.jhddsjBiztyd);        //送达时间
+        tvYundanhao.setText(rowsBean.ydhBiztyd);        //运单号
+        orderBz.setText(rowsBean.pdsmBiztyd);           //备注
+        //当备注为空时 不显示该项
+        if(TextUtils.isEmpty(rowsBean.pdsmBiztyd)){
+            ll_bz.setVisibility(View.GONE);
+        }else {
+            ll_bz.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+
+    /**
+     * 显示过磅信息
+     */
+    private void showBDInfo(){
+        //磅单信息
+        tvMaozhong.setText(rowsBean.mzBizgbd);          //毛重
+        tvPizhong.setText(rowsBean.pzBizgbd);           //皮重
+        tvJingzhong.setText(rowsBean.jzBizgbd);         //净重
+        //显示磅单图片
+        if (TextUtils.isEmpty(rowsBean.bdtp)) {
+            ll_pic.setVisibility(View.GONE);
+        } else {
+            ll_pic.setVisibility(View.VISIBLE);
+            //显示图片
+            RequestOptions requestOptions = new RequestOptions()
+                    .placeholder(R.mipmap.background_pass)
+                    .error(R.mipmap.background_pass)
+                    .fallback(R.mipmap.background_pass);
+            Glide.with(HeaderOrderDetailActivity.this)
+                    .load(IPConfig.getOutSourceURLPreFix() +rowsBean.bdtp)
+                    .apply(requestOptions)
+                    .into(ivPaizhao);
+        }
     }
 
 
@@ -135,7 +185,7 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_paizhao:
-                showDialog();
+
                 break;
             case R.id.img_back:
                 finish();
@@ -169,9 +219,6 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
         }
     }
 
-    private void showDialog() {
-
-    }
 
     @Override
     public void Error(String errorMsg) {

@@ -11,7 +11,10 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.ui.activity.CarFaultActivity;
+import cn.piesat.sanitation.ui.activity.CarSerViceActivity;
 import cn.piesat.sanitation.ui.activity.DriverOrderListActivity;
+import cn.piesat.sanitation.ui.activity.ExpenseAccountActivity;
 
 /**
  * 司机
@@ -40,10 +43,13 @@ public class WorkDriverFragment extends BaseFragment {
                 toActivity(DriverOrderListActivity.class);
                 break;
             case R.id.car_fault:
+                toActivity(CarFaultActivity.class);
                 break;
             case R.id.money_report:
+                toActivity(ExpenseAccountActivity.class);
                 break;
             case R.id.car_service:
+                toActivity(CarSerViceActivity.class);
                 break;
             case R.id.one_help:
                 break;

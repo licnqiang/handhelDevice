@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply from: 'tinker-support.gradle'
 android {
 
-    compileSdkVersion  28
+    compileSdkVersion 28
     defaultConfig {
         applicationId "cn.piesat.sanitation"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -16,9 +16,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "79ddf9ac5038d24f74dcf463", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
 

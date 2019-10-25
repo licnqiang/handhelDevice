@@ -67,6 +67,7 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
     @Override
     protected void initData() {
         queryPresenter = new QueryPresenter(this);
+        showLoadingDialog();
         GetIntentValue();
     }
 
@@ -146,6 +147,7 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
 
     @Override
     public void Error(String errorMsg) {
+        dismiss();
         ToastUtil.show(this, errorMsg);
     }
 
@@ -153,24 +155,28 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
     //查询压缩厂
     @Override
     public void SuccessFinshByCompress(CompressStations compressStations) {
+        dismiss();
         compressStationAdapter.refreshData(compressStations.rows);
     }
 
     //查询车辆
     @Override
     public void SuccessFinshByCar(CarInfo carInfo) {
+        dismiss();
         carAdapter.refreshData(carInfo.rows);
     }
 
     //查询焚烧厂
     @Override
     public void SuccessFinshByBurnStation(BurnStationInfo burnStationInfo) {
+        dismiss();
         burnStationAdapter.refreshData(burnStationInfo.rows);
     }
 
     //查询司机
     @Override
     public void SuccessFinshByDriver(DriverInfo driverInfo) {
+        dismiss();
         driverAdapter.refreshData(driverInfo.rows);
     }
 
