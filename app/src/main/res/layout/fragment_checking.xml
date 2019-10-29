@@ -140,7 +140,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/start_time"
                     android:paddingTop="10dp"
-                    android:text="上班时间08:00"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/text_16dp" />
 
@@ -161,7 +160,6 @@
                 android:layout_alignParentBottom="true"
                 android:paddingLeft="@dimen/text_20dp"
                 android:paddingTop="10dp"
-                android:text="上班时间08:00"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/text_16dp" />
 

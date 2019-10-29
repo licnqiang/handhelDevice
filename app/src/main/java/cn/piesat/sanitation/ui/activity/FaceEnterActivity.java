@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.baidu.idl.main.facesdk.FaceAuth;
 import com.baidu.idl.main.facesdk.callback.Callback;
@@ -49,6 +50,10 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
     AutoTexturePreviewView mPreviewView;
     @BindView(R.id.iv_user_pic)
     ImageView imageView;
+    @BindView(R.id.user_name)
+    TextView userName;
+    @BindView(R.id.user_address)
+    TextView userAddress;
 
     // RGB摄像头图像宽和高
     private static final int mWidth = 640;
@@ -71,7 +76,8 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
 
     @Override
     protected void initData() {
-
+        userName.setText(BaseApplication.getUserInfo().name);
+        userAddress.setText(BaseApplication.getUserInfo().address);
     }
 
 

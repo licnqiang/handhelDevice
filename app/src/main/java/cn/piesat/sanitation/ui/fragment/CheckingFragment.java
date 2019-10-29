@@ -54,6 +54,10 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     TextView userStartCheckTime;
     @BindView(R.id.user_end_check_time)
     TextView userEndCheckTime;
+    @BindView(R.id.tv_clock_in_time)
+    TextView tvClockInTime;
+    @BindView(R.id.tv_clock_in)
+    TextView tvClockIn;
     private UserInfo_Tab userInfo_tab;
 
     @Override
@@ -88,6 +92,18 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     @Override
     public void onResume() {
         super.onResume();
+
+        boolean startTime = TimeUtils.isCurrentInTimeScope(8, 0, 12, 0);
+        boolean endTime = TimeUtils.isCurrentInTimeScope(12, 0, 20, 0);
+
+        if(startTime){
+            tvClockIn.setText("上班打卡");
+        }else if(endTime){
+            tvClockIn.setText("下班打卡");
+        }
+
+        //显示当前时分秒
+        tvClockInTime.setText(TimeUtils.getCurrentTimeHHMMSS());
         //当天打卡情况
         checkingPresenter.QueryCheckingState(TimeUtils.getCurrentTime());
     }
@@ -121,8 +137,6 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
             }else {
                 ToastUtil.show(getActivity(), "暂不支持迟到/早退卡或重复打卡");
             }
-
-
         }
 
     }

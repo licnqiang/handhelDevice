@@ -103,7 +103,11 @@ public class MyDetailActivity extends BaseActivity implements UserInfoContract.M
         etName.setText(userInfo_tab.name);
         etSex.setText(userInfo_tab.sex.equals("1") ? "男" : "女");
         etPhone.setText(userInfo_tab.phone);
-        etBrthy.setText(userInfo_tab.birthday.replace(" 00:00:00", ""));
+        if(null!=userInfo_tab.birthday&&TextUtils.isEmpty(userInfo_tab.birthday)){
+            etBrthy.setText(userInfo_tab.birthday.replace("00:00:00", ""));
+        }else {
+            etBrthy.setText("");
+        }
         etAddress.setText(userInfo_tab.address);
     }
 

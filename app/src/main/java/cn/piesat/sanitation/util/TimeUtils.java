@@ -1043,6 +1043,17 @@ public class TimeUtils {
         return 0;
     }
 
+    /**
+     * 获取当前年月日 时分秒
+     *
+     * @return
+     */
+    public static String getCurrentTimeHHMMSS() {
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(d);
+    }
+
 
     /**
      * 获取当前年月日 时分秒

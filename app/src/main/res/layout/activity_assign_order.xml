@@ -106,7 +106,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/bule"
+                android:background="@drawable/btn_click_state"
                 android:gravity="center"
                 android:text="申请派单"
                 android:textColor="@color/white"
