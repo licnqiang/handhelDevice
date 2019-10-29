@@ -58,7 +58,7 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
         hashMap.put("sbsjCarfault", sbsjCarfault);
         hashMap.put("bzCarfault", bzCarfault);
         hashMap.put("yjwcsjRepair", yjwcsjRepair);
-        commonPresenter.invokeInterfaceObtainData(false, false, true, false, UrlContant.OutSourcePart.car_state_part, UrlContant.OutSourcePart.car_falut_sumbit,
+        commonPresenter.invokeInterfaceObtainData(false, false, true, true, UrlContant.OutSourcePart.car_state_part, UrlContant.OutSourcePart.car_falut_sumbit,
                 hashMap, new TypeToken<String>() {
                 });
     }

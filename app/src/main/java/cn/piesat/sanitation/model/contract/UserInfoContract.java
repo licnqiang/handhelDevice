@@ -20,6 +20,11 @@ public interface UserInfoContract {
 
     }
 
+    interface MyDetailUserInfoView {
+        void Error(String errorMsg);
+        void SuccessFinsh();
+    }
+
     interface UserInfoPresenter {
         //上传头像
         void ModeyUserPic(String userPic);
@@ -27,5 +32,7 @@ public interface UserInfoContract {
         void UserPicVers(String userPic);
         //打卡
         void WorkChecking(String type,String time);
+        //修改用户信息
+        void ModeyUserInfo(String userPic,String name,String sex,String phone,String birthday,String address);
     }
 }

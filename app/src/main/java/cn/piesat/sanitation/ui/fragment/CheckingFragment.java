@@ -55,7 +55,6 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     @BindView(R.id.user_end_check_time)
     TextView userEndCheckTime;
     private UserInfo_Tab userInfo_tab;
-    int Tag = 0;
 
     @Override
     protected int getLayoutId() {
@@ -100,27 +99,27 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
             tipDialog();
         } else {
 
-            boolean startTime = TimeUtils.isCurrentInTimeScope(6, 0, 8, 0);
-            boolean endTime = TimeUtils.isCurrentInTimeScope(18, 0, 20, 0);
+            boolean startTime = TimeUtils.isCurrentInTimeScope(8, 0, 12, 0);
+            boolean endTime = TimeUtils.isCurrentInTimeScope(12, 0, 20, 0);
 
             if (startTime) {  //上班
-                if (Tag != 1) {
+                if (TextUtils.isEmpty(userStartCheckTime.getText().toString())) {
                     startActivity(new Intent(getActivity(), FaceEnterActivity.class)
                             .putExtra(SysContant.CommentTag.comment_key, SysContant.CommentTag.face_tag_verify)
                             .putExtra("type", "1"));
                 } else {
-                    ToastUtil.show(getActivity(), "暂不支持迟到或早退卡");
+                    ToastUtil.show(getActivity(), "暂不支持迟到/早退卡或重复打卡");
                 }
             } else if (endTime) {   //下班
-                if (Tag != 2) {
+                if (TextUtils.isEmpty(userEndCheckTime.getText().toString())) {
                     startActivity(new Intent(getActivity(), FaceEnterActivity.class)
                             .putExtra(SysContant.CommentTag.comment_key, SysContant.CommentTag.face_tag_verify)
                             .putExtra("type", "2"));
                 } else {
-                    ToastUtil.show(getActivity(), "暂不支持迟到或早退卡");
+                    ToastUtil.show(getActivity(), "暂不支持迟到/早退卡或重复打卡");
                 }
             }else {
-                ToastUtil.show(getActivity(), "暂不支持迟到或早退卡");
+                ToastUtil.show(getActivity(), "暂不支持迟到/早退卡或重复打卡");
             }
 
 
@@ -153,12 +152,10 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
         if (null != checkRecords && checkRecords.size() > 0) {
             for (int i = 0; i < checkRecords.size(); i++) {
                 if (checkRecords.get(i).type == 1) {
-                    Tag = 1;
                     userStartCheckTime.setVisibility(View.VISIBLE);
                     userStartCheckTime.setText("打卡时间" + checkRecords.get(i).time);
 
                 } else if (checkRecords.get(i).type == 2) {
-                    Tag = 2;
                     userEndCheckTime.setVisibility(View.VISIBLE);
                     userEndCheckTime.setText("打卡时间" + checkRecords.get(i).time);
                 }

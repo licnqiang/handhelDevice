@@ -18,6 +18,7 @@ import com.baidu.idl.main.facesdk.model.BDFaceImageInstance;
 import com.baidu.idl.main.facesdk.model.BDFaceSDKCommon;
 import com.bumptech.glide.Glide;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
@@ -33,6 +35,7 @@ import cn.piesat.sanitation.model.presenter.UserInfoPresenter;
 import cn.piesat.sanitation.networkdriver.upLoadFile.UpLoadFileControl;
 import cn.piesat.sanitation.ui.view.FaceRoundView;
 import cn.piesat.sanitation.util.BitmapUtils;
+import cn.piesat.sanitation.util.PhotoBitmapUtils;
 import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 import cn.piesat.sanitation.util.carmera.AutoTexturePreviewView;
@@ -110,7 +113,6 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
     }
 
 
-
     /**
      * 显示检测的图片。用于调试，如果人脸sdk检测的人脸需要朝上，可以通过该图片判断。实际应用中可注释掉
      *
@@ -126,17 +128,19 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
         BDFaceImageInstance imageInstance = rgbInstance.getImage();
         final Bitmap bitmap = BitmapUtils.getInstaceBmp(imageInstance);
         String path = BitmapUtils.getFileFromBytes(this, bitmap);
-
+        File file = PhotoBitmapUtils.amendRotatePhoto(path, this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 imageView.setVisibility(View.VISIBLE);
-                imageView.setImageBitmap(bitmap);
+                Glide.with(FaceEnterActivity.this)
+                        .load(file.getAbsolutePath())
+                        .into(imageView);
             }
         });
 
         List<String> paths = new ArrayList<>();
-        paths.add(path);
+        paths.add(file.getAbsolutePath());
         UpLoadFileControl.uploadFile(false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.upload, paths, null, new UpLoadFileControl.ResultCallBack() {
             @Override
             public void succeed(Object str) {

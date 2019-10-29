@@ -2,9 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="5dp"
     android:orientation="horizontal">
 
 
@@ -12,9 +10,12 @@
         android:id="@+id/ll_compress_station"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/comment_click_state"
+        android:background="@drawable/collect_select_image"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:paddingBottom="15dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="15dp">
 
         <TextView
             android:id="@+id/car_num"

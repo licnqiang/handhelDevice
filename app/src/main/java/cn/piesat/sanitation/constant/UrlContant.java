@@ -15,12 +15,12 @@ public class UrlContant {
 
         String part = "v1";
         String assigin_order_part = "tyd";
-        String car_state_part = "repair";     //车辆故障上报
-        String car_service_part = "carfault";     //车辆维保上报
+        String car_state_part = "carfault";     //车辆故障上报
+        String car_service_part = "repair";     //车辆维保上报
 
 
-        String car_service_sumbit = "reportFault";  //车辆故障上报
-        String car_falut_sumbit = "reportRepair";  //车辆故障上报
+        String car_service_sumbit = "reportRepair";  //车辆故障上报
+        String car_falut_sumbit = "reportFault";  //车辆故障上报
         String login = "login";
         String query_compress_station = "getRoleYsz";
         String query_car = "getRoleCar";

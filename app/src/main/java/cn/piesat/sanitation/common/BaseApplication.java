@@ -44,7 +44,6 @@ import cn.piesat.sanitation.util.faceUtil.SdkInitListener;
  * @since 2016/11/7
  */
 public class BaseApplication extends DefaultApplicationLike {
-    static UserInfo_Tab userInfo_tab;
 
     public static final String TAG = "Tinker.BaseApplication";
     public static Map<String, Activity> activityMap = new HashMap<String, Activity>();        //管理activity 的容器
@@ -61,10 +60,8 @@ public class BaseApplication extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
-
         ApplicationContext = getApplication().getApplicationContext();
         SpHelper.init(getApplication().getApplicationContext());
-//        SpHelper.setStringValue("token", "");
         registerMessageReceiver();
         //initBuglyCrashReport();
         initJPush();
@@ -76,12 +73,8 @@ public class BaseApplication extends DefaultApplicationLike {
         initLicense();
     }
 
-    public static void setUserInfo(UserInfo_Tab userInfo) {
-        userInfo_tab = userInfo;
-    }
-
     public static UserInfo_Tab getUserInfo() {
-        return userInfo_tab;
+        return new Select().from(UserInfo_Tab.class).querySingle();
     }
 
 

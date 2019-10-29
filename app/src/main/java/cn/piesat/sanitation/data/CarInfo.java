@@ -17,12 +17,12 @@ public class CarInfo implements Serializable{
     public List<RowsBean> rows;
 
     public static class RowsBean implements Serializable{
-        public long vid;
-        public String licensePlate;
+        public long vid;                     //车辆型号
+        public String licensePlate;          //车牌号
         public String licensePlateColor;
         public String vtId;
-        public String vehicleType;
-        public String vehicleNationality;
+        public String vehicleType;           //车辆类型1、货运车辆2、客运车辆
+        public String vehicleNationality;    //"行政区划代码GB/T2260车籍地"
         public String maintMiles;
         public String yearExamine;
         public String insuranceDate;
@@ -42,7 +42,7 @@ public class CarInfo implements Serializable{
         public String accOffDbInterval;
         public int camNum;
         public String ledType;
-        public String vehicleStatus;
+        public String vehicleStatus;    //0:在网 1:退网 2:到期
         public String fixTime;
         public String fixlocation;
         public String fixer;
@@ -50,14 +50,14 @@ public class CarInfo implements Serializable{
         public String lastMaintMiles;
         public String vedioNum;
         public String businessmag;
-        public String vehicleClass;
+        public String vehicleClass;       //车辆分类（数据字典VehicleType）
         public String transportMechanism;
         public String owersName;
         public String owersTel;
         public String owersId;
         public String deviceId;
-        public String videoType;
-        public String videoSource;
+        public String videoType;          //视频设备类型
+        public String videoSource;        //视频源IP
         public String m2mcardNo;
         public String photo;
         public String driverids;

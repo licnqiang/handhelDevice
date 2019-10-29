@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.model.presenter;
 
 import com.google.gson.reflect.TypeToken;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Map;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.LoginInfo_Respose;
+import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.model.contract.LoginContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
@@ -37,7 +39,7 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("username", userName);
         hashMap.put("password", passWord);
-        commonPresenter.invokeInterfaceObtainData(false, false, true,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.login,
+        commonPresenter.invokeInterfaceObtainData(false, false, true, false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.login,
                 hashMap, new TypeToken<LoginInfo_Respose>() {
                 });
     }
@@ -50,10 +52,11 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
             LoginInfo_Respose loginInfo_respose = (LoginInfo_Respose) data;
             //通过用户id初始化数据库，保证用户数据库的唯一性
             BaseApplication.initDB(loginInfo_respose.user.id);
+            new Delete().from(UserInfo_Tab.class).execute();
             //保存用户基本信息
             loginInfo_respose.user.save();
-            BaseApplication.setUserInfo(loginInfo_respose.user);
             SpHelper.setStringValue("token", loginInfo_respose.token);
+            SpHelper.setStringValue("userId", loginInfo_respose.user.id); //保存该id主要用于开启数据库
             mLoginView.jumpToMain();
         } else {
             mLoginView.loginError(Msg);

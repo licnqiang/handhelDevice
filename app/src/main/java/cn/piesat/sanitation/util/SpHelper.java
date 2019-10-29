@@ -57,6 +57,7 @@ public class SpHelper {
         editor.putLong(key, value);
         editor.commit();
     }
+
     public static long getLongValue(String key) {
         return sp.getLong(key, -1);
     }
@@ -77,8 +78,8 @@ public class SpHelper {
         editor.commit();
     }
 
-    public static void clearAllValue(Context context){
-        SharedPreferences sharedData =  context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+    public static void clearAllValue(Context context) {
+        SharedPreferences sharedData = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         Editor editor = sharedData.edit();
         editor.clear();
         editor.commit();

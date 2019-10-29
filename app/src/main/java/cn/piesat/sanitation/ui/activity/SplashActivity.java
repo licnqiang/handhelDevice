@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity {
     String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
     private int mRequestCode = 0x1;
     /*界面跳转时间*/
-    private long DELAY_TIME = 300;
+    private long DELAY_TIME = 1000;
 
     @Override
     protected int getLayoutId() {
@@ -114,23 +114,19 @@ public class SplashActivity extends BaseActivity {
      * 两秒跳转
      */
     private void starMain() {
-//        if (!TextUtils.isEmpty(SpHelper.getStringValue("token"))){
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-        // 启动登录窗口
-        toActivity(LoginActivity.class);
-        // 关闭启动画面
-        finish();
-//                }
-//            }, DELAY_TIME);
-//        }else {
-//            toActivity(LoginActivity.class);
-//            finish();
-//
-//        }
-
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String token=SpHelper.getStringValue("token");
+                if (!TextUtils.isEmpty(token)) {
+                    toActivity(MainActivity.class);
+                } else {
+                    toActivity(LoginActivity.class);
+                }
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                finish();
+            }
+        }, DELAY_TIME);
     }
 
 }

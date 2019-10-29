@@ -20,6 +20,8 @@ import cn.piesat.sanitation.ui.fragment.WorkDriverFragment;
 import cn.piesat.sanitation.ui.fragment.WorkDustmanFragment;
 import cn.piesat.sanitation.ui.fragment.WorkStationHeaderFragment;
 import cn.piesat.sanitation.ui.view.BottomBar;
+import cn.piesat.sanitation.util.SpHelper;
+import cn.piesat.sanitation.util.ToastUtil;
 
 
 public class MainActivity extends BaseActivity {
@@ -43,7 +45,32 @@ public class MainActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void initView() {
+        String userId= SpHelper.getStringValue("userId");
+        //通过userId开启数据库   在这里开启数据库是因为只有在这里userId 才能确定
+        BaseApplication.initDB(userId);
+    }
 
+    /**
+     * //4站长 5操作工 6扫保人员 7司机
+     *
+     * @return
+     */
+    private BaseFragment switcheWork() {
+        int type = BaseApplication.getUserInfo().userType;
+        if (type == 4) {
+            return workStationHeaderFragment;
+        } else if (type == 5) {
+            return workCompressFragment;
+        } else if (type == 6) {
+            return workDustmanFragment;
+        } else if (type == 7) {
+            return workDriverFragment;
+        } else
+            return workDustmanFragment;
+    }
+
+    @Override
+    protected void initData() {
         bottomBar.setContainer(R.id.fl_container)
                 .setTitleSize(14)
                 .setTitleBeforeAndAfterColor("#999999", "#1587FD")
@@ -66,29 +93,6 @@ public class MainActivity extends BaseActivity {
                         R.mipmap.main_wode,
                         R.mipmap.main_wode_sel)
                 .build();
-    }
-
-    /**
-     * //4站长 5操作工 6扫保人员 7司机
-     * @return
-     */
-    private BaseFragment switcheWork() {
-        int type = BaseApplication.getUserInfo().userType;
-        if (type == 4) {
-            return workStationHeaderFragment;
-        }else if (type == 5) {
-            return workCompressFragment;
-        }else if (type == 6) {
-            return workDustmanFragment;
-        }else if (type == 7) {
-            return workDriverFragment;
-        }else
-        return workDustmanFragment;
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
 
@@ -120,6 +124,24 @@ public class MainActivity extends BaseActivity {
             workDustmanFragment = (WorkDustmanFragment) fragment;
         }
         super.onAttachFragment(fragment);
+    }
+
+    /**
+     * 退出程序
+     */
+
+    private long lastTime = -1;
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - lastTime > 2000) {
+            ToastUtil.show(this, "再按一次退出程序");
+            lastTime = System.currentTimeMillis();
+        } else {
+            finish();
+            super.onBackPressed();
+            System.exit(0);
+        }
     }
 
 }

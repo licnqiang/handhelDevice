@@ -271,7 +271,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.CarFaultActivity" />
-        <activity android:name=".ui.activity.CarSerViceActivity"></activity>
+        <activity android:name=".ui.activity.CarSerViceActivity" />
+        <activity android:name=".ui.activity.MyDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" ></activity>
     </application>
 
 </manifest>

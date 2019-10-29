@@ -7,8 +7,6 @@ package cn.piesat.sanitation.util.faceUtil;
 import com.baidu.idl.main.facesdk.FaceInfo;
 import com.baidu.idl.main.facesdk.model.BDFaceImageInstance;
 
-import cn.piesat.sanitation.data.User;
-
 public class LivenessModel {
 
     private int faceDetectCode;
@@ -30,8 +28,6 @@ public class LivenessModel {
     private long featureDuration;
     private long checkDuration;
     private BDFaceImageInstance bdFaceImageInstance;
-
-    private User user;
 
     private int[] shape;
 
@@ -200,13 +196,6 @@ public class LivenessModel {
         this.checkDuration = checkDuration;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public float getFeatureCode() {
         return featureCode;

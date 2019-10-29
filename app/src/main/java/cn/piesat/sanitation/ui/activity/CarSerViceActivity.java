@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.hb.dialog.myDialog.ActionSheetDialog;
 
 import java.util.Date;
 
@@ -21,6 +22,7 @@ import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.model.contract.CarStateContract;
 import cn.piesat.sanitation.model.presenter.CarStatePresenter;
+import cn.piesat.sanitation.ui.view.CommentItemInputModul;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
 import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
@@ -38,13 +40,13 @@ public class CarSerViceActivity extends BaseActivity implements CarStateContract
     @BindView(R.id.tv_type)
     CommentItemModul tvType;
     @BindView(R.id.tv_address)
-    CommentItemModul tvAddress;
+    CommentItemInputModul tvAddress;
     @BindView(R.id.tv_car_par)
-    CommentItemModul tvCarPar;
+    CommentItemInputModul tvCarPar;
     @BindView(R.id.tv_time)
     CommentItemModul tvTime;
     @BindView(R.id.tv_money)
-    CommentItemModul tvMoney;
+    CommentItemInputModul tvMoney;
     @BindView(R.id.end_time)
     CommentItemModul endTime;
     @BindView(R.id.et_bz)
@@ -69,9 +71,28 @@ public class CarSerViceActivity extends BaseActivity implements CarStateContract
         tvTime.setText(TimeUtils.getCurrentTimeMMSS());
     }
 
-    @OnClick({R.id.img_back, R.id.btn_submit, R.id.tv_car, R.id.end_time})
+    private void showDialog() {
+        ActionSheetDialog dialog = new ActionSheetDialog(this).builder().setTitle("请选择")
+                .addSheetItem("维修", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        tvType.setText("维修");
+                    }
+                }).addSheetItem("保养", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        tvType.setText("保养");
+                    }
+                });
+        dialog.show();
+    }
+
+    @OnClick({R.id.img_back, R.id.btn_submit, R.id.tv_car, R.id.end_time,R.id.tv_type})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_type:
+                showDialog();
+                break;
             case R.id.tv_car:
                 Intent intentcar = new Intent();
                 intentcar.setClass(this, ItemSelectActivity.class);
@@ -87,7 +108,15 @@ public class CarSerViceActivity extends BaseActivity implements CarStateContract
                 finish();
                 break;
             case R.id.btn_submit:
-                String sfaultType = tvType.getText().toString();
+                String sfaultType="";
+                String getfaultType = tvType.getText().toString();
+                if(getfaultType.equals("维修")){
+                    sfaultType="1";
+                }else if(getfaultType.equals("保养")){
+                    sfaultType="2";
+                }else {
+                    sfaultType="";
+                }
                 String sfaultTimeStart = tvTime.getText().toString();
                 String sfaultAddress = tvAddress.getText().toString();
                 String sfaultTimeEnd = endTime.getText().toString();

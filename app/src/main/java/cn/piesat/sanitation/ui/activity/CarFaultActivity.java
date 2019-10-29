@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.hb.dialog.myDialog.ActionSheetDialog;
 
 import java.util.Date;
 
@@ -22,7 +23,9 @@ import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.model.contract.CarStateContract;
 import cn.piesat.sanitation.model.presenter.CarStatePresenter;
+import cn.piesat.sanitation.ui.view.CommentItemInputModul;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
+import cn.piesat.sanitation.util.PhotoTool;
 import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
@@ -39,7 +42,7 @@ public class CarFaultActivity extends BaseActivity implements CarStateContract.C
     @BindView(R.id.fault_type)
     CommentItemModul faultType;
     @BindView(R.id.fault_address)
-    CommentItemModul faultAddress;
+    CommentItemInputModul faultAddress;
     @BindView(R.id.et_bz)
     EditText etBz;
 
@@ -67,10 +70,29 @@ public class CarFaultActivity extends BaseActivity implements CarStateContract.C
         faultTimeStart.setText(TimeUtils.getCurrentTimeMMSS());
     }
 
+    private void showDialog() {
+        ActionSheetDialog dialog = new ActionSheetDialog(this).builder().setTitle("请选择")
+                .addSheetItem("一级", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        faultType.setText("一级");
+                    }
+                }).addSheetItem("二级", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        faultType.setText("二级");
+                    }
+                });
+        dialog.show();
+    }
 
-    @OnClick({R.id.img_back, R.id.btn_submit, R.id.fault_car, R.id.fault_time_end})
+
+    @OnClick({R.id.img_back, R.id.btn_submit, R.id.fault_car, R.id.fault_time_end,R.id.fault_type})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.fault_type:
+                showDialog();
+                break;
             case R.id.fault_time_end:
                 seleTimePicker ();
                 break;

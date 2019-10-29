@@ -81,7 +81,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.SelectedPicViewH
             CarInfo.RowsBean rowsBean = mData.get(position);
 
             carNum.setText(rowsBean.licensePlate);     //地址
-            carState.setText(rowsBean.carState); //站名
+            if ("0".equals(carState)) {
+                carState.setText("空闲"); //站名
+            }
             tvStation.setText(rowsBean.deptNameCount); //站名
         }
 

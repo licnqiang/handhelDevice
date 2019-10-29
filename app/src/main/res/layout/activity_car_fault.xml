@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray5"
     android:orientation="vertical"
     tools:context=".ui.activity.CarFaultActivity">
+
     <include layout="@layout/common_title" />
 
     <LinearLayout
@@ -19,38 +21,35 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="故障车辆："
-            app:comment_item_value="陕A：458568" />
+            app:comment_item_title="故障车辆：" />
 
         <cn.piesat.sanitation.ui.view.CommentItemModul
             android:id="@+id/fault_type"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="类型："
-            app:comment_item_value="维修" />
+            app:comment_item_title="类型：" />
+
         <cn.piesat.sanitation.ui.view.CommentItemModul
             android:id="@+id/fault_time_start"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="上报时间："
-            app:comment_item_value="2019.10.9" />
-        <cn.piesat.sanitation.ui.view.CommentItemModul
+            app:comment_item_title="上报时间：" />
+
+        <cn.piesat.sanitation.ui.view.CommentItemInputModul
             android:id="@+id/fault_address"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="地点："
-            app:comment_item_value="沣东大道" />
+            app:comment_item_title="地点：" />
 
         <cn.piesat.sanitation.ui.view.CommentItemModul
             android:id="@+id/fault_time_end"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="1dp"
-            app:comment_item_title="完成时间："
-            app:comment_item_value="2019.10.9" />
+            app:comment_item_title="完成时间：" />
 
 
         <LinearLayout
@@ -97,10 +96,10 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/btn_click_state"
                 android:text="提交"
-                android:textSize="14sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </RelativeLayout>
 
     </LinearLayout>
 
-    </LinearLayout>
+</LinearLayout>

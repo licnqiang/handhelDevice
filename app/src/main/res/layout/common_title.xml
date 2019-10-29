@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:maxEms="6"
             android:singleLine="true"
             android:ellipsize="end"
             android:textColor="@color/color_black"
@@ -50,7 +51,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:padding="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/color_black"
             android:visibility="gone" />
     </RelativeLayout>
 

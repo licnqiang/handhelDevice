@@ -5,11 +5,14 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
 import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.common.netchange.event.TokenLoseEvent;
 import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.networkdriver.module.NetApi;
 import cn.piesat.sanitation.networkdriver.module.RetrofitUtils;
@@ -30,6 +33,7 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class BasePresenter extends RetrofitUtils {
 
     public static final int REQUEST_SUCCESS = 0;//请求成功
+    public static final int REQUEST_TOKEN_LOSE = 401;//token失效
     public static final int REQUEST_FAILURE = 500;//请求失败
     protected NetApi service = null;
 
@@ -127,7 +131,7 @@ public abstract class BasePresenter extends RetrofitUtils {
     public Object requestServer(Object receivedStr, TypeToken<?> typeToken) {
         try {
             Object result = null;
-            if (!TextUtils.isEmpty(receivedStr+"")) {
+            if (!TextUtils.isEmpty(receivedStr + "")) {
                 result = new Gson().fromJson(new Gson().toJson(receivedStr), typeToken.getType());
             }
             return result;
@@ -149,7 +153,7 @@ public abstract class BasePresenter extends RetrofitUtils {
         if (baseResponse.code == REQUEST_SUCCESS) {
             Object object = null;
             if (null != typeToken) {
-                if (null == baseResponse.rows||TextUtils.isEmpty(baseResponse.rows+"")) {
+                if (null == baseResponse.rows || TextUtils.isEmpty(baseResponse.rows + "")) {
                     object = requestServer(baseResponse.data, typeToken);
                 } else {
                     object = requestServer(baseResponse, typeToken);
@@ -157,7 +161,12 @@ public abstract class BasePresenter extends RetrofitUtils {
             }
             //成功回调数据
             onResponse(methodName, object, REQUEST_SUCCESS, parameterMap, baseResponse.msg);
-        } else {
+
+        } else if (baseResponse.code == REQUEST_TOKEN_LOSE) {    //token失效
+            onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap, baseResponse.msg);
+            //token失效
+            EventBus.getDefault().post(new TokenLoseEvent(false));
+        } else {   //请求失败
             onResponse(methodName, baseResponse, REQUEST_FAILURE, parameterMap, baseResponse.msg);
         }
     }
@@ -172,4 +181,6 @@ public abstract class BasePresenter extends RetrofitUtils {
      */
 
     public abstract void onResponse(String methodName, Object object, int status, Map<String, String> parameterMap, String Msg);
+
+
 }
