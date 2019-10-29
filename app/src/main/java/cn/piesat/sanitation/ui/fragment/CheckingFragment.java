@@ -30,6 +30,7 @@ import cn.piesat.sanitation.model.presenter.CheckingPresenter;
 import cn.piesat.sanitation.ui.activity.FaceEnterActivity;
 import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
+import cn.piesat.sanitation.util.UiUtils;
 
 /**
  * 考勤
@@ -58,6 +59,9 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     TextView tvClockInTime;
     @BindView(R.id.tv_clock_in)
     TextView tvClockIn;
+    @BindView(R.id.user_name_tag)
+    TextView userNameTag;
+
     private UserInfo_Tab userInfo_tab;
 
     @Override
@@ -76,14 +80,15 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     protected void initData() {
         userStartCheckTime.setVisibility(View.GONE);
         userEndCheckTime.setVisibility(View.GONE);
-
         setUserInfo();
     }
 
     //设置用户基本信息
     private void setUserInfo() {
+
         userInfo_tab = BaseApplication.getUserInfo();
         userName.setText(userInfo_tab.name);
+        userNameTag.setText(UiUtils.getPinYinHeadChar(userInfo_tab.name.substring(0,1)));
         userAddress.setText(userInfo_tab.address);
         tvYear.setText(TimeUtils.getCurrentYear());
         tvMathDay.setText(TimeUtils.getCurrentMathDay());

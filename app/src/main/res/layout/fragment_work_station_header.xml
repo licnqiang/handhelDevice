@@ -70,6 +70,7 @@
         android:orientation="horizontal">
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/refuse_transport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -79,6 +80,7 @@
 
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/money_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -113,6 +115,7 @@
         android:orientation="horizontal">
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/record_refuse_transport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -122,6 +125,7 @@
 
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/record_driver_mody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

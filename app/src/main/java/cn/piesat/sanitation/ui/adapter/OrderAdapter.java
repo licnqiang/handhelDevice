@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,25 +86,29 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.SelectedPicV
             //运单状态：0 -指派取消、1-已指派未接单、2-已接单未起运、3-已起运未过磅、4-已过磅未确认、5- 已完成
             itemView.setOnClickListener(this);
             OrderList.RowsBean rowsBean = mData.get(position);
-            orderNum.setText("订单号:" + rowsBean.ydhBiztyd);
+            orderNum.setText("订单号:  " + rowsBean.ydhBiztyd);
             orderSendAddress.setText(rowsBean.fscmc);
-            time.setText("执行时间:" + rowsBean.jhqysjBiztyd);
+            time.setText(rowsBean.jhqysjBiztyd);
             if (rowsBean.status == 0) {             //0 -指派取消
                 orderState.setText("已取消");
-                orderState.setBackgroundResource(R.drawable.block_frame);
-                tv_tag.setBackgroundResource(R.drawable.block_frame);
+                orderState.setTextColor(Color.parseColor("#888888"));
+                orderState.setBackgroundResource(R.drawable.gay_frame);
+                tv_tag.setBackgroundResource(R.mipmap.end);
             } else if (rowsBean.status == 1) {      //1-已指派未接单
                 orderState.setText("未接单");
+                orderState.setTextColor(Color.parseColor("#E95E28"));
                 orderState.setBackgroundResource(R.drawable.orange_frame);
-                tv_tag.setBackgroundResource(R.drawable.orange_frame);
+                tv_tag.setBackgroundResource(R.mipmap.start);
             } else if (rowsBean.status == 5) {      //2-已完成
                 orderState.setText("已完成");
-                orderState.setBackgroundResource(R.drawable.green_frame);
-                tv_tag.setBackgroundResource(R.drawable.green_frame);
+                orderState.setTextColor(Color.parseColor("#888888"));
+                orderState.setBackgroundResource(R.drawable.gay_frame);
+                tv_tag.setBackgroundResource(R.mipmap.end);
             } else {
                 orderState.setText("进行中");
+                orderState.setTextColor(Color.parseColor("#2A83E9"));
                 orderState.setBackgroundResource(R.drawable.blue_frame);
-                tv_tag.setBackgroundResource(R.drawable.blue_frame);
+                tv_tag.setBackgroundResource(R.mipmap.ing);
             }
 
         }

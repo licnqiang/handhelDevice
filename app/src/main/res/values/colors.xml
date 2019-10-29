@@ -21,6 +21,11 @@
     <color name="color_888888">#888888</color>
     <color name="color_333333">#333333</color>
     <color name="color_pressed">#FFE9E5E5</color>
+
+    <color name="color_E8EFF6">#E8EFF6</color>
+    <color name="color_F8F0ED">#F8F0ED</color>
+    <color name="color_2A83E9">#2A83E9</color>
+    <color name="color_E95E28">#E95E28</color>
     <!--<color name="bg_title">#FF4081</color>-->
     <!--<color name="transparent">#00000000</color>-->
     <!--<color name="transparent_blue">#99D8DFEF</color>-->
