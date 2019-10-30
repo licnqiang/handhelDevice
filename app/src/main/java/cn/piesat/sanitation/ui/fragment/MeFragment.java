@@ -15,6 +15,7 @@ import cn.piesat.sanitation.common.BaseFragment;
 import cn.piesat.sanitation.ui.activity.MyAttendanceListActivity;
 import cn.piesat.sanitation.ui.activity.MyDetailActivity;
 import cn.piesat.sanitation.ui.activity.SplashActivity;
+import cn.piesat.sanitation.ui.activity.StationAllUserActivity;
 import cn.piesat.sanitation.ui.activity.UserListActivity;
 import cn.piesat.sanitation.util.DialogUtils;
 import cn.piesat.sanitation.util.SpHelper;
@@ -87,7 +88,7 @@ public class MeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.imgExit,R.id.layoutAttendance,R.id.layoutEdit})
+    @OnClick({R.id.imgExit,R.id.layoutAttendance,R.id.layoutEdit,R.id.layoutModify})
     public void onViewClick(View view){
         switch (view.getId()){
             case R.id.imgExit:
@@ -110,6 +111,9 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.layoutEdit:
                 toActivity(MyDetailActivity.class);
+                break;
+            case R.id.layoutModify: //我的上报
+                toActivity(StationAllUserActivity.class);
                 break;
         }
     }

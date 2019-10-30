@@ -17,7 +17,7 @@ import okio.BufferedSource;
 
 /**
  * 网络拦截器
- * 主要功能  打印网络请求的参数 url
+ * 主要功能  打印网络进度
  * 是否响应
  * 响应的json数据和url
  */
@@ -52,26 +52,6 @@ public class LoggingInterceptor implements Interceptor {
         }
 
         Response response = chain.proceed(request);
-        ResponseBody responseBody = response.body();
-
-
-        String rBady = null;
-        BufferedSource source = responseBody.source();
-        source.request(Long.MAX_VALUE);   //缓存body体
-        Buffer buffer = source.buffer();
-
-        Charset charset = UTF8;
-        MediaType contentType = responseBody.contentType();
-        if (null != contentType) {
-            try {
-                charset = contentType.charset(UTF8);
-            } catch (UnsupportedCharsetException e) {
-                e.printStackTrace();
-            }
-        }
-        rBady = buffer.clone().readString(charset);
-
-        LogUtil.e("http", "Http--响应==="+ rBady);
 
         return  response;
     }

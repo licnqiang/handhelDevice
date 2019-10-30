@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-    <include layout="@layout/common_title"/>
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title" />
 
 
     <com.liaoinstan.springview.widget.SpringView
@@ -15,8 +17,7 @@
             android:id="@+id/lvUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/gray5"
-            android:dividerHeight="@dimen/dp_10">
+            android:divider="@color/gray5">
 
         </ListView>
 

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
@@ -86,7 +88,7 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
     private void GetIntentValue() {
         Intent intent = getIntent();
         rowsBean = (OrderList.RowsBean) intent.getSerializableExtra(SysContant.CommentTag.comment_key);
-        if(null==rowsBean){
+        if (null == rowsBean) {
             return;
         }
         showBaseInfo();
@@ -135,7 +137,7 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
     protected void initData() {
     }
 
-    private void showBaseInfo(){
+    private void showBaseInfo() {
         //显示基础数据
         compressStation.setText(rowsBean.yszName);      //压缩站
         tvCar.setText(rowsBean.licensePlate);           //车牌号
@@ -146,9 +148,9 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
         tvYundanhao.setText(rowsBean.ydhBiztyd);        //运单号
         orderBz.setText(rowsBean.pdsmBiztyd);           //备注
         //当备注为空时 不显示该项
-        if(TextUtils.isEmpty(rowsBean.pdsmBiztyd)){
+        if (TextUtils.isEmpty(rowsBean.pdsmBiztyd)) {
             ll_bz.setVisibility(View.GONE);
-        }else {
+        } else {
             ll_bz.setVisibility(View.VISIBLE);
 
         }
@@ -158,7 +160,7 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
     /**
      * 显示过磅信息
      */
-    private void showBDInfo(){
+    private void showBDInfo() {
         //磅单信息
         tvMaozhong.setText(rowsBean.mzBizgbd);          //毛重
         tvPizhong.setText(rowsBean.pzBizgbd);           //皮重
@@ -174,7 +176,7 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
                     .error(R.mipmap.background_pass)
                     .fallback(R.mipmap.background_pass);
             Glide.with(HeaderOrderDetailActivity.this)
-                    .load(IPConfig.getOutSourceURLPreFix() +rowsBean.bdtp)
+                    .load(IPConfig.getOutSourceURLPreFix() + rowsBean.bdtp)
                     .apply(requestOptions)
                     .into(ivPaizhao);
         }
@@ -184,7 +186,19 @@ public class HeaderOrderDetailActivity extends BaseActivity implements ChangeOrd
     @OnClick({R.id.img_back, R.id.btn_get, R.id.iv_paizhao})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_paizhao:
+            case R.id.iv_paizhao:  //站长查看图片
+                if (null != rowsBean.bdtp && !TextUtils.isEmpty(rowsBean.bdtp)) {
+                    Intent intent = new Intent(this, ImageDetailActivity.class);
+                    intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + rowsBean.bdtp);//非必须
+                    int[] location = new int[2];
+                    ivPaizhao.getLocationOnScreen(location);
+                    intent.putExtra("locationX", location[0]);//必须
+                    intent.putExtra("locationY", location[1]);//必须
+                    intent.putExtra("width", ivPaizhao.getWidth());//必须
+                    intent.putExtra("height", ivPaizhao.getHeight());//必须
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
 
                 break;
             case R.id.img_back:

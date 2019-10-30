@@ -114,7 +114,7 @@ public abstract class BasePresenter extends RetrofitUtils {
                     //获取数据
                     @Override
                     public void onNext(BaseReseponseInfo baseResponse) {
-                        LogUtil.e("http", "onNext" + new Gson().toJson(baseResponse));
+                        LogUtil.e("http", "网络响应" + new Gson().toJson(baseResponse));
                         responseData(baseResponse, methodName, parameterMap, typeToken);
                     }
                 });

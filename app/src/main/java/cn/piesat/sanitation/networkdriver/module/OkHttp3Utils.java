@@ -27,8 +27,8 @@ public class OkHttp3Utils {
             okHttpClient.readTimeout(60, TimeUnit.SECONDS);//设置读超时
             okHttpClient.writeTimeout(60, TimeUnit.SECONDS);//设置写超时
             okHttpClient.retryOnConnectionFailure(true);//是否自动重连
-            okHttpClient.addInterceptor(new LoggingInterceptor(uploadListener));//添加拦截
-            okHttpClient.addInterceptor(new TokenInterceptor());//添加拦截
+            okHttpClient.addInterceptor(new TokenInterceptor());//添加token拦截
+            okHttpClient.addInterceptor(new LoggingInterceptor(uploadListener));//获取请求进度拦截
         }
 
         return okHttpClient;

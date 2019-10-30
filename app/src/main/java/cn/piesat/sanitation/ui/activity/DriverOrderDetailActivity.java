@@ -133,7 +133,7 @@ public class DriverOrderDetailActivity extends BaseActivity implements ChangeOrd
                     OrderState_2();
                     break;
                 case 3:  //已起运未过磅
-                    isEdit();
+                    swithEdit(true);
                     OrderState_3();
                     break;
                 case 4:  //已过磅未确认
@@ -142,7 +142,7 @@ public class DriverOrderDetailActivity extends BaseActivity implements ChangeOrd
                     break;
                 case 5:  //已完成
                     showBDInfo();
-                    notEdit();
+                    swithEdit(false);
                     rlOrderState.setVisibility(View.GONE);
                     btnGet.setVisibility(View.GONE);
                     break;
@@ -201,7 +201,7 @@ public class DriverOrderDetailActivity extends BaseActivity implements ChangeOrd
      * 订单状态为 已过磅未确认 的显示状态
      */
     private void OrderState_4(){
-        notEdit();
+        swithEdit(false);
         bangdanInfo.setVisibility(View.VISIBLE);
         rlOrderState.setVisibility(View.VISIBLE);
         ivOrderState.setImageResource(R.mipmap.order_state_3);
@@ -210,24 +210,14 @@ public class DriverOrderDetailActivity extends BaseActivity implements ChangeOrd
 
 
     /**
-     * 界面可编辑
+     * 界面切换是否可编辑
      */
-    private void isEdit(){
-        tvMaozhong.setFocusable(true);
-        tvPizhong.setFocusable(true);
-        tvJingzhong.setFocusable(true);
-        ivPaizhao.setFocusable(true);
+    private void swithEdit(boolean isEdit){
+        tvMaozhong.setFocusable(isEdit);
+        tvPizhong.setFocusable(isEdit);
+        tvJingzhong.setFocusable(isEdit);
     }
 
-    /**
-     * 界面不可编辑，显示过磅单相关信息
-     */
-    private void notEdit() {
-        tvMaozhong.setFocusable(false);
-        tvPizhong.setFocusable(false);
-        tvJingzhong.setFocusable(false);
-        ivPaizhao.setFocusable(false);
-    }
 
 
     @Override
@@ -239,7 +229,11 @@ public class DriverOrderDetailActivity extends BaseActivity implements ChangeOrd
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_paizhao:
-                showDialog();
+                if(rowsBean.status==5||rowsBean.status==4){
+                    lookImage();  //放大查看图片
+                }else {
+                    showDialog(); //上传图片
+                }
                 break;
             case R.id.img_back:
                 finish();
@@ -284,6 +278,22 @@ public class DriverOrderDetailActivity extends BaseActivity implements ChangeOrd
                 break;
         }
     }
+
+    private void lookImage(){
+        if (null != rowsBean.bdtp && !TextUtils.isEmpty(rowsBean.bdtp)) {
+            Intent intent = new Intent(this, ImageDetailActivity.class);
+            intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + rowsBean.bdtp);//非必须
+            int[] location = new int[2];
+            ivPaizhao.getLocationOnScreen(location);
+            intent.putExtra("locationX", location[0]);//必须
+            intent.putExtra("locationY", location[1]);//必须
+            intent.putExtra("width", ivPaizhao.getWidth());//必须
+            intent.putExtra("height", ivPaizhao.getHeight());//必须
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        }
+    }
+
 
     private void showDialog() {
         ActionSheetDialog dialog = new ActionSheetDialog(this).builder().setTitle("请选择")

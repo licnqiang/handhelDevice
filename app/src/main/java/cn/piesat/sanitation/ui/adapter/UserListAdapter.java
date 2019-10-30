@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.data.UserListBean;
 import cn.piesat.sanitation.ui.activity.MyAttendanceListActivity;
+import cn.piesat.sanitation.util.UiUtils;
 
 /**
  * Created by sen.luo on 2019/10/24.
@@ -25,7 +26,7 @@ public class UserListAdapter extends BaseAdapter {
     private ArrayList<UserListBean.RowsBean> userListBean;
 
 
-    public UserListAdapter(Context context, ArrayList<UserListBean.RowsBean>  userBean) {
+    public UserListAdapter(Context context, ArrayList<UserListBean.RowsBean> userBean) {
         this.context = context;
         this.userListBean = userBean;
     }
@@ -47,60 +48,54 @@ public class UserListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        UserListViewHolder holder=null;
+        UserListViewHolder holder = null;
 
-        if (convertView==null){
-            holder=new UserListViewHolder();
-            convertView= LayoutInflater.from(context).inflate(R.layout.item_user_list,null);
-            holder.tvCompany=convertView.findViewById(R.id.tvCompany);
-            holder.tvName=convertView.findViewById(R.id.tvName);
-            holder.tvUserType=convertView.findViewById(R.id.tvUserType);
-            holder.tvJob=convertView.findViewById(R.id.tvJob);
+        if (convertView == null) {
+            holder = new UserListViewHolder();
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_user_station, null);
+            holder.tvHead = convertView.findViewById(R.id.tvHead);
+            holder.user_name = convertView.findViewById(R.id.user_name);
+            holder.user_type = convertView.findViewById(R.id.user_type);
 
             convertView.setTag(holder);
-        }else {
-            holder= (UserListViewHolder) convertView.getTag();
+        } else {
+            holder = (UserListViewHolder) convertView.getTag();
         }
 
-        UserListBean.RowsBean userBean =userListBean.get(position);
+        UserListBean.RowsBean userBean = userListBean.get(position);
 
-        holder.tvName.setText(TextUtils.isEmpty(userBean.name)? "姓名:无":"姓名:"+userBean.name);
-        holder.tvCompany.setText(TextUtils.isEmpty(userBean.deptNameCount)? "组织机构：无":"组织机构："+userBean.deptNameCount);
-        holder.tvJob.setText(TextUtils.isEmpty(userBean.job)? "职位:无":"职位:"+userBean.job);
+        holder.user_name.setText(TextUtils.isEmpty(userBean.name) ? "无" : "" + userBean.name);
+        holder.tvHead.setText(UiUtils.getPinYinHeadChar(userBean.name.substring(0, 1)));
 
-
-                int type = Integer.parseInt(userBean.userType);
-        switch (type){
+        int type = Integer.parseInt(userBean.userType);
+        switch (type) {
             case 1:
-                holder.tvUserType.setText("人员类型：管理员");
+                holder.user_type.setText("管理员");
                 break;
             case 2:
-                holder.tvUserType.setText("人员类型：普通用户");
+                holder.user_type.setText("普通用户");
                 break;
             case 3:
-                holder.tvUserType.setText("人员类型：环卫集团员工");
+                holder.user_type.setText("环卫集团员工");
                 break;
             case 4:
-                holder.tvUserType.setText("人员类型：站长");
+                holder.user_type.setText("站长");
                 break;
             case 5:
-                holder.tvUserType.setText("人员类型：操作工");
+                holder.user_type.setText("操作工");
                 break;
             case 6:
-                holder.tvUserType.setText("人员类型：扫保人员");
+                holder.user_type.setText("扫保人员");
                 break;
             case 7:
-                holder.tvUserType.setText("人员类型：司机");
-                break;
-            default:
-                holder.tvUserType.setText("人员类型：普通用户");
+                holder.user_type.setText("司机");
                 break;
         }
 
         convertView.setOnClickListener(v -> {
             context.startActivity(new Intent(context, MyAttendanceListActivity.class)
-                .putExtra("userId",userBean.id)
-                    .putExtra("userName",userBean.name)
+                    .putExtra("userId", userBean.id)
+                    .putExtra("userName", userBean.name)
             );
         });
 
@@ -108,7 +103,7 @@ public class UserListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class UserListViewHolder{
-        TextView tvName, tvUserType,tvJob,tvCompany;
+    class UserListViewHolder {
+        TextView tvHead, user_name, user_type;
     }
 }

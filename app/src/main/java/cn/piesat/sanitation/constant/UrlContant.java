@@ -25,7 +25,7 @@ public class UrlContant {
         String query_compress_station = "getRoleYsz";
         String query_car = "getRoleCar";
         String query_burn_staion = "getAllFsc";
-        String query_driver = "findAllUser";
+        String query_driver = "findRoleUser";
         String upload = "upload";
         String mody_user_pic = "editUser";
         String assigin_order = "toTyd";
@@ -35,7 +35,7 @@ public class UrlContant {
         String query_save_bd = "saveBDTyd";  //榜单
         String query_finish_bd = "finishTyd";  //过磅确认
         String query_cancel_order = "cancelTyd";  //订单取消
-        String user_list="findAllUser";
+        String user_list="findRoleUser";
     }
 
 

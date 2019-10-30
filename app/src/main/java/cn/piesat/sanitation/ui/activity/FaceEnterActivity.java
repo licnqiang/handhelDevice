@@ -61,7 +61,7 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
     private byte[] picData;
 
     UserInfoPresenter userInfoPresenter;
-    private String type = null;
+    private String type = null;   //1为上班卡   2为下班卡
 
     @Override
     protected int getLayoutId() {
@@ -138,6 +138,7 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                //显示正在验证的用户照片
                 imageView.setVisibility(View.VISIBLE);
                 Glide.with(FaceEnterActivity.this)
                         .load(file.getAbsolutePath())
@@ -201,7 +202,7 @@ public class FaceEnterActivity extends BaseActivity implements UserInfoContract.
     public void Error(String errorMsg) {
         imageView.setVisibility(View.GONE);
         dismiss();
-        ToastUtil.show(FaceEnterActivity.this, errorMsg);
+        ToastUtil.show(FaceEnterActivity.this, "");
     }
 
     @Override

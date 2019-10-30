@@ -57,13 +57,13 @@ public class MainActivity extends BaseActivity {
      */
     private BaseFragment switcheWork() {
         int type = BaseApplication.getUserInfo().userType;
-        if (type == 4) {
+        if (type == 4) {                       //4站长
             return workStationHeaderFragment;
-        } else if (type == 5) {
+        } else if (type == 5) {                //5操作工
             return workCompressFragment;
-        } else if (type == 6) {
+        } else if (type == 6) {                //6扫保人员
             return workDustmanFragment;
-        } else if (type == 7) {
+        } else if (type == 7) {                //7司机
             return workDriverFragment;
         } else
             return workDustmanFragment;

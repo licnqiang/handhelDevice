@@ -53,7 +53,7 @@ public class MinePresenter implements ICommonAction,MineContract.MyAttendancePre
                  if (status == REQUEST_SUCCESS) {//成功
                      getUserListView.SuccessOnUserList((UserListBean) data);
                  }else {
-                     myAttendanceListView.Error(Msg);
+                     getUserListView.Error(Msg);
 
                  }
                  break;

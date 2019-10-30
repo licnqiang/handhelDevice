@@ -146,7 +146,7 @@ public class UserInfoPresenter implements ICommonAction, UserInfoContract.UserIn
                     if (facePk.contrast) {
                         userInfoView.SuccessFinshPicVers();
                     } else {
-                        userInfoView.Error(Msg);
+                        userInfoView.Error("用户对比失败");
                     }
 
                 } else {
