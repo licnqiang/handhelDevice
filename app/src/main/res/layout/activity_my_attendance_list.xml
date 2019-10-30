@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/bg_page">
     <include layout="@layout/common_title"/>
 
     <TextView
@@ -16,20 +16,26 @@
         android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
         android:paddingEnd="@dimen/dp_10"
-        android:background="@color/them_tip_orange"/>
+        android:background="@color/them_tip_orange"
+     />
 
 
     <com.liaoinstan.springview.widget.SpringView
         android:id="@+id/springView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ListView
             android:id="@+id/lvAttendance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/gray5"
-            android:dividerHeight="@dimen/dp_10">
+            android:divider="@color/bg_page"
+            android:dividerHeight="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            >
 
         </ListView>
 

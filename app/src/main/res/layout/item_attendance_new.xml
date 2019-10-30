@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/while_frame"
+    android:padding="@dimen/dp_10"
+   >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <LinearLayout
+        android:id="@+id/layoutLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="@dimen/text_10dp"
+            android:layout_height="@dimen/text_10dp"
+            android:background="@drawable/blue_circle"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="35dp"
+            android:background="@color/color_2A83E9"/>
+
+        <View
+            android:layout_width="@dimen/text_10dp"
+            android:layout_height="@dimen/text_10dp"
+            android:background="@drawable/blue_circle"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/layoutLeft"
+        android:layout_marginLeft="@dimen/dp_10"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvGoTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_15dp"
+                android:textStyle="bold"
+                android:textColor="@color/color_333333"/>
+
+            <TextView
+                android:id="@+id/tvGoWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上班"
+                android:textSize="@dimen/text_12dp"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingBottom="@dimen/dp_2"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@drawable/gay_frame"
+                android:textColor="@color/color_888888"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp_20">
+
+            <TextView
+                android:id="@+id/tvOffTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_15dp"
+                android:textStyle="bold"
+                android:textColor="@color/color_333333"/>
+
+            <TextView
+                android:id="@+id/tvOffWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下班"
+                android:textSize="@dimen/text_12dp"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingBottom="@dimen/dp_2"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@drawable/gay_frame"
+                android:textColor="@color/color_888888"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_frame"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bule"
+            android:textSize="@dimen/text_16dp"/>
+
+        <TextView
+            android:id="@+id/tvMonthDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bule"
+            android:textStyle="bold"
+            android:textSize="26dp"/>
+
+    </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

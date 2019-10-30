@@ -1090,6 +1090,12 @@ public class TimeUtils {
         return sdf.format(d);
     }
 
+
+    public static String getCurrentYear(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        return sdf.format(date);
+    }
+
     /**
      * 获取当前月日
      *
@@ -1099,6 +1105,12 @@ public class TimeUtils {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
         return sdf.format(d);
+    }
+
+
+    public static String getCurrentMathDay(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+        return sdf.format(date);
     }
 
     /**
