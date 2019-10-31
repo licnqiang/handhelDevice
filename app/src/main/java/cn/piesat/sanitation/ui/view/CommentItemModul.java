@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cn.piesat.sanitation.R;
+import cn.piesat.sanitation.common.BaseActivity;
 
 /**
  * @author lq
@@ -20,6 +21,7 @@ import cn.piesat.sanitation.R;
 public class CommentItemModul extends LinearLayout {
     TextView itemTitle;
     TextView itemValue;
+    ImageView ivNext;
 
     public CommentItemModul(Context context) {
         super(context);
@@ -35,12 +37,15 @@ public class CommentItemModul extends LinearLayout {
         LayoutInflater.from(getContext()).inflate(R.layout.comment_item_modul, this, true);
         itemValue = findViewById(R.id.comment_item_value);
         itemTitle = findViewById(R.id.comment_item_name);
+        ivNext = findViewById(R.id.iv_next);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CommentItemModul,
                 defStyle, 0);
         String title = a.getString(R.styleable.CommentItemModul_comment_item_title);
         String value = a.getString(R.styleable.CommentItemModul_comment_item_value);
+        boolean visibility = a.getBoolean(R.styleable.CommentItemModul_comment_item_next_visibility,true);
 
+        ivNext.setVisibility(visibility?VISIBLE:INVISIBLE);
         itemTitle.setText(title);
         itemValue.setText(value);
         a.recycle();

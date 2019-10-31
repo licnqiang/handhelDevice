@@ -46,10 +46,10 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
      * @param sbrCarfault     上报人姓名;（填写）
      * @param sbsjCarfault    上报时间;（填写yyyy-mm-dd 24hh:mi:ss）
      * @param bzCarfault      备注;（填写）
-     * @param yjwcsjRepair    完成时间
+     * @param yjwcsjCarfault    完成时间
      */
     @Override
-    public void CarFaultSubmit(String idBizcar, String carfaultType, String carfaultAddress, String sbrCarfault, String sbsjCarfault, String bzCarfault, String yjwcsjRepair) {
+    public void CarFaultSubmit(String idBizcar, String carfaultType, String carfaultAddress, String sbrCarfault, String sbsjCarfault, String bzCarfault, String yjwcsjCarfault) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("idBizcar", idBizcar);
         hashMap.put("carfaultType", carfaultType);
@@ -57,7 +57,7 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
         hashMap.put("sbrCarfault", sbrCarfault);
         hashMap.put("sbsjCarfault", sbsjCarfault);
         hashMap.put("bzCarfault", bzCarfault);
-        hashMap.put("yjwcsjRepair", yjwcsjRepair);
+        hashMap.put("yjwcsjCarfault", yjwcsjCarfault);
         commonPresenter.invokeInterfaceObtainData(false, false, true, true, UrlContant.OutSourcePart.car_state_part, UrlContant.OutSourcePart.car_falut_sumbit,
                 hashMap, new TypeToken<String>() {
                 });
@@ -73,10 +73,10 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
      * @param jeRepair                保养/维修项目金额;（填写）
      * @param sbrRpair                上报人姓名;（填写）
      * @param bzRepair                备注;（填写）
-     * @param yjwcsjCarfault          完成时间
+     * @param yjwcsjRepair          完成时间
      */
     @Override
-    public void CarServiceSubmit(String idBizcar, String typeRepair, String sgdwRepair, String sjRepair, String xmRepair, String jeRepair, String sbrRpair, String bzRepair, String yjwcsjCarfault) {
+    public void CarServiceSubmit(String idBizcar, String typeRepair, String sgdwRepair, String sjRepair, String xmRepair, String jeRepair, String sbrRpair, String bzRepair, String yjwcsjRepair) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("idBizcar", idBizcar);
         hashMap.put("typeRepair", typeRepair);
@@ -86,7 +86,7 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
         hashMap.put("jeRepair", jeRepair);
         hashMap.put("sbrRpair", sbrRpair);
         hashMap.put("bzRepair", bzRepair);
-        hashMap.put("yjwcsjCarfault", yjwcsjCarfault);
+        hashMap.put("yjwcsjRepair", yjwcsjRepair);
         commonPresenter.invokeInterfaceObtainData(false, false, true, true, UrlContant.OutSourcePart.car_service_part, UrlContant.OutSourcePart.car_service_sumbit,
                 hashMap, new TypeToken<String>() {
                 });

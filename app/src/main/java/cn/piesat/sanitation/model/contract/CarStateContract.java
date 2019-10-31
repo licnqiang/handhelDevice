@@ -25,10 +25,10 @@ public interface CarStateContract {
 
     interface CarStatePresenter {
         //车辆故障上报
-        void CarFaultSubmit(String idBizcar,String carfaultType,String carfaultAddress,String sbrCarfault,String sbsjCarfault,String bzCarfault,String yjwcsjRepair);
+        void CarFaultSubmit(String idBizcar,String carfaultType,String carfaultAddress,String sbrCarfault,String sbsjCarfault,String bzCarfault,String yjwcsjCarfault);
         //车辆维保上报
         void CarServiceSubmit(String idBizcar,String typeRepair,String sgdwRepair,String sjRepair,String xmRepair,String jeRepair,String sbrRpair
-                ,String bzRepair,String yjwcsjCarfault);
+                ,String bzRepair,String yjwcsjRepair);
 
     }
 }

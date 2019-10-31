@@ -279,7 +279,11 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.ImageDetailActivity" />
         <activity android:name=".ui.activity.StationAllUserActivity" />
-        <activity android:name=".ui.activity.EventListActivity"></activity>
+        <activity android:name=".ui.activity.EventListActivity" />
+        <activity android:name=".ui.activity.CarMaintenanceActivity" />
+        <activity android:name=".ui.activity.CarBreakDownActivity"></activity>
+        <activity android:name=".ui.activity.CarSerViceDetailShowActivity"></activity>
+        <activity android:name=".ui.activity.CarFaultDetailShowActivity"></activity>
     </application>
 
 </manifest>

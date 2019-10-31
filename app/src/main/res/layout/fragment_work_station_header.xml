@@ -134,13 +134,13 @@
             app:work_modul_title="设备维护"></cn.piesat.sanitation.ui.view.MyWorkModul>
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/record_car_breakdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:visibility="invisible"
-            app:work_modul_icon="@mipmap/ic_launcher"
-            app:work_modul_title="一键呼救"></cn.piesat.sanitation.ui.view.MyWorkModul>
+            app:work_modul_icon="@mipmap/car_fault"
+            app:work_modul_title="车辆故障"></cn.piesat.sanitation.ui.view.MyWorkModul>
     </LinearLayout>
 
 
