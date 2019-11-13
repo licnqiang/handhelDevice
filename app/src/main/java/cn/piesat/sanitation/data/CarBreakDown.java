@@ -35,6 +35,7 @@ public class CarBreakDown implements Serializable{
         public String updateUserIdbizcaifault;     // 修改用户
         public String updatetimeIdbizcaifault;
         public String yjwcsjCarfault;              // 完成时间
+        public int lay1Sysdictionary;       //  4为可以审批的用户类型
 
     }
 }

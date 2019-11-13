@@ -39,5 +39,7 @@ public class CarMaintenance implements Serializable {
         public String owner;                  //司机
         public String name;                   //维修/保养状态
         public String repairState;            //维修/保养状态code
+        public int lay1Sysdictionary;       //  4为可以审批的用户类型
+
     }
 }

@@ -57,7 +57,11 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
                 hashMap, new TypeToken<CarMaintenance>() {
                 });
     }
-
+    /**
+     * 查询车辆故障分页
+     * 站长默认查询所管理的站下的车辆
+     * 司机默认搜索自己提交的信息
+     */
     @Override
     public void QueryCarBreakDown(int pageNum, int pageSize) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -79,9 +83,9 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
     public void AuditCarMaintenance(String idBizrepair, String faultState, String lay1Idbizcaifault) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("idBizrepair", idBizrepair);
-        hashMap.put("faultState", faultState);
+        hashMap.put("repairState", faultState);
         hashMap.put("lay1Idbizcaifault", lay1Idbizcaifault);
-        commonPresenter.invokeInterfaceObtainData(false, false, true, false, UrlContant.OutSourcePart.car_maintencen_audit_par, UrlContant.OutSourcePart.car_maintencen_audit,
+        commonPresenter.invokeInterfaceObtainData(false, false, true, true, UrlContant.OutSourcePart.car_maintencen_audit_par, UrlContant.OutSourcePart.car_maintencen_audit,
                 hashMap, new TypeToken<CarBreakDown>() {
                 });
 
@@ -100,7 +104,7 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
         hashMap.put("idBizcaifault", idBizcaifault);
         hashMap.put("faultState", faultState);
         hashMap.put("lay1Idbizcaifault", lay1Idbizcaifault);
-        commonPresenter.invokeInterfaceObtainData(false, false, true, false, UrlContant.OutSourcePart.car_break_down_audit_par, UrlContant.OutSourcePart.car_break_down_audit,
+        commonPresenter.invokeInterfaceObtainData(false, false, true, true, UrlContant.OutSourcePart.car_break_down_audit_par, UrlContant.OutSourcePart.car_break_down_audit,
                 hashMap, new TypeToken<CarBreakDown>() {
                 });
     }

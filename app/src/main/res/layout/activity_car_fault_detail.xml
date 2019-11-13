@@ -10,6 +10,10 @@
 
     <include layout="@layout/common_title" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -86,9 +90,12 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/submit_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
             android:paddingBottom="20dp">
 
             <Button
@@ -99,11 +106,23 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/btn_click_state"
-                android:text="审核通过"
+                android:text="通过"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
-        </RelativeLayout>
+            <Button
+                android:id="@+id/btn_submit_no"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/red_btn_click_state"
+                android:text="不通过"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
 
     </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
