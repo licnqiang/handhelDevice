@@ -23,12 +23,12 @@ public interface QueryContract {
 
     interface QueryPresenter {
         //查询压缩站
-        void QueryCompress(int pageNum, int pageSize);
+        void QueryCompress(int pageNum, String pageSize);
         //查询车辆
-        void QueryCar(int pageNum, int pageSize,int status);
+        void QueryCar(int pageNum, String pageSize,int status);
         //查询焚烧厂
-        void QueryBurnStation(int pageNum, int pageSize);
+        void QueryBurnStation(int pageNum, String pageSize);
         //查询司机
-        void QueryDriver(int pageNum, int pageSize,int userType,String idSysdept);
+        void QueryDriver(int pageNum, String pageSize,int userType,String idSysdept);
     }
 }

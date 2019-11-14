@@ -7,6 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -31,7 +35,9 @@ public class CarMaintenanceActivity extends BaseActivity implements CarMaintenan
     TextView tvTitle;
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
-
+    @BindView(R.id.springView)
+    SpringView springView;
+    private int pageNum=1;
     CarMaintenancePresenter carMaintenancePresenter;
     CarMaintenanceAdapter carMaintenanceAdapter;
     private ArrayList<CarMaintenance.RowsBean> rowsBeanList;
@@ -62,6 +68,21 @@ public class CarMaintenanceActivity extends BaseActivity implements CarMaintenan
         carMaintenanceAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(carMaintenanceAdapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum=1;
+                carMaintenancePresenter.QueryCarMaintenance(pageNum, SysContant.CommentTag.pageSize);
+            }
+
+            @Override
+            public void onLoadmore() {
+                pageNum++;
+                carMaintenancePresenter.QueryCarMaintenance(pageNum, SysContant.CommentTag.pageSize);
+            }
+        });
     }
 
     @OnClick(R.id.img_back)
@@ -72,19 +93,34 @@ public class CarMaintenanceActivity extends BaseActivity implements CarMaintenan
     @Override
     protected void onResume() {
         super.onResume();
-        carMaintenancePresenter.QueryCarMaintenance(0, -1);
+        carMaintenancePresenter.QueryCarMaintenance(pageNum, SysContant.CommentTag.pageSize);
     }
 
     @Override
     public void Error(String errorMsg) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
         ToastUtil.show(this, errorMsg);
     }
 
     @Override
     public void SuccessFinsh(CarMaintenance carMaintenance) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
-        carMaintenanceAdapter.refreshData(carMaintenance.rows);
+        if (null!=carMaintenance.rows&&carMaintenance.rows.size()>0){
+
+            if (pageNum==1){
+                carMaintenanceAdapter.refreshData(carMaintenance.rows);
+            }else {
+                carMaintenanceAdapter.addAll(carMaintenance.rows);
+            }
+        }else {
+            ToastUtil.show(this,"没有更多数据咯!");
+        }
     }
 
     @Override

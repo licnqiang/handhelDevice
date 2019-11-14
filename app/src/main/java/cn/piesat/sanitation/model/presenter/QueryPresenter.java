@@ -39,20 +39,20 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
 
 
     @Override
-    public void QueryCompress(int pageNum, int pageSize) {
+    public void QueryCompress(int pageNum, String pageSize) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
-        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("pageSize", pageSize);
         commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_compress_station,
                 hashMap, new TypeToken<CompressStations>() {
                 });
     }
 
     @Override
-    public void QueryCar(int pageNum, int pageSize, int status) {
+    public void QueryCar(int pageNum, String pageSize, int status) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
-        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("pageSize", pageSize);
         hashMap.put("status", status + "");
         commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_car,
                 hashMap, new TypeToken<CarInfo>() {
@@ -61,10 +61,10 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
     }
 
     @Override
-    public void QueryBurnStation(int pageNum, int pageSize) {
+    public void QueryBurnStation(int pageNum, String pageSize) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
-        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("pageSize", pageSize);
         commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_burn_staion,
                 hashMap, new TypeToken<BurnStationInfo>() {
                 });
@@ -79,10 +79,10 @@ public class QueryPresenter implements ICommonAction, QueryContract.QueryPresent
      * @param idSysdept   组织机构id
      */
     @Override
-    public void QueryDriver(int pageNum, int pageSize, int userType, String idSysdept) {
+    public void QueryDriver(int pageNum, String pageSize, int userType, String idSysdept) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
-        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("pageSize", pageSize);
         hashMap.put("userType", userType + "");
         hashMap.put("idSysdept", idSysdept);
         commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.query_driver,

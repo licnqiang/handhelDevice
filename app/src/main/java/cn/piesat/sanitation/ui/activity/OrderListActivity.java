@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +43,14 @@ public class OrderListActivity extends BaseActivity implements OrderContract.Que
     TextView tvTitle;
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
+    @BindView(R.id.springView)
+    SpringView springView;
     private OrderAdapter adapter;
 
     List<OrderList.RowsBean> rowsBeans;
 
     OrderPresenter orderPresenter;
-
+    private int pageNum=1;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_order_list;
@@ -59,6 +64,21 @@ public class OrderListActivity extends BaseActivity implements OrderContract.Que
         adapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(adapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum=1;
+                orderPresenter.QueryOrderList(pageNum,  SysContant.CommentTag.pageSize, null, null, null);
+            }
+
+            @Override
+            public void onLoadmore() {
+                pageNum++;
+                orderPresenter.QueryOrderList(pageNum,  SysContant.CommentTag.pageSize, null, null, null);
+            }
+        });
     }
 
     @Override
@@ -71,7 +91,7 @@ public class OrderListActivity extends BaseActivity implements OrderContract.Que
     protected void onResume() {
         super.onResume();
         showLoadingDialog("加载中", false);
-        orderPresenter.QueryOrderList(1, -1, null, null, null);
+        orderPresenter.QueryOrderList(pageNum,  SysContant.CommentTag.pageSize, null, null, null);
     }
 
     @OnClick(R.id.img_back)
@@ -81,14 +101,29 @@ public class OrderListActivity extends BaseActivity implements OrderContract.Que
 
     @Override
     public void Error(String errorMsg) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
         ToastUtil.show(this, errorMsg);
     }
 
     @Override
     public void SuccessFinshByOrderList(OrderList orderList) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
-        adapter.refreshData(orderList.rows);
+        if (null!=orderList.rows&&orderList.rows.size()>0){
+
+            if (pageNum==1){
+                adapter.refreshData(orderList.rows);
+            }else {
+                adapter.addAll(orderList.rows);
+            }
+        }else {
+            ToastUtil.show(this,"没有更多数据咯!");
+        }
     }
 
     @Override

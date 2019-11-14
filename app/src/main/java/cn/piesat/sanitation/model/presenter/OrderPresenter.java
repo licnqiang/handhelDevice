@@ -80,10 +80,10 @@ public class OrderPresenter implements ICommonAction, OrderContract.OrderPresent
      * @param status     运单状态(非必传)：0 - 指派取消、1 - 已指派未接单、2 - 已接单未起运、3 - 已起运未过磅、4 - 已过磅未确认、5- 已完成
      */
     @Override
-    public void QueryOrderList(int pageNum, int pageSize,String sjId,String clId,String status) {
+    public void QueryOrderList(int pageNum, String pageSize,String sjId,String clId,String status) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
-        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("pageSize", pageSize);
         if(null!=sjId){
             hashMap.put("sjId", sjId);
         }

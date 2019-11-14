@@ -7,6 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -26,10 +30,14 @@ public class CarBreakDownActivity extends BaseActivity implements CarMaintenance
     TextView tvTitle;
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
+    @BindView(R.id.springView)
+    SpringView springView;
 
     CarMaintenancePresenter carMaintenancePresenter;
     CarBreakDownAdapter carBreakDownAdapter;
     private ArrayList<CarBreakDown.RowsBean> rowsBeanList;
+
+    private int pageNum = 1;
 
     @Override
     protected int getLayoutId() {
@@ -54,6 +62,21 @@ public class CarBreakDownActivity extends BaseActivity implements CarMaintenance
         carBreakDownAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(carBreakDownAdapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum = 1;
+                carMaintenancePresenter.QueryCarBreakDown(pageNum, SysContant.CommentTag.pageSize);
+            }
+
+            @Override
+            public void onLoadmore() {
+                pageNum++;
+                carMaintenancePresenter.QueryCarBreakDown(pageNum, SysContant.CommentTag.pageSize);
+            }
+        });
     }
 
     @Override
@@ -64,7 +87,7 @@ public class CarBreakDownActivity extends BaseActivity implements CarMaintenance
     @Override
     protected void onResume() {
         super.onResume();
-        carMaintenancePresenter.QueryCarBreakDown(0, -1);
+        carMaintenancePresenter.QueryCarBreakDown(pageNum, SysContant.CommentTag.pageSize);
     }
 
     @OnClick(R.id.img_back)
@@ -74,21 +97,36 @@ public class CarBreakDownActivity extends BaseActivity implements CarMaintenance
 
     @Override
     public void onItemClick(View view, int position) {
-            startActivity(new Intent(this,CarFaultDetailShowActivity.class).putExtra(SysContant.CommentTag.comment_key,rowsBeanList.get(position)));
+        startActivity(new Intent(this, CarFaultDetailShowActivity.class).putExtra(SysContant.CommentTag.comment_key, rowsBeanList.get(position)));
     }
 
     @Override
     public void Error(String errorMsg) {
+        if (null!=springView) {
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
         ToastUtil.show(this, errorMsg);
     }
 
     @Override
     public void SuccessFinsh(CarBreakDown carBreakDown) {
+        if (null!=springView) {
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
-        carBreakDownAdapter.refreshData(carBreakDown.rows);
-    }
+        if (null != carBreakDown.rows && carBreakDown.rows.size() > 0) {
 
+            if (pageNum == 1) {
+                carBreakDownAdapter.refreshData(carBreakDown.rows);
+            } else {
+                carBreakDownAdapter.addAll(carBreakDown.rows);
+            }
+
+        } else {
+            ToastUtil.show(this, "没有更多数据咯!");
+        }
+    }
 
 
 }

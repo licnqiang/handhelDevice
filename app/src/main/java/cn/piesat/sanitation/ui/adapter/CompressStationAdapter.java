@@ -44,6 +44,11 @@ public class CompressStationAdapter extends RecyclerView.Adapter<CompressStation
         notifyDataSetChanged();
     }
 
+    public void addAll(List<CompressStations.RowsBean> data) {
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
+
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new SelectedPicViewHolder(mInflater.inflate(R.layout.item_compress_station, parent, false));

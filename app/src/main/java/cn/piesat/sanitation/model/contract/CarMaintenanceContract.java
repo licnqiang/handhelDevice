@@ -33,14 +33,14 @@ public interface CarMaintenanceContract {
          *   站长默认查询所管理的站下的车辆
          *   司机默认搜索自己提交的信息
          */
-       void QueryCarMaintenance(int pageNum, int pageSize);
+       void QueryCarMaintenance(int pageNum, String pageSize);
 
         /**
          *   车辆故障
          *   站长默认查询所管理的站下的车辆
          *   司机默认搜索自己提交的信息
          */
-        void QueryCarBreakDown(int pageNum, int pageSize);
+        void QueryCarBreakDown(int pageNum, String pageSize);
 
 
         /**

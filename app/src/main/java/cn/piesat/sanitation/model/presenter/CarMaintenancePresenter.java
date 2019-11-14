@@ -49,10 +49,10 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
      * 司机默认搜索自己提交的信息
      */
     @Override
-    public void QueryCarMaintenance(int pageNum, int pageSize) {
+    public void QueryCarMaintenance(int pageNum, String pageSize) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
-        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("pageSize", pageSize);
         commonPresenter.invokeInterfaceObtainData(false, false, true, false, UrlContant.OutSourcePart.car_maintencen_port_list, UrlContant.OutSourcePart.car_maintencen_list,
                 hashMap, new TypeToken<CarMaintenance>() {
                 });
@@ -63,10 +63,10 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
      * 司机默认搜索自己提交的信息
      */
     @Override
-    public void QueryCarBreakDown(int pageNum, int pageSize) {
+    public void QueryCarBreakDown(int pageNum, String pageSize) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("pageNum", pageNum + "");
-        hashMap.put("pageSize", pageSize + "");
+        hashMap.put("pageSize", pageSize);
         commonPresenter.invokeInterfaceObtainData(false, false, true, false, UrlContant.OutSourcePart.car_maintencen_port_list, UrlContant.OutSourcePart.car_break_down_list,
                 hashMap, new TypeToken<CarBreakDown>() {
                 });

@@ -47,6 +47,11 @@ public class CarBreakDownAdapter extends RecyclerView.Adapter<CarBreakDownAdapte
         notifyDataSetChanged();
     }
 
+    public void addAll(List<CarBreakDown.RowsBean> data) {
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
+
     @Override
     public StationUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new StationUserViewHolder(mInflater.inflate(R.layout.item_event, parent, false));

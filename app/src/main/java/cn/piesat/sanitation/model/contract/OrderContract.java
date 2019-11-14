@@ -32,7 +32,7 @@ public interface OrderContract {
         void AssignOrder(String fscId,String fscmc,String clId,String jhddsjBiztyd,String jhqysjBiztyd,
                          String pdsmBiztyd,String sjId,String yszId,String yszName);
         //站长查询运单列表接口
-        void QueryOrderList(int pageNum, int pageSize,String sjId,String clId,String status);
+        void QueryOrderList(int pageNum, String pageSize,String sjId,String clId,String status);
 
     }
 }

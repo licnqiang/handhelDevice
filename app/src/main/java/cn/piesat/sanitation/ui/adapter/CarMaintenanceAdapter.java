@@ -45,6 +45,10 @@ public class CarMaintenanceAdapter extends RecyclerView.Adapter<CarMaintenanceAd
         mData.addAll(data);
         notifyDataSetChanged();
     }
+    public void addAll(List<CarMaintenance.RowsBean> data) {
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
 
     @Override
     public StationUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

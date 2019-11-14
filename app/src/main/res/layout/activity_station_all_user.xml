@@ -10,11 +10,16 @@
 
     <include layout="@layout/common_title" />
 
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/springView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecylerView"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:paddingBottom="15dp"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </com.liaoinstan.springview.widget.SpringView>
 
 </LinearLayout>

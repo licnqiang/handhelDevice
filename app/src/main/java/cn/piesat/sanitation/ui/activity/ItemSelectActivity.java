@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,9 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
     TextView tvTitle;
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
+    @BindView(R.id.springView)
+    SpringView springView;
+
     private String queryType; //查询类型
     private CompressStationAdapter compressStationAdapter;
     private CarAdapter carAdapter;
@@ -54,6 +60,7 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
     List<DriverInfo.RowsBean> driverInfos;
     List<BurnStationInfo.RowsBean> burnInfos;
 
+    private int pageNum=1;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_item_select;
@@ -79,22 +86,22 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
                 case SysContant.QueryType.compress_station_key:  //压缩站
                     tvTitle.setText("选择压缩站");
                     setCompressStationAdapter();
-                    queryPresenter.QueryCompress(1, -1);
+                    queryPresenter.QueryCompress(pageNum, SysContant.CommentTag.pageSize);
                     break;
                 case SysContant.QueryType.car_key:  //车辆
                     tvTitle.setText("选择车辆");
                     setCarAdapter();
-                    queryPresenter.QueryCar(1, -1, 0);
+                    queryPresenter.QueryCar(pageNum, SysContant.CommentTag.pageSize, 0);
                     break;
                 case SysContant.QueryType.driver_key:  //司机
                     tvTitle.setText("选择驾驶员");
                     setDriverAdapter();
-                    queryPresenter.QueryDriver(1, -1, 7, BaseApplication.getUserInfo().idSysdept);
+                    queryPresenter.QueryDriver(pageNum, SysContant.CommentTag.pageSize, 7, BaseApplication.getUserInfo().idSysdept);
                     break;
                 case SysContant.QueryType.burn_key:  //焚烧厂
                     tvTitle.setText("选择焚烧厂");
                     setBurnAdapter();
-                    queryPresenter.QueryBurnStation(1, -1);
+                    queryPresenter.QueryBurnStation(pageNum, SysContant.CommentTag.pageSize);
                     break;
             }
         }
@@ -109,6 +116,21 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
         compressStationAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(compressStationAdapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum=1;
+                queryPresenter.QueryCompress(pageNum, SysContant.CommentTag.pageSize);
+            }
+
+            @Override
+            public void onLoadmore() {
+                pageNum++;
+                queryPresenter.QueryCompress(pageNum, SysContant.CommentTag.pageSize);
+            }
+        });
     }
 
     /**
@@ -120,6 +142,21 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
         carAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(carAdapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum=1;
+                queryPresenter.QueryCar(pageNum, SysContant.CommentTag.pageSize, 0);
+            }
+
+            @Override
+            public void onLoadmore() {
+                pageNum++;
+                queryPresenter.QueryCar(pageNum, SysContant.CommentTag.pageSize, 0);
+            }
+        });
     }
 
     /**
@@ -131,6 +168,21 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
         driverAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(driverAdapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum=1;
+                queryPresenter.QueryDriver(pageNum, SysContant.CommentTag.pageSize, 7, BaseApplication.getUserInfo().idSysdept);
+            }
+
+            @Override
+            public void onLoadmore() {
+                pageNum++;
+                queryPresenter.QueryDriver(pageNum, SysContant.CommentTag.pageSize, 7, BaseApplication.getUserInfo().idSysdept);
+            }
+        });
     }
 
     /**
@@ -142,11 +194,29 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
         burnStationAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(burnStationAdapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                pageNum=1;
+                queryPresenter.QueryBurnStation(pageNum, SysContant.CommentTag.pageSize);
+            }
+
+            @Override
+            public void onLoadmore() {
+                pageNum++;
+                queryPresenter.QueryBurnStation(pageNum, SysContant.CommentTag.pageSize);
+            }
+        });
     }
 
 
     @Override
     public void Error(String errorMsg) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
         ToastUtil.show(this, errorMsg);
     }
@@ -155,29 +225,78 @@ public class ItemSelectActivity extends BaseActivity implements QueryContract.Qu
     //查询压缩厂
     @Override
     public void SuccessFinshByCompress(CompressStations compressStations) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
-        compressStationAdapter.refreshData(compressStations.rows);
+        if (null!=compressStations.rows&&compressStations.rows.size()>0){
+
+            if (pageNum==1){
+                compressStationAdapter.refreshData(compressStations.rows);
+            }else {
+                compressStationAdapter.addAll(compressStations.rows);
+            }
+        }else {
+            ToastUtil.show(this,"没有更多数据咯!");
+        }
     }
 
     //查询车辆
     @Override
     public void SuccessFinshByCar(CarInfo carInfo) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
-        carAdapter.refreshData(carInfo.rows);
+        if (null!=carInfo.rows&&carInfo.rows.size()>0){
+
+            if (pageNum==1){
+                carAdapter.refreshData(carInfo.rows);
+            }else {
+                carAdapter.addAll(carInfo.rows);
+            }
+        }else {
+            ToastUtil.show(this,"没有更多数据咯!");
+        }
     }
 
     //查询焚烧厂
     @Override
     public void SuccessFinshByBurnStation(BurnStationInfo burnStationInfo) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
-        burnStationAdapter.refreshData(burnStationInfo.rows);
+        if (null!=burnStationInfo.rows&&burnStationInfo.rows.size()>0){
+
+            if (pageNum==1){
+                burnStationAdapter.refreshData(burnStationInfo.rows);
+            }else {
+                burnStationAdapter.addAll(burnStationInfo.rows);
+            }
+        }else {
+            ToastUtil.show(this,"没有更多数据咯!");
+        }
     }
 
     //查询司机
     @Override
     public void SuccessFinshByDriver(DriverInfo driverInfo) {
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
         dismiss();
-        driverAdapter.refreshData(driverInfo.rows);
+
+        if (null!=driverInfo.rows&&driverInfo.rows.size()>0){
+
+            if (pageNum==1){
+                driverAdapter.refreshData(driverInfo.rows);
+            }else {
+                driverAdapter.addAll(driverInfo.rows);
+            }
+        }else {
+            ToastUtil.show(this,"没有更多数据咯!");
+        }
     }
 
 
