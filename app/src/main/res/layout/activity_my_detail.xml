@@ -61,7 +61,7 @@
 
                 <EditText
                     android:id="@+id/et_name"
-                    android:layout_width="100dp"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:background="@color/white"
@@ -115,7 +115,7 @@
 
                 <EditText
                     android:id="@+id/et_phone"
-                    android:layout_width="100dp"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:background="@color/white"
@@ -141,7 +141,7 @@
 
                 <TextView
                     android:id="@+id/et_brthy"
-                    android:layout_width="100dp"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:background="@color/white"
@@ -168,7 +168,7 @@
 
                 <EditText
                     android:id="@+id/et_address"
-                    android:layout_width="100dp"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:background="@color/white"

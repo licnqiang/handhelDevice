@@ -33,7 +33,6 @@ public class HomePresenter implements ICommonAction,HomeContract.HomeNewsPresent
 
     @Override
     public void GetNewsList() {
-
         commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.new_part, UrlContant.MySourcePart.new_List,
                 null, new TypeToken<HomeNewsBean>() {
                 });

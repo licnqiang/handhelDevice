@@ -36,6 +36,9 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="李强"
+                android:maxEms="5"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_28" />
 
@@ -45,6 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="top"
+                android:maxEms="5"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:text="西安航天宏图"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16" />
@@ -59,22 +65,22 @@
             android:background="#26ffffff"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_year"
+            <TextClock
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="bottom"
                 android:text="2019"
+                android:format24Hour ="yyyy"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16" />
 
-            <TextView
-                android:id="@+id/tv_math_day"
+            <TextClock
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="top"
+                android:format24Hour ="MM/dd"
                 android:text="10/15"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_40" />
@@ -197,14 +203,14 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_24dp" />
 
-            <TextView
-                android:id="@+id/tv_clock_in_time"
+            <TextClock
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_clock_in"
                 android:layout_centerInParent="true"
                 android:paddingTop="@dimen/text_15dp"
                 android:text="07:50:24"
+                android:format24Hour ="HH:mm:ss"
                 android:textColor="@color/them_tip_font"
                 android:textSize="@dimen/text_16dp" />
 

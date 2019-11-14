@@ -27,7 +27,7 @@ import cn.piesat.sanitation.ui.adapter.EventListAdapter;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 车辆维保
+ * 车辆维保记录列表
  */
 public class CarMaintenanceActivity extends BaseActivity implements CarMaintenanceContract.CarMaintenanceView, CarMaintenanceAdapter.OnRecyclerViewItemClickListener {
 

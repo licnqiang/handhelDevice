@@ -45,6 +45,9 @@ import cn.piesat.sanitation.util.carmera.CameraPreviewManager;
 import cn.piesat.sanitation.util.carmera.GlobalSet;
 import cn.piesat.sanitation.util.carmera.SingleBaseConfig;
 
+/**
+ * 考勤 人脸对比
+ */
 public class FaceEnterActivity extends BaseActivity implements UserInfoContract.UserInfoView {
     @BindView(R.id.auto_camera_preview_view)
     AutoTexturePreviewView mPreviewView;

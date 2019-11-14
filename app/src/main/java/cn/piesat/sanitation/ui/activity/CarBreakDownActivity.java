@@ -25,6 +25,9 @@ import cn.piesat.sanitation.ui.adapter.CarBreakDownAdapter;
 import cn.piesat.sanitation.ui.adapter.CarMaintenanceAdapter;
 import cn.piesat.sanitation.util.ToastUtil;
 
+/**
+ * 故障记录界面
+ */
 public class CarBreakDownActivity extends BaseActivity implements CarMaintenanceContract.CarBreakDownView, CarBreakDownAdapter.OnRecyclerViewItemClickListener {
     @BindView(R.id.tv_title)
     TextView tvTitle;

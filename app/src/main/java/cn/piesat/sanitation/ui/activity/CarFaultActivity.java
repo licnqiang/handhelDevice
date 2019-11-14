@@ -30,7 +30,7 @@ import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 车辆故障
+ * 车辆故障上报
  */
 public class CarFaultActivity extends BaseActivity implements CarStateContract.CarStateView {
 
@@ -72,15 +72,15 @@ public class CarFaultActivity extends BaseActivity implements CarStateContract.C
 
     private void showDialog() {
         ActionSheetDialog dialog = new ActionSheetDialog(this).builder().setTitle("请选择")
-                .addSheetItem("一级", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                .addSheetItem("严重故障", null, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {
-                        faultType.setText("一级");
+                        faultType.setText("严重故障");
                     }
-                }).addSheetItem("二级", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                }).addSheetItem("轻微故障", null, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {
-                        faultType.setText("二级");
+                        faultType.setText("轻微故障");
                     }
                 });
         dialog.show();

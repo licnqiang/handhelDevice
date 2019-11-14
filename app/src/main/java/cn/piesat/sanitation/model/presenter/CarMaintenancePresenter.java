@@ -113,7 +113,10 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex) {
-            case UrlContant.OutSourcePart.car_maintencen_list:  //查询车辆维保 列表
+            /**
+             * 查询车辆维保 列表
+             */
+            case UrlContant.OutSourcePart.car_maintencen_list:
                 if (status == REQUEST_SUCCESS) {//成功
                     CarMaintenance carMaintenance = (CarMaintenance) data;
                     carMaintenanceView.SuccessFinsh(carMaintenance);
@@ -122,7 +125,10 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
                     carMaintenanceView.Error(Msg);
                 }
                 break;
-            case UrlContant.OutSourcePart.car_break_down_list:  //查询车辆故障 列表
+            /**
+             * 查询车辆故障 列表
+             */
+            case UrlContant.OutSourcePart.car_break_down_list:
                 if (status == REQUEST_SUCCESS) {//成功
                     CarBreakDown carBreakDown = (CarBreakDown) data;
                     carBreakDownView.SuccessFinsh(carBreakDown);
@@ -131,7 +137,10 @@ public class CarMaintenancePresenter implements ICommonAction, CarMaintenanceCon
                     carBreakDownView.Error(Msg);
                 }
                 break;
-            case UrlContant.OutSourcePart.car_maintencen_audit:  //维保审核和故障审核同意接收是否成功
+            /**
+             *  维保审核和故障审核同意接收是否成功
+             */
+            case UrlContant.OutSourcePart.car_maintencen_audit:
                 if (status == REQUEST_SUCCESS) {//成功
                     auditView.SuccessFinsh();
                 } else {

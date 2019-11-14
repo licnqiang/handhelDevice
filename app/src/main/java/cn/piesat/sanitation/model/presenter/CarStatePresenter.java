@@ -73,7 +73,7 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
      * @param jeRepair                保养/维修项目金额;（填写）
      * @param sbrRpair                上报人姓名;（填写）
      * @param bzRepair                备注;（填写）
-     * @param yjwcsjRepair          完成时间
+     * @param yjwcsjRepair            完成时间
      */
     @Override
     public void CarServiceSubmit(String idBizcar, String typeRepair, String sgdwRepair, String sjRepair, String xmRepair, String jeRepair, String sbrRpair, String bzRepair, String yjwcsjRepair) {
@@ -96,7 +96,10 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex) {
-            case UrlContant.OutSourcePart.car_falut_sumbit:  //车辆故障上报 返回
+            /**
+             * 车辆故障上报
+             */
+            case UrlContant.OutSourcePart.car_falut_sumbit:
                 if (status == REQUEST_SUCCESS) {//成功
 
                     carStateView.SuccessFinshByCarFaultSubmit();
@@ -105,8 +108,10 @@ public class CarStatePresenter implements ICommonAction, CarStateContract.CarSta
                     carStateView.Error(Msg);
                 }
                 break;
-
-            case UrlContant.OutSourcePart.car_service_sumbit:  //车辆维保上报 返回
+            /**
+             * 车辆维保上报
+             */
+            case UrlContant.OutSourcePart.car_service_sumbit:
                 if (status == REQUEST_SUCCESS) {//成功
 
                     carStateViewService.SuccessFinshByCarServiceSubmit();

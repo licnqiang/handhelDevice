@@ -28,7 +28,7 @@ import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 汽车维保
+ * 汽车维保上报
  */
 public class CarSerViceActivity extends BaseActivity implements CarStateContract.CarStateViewService{
 

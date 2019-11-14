@@ -64,6 +64,7 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
 
     @Override
     protected void initView() {
+        showLoadingDialog();
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         minePresenter=new MinePresenter(this);
         if (TextUtils.isEmpty(getIntent().getStringExtra("userId"))){
@@ -117,7 +118,6 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
     @Override
     protected void initData() {
         tvPrompt.setText("当前显示 "+startDate+" 到 "+endDate+" 的考勤记录");
-        showLoadingDialog();
         Map<String,String> map =new HashMap<>();
         map.put("userId", userId);
         map.put("startDate",startDate);
