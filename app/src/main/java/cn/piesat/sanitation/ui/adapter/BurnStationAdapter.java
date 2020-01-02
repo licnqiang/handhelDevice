@@ -44,6 +44,11 @@ public class BurnStationAdapter extends RecyclerView.Adapter<BurnStationAdapter.
         notifyDataSetChanged();
     }
 
+    public void addAll(List<BurnStationInfo.RowsBean> data) {
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
+
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new SelectedPicViewHolder(mInflater.inflate(R.layout.item_burn_station, parent, false));

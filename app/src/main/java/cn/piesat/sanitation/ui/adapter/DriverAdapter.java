@@ -43,6 +43,10 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.SelectedPi
         mData.addAll(data);
         notifyDataSetChanged();
     }
+    public void addAll(List<DriverInfo.RowsBean> data) {
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
 
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -103,7 +103,7 @@
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:text="服务功能"
+        android:text="记录"
         android:textColor="@color/color_black"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -115,32 +115,32 @@
         android:orientation="horizontal">
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
-            android:id="@+id/one_help"
+            android:id="@+id/record_driver_mody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            app:work_modul_icon="@mipmap/device_service"
+            app:work_modul_title="设备维护"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/record_car_breakdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/car_fault"
+            app:work_modul_title="车辆故障"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/record_refuse_transport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
             app:work_modul_icon="@mipmap/station_send"
-            app:work_modul_title="一键呼救"></cn.piesat.sanitation.ui.view.MyWorkModul>
-
-
-        <cn.piesat.sanitation.ui.view.MyWorkModul
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:visibility="invisible"
-            app:work_modul_icon="@mipmap/help"
-            app:work_modul_title="一键呼救"></cn.piesat.sanitation.ui.view.MyWorkModul>
-
-        <cn.piesat.sanitation.ui.view.MyWorkModul
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:visibility="invisible"
-            app:work_modul_icon="@mipmap/ic_launcher"
-            app:work_modul_title="一键呼救"></cn.piesat.sanitation.ui.view.MyWorkModul>
+            app:work_modul_title="垃圾运输"></cn.piesat.sanitation.ui.view.MyWorkModul>
     </LinearLayout>
 
 

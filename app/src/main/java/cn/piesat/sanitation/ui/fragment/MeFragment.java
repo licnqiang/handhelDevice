@@ -95,7 +95,7 @@ public class MeFragment extends BaseFragment {
                 DialogUtils.generalDialog(getActivity(), "确认退出当前账号吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SpHelper.clearAllValue(getActivity());
+                        SpHelper.setStringValue("token","");
                         startActivity(new Intent(getActivity(), SplashActivity.class));
                         getActivity().finish();
                     }

@@ -108,6 +108,7 @@ public class BaseApplication extends DefaultApplicationLike {
      * @param userID
      */
     public static void initDB(String userID) {
+
         InitDBUtil.initDB(ApplicationContext, userID);
     }
 

@@ -12,7 +12,11 @@ import java.util.ArrayList;
 
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.ui.view.SmoothImageView;
+import cn.piesat.sanitation.util.ToastUtil;
 
+/**
+ * 图片放大查看
+ */
 public class ImageDetailActivity extends AppCompatActivity {
 
     private String mDatas;
@@ -47,6 +51,8 @@ public class ImageDetailActivity extends AppCompatActivity {
                 .load(mDatas)
                 .apply(requestOptions)
                 .into(imageView);
+
+
     }
 
 }

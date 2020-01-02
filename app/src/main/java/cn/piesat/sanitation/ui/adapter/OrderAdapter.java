@@ -44,6 +44,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.SelectedPicV
         mData.addAll(data);
         notifyDataSetChanged();
     }
+    public void addAll(List<OrderList.RowsBean> data) {
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
 
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -6,6 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -21,6 +25,8 @@ public class StationAllUserActivity extends BaseActivity implements StationUserA
     TextView tvTitle;
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
+    @BindView(R.id.springView)
+    SpringView springView;
     private StationUserAdapter stationUserAdapter;
     private ArrayList<String> rowsBeanList;
 
@@ -49,6 +55,20 @@ public class StationAllUserActivity extends BaseActivity implements StationUserA
         stationUserAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
         RecylerView.setAdapter(stationUserAdapter);
+        springView.setHeader(new DefaultHeader(this));
+        springView.setFooter(new DefaultFooter(this));
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                springView.onFinishFreshAndLoad();
+            }
+
+            @Override
+            public void onLoadmore() {
+                springView.onFinishFreshAndLoad();
+            }
+        });
+
     }
 
     @OnClick(R.id.img_back)

@@ -20,6 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="取消"
+            android:padding="10dp"
+            android:background="@drawable/comment_click_state"
             android:textColor="@color/them_black_font"
             android:textSize="14sp" />
 

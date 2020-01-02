@@ -13,6 +13,8 @@ import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
 import cn.piesat.sanitation.ui.activity.AssignOrderActivity;
+import cn.piesat.sanitation.ui.activity.CarBreakDownActivity;
+import cn.piesat.sanitation.ui.activity.CarMaintenanceActivity;
 import cn.piesat.sanitation.ui.activity.ExpenseAccountActivity;
 import cn.piesat.sanitation.ui.activity.OrderListActivity;
 import cn.piesat.sanitation.ui.activity.ViolateReportActivity;
@@ -44,7 +46,7 @@ public class WorkStationHeaderFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.money_report,R.id.refuse_transport,R.id.record_refuse_transport,R.id.record_driver_mody})
+    @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.money_report, R.id.refuse_transport, R.id.record_refuse_transport, R.id.record_driver_mody,R.id.record_car_breakdown})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.refuse_transport:     //审批 违章上报
@@ -62,6 +64,10 @@ public class WorkStationHeaderFragment extends BaseFragment {
             case R.id.record_refuse_transport:              //记录 垃圾运输
                 break;
             case R.id.record_driver_mody:              //记录  设备维护
+                toActivity(CarMaintenanceActivity.class);  //车辆维保列表
+                break;
+            case R.id.record_car_breakdown:              //记录  车辆故障
+                toActivity(CarBreakDownActivity.class);  //车辆故障列表
                 break;
         }
     }

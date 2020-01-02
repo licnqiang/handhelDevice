@@ -63,6 +63,11 @@ public class ChangeOrderStatePresenter implements ICommonAction, ChangeOrderStat
                 });
     }
 
+    /**
+     *  司机起运
+     * @param idBiztydsjgbd  ID
+     * @param jsrwsjBiztydsjgbd   起运时间（年-月-日 时:分:秒）
+     */
     @Override
     public void StartTransport(String idBiztydsjgbd, String jsrwsjBiztydsjgbd) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -98,6 +103,11 @@ public class ChangeOrderStatePresenter implements ICommonAction, ChangeOrderStat
                 });
     }
 
+    /**
+     *  司机过磅
+     * @param idBiztydsjgbd  ID
+     * @param qrsjBiztydsjgbd   过磅时间（年-月-日 时:分:秒）
+     */
     @Override
     public void AffrimCountWeight(String idBiztydsjgbd, String qrsjBiztydsjgbd) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -109,6 +119,10 @@ public class ChangeOrderStatePresenter implements ICommonAction, ChangeOrderStat
                 });
     }
 
+    /**
+     *  站长取消订单
+     * @param tydsjgbdId  ID
+     */
     @Override
     public void CancelSendOrder(String tydsjgbdId) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -123,36 +137,50 @@ public class ChangeOrderStatePresenter implements ICommonAction, ChangeOrderStat
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex) {
-            case UrlContant.OutSourcePart.query_take_order:  //派单返回
+            /**
+             * 站长派单
+             */
+            case UrlContant.OutSourcePart.query_take_order:
                 if (status == REQUEST_SUCCESS) {//成功
                     changeOrderStateView.SuccessFinshByGetOrder();
                 } else {
                     changeOrderStateView.Error(Msg);
                 }
                 break;
-            case UrlContant.OutSourcePart.query_start_strans:  //起运
+            /**
+             * 司机起运
+             */
+            case UrlContant.OutSourcePart.query_start_strans:
                 if (status == REQUEST_SUCCESS) {//成功
                     changeOrderStateView.SuccessFinshByStartTransport();
                 } else {
                     changeOrderStateView.Error(Msg);
                 }
                 break;
-            case UrlContant.OutSourcePart.query_save_bd:  //过磅
+            /**
+             * 司机过磅
+             */
+            case UrlContant.OutSourcePart.query_save_bd:
                 if (status == REQUEST_SUCCESS) {//成功
                     changeOrderStateView.SuccessFinshByCountWeight();
                 } else {
                     changeOrderStateView.Error(Msg);
                 }
                 break;
-
-            case UrlContant.OutSourcePart.query_finish_bd:  //榜单确认
+            /**
+             * 站长榜单确认
+             */
+            case UrlContant.OutSourcePart.query_finish_bd:
                 if (status == REQUEST_SUCCESS) {//成功
                     headerchangeOrderStateView.SuccessFinshByAffrimCountWeight();
                 } else {
                     changeOrderStateView.Error(Msg);
                 }
                 break;
-            case UrlContant.OutSourcePart.query_cancel_order:  //订单取消
+            /**
+             * 站长取消订单
+             */
+            case UrlContant.OutSourcePart.query_cancel_order:
                 if (status == REQUEST_SUCCESS) {//成功
                     headerchangeOrderStateView.SuccessFinshByCancelSendOrder();
                 } else {

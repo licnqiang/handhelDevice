@@ -42,7 +42,10 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
         commonPresenter = new CommonPresenter(this);
     }
 
-    //查询考勤情况
+    /**
+     * 查询考勤情况
+     */
+
     @Override
     public void QueryCheckingState(String date) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -54,10 +57,13 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
     }
 
 
-    //获取考勤时间位置限制
+    /**
+     * 获取考勤时间位置限制
+     */
     @Override
     public void WorKTimeSet() {
         HashMap<String, String> hashMap = new HashMap<>();
+        //用户组织id
         hashMap.put("siteId", BaseApplication.getUserInfo().idSysdept);
         commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.check_set_par, UrlContant.MySourcePart.check_set,
                 hashMap, new TypeToken<StationCheckSet>() {
@@ -68,24 +74,27 @@ public class CheckingPresenter implements ICommonAction, CheckingContract.Checki
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex) {
-            case UrlContant.MySourcePart.check_record:  //通过时间获取考勤记录
+            /**
+             * 查询考勤情况
+             */
+            case UrlContant.MySourcePart.check_record:
                 if (status == REQUEST_SUCCESS) {//成功
                     List<CheckRecord> checkRecords = (List<CheckRecord>) data;
-                    LogUtil.e("---------","----checkRecords-----"+new Gson().toJson(checkRecords));
                     CheckingView.SuccessFinshByCheckRecord(checkRecords);
                 } else {
                     CheckingView.Error(Msg);
                 }
                 break;
-
-            case UrlContant.MySourcePart.check_set:  //通过时间获取考勤记录
+            /**
+             * 获取考勤时间位置限制
+             */
+            case UrlContant.MySourcePart.check_set:
                 if (status == REQUEST_SUCCESS) {//成功
                     StationCheckSet stationCheckSet = (StationCheckSet) data;
                     CheckingView.SuccessFinshByWorKTimeSet(stationCheckSet);
                 } else {
                     CheckingView.Error(Msg);
                 }
-
                 break;
 
         }

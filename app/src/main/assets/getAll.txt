@@ -1,0 +1,27 @@
+{ "code": 0，
+ "totle": 2，
+"rows": [ {
+​ "idBizrepair": "F3638C42D0E84003BDB08364A25BF6B8"，
+​ "idBizcar": "61789"，
+​ "typeRepair": ""，
+​ "sgdwRepair":  ""，
+​ "sjRepair":  ""，
+​ "xmRepair": ""，
+​ "jeRepair":  ""，
+​ "sbrRepair": ""，
+​ "bzRepair": ""，
+"createUserBizrepair": "1728D88EABB241EF8035DCDB8DCB8148"，
+​ "createtimeBizrepair": "2019-10-28T14:54:57"，
+​ "lay1Bizrepair":  ""，
+​ "lay2Bizrepair": ""，
+​ "lay3Bizrepair":  ""，
+​ "lay4Bizrepair":  ""，
+​ "lay5Bizrepair":  ""，
+​ "yjwcsjRepair":  ""，
+​ "licensePlate": "陕AU0722"，
+​ "deptName": "马王压缩站"，
+​ "owner":  ""，
+ "name": "未审核"，
+​ "repairState": "1"，
+​ } ]
+}

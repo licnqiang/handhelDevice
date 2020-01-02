@@ -4,18 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,80 +19,81 @@ import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.constant.SysContant;
-import cn.piesat.sanitation.data.OrderList;
-import cn.piesat.sanitation.model.contract.OrderContract;
-import cn.piesat.sanitation.model.presenter.OrderPresenter;
-import cn.piesat.sanitation.ui.adapter.HomeMenuAdapter;
-import cn.piesat.sanitation.ui.adapter.OrderAdapter;
-import cn.piesat.sanitation.util.LogUtil;
+import cn.piesat.sanitation.data.CarMaintenance;
+import cn.piesat.sanitation.model.contract.CarMaintenanceContract;
+import cn.piesat.sanitation.model.presenter.CarMaintenancePresenter;
+import cn.piesat.sanitation.ui.adapter.CarMaintenanceAdapter;
+import cn.piesat.sanitation.ui.adapter.EventListAdapter;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 站长-订单列表
+ * 车辆维保记录列表
  */
-public class OrderListActivity extends BaseActivity implements OrderContract.QueryOrderList, OrderAdapter.OnRecyclerViewItemClickListener {
+public class CarMaintenanceActivity extends BaseActivity implements CarMaintenanceContract.CarMaintenanceView, CarMaintenanceAdapter.OnRecyclerViewItemClickListener {
 
-
-    @BindView(R.id.img_back)
-    ImageView imgBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
     @BindView(R.id.springView)
     SpringView springView;
-    private OrderAdapter adapter;
-
-    List<OrderList.RowsBean> rowsBeans;
-
-    OrderPresenter orderPresenter;
     private int pageNum=1;
+    CarMaintenancePresenter carMaintenancePresenter;
+    CarMaintenanceAdapter carMaintenanceAdapter;
+    private ArrayList<CarMaintenance.RowsBean> rowsBeanList;
+
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_order_list;
+        return R.layout.activity_car_maintenance;
     }
 
     @Override
     protected void initView() {
-        tvTitle.setText("订单列表");
-        rowsBeans = new ArrayList<>();
-        adapter = new OrderAdapter(this, rowsBeans);
-        adapter.setOnItemClickListener(this);
+        tvTitle.setText("维保信息");
+        showLoadingDialog();
+        carMaintenancePresenter = new CarMaintenancePresenter(this);
+    }
+
+    @Override
+    protected void initData() {
+        setCompressStationAdapter();
+    }
+
+    /**
+     * 人员列表
+     */
+    private void setCompressStationAdapter() {
+        rowsBeanList = new ArrayList<>();
+        carMaintenanceAdapter = new CarMaintenanceAdapter(this, rowsBeanList);
+        carMaintenanceAdapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(this));
-        RecylerView.setAdapter(adapter);
+        RecylerView.setAdapter(carMaintenanceAdapter);
         springView.setHeader(new DefaultHeader(this));
         springView.setFooter(new DefaultFooter(this));
         springView.setListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
                 pageNum=1;
-                orderPresenter.QueryOrderList(pageNum,  SysContant.CommentTag.pageSize, null, null, null);
+                carMaintenancePresenter.QueryCarMaintenance(pageNum, SysContant.CommentTag.pageSize);
             }
 
             @Override
             public void onLoadmore() {
                 pageNum++;
-                orderPresenter.QueryOrderList(pageNum,  SysContant.CommentTag.pageSize, null, null, null);
+                carMaintenancePresenter.QueryCarMaintenance(pageNum, SysContant.CommentTag.pageSize);
             }
         });
-    }
-
-    @Override
-    protected void initData() {
-        orderPresenter = new OrderPresenter(this);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        showLoadingDialog("加载中", false);
-        orderPresenter.QueryOrderList(pageNum,  SysContant.CommentTag.pageSize, null, null, null);
     }
 
     @OnClick(R.id.img_back)
     public void onViewClicked() {
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carMaintenancePresenter.QueryCarMaintenance(pageNum, SysContant.CommentTag.pageSize);
     }
 
     @Override
@@ -109,17 +106,17 @@ public class OrderListActivity extends BaseActivity implements OrderContract.Que
     }
 
     @Override
-    public void SuccessFinshByOrderList(OrderList orderList) {
+    public void SuccessFinsh(CarMaintenance carMaintenance) {
         if (null!=springView){
             springView.onFinishFreshAndLoad();
         }
         dismiss();
-        if (null!=orderList.rows&&orderList.rows.size()>0){
+        if (null!=carMaintenance.rows&&carMaintenance.rows.size()>0){
 
             if (pageNum==1){
-                adapter.refreshData(orderList.rows);
+                carMaintenanceAdapter.refreshData(carMaintenance.rows);
             }else {
-                adapter.addAll(orderList.rows);
+                carMaintenanceAdapter.addAll(carMaintenance.rows);
             }
         }else {
             ToastUtil.show(this,"没有更多数据咯!");
@@ -128,7 +125,6 @@ public class OrderListActivity extends BaseActivity implements OrderContract.Que
 
     @Override
     public void onItemClick(View view, int position) {
-        OrderList.RowsBean rowsBean = rowsBeans.get(position);
-        startActivity(new Intent(this, HeaderOrderDetailActivity.class).putExtra(SysContant.CommentTag.comment_key, rowsBean));
+        startActivity(new Intent(this,CarSerViceDetailShowActivity.class).putExtra(SysContant.CommentTag.comment_key,rowsBeanList.get(position)));
     }
 }

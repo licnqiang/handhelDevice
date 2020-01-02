@@ -35,7 +35,9 @@ import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
+ * 司机端
  * 订单详情
+ * 根据订单状态显示界面
  */
 public class DriverOrderDetailActivity extends BaseActivity implements ChangeOrderStateContract.changeOrderStateView {
 

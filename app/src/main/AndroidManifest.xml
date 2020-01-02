@@ -286,6 +286,11 @@
 
         <activity android:name=".ui.activity.AddViolateReportActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.EventListActivity" />
+        <activity android:name=".ui.activity.CarMaintenanceActivity" />
+        <activity android:name=".ui.activity.CarBreakDownActivity"></activity>
+        <activity android:name=".ui.activity.CarSerViceDetailShowActivity"></activity>
+        <activity android:name=".ui.activity.CarFaultDetailShowActivity"></activity>
     </application>
 
 </manifest>

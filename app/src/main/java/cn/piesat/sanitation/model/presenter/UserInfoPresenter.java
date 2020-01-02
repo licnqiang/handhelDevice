@@ -94,7 +94,7 @@ public class UserInfoPresenter implements ICommonAction, UserInfoContract.UserIn
         hashMap.put("name", name);
         hashMap.put("sex", sex);
         hashMap.put("phone", phone);
-        if (TextUtils.isEmpty(birthday)) {             //生日加判断 原因后台接受时间字段是时分秒格式，用户有可能不输入时间字段，加此判断避免接口报错
+        if (!TextUtils.isEmpty(birthday)) {             //生日加判断 原因后台接受时间字段是时分秒格式，用户有可能不输入时间字段，加此判断避免接口报错
             hashMap.put("birthday", birthday);
         }
         hashMap.put("address", address);

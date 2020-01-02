@@ -46,17 +46,11 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     TextView userName;
     @BindView(R.id.user_address)
     TextView userAddress;
-    @BindView(R.id.tv_year)
-    TextView tvYear;
-    @BindView(R.id.tv_math_day)
-    TextView tvMathDay;
     CheckingPresenter checkingPresenter;
     @BindView(R.id.user_start_check_time)
     TextView userStartCheckTime;
     @BindView(R.id.user_end_check_time)
     TextView userEndCheckTime;
-    @BindView(R.id.tv_clock_in_time)
-    TextView tvClockInTime;
     @BindView(R.id.tv_clock_in)
     TextView tvClockIn;
     @BindView(R.id.user_name_tag)
@@ -80,7 +74,6 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
     protected void initData() {
         userStartCheckTime.setVisibility(View.GONE);
         userEndCheckTime.setVisibility(View.GONE);
-        setUserInfo();
     }
 
     //设置用户基本信息
@@ -90,14 +83,12 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
         userName.setText(userInfo_tab.name);
         userNameTag.setText(UiUtils.getPinYinHeadChar(userInfo_tab.name.substring(0,1)));
         userAddress.setText(userInfo_tab.address);
-        tvYear.setText(TimeUtils.getCurrentYear());
-        tvMathDay.setText(TimeUtils.getCurrentMathDay());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
+        setUserInfo();
         boolean startTime = TimeUtils.isCurrentInTimeScope(8, 0, 12, 0);
         boolean endTime = TimeUtils.isCurrentInTimeScope(12, 0, 20, 0);
 
@@ -106,9 +97,6 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
         }else if(endTime){
             tvClockIn.setText("下班打卡");
         }
-
-        //显示当前时分秒
-        tvClockInTime.setText(TimeUtils.getCurrentTimeHHMMSS());
         //当天打卡情况
         checkingPresenter.QueryCheckingState(TimeUtils.getCurrentTime());
     }

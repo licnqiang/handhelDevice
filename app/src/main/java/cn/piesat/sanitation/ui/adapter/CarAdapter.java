@@ -44,6 +44,13 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.SelectedPicViewH
         mData.addAll(data);
         notifyDataSetChanged();
     }
+    public void addAll(List<CarInfo.RowsBean> data) {
+        if (null != mData) {
+            mData.clear();
+        }
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
 
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

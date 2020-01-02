@@ -17,6 +17,7 @@ public class UrlContant {
         String assigin_order_part = "tyd";
         String car_state_part = "carfault";     //车辆故障上报
         String car_service_part = "repair";     //车辆维保上报
+        String car_maintencen_port_list="repaircarView";  //查询车辆维保
 
 
         String car_service_sumbit = "reportRepair";  //车辆故障上报
@@ -35,7 +36,17 @@ public class UrlContant {
         String query_save_bd = "saveBDTyd";  //榜单
         String query_finish_bd = "finishTyd";  //过磅确认
         String query_cancel_order = "cancelTyd";  //订单取消
-        String user_list="findRoleUser";
+        String user_list="findRoleUser"; //查看站点人员
+        String car_maintencen_list="getAll";  //查询车辆维保
+        String car_break_down_list="getAllFault";  //查询车辆故障
+
+
+        String car_maintencen_audit_par="repair";  //车辆维保审批
+        String car_maintencen_audit="approvalFault";  //车辆维保审批
+
+        String car_break_down_audit_par="carfault";  //车辆故障审批
+        String car_break_down_audit="approvalFault";  //车辆故障审批
+
     }
 
 

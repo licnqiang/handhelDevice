@@ -10,6 +10,7 @@ import com.raizlabs.android.dbflow.structure.database.DatabaseHelperListener;
 import com.raizlabs.android.dbflow.structure.database.OpenHelper;
 
 import java.io.File;
+
 import cn.piesat.sanitation.constant.FileConstant;
 
 
@@ -19,7 +20,9 @@ import cn.piesat.sanitation.constant.FileConstant;
  */
 
 public class InitDBUtil {
-    public static void initDB(Context context,String userId) {
+    public static void initDB(Context context, String userId) {
+        /*初始化前 默认关闭数据库 解决数据库切换时发生崩溃问题*/
+        FlowManager.close();
 
         String dbName = FileConstant.getDBPath(userId);
 

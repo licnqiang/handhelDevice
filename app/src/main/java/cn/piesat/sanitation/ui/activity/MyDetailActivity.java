@@ -88,7 +88,7 @@ public class MyDetailActivity extends BaseActivity implements UserInfoContract.M
     private void showInfo() {
         //不可编辑
         ETFocusa(false);
-        UserInfo_Tab userInfo_tab = new Select().from(UserInfo_Tab.class).querySingle();
+        UserInfo_Tab userInfo_tab = BaseApplication.getUserInfo();
         picPath = userInfo_tab.lay1Sysuser;
         //显示图片
         RequestOptions requestOptions = new RequestOptions()
@@ -103,7 +103,7 @@ public class MyDetailActivity extends BaseActivity implements UserInfoContract.M
         etName.setText(userInfo_tab.name);
         etSex.setText(userInfo_tab.sex.equals("1") ? "男" : "女");
         etPhone.setText(userInfo_tab.phone);
-        if(null!=userInfo_tab.birthday&&TextUtils.isEmpty(userInfo_tab.birthday)){
+        if(null!=userInfo_tab.birthday&&!TextUtils.isEmpty(userInfo_tab.birthday)){
             etBrthy.setText(userInfo_tab.birthday.replace("00:00:00", ""));
         }else {
             etBrthy.setText("");

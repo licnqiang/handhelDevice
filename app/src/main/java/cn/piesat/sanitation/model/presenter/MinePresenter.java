@@ -35,6 +35,28 @@ public class MinePresenter implements ICommonAction,MineContract.MyAttendancePre
         commonPresenter=new CommonPresenter(this);
     }
 
+    /**
+     * 考勤列表
+     * @param map
+     */
+    @Override
+    public void getMyAttendanceList(Map<String, String> map) {
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.attendance_part, UrlContant.MySourcePart.attendance_List,
+                map, new TypeToken< MyAttendanceLBean>() {
+                });
+    }
+
+    /**
+     * 人员列表
+     * @param map
+     */
+    @Override
+    public void getUserList(Map<String, String> map) {
+        commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.user_list,
+                map, new TypeToken<UserListBean>() {
+                });
+    }
+
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex){
@@ -62,26 +84,5 @@ public class MinePresenter implements ICommonAction,MineContract.MyAttendancePre
 
     }
 
-    /**
-     * 考勤列表
-     * @param map
-     */
-    @Override
-    public void getMyAttendanceList(Map<String, String> map) {
-        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.attendance_part, UrlContant.MySourcePart.attendance_List,
-                map, new TypeToken< MyAttendanceLBean>() {
-                });
-    }
-
-    /**
-     * 人员列表
-     * @param map
-     */
-    @Override
-    public void getUserList(Map<String, String> map) {
-        commonPresenter.invokeInterfaceObtainData(false, false, false,false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.user_list,
-                map, new TypeToken<UserListBean>() {
-                });
-    }
 
 }

@@ -64,6 +64,7 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
 
     @Override
     protected void initView() {
+        showLoadingDialog();
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         minePresenter=new MinePresenter(this);
         if (TextUtils.isEmpty(getIntent().getStringExtra("userId"))){
@@ -117,7 +118,6 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
     @Override
     protected void initData() {
         tvPrompt.setText("当前显示 "+startDate+" 到 "+endDate+" 的考勤记录");
-        showLoadingDialog();
         Map<String,String> map =new HashMap<>();
         map.put("userId", userId);
         map.put("startDate",startDate);
@@ -129,7 +129,7 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
 
     @Override
     public void Error(String msg) {
-        if (springView!=null){
+        if (null!=springView){
             springView.onFinishFreshAndLoad();
         }
         dismiss();
@@ -138,11 +138,11 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
 
     @Override
     public void SuccessOnAttendanceList(MyAttendanceLBean myAttendanceLBean) {
-        if (springView!=null){
+        if (null!=springView){
             springView.onFinishFreshAndLoad();
         }
             dismiss();
-            if (myAttendanceLBean.list!=null&&myAttendanceLBean.list.size()>0){
+            if (null!=myAttendanceLBean.list&&myAttendanceLBean.list.size()>0){
 
                 if (pageNum==1){
                     attendanceList.clear();
@@ -150,7 +150,7 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
                 attendanceList.addAll(myAttendanceLBean.list);
                 attendanceAdapter.notifyDataSetChanged();
             }else {
-                ToastUtil.show(this,"数据为空");
+                ToastUtil.show(this,"没有更多数据咯!");
             }
     }
 
