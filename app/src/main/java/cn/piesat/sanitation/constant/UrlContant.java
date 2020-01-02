@@ -62,6 +62,10 @@ public class UrlContant {
         String attendance_part="api/punch";
         String attendance_List="getDataOfMonthByUserId";
 
+        String violate_report_get="api/IllegalReport";
+        String violate_report_add="save";
+        String violate_report_list="list";
+
 
     }
 

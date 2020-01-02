@@ -15,6 +15,7 @@ import cn.piesat.sanitation.common.BaseFragment;
 import cn.piesat.sanitation.ui.activity.AssignOrderActivity;
 import cn.piesat.sanitation.ui.activity.ExpenseAccountActivity;
 import cn.piesat.sanitation.ui.activity.OrderListActivity;
+import cn.piesat.sanitation.ui.activity.ViolateReportActivity;
 import cn.piesat.sanitation.ui.view.MyWorkModul;
 
 /**
@@ -46,7 +47,8 @@ public class WorkStationHeaderFragment extends BaseFragment {
     @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.money_report,R.id.refuse_transport,R.id.record_refuse_transport,R.id.record_driver_mody})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.refuse_transport:     //审批 垃圾运输
+            case R.id.refuse_transport:     //审批 违章上报
+                toActivity(ViolateReportActivity.class);
                 break;
             case R.id.bai_dan:              //运单
                 toActivity(AssignOrderActivity.class);

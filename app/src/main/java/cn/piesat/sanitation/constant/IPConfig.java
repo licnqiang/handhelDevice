@@ -6,10 +6,10 @@ package cn.piesat.sanitation.constant;
 public class IPConfig {
 
     //自己服务器本地服务器
-    private final static String U1 = "http://119.3.224.4:19080/";
+    private final static String U1 = "http://192.168.5.51:8081/";
 
     //自己服务器正式服务器
-    private final static String U2 = "http://119.3.224.4:19080/";
+    private final static String U2 = "http://192.168.5.51:8081/";
 
     // 测试版本下 正式测试服务器地址切换用
     public static boolean flag = true;
