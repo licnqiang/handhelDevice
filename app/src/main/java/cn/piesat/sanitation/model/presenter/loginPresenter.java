@@ -1,5 +1,7 @@
 package cn.piesat.sanitation.model.presenter;
 
+import android.util.Log;
+
 import com.google.gson.reflect.TypeToken;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 

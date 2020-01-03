@@ -10,7 +10,7 @@ import java.util.List;
  * @describe TODO
  */
 public class CarMaintenance implements Serializable {
-    
+
 
     public int code;
     public int totle;
