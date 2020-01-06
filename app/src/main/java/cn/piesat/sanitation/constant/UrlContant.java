@@ -76,6 +76,8 @@ public class UrlContant {
         String violate_report_get="api/IllegalReport";
         String violate_report_add="save";
         String violate_report_list="list";
+        String violate_report_select_id="selectbyid";
+        String violate_report_delete="delete";
 
 
     }
