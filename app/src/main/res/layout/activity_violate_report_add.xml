@@ -26,11 +26,11 @@
                 <TextView
                     style="@style/text_14_5b"
                     android:text="压缩站:"
-                 />
+                    />
 
                 <EditText
                     android:id="@+id/etStation"
-                   style="@style/edit_14_33"
+                    style="@style/edit_14_33"
                     android:focusable="false"
                     android:hint="请选择"
                     />

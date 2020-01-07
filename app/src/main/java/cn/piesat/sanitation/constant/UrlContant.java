@@ -73,11 +73,15 @@ public class UrlContant {
         String attendance_part="api/punch";
         String attendance_List="getDataOfMonthByUserId";
 
-        String violate_report_get="api/IllegalReport";
-        String violate_report_add="save";
+        String violate_report_get="api";
+        String violate_report_add="IllegalReport/save";
         String violate_report_list="list";
         String violate_report_select_id="selectbyid";
         String violate_report_delete="delete";
+        //加油
+        String gasoline_report_get="api";
+        String gasoline_report_add="OilReport/save";
+        String gasoline_report_list="OilReport/list";
 
         String accident_report_get="api/AccidentReport";
         String accident_report_add="save";

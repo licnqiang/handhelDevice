@@ -134,14 +134,13 @@
             app:work_modul_title="车辆故障"></cn.piesat.sanitation.ui.view.MyWorkModul>
 
         <cn.piesat.sanitation.ui.view.MyWorkModul
-            android:id="@+id/record_refuse_transport"
+            android:id="@+id/add_gaso_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:visibility="invisible"
             app:work_modul_icon="@mipmap/station_send"
-            app:work_modul_title="垃圾运输"></cn.piesat.sanitation.ui.view.MyWorkModul>
+            app:work_modul_title="加油上报"></cn.piesat.sanitation.ui.view.MyWorkModul>
     </LinearLayout>
 
 

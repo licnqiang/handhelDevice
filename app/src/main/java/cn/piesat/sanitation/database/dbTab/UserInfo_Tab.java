@@ -66,6 +66,8 @@ public class UserInfo_Tab extends BaseModel implements Serializable {
     public String lay5Sysuser;
     @Column
     public String deptNameCount;  //组织机构名称(聚合查询，非原对象，仅作显示)
+    @Column
+    public String areaCount;  //行政区划
 
     //以下是司机用户 特有的信息字段
     @Column

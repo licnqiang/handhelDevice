@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void initView() {
-        String userId= SpHelper.getStringValue("userId");
+        String userId = SpHelper.getStringValue("userId");
         //通过userId开启数据库   在这里开启数据库是因为只有在这里userId 才能确定
         BaseApplication.initDB(userId);
     }
@@ -65,8 +65,9 @@ public class MainActivity extends BaseActivity {
             return workDustmanFragment;
         } else if (type == 7) {                //7司机
             return workDriverFragment;
-        } else
+        } else {
             return workDustmanFragment;
+        }
     }
 
     @Override
