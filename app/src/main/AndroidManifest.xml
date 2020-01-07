@@ -279,11 +279,24 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.ImageDetailActivity" />
         <activity android:name=".ui.activity.StationAllUserActivity" />
+        <activity android:name=".ui.activity.EventListActivity"></activity>
+
+        <activity android:name=".ui.activity.ViolateReportActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.activity.AddViolateReportActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.EventListActivity" />
         <activity android:name=".ui.activity.CarMaintenanceActivity" />
         <activity android:name=".ui.activity.CarBreakDownActivity"></activity>
         <activity android:name=".ui.activity.CarSerViceDetailShowActivity"></activity>
         <activity android:name=".ui.activity.CarFaultDetailShowActivity"></activity>
+        <activity android:name=".ui.activity.GasoLineReportActivity"/>
+        <activity android:name=".ui.activity.GasoLineReportDetailActivity"/>
+        <activity android:name=".ui.activity.AddGasoLineReportActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package cn.piesat.sanitation.common;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
@@ -27,13 +28,13 @@ import cn.piesat.sanitation.util.ToastUtil;
 public abstract class BaseActivity extends AppCompatActivity {
     Unbinder mBind;
     LoadingDialog loadingDialog;
-
+    MyAlertDialog myAlertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //全部禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         }
@@ -139,13 +140,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .setPositiveButton("确认", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        BaseApplication.closeAllActivityByMap();
+                        dismiss();
                         toActivity(LoginActivity.class);
+                        BaseApplication.closeAllActivityByMap();
                     }
                 }).setNegativeButton("取消", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         BaseApplication.closeAllActivityByMap();
+                        dismiss();
                     }
                 });
         myAlertDialog.show();

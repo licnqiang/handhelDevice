@@ -163,8 +163,9 @@ public class DialogUtils {
     }
 
 
-    public static void listDiaLog(Context context, String[] items, DialogInterface.OnClickListener negativeClickListener){
+    public static void listDiaLog(Context context, String title,String[] items, DialogInterface.OnClickListener negativeClickListener){
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+        builder.setTitle(title);
         builder.setItems(items,negativeClickListener);
         builder.create().show();
     }
