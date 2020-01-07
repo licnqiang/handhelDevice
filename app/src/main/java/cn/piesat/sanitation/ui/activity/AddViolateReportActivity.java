@@ -130,10 +130,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
 
     @OnClick({R.id.imgPhoto,R.id.btReport,R.id.etViolatePerson,R.id.etCarNumber,R.id.etViolateDistrict,R.id.etViolateDate})
     public void onViewClick(View view){
-            if (!isEdit){
 
-                return;
-            }
         switch (view.getId()){
           /*  // 选择站点
             case R.id.etStation:
@@ -146,6 +143,9 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 break;*/
                 //选择车牌
             case R.id.etCarNumber:
+                if (!isEdit){
+                    return;
+                }
                 Intent intentcar = new Intent();
                 intentcar.setClass(this, ItemSelectActivity.class);
                 Bundle bundlecar = new Bundle();
@@ -155,6 +155,9 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 break;
                 //选择违章人\司机
             case R.id.etViolatePerson:
+                if (!isEdit){
+                    return;
+                }
                 Intent intentDriver = new Intent();
                 intentDriver.setClass(this, ItemSelectActivity.class);
                 Bundle bundleDriver = new Bundle();
@@ -165,7 +168,9 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
 
                 //违章区域
             case R.id.etViolateDistrict:
-
+                if (!isEdit){
+                    return;
+                }
                 DialogUtils.listDiaLog(this, "请选择区域：",SysContant.CommentTag.district, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -176,6 +181,9 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 break;
                 //违章时间
             case R.id.etViolateDate:
+                if (!isEdit){
+                    return;
+                }
                 seleTimePicker(etViolateDate);
                 break;
 

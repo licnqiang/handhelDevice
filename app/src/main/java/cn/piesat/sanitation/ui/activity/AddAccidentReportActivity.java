@@ -29,6 +29,7 @@ import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
+import cn.piesat.sanitation.data.AccidentReportBean;
 import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.data.DriverInfo;
@@ -100,6 +101,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
 
         if (BaseApplication.getUserInfo()!=null){
             etReportPerson.setText(BaseApplication.getUserInfo().name);
+            etStation.setText(BaseApplication.getUserInfo().deptNameCount);//站点名称
         }
 
         accidentReportPresenter=new AccidentReportPresenter(this);
@@ -113,20 +115,18 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
             etRemark.setFocusable(false);
             etStation.setFocusable(false);
             etReportPerson.setFocusable(false);
+            etDescription.setFocusable(false);
             Map<String,String> map =new HashMap<>();
             map.put("id",reportId);
             showLoadingDialog();
-//            reportPresenter.getViolateReportDetail(map);
+            accidentReportPresenter.getAccidentReportDetail(map);
         }
     }
 
 
     @OnClick({R.id.imgPhoto,R.id.btReport,R.id.etViolatePerson,R.id.etCarNumber,R.id.etViolateDistrict,R.id.etViolateDate})
     public void onViewClick(View view){
-        if (!isEdit){
 
-            return;
-        }
         switch (view.getId()){
           /*  // 选择站点
             case R.id.etStation:
@@ -139,6 +139,9 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
                 break;*/
             //选择车牌
             case R.id.etCarNumber:
+                if (!isEdit){
+                    return;
+                }
                 Intent intentcar = new Intent();
                 intentcar.setClass(this, ItemSelectActivity.class);
                 Bundle bundlecar = new Bundle();
@@ -148,6 +151,9 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
                 break;
             //选择违章人\司机
             case R.id.etViolatePerson:
+                if (!isEdit){
+                    return;
+                }
                 Intent intentDriver = new Intent();
                 intentDriver.setClass(this, ItemSelectActivity.class);
                 Bundle bundleDriver = new Bundle();
@@ -158,6 +164,9 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
 
             //违章区域
             case R.id.etViolateDistrict:
+                if (!isEdit){
+                    return;
+                }
 
                 DialogUtils.listDiaLog(this, "请选择区域：",SysContant.CommentTag.district, new DialogInterface.OnClickListener() {
                     @Override
@@ -169,6 +178,9 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
                 break;
             //违章时间
             case R.id.etViolateDate:
+                if (!isEdit){
+                    return;
+                }
                 seleTimePicker(etViolateDate);
                 break;
 
@@ -188,6 +200,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
 
 
     private void getReport() {
+        etCarNumber.setText("陕A92k0V");//TODO test
         String station=etStation.getText().toString().trim();
         String carNumber=etCarNumber.getText().toString().trim();
         String violatePerson=etViolatePerson.getText().toString().trim();
@@ -234,12 +247,15 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
         map.put("siteName",station);//站点名称
         map.put("carNumber",carNumber);//车牌号
         map.put("reportperson",etReportPerson.getText().toString());//上报人
-        map.put("illegalPeople",violatePerson);//违章人
-        map.put("illegalTime",violateDate);//违章时间（年月日）
-        map.put("illegalProject",violateDetail);//违章项目
-        map.put("illegalMoney",violateFine);
+        map.put("accidentPeople",violatePerson);//事故人
+        map.put("accidentTime",violateDate);//事故时间（年月日）
+        map.put("proportionalAmount",violateDetail);//定则划分
+        map.put("fee",violateFine);//定损额
         if (!etRemark.getText().toString().isEmpty()){
             map.put("remark",etRemark.getText().toString());
+        }
+        if (!etDescription.getText().toString().isEmpty()){
+            map.put("accidentDescription",etDescription.getText().toString());
         }
 
         accidentReportPresenter.getAccidentReportAdd(map);
@@ -256,10 +272,32 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
         ToastUtil.show(AddAccidentReportActivity.this,msg);
         dismiss();
 
+
     }
 
     @Override
-    public void successOnAccidentReportDetail(Object o) {
+    public void successOnAccidentReportDetail(AccidentReportBean.AccidentListBean accidentListBean) {
+        dismiss();
+        if (accidentListBean!=null){
+            etStation.setText(accidentListBean.siteName==null?"空":accidentListBean.siteName);
+            etCarNumber.setText(accidentListBean.carNumber==null?"空":accidentListBean.carNumber);
+            etViolatePerson.setText(accidentListBean.accidentPeople==null?"空":accidentListBean.accidentPeople);
+            etViolateDate.setText(accidentListBean.accidentTime==null?"空":accidentListBean.accidentTime);
+            etViolateDetail.setText(accidentListBean.proportionalAmount==null?"空":accidentListBean.proportionalAmount);
+            etViolateDistrict.setText(accidentListBean.administrativeArea==null?"空":accidentListBean.administrativeArea);
+            etViolateFine.setText(accidentListBean.fee==null?"空":accidentListBean.fee);
+            etRemark.setText(accidentListBean.remark==null?"空":accidentListBean.remark);
+            etDescription.setText(accidentListBean.accidentDescription==null? "空":accidentListBean.accidentDescription);
+
+            if (accidentListBean.scenePhotos!=null){
+                detailPhoto=accidentListBean.scenePhotos;
+                Glide.with(AddAccidentReportActivity.this)
+                        .load(accidentListBean.scenePhotos)
+                        .into(imgPhoto);
+            }
+
+
+        }
 
     }
 

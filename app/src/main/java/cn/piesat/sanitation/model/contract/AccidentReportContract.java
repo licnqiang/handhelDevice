@@ -1,17 +1,20 @@
 package cn.piesat.sanitation.model.contract;
 
+import java.util.List;
 import java.util.Map;
+
+import cn.piesat.sanitation.data.AccidentReportBean;
 
 public interface AccidentReportContract {
 
     interface GetAccidentAddIView{
         void error(String msg);
         void successOnAccidentAdd(String msg);
-        void successOnAccidentReportDetail(Object o);
+        void successOnAccidentReportDetail(AccidentReportBean.AccidentListBean accidentListBean);
     }
 
     interface GetAccidentReportIView{
-        void successOnAccidentList();
+        void successOnAccidentList(AccidentReportBean beans);
         void error(String msg);
         void successOnAccidentDelete(String msg);
     }

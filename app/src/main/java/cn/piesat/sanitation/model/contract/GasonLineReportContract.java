@@ -3,7 +3,6 @@ package cn.piesat.sanitation.model.contract;
 import java.util.Map;
 
 import cn.piesat.sanitation.data.GasonLines;
-import cn.piesat.sanitation.data.ViolateReportListBean;
 
 
 /**

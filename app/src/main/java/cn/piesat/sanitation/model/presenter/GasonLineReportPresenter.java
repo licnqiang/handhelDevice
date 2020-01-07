@@ -8,7 +8,6 @@ import java.util.Map;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.GasonLines;
-import cn.piesat.sanitation.data.ViolateReportListBean;
 import cn.piesat.sanitation.model.contract.GasonLineReportContract;
 import cn.piesat.sanitation.model.contract.ReportContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;

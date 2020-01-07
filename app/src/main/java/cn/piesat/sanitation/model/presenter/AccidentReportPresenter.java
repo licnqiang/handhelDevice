@@ -2,13 +2,18 @@ package cn.piesat.sanitation.model.presenter;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.util.List;
 import java.util.Map;
 
 import cn.piesat.sanitation.constant.UrlContant;
+import cn.piesat.sanitation.data.AccidentReportBean;
+import cn.piesat.sanitation.data.ViolateReportBean;
 import cn.piesat.sanitation.model.contract.AccidentReportContract;
 import cn.piesat.sanitation.model.contract.ReportContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
+
+import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;
 
 public class AccidentReportPresenter implements ICommonAction, AccidentReportContract.ReportAccidentPresenter {
 
@@ -34,7 +39,8 @@ public class AccidentReportPresenter implements ICommonAction, AccidentReportCon
      */
     @Override
     public void getAccidentReportList(Map<String, String> map) {
-
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.accident_report_get,UrlContant.MySourcePart.accident_report_list
+                ,map,new TypeToken<AccidentReportBean>(){});
     }
 
     /**
@@ -53,7 +59,8 @@ public class AccidentReportPresenter implements ICommonAction, AccidentReportCon
      */
     @Override
     public void getAccidentReportDetail(Map<String, String> map) {
-
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.accident_report_get,UrlContant.MySourcePart.accident_report_select_id
+                ,map,new TypeToken<AccidentReportBean.AccidentListBean>(){});
     }
 
     /**
@@ -68,14 +75,35 @@ public class AccidentReportPresenter implements ICommonAction, AccidentReportCon
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex){
-
+                //新增
             case UrlContant.MySourcePart.accident_report_add:
+                if (status==REQUEST_SUCCESS){
+                    accidentAddIView.successOnAccidentAdd(Msg);
+                }else {
+                    accidentAddIView.error(Msg);
+                }
+
                 break;
 
+                //列表
             case UrlContant.MySourcePart.accident_report_list:
+                if (status==REQUEST_SUCCESS){
+                    accidentReportIView.successOnAccidentList((AccidentReportBean) data);
+                }else {
+                    accidentReportIView.error(Msg);
+                }
+
                 break;
+            //详情
             case UrlContant.MySourcePart.accident_report_select_id:
+                if (status==REQUEST_SUCCESS){
+                    accidentAddIView.successOnAccidentReportDetail((AccidentReportBean.AccidentListBean) data);
+                }else {
+                    accidentAddIView.error(Msg);
+                }
                 break;
+
+
 
         }
     }

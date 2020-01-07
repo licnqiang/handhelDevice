@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.LoginVi
     @Override
     public void loginError(String errorMsg) {
         dismiss();
-        ToastUtil.show(this,"errorMsg");
+        ToastUtil.show(this,errorMsg);
     }
 
     @Override
