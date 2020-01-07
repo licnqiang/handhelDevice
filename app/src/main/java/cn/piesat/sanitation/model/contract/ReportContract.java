@@ -26,10 +26,13 @@ public interface ReportContract {
     }
 
 
+
+
     interface ReportViolatePresenter{
         void getViolateReportList(Map<String,String> map);
         void getViolateReportAdd(Map<String,String> map);
         void getViolateReportDetail(Map<String,String>map);
         void getViolateReportDelete(Map<String,String>map);
+
     }
 }

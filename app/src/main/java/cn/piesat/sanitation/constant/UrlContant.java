@@ -79,6 +79,10 @@ public class UrlContant {
         String violate_report_select_id="selectbyid";
         String violate_report_delete="delete";
 
+        String accident_report_get="api/AccidentReport";
+        String accident_report_add="save";
+        String accident_report_list="list";
+        String accident_report_select_id="selectbyid";
 
     }
 

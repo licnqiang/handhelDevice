@@ -32,9 +32,8 @@ import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.data.DriverInfo;
-import cn.piesat.sanitation.data.ViolateReportBean;
-import cn.piesat.sanitation.model.contract.ReportContract;
-import cn.piesat.sanitation.model.presenter.ReportPresenter;
+import cn.piesat.sanitation.model.contract.AccidentReportContract;
+import cn.piesat.sanitation.model.presenter.AccidentReportPresenter;
 import cn.piesat.sanitation.networkdriver.upLoadFile.UpLoadFileControl;
 import cn.piesat.sanitation.util.DialogUtils;
 import cn.piesat.sanitation.util.PhotoTool;
@@ -42,10 +41,9 @@ import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 站长 新增违章上报\违章详情页面
- * Created by sen.luo on 2020/1/2.
+ * 事故 详情、新增
  */
-public class AddViolateReportActivity extends BaseActivity implements ReportContract.getReportAddIView {
+public class AddAccidentReportActivity extends BaseActivity implements AccidentReportContract.GetAccidentAddIView {
 
     @BindView(R.id.tv_title)
     TextView tv_title;
@@ -70,47 +68,41 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
     EditText etViolateFine;
     @BindView(R.id.imgPhoto)
     ImageView imgPhoto;
-    @BindView(R.id.iv_right)
-    ImageView iv_right;
+
     @BindView(R.id.btReport)
     Button btReport;
-
-    private String picPath; //图片url
-    private ReportPresenter reportPresenter;
-
-
-    private CompressStations.RowsBean rowsBean; //站点
-    private CarInfo.RowsBean carRowsBean; //车辆
-    private DriverInfo.RowsBean driverRowsBean; //司机
+    @BindView(R.id.etDescription)
+    EditText etDescription;
 
     private boolean isEdit=false;//是否可编辑 用于详情页展示
     private String  reportId="";
+    private String picPath; //图片url
     private String detailPhoto="";
+
+    private CarInfo.RowsBean carRowsBean; //车辆
+    private DriverInfo.RowsBean driverRowsBean; //司机
+
+    private AccidentReportPresenter accidentReportPresenter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_violate_report_add;
+        return R.layout.activity_accident_report_add;
     }
 
     @Override
     protected void initView() {
         isEdit=getIntent().getBooleanExtra("isEdit",false);
         reportId=getIntent().getStringExtra("report_id");
-        tv_title.setText(isEdit?"新增违章上报":"违章详情");
+        tv_title.setText(isEdit?"新增事故上报":"事故详情");
         btReport.setVisibility(isEdit? View.VISIBLE:View.GONE);
 
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
 
-
-        reportPresenter=new ReportPresenter(this);
-
         if (BaseApplication.getUserInfo()!=null){
             etReportPerson.setText(BaseApplication.getUserInfo().name);
-            etStation.setText(BaseApplication.getUserInfo().deptNameCount);//站点名称
         }
 
-
-
+        accidentReportPresenter=new AccidentReportPresenter(this);
     }
 
     @Override
@@ -121,19 +113,20 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
             etRemark.setFocusable(false);
             etStation.setFocusable(false);
             etReportPerson.setFocusable(false);
-            Map<String,String>map =new HashMap<>();
+            Map<String,String> map =new HashMap<>();
             map.put("id",reportId);
             showLoadingDialog();
-            reportPresenter.getViolateReportDetail(map);
+//            reportPresenter.getViolateReportDetail(map);
         }
     }
 
+
     @OnClick({R.id.imgPhoto,R.id.btReport,R.id.etViolatePerson,R.id.etCarNumber,R.id.etViolateDistrict,R.id.etViolateDate})
     public void onViewClick(View view){
-            if (!isEdit){
+        if (!isEdit){
 
-                return;
-            }
+            return;
+        }
         switch (view.getId()){
           /*  // 选择站点
             case R.id.etStation:
@@ -144,7 +137,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 0);
                 break;*/
-                //选择车牌
+            //选择车牌
             case R.id.etCarNumber:
                 Intent intentcar = new Intent();
                 intentcar.setClass(this, ItemSelectActivity.class);
@@ -153,7 +146,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 intentcar.putExtras(bundlecar);
                 startActivityForResult(intentcar, 0);
                 break;
-                //选择违章人\司机
+            //选择违章人\司机
             case R.id.etViolatePerson:
                 Intent intentDriver = new Intent();
                 intentDriver.setClass(this, ItemSelectActivity.class);
@@ -163,7 +156,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 startActivityForResult(intentDriver, 0);
                 break;
 
-                //违章区域
+            //违章区域
             case R.id.etViolateDistrict:
 
                 DialogUtils.listDiaLog(this, "请选择区域：",SysContant.CommentTag.district, new DialogInterface.OnClickListener() {
@@ -174,7 +167,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 });
 
                 break;
-                //违章时间
+            //违章时间
             case R.id.etViolateDate:
                 seleTimePicker(etViolateDate);
                 break;
@@ -193,6 +186,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
         }
     }
 
+
     private void getReport() {
         String station=etStation.getText().toString().trim();
         String carNumber=etCarNumber.getText().toString().trim();
@@ -210,23 +204,23 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
             return;
         }
         if (violatePerson.isEmpty()){
-            ToastUtil.show(this,"违章人不得为空");
+            ToastUtil.show(this,"事故人不得为空");
             return;
         }
         if (violateDate.isEmpty()){
-            ToastUtil.show(this,"违章时间不得为空");
+            ToastUtil.show(this,"事故时间不得为空");
             return;
         }
         if (violateDetail.isEmpty()){
-            ToastUtil.show(this,"违章项目不得为空");
+            ToastUtil.show(this,"定则划分不得为空");
             return;
         }
         if (violateDistrict.isEmpty()){
-            ToastUtil.show(this,"违章区域不得为空");
+            ToastUtil.show(this,"事故区域不得为空");
             return;
         }
         if (violateFine.isEmpty()){
-            ToastUtil.show(this,"违章罚款不得为空");
+            ToastUtil.show(this,"定损额不得为空");
             return;
         }
 
@@ -248,68 +242,35 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
             map.put("remark",etRemark.getText().toString());
         }
 
-        reportPresenter.getViolateReportAdd(map);
+        accidentReportPresenter.getAccidentReportAdd(map);
     }
 
     @Override
-    public void Error(String msg) {
+    public void error(String msg) {
         ToastUtil.show(this,msg);
         dismiss();
-
-
     }
+
     @Override
-    public void SuccessOnReportAdd(String msg) {
-         ToastUtil.show(AddViolateReportActivity.this,msg);
+    public void successOnAccidentAdd(String msg) {
+        ToastUtil.show(AddAccidentReportActivity.this,msg);
         dismiss();
 
     }
 
     @Override
-    public void SuccessOnViolateReportDetail(ViolateReportBean.ViolateListBean violateListBean) {
-        dismiss();
-        if (violateListBean!=null){
-            etStation.setText(violateListBean.siteName==null?"空":violateListBean.siteName);
-            etCarNumber.setText(violateListBean.carNumber==null?"空":violateListBean.carNumber);
-            etViolatePerson.setText(violateListBean.illegalPeople==null?"空":violateListBean.illegalPeople);
-            etViolateDate.setText(violateListBean.illegalTime==null?"空":violateListBean.illegalTime);
-            etViolateDetail.setText(violateListBean.illegalProject==null?"空":violateListBean.illegalProject);
-            etViolateDistrict.setText(violateListBean.administrativeArea==null?"空":violateListBean.administrativeArea);
-            etViolateFine.setText(violateListBean.illegalMoney==null?"空":violateListBean.illegalMoney);
-            etRemark.setText(violateListBean.remark==null?"空":violateListBean.remark);
+    public void successOnAccidentReportDetail(Object o) {
 
-            if (violateListBean.illegalPhoto!=null){
-                detailPhoto=violateListBean.illegalPhoto;
-                Glide.with(AddViolateReportActivity.this)
-                        .load(violateListBean.illegalPhoto)
-                        .into(imgPhoto);
-            }
-
-
-        }
     }
 
 
-    private void showDialog() {
-        ActionSheetDialog dialog = new ActionSheetDialog(this).builder().setTitle("请选择")
-                .addSheetItem("相册", null, new ActionSheetDialog.OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                        PhotoTool.openLocalImage(AddViolateReportActivity.this);
-                    }
-                }).addSheetItem("拍照", null, new ActionSheetDialog.OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                        PhotoTool.openCameraImage(AddViolateReportActivity.this);
-                    }
-                });
-        dialog.show();
-    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //选择照相机之后的处理
-        if (requestCode==PhotoTool.GET_IMAGE_BY_CAMERA){
+        if (requestCode== PhotoTool.GET_IMAGE_BY_CAMERA){
             if (resultCode == RESULT_OK) {
                 String path = PhotoTool.getImageAbsolutePath(this, PhotoTool.imageUriFromCamera);
                 showLoadingDialog("上传图片", false);
@@ -318,14 +279,13 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
 
         }
 
-
         switch (resultCode) {
 
-            case SysContant.QueryType.compress_station_code:  //选择压缩站
+         /*   case SysContant.QueryType.compress_station_code:  //选择压缩站
                 Bundle bundle = data.getExtras();
                 rowsBean = (CompressStations.RowsBean) bundle.getSerializable(SysContant.QueryType.query_type);
                 etStation.setText(rowsBean.nameYsz);
-                break;
+                break;*/
 
             case SysContant.QueryType.car_code:  //选择车辆
                 Bundle bundlecar = data.getExtras();
@@ -354,6 +314,9 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+
     private void uploadFile(String path) {
         List<String> paths = new ArrayList<>();
         paths.add(path);
@@ -367,7 +330,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                         .placeholder(R.mipmap.paizhao)
                         .error(R.mipmap.paizhao)
                         .fallback(R.mipmap.paizhao);
-                Glide.with(AddViolateReportActivity.this)
+                Glide.with(AddAccidentReportActivity.this)
                         .load(IPConfig.getOutSourceURLPreFix() + picPath)
                         .apply(requestOptions)
                         .into(imgPhoto);
@@ -375,11 +338,28 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
 
             @Override
             public void faild() {
-                ToastUtil.show(AddViolateReportActivity.this, "图片上传失败，请重新上传");
+                ToastUtil.show(AddAccidentReportActivity.this, "图片上传失败，请重新上传");
                 dismiss();
             }
         });
 
+    }
+
+
+    private void showDialog() {
+        ActionSheetDialog dialog = new ActionSheetDialog(this).builder().setTitle("请选择")
+                .addSheetItem("相册", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        PhotoTool.openLocalImage(AddAccidentReportActivity.this);
+                    }
+                }).addSheetItem("拍照", null, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        PhotoTool.openCameraImage(AddAccidentReportActivity.this);
+                    }
+                });
+        dialog.show();
     }
     private void seleTimePicker(EditText textView) {
         TimePickerView pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
@@ -421,6 +401,5 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
             ToastUtil.show(this,"无法查看图片");
         }
     }
-
 
 }

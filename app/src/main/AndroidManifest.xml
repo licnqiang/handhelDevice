@@ -290,6 +290,12 @@
         <activity android:name=".ui.activity.CarBreakDownActivity"></activity>
         <activity android:name=".ui.activity.CarSerViceDetailShowActivity"></activity>
         <activity android:name=".ui.activity.CarFaultDetailShowActivity"></activity>
+
+        <activity android:name=".ui.activity.AccidentReportActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activity.AddAccidentReportActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
