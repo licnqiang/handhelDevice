@@ -48,6 +48,8 @@ public class SysContant {
         String face_tag_verify = "face_tag_verify"; //头像验证
         String pageSize="20";//
 
+        String[] district={"沣东新城","沣西新城","秦汉新城","空港新城","泾河新城"};
+
     }
 
 

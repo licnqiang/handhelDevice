@@ -150,7 +150,7 @@ public class MyAttendanceListActivity extends BaseActivity implements MineContra
                 attendanceList.addAll(myAttendanceLBean.list);
                 attendanceAdapter.notifyDataSetChanged();
             }else {
-                ToastUtil.show(this,"没有更多数据咯!");
+                ToastUtil.show(this,"没有更多数据!");
             }
     }
 

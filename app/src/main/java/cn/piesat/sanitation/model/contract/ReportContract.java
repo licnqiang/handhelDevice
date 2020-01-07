@@ -2,7 +2,7 @@ package cn.piesat.sanitation.model.contract;
 
 import java.util.Map;
 
-import cn.piesat.sanitation.data.ViolateReportListBean;
+import cn.piesat.sanitation.data.ViolateReportBean;
 
 
 /**
@@ -13,15 +13,16 @@ public interface ReportContract {
 
     interface getReportAddIView{
         void Error(String msg);
-        void SuccessOnReportAdd(Object o);
+        void SuccessOnReportAdd(String msg);
+        void SuccessOnViolateReportDetail(ViolateReportBean.ViolateListBean violateListBean);
     }
 
 
 
     interface getViolateReportIView{
-        void SuccessOnReportList(ViolateReportListBean bean);
+        void SuccessOnReportList(ViolateReportBean bean);
         void Error(String msg);
-        void SuccessOnReportDelete(Object o);
+        void SuccessOnReportDelete(String msg);
     }
 
 

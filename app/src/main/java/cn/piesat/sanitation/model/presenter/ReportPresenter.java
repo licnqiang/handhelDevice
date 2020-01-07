@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Map;
 
 import cn.piesat.sanitation.constant.UrlContant;
-import cn.piesat.sanitation.data.ViolateReportListBean;
+import cn.piesat.sanitation.data.ViolateReportBean;
 import cn.piesat.sanitation.model.contract.ReportContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
@@ -39,7 +39,8 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
      */
     @Override
     public void getViolateReportList(Map<String, String> map) {
-
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.violate_report_get,UrlContant.MySourcePart.violate_report_list
+                ,map,new TypeToken<ViolateReportBean>(){});
     }
 
     /**
@@ -58,7 +59,8 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
      */
     @Override
     public void getViolateReportDetail(Map<String, String> map) {
-
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.violate_report_get,UrlContant.MySourcePart.violate_report_select_id
+                ,map,new TypeToken<ViolateReportBean.ViolateListBean>(){});
     }
 
     /**
@@ -67,7 +69,8 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
      */
     @Override
     public void getViolateReportDelete(Map<String, String> map) {
-
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.violate_report_get,UrlContant.MySourcePart.violate_report_delete
+                ,map,new TypeToken<Object>(){});
     }
 
     @Override
@@ -76,7 +79,7 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
             //列表
             case UrlContant.MySourcePart.violate_report_list:
                 if (status==REQUEST_SUCCESS){
-                    reportIView.SuccessOnReportList((ViolateReportListBean) data);
+                    reportIView.SuccessOnReportList((ViolateReportBean) data);
                 }else {
                     reportIView.Error(Msg);
                 }
@@ -86,7 +89,24 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
                 //违章新增
             case UrlContant.MySourcePart.violate_report_add:
                 if (status==REQUEST_SUCCESS){
-                    reportAddIView.SuccessOnReportAdd(data);
+                    reportAddIView.SuccessOnReportAdd(Msg);
+                }else {
+                    reportAddIView.Error(Msg);
+                }
+                break;
+              //查询指定详情
+            case UrlContant.MySourcePart.violate_report_select_id:
+                if (status==REQUEST_SUCCESS){
+                    reportAddIView.SuccessOnViolateReportDetail((ViolateReportBean.ViolateListBean) data);
+                }else {
+                    reportAddIView.Error(Msg);
+                }
+                break;
+
+            //删除指定详情
+            case UrlContant.MySourcePart.violate_report_delete:
+                if (status==REQUEST_SUCCESS){
+                    reportIView.SuccessOnReportDelete(Msg);
                 }else {
                     reportAddIView.Error(Msg);
                 }
