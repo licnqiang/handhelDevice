@@ -39,6 +39,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:background="@drawable/comment_click_state"
             android:padding="5dp"
             android:src="@mipmap/sandian"
             android:visibility="gone" />

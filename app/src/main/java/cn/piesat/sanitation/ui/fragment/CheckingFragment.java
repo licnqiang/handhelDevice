@@ -160,11 +160,11 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
             for (int i = 0; i < checkRecords.size(); i++) {
                 if (checkRecords.get(i).type == 1) {
                     userStartCheckTime.setVisibility(View.VISIBLE);
-                    userStartCheckTime.setText("打卡时间" + checkRecords.get(i).time);
+                    userStartCheckTime.setText("打卡时间 " + checkRecords.get(i).time);
 
                 } else if (checkRecords.get(i).type == 2) {
                     userEndCheckTime.setVisibility(View.VISIBLE);
-                    userEndCheckTime.setText("打卡时间" + checkRecords.get(i).time);
+                    userEndCheckTime.setText("打卡时间 " + checkRecords.get(i).time);
                 }
             }
         }
@@ -176,8 +176,8 @@ public class CheckingFragment extends BaseFragment implements CheckingContract.C
         if (null == stationCheckSet) {
             return;
         }
-        startTime.setText("上班时间" + stationCheckSet.startTime);
-        endTime.setText("上班时间" + stationCheckSet.endTime);
+        startTime.setText("上班时间 " + stationCheckSet.startTime);
+        endTime.setText("下班班时间 " + stationCheckSet.endTime);
     }
 
 }
