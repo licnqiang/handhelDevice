@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.ui.activity.AccidentReportActivity;
 import cn.piesat.sanitation.ui.activity.AssignOrderActivity;
 import cn.piesat.sanitation.ui.activity.CarBreakDownActivity;
 import cn.piesat.sanitation.ui.activity.CarMaintenanceActivity;
@@ -56,8 +57,9 @@ public class WorkStationHeaderFragment extends BaseFragment {
             case R.id.bai_dan:              //运单
                 toActivity(AssignOrderActivity.class);
                 break;
-            case R.id.money_report:         //行政报销
-                toActivity(ExpenseAccountActivity.class);
+            case R.id.money_report://事故上报
+                toActivity(AccidentReportActivity.class);
+//                toActivity(ExpenseAccountActivity.class); //行政报销
                 break;
             case R.id.yun_dan:              //运单
                 toActivity(OrderListActivity.class);

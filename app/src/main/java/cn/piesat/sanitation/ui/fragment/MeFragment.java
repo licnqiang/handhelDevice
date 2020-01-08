@@ -31,6 +31,8 @@ public class MeFragment extends BaseFragment {
     TextView tvHead;
     @BindView(R.id.tvAttendance)
     TextView tvAttendance;
+    @BindView(R.id.tvDescription)
+    TextView tvDescription;
 
  /*   @BindView(R.id.tvUserUnit)
     TextView tvUserUnit;*/
@@ -45,17 +47,25 @@ public class MeFragment extends BaseFragment {
         if (BaseApplication.getUserInfo()==null){
             return;
         }
-        if (BaseApplication.getUserInfo().name!=null){
-            String name=BaseApplication.getUserInfo().name;
-            tvUserName.setText(name);
-            tvHead.setText(UiUtils.getPinYinHeadChar(name.substring(0,1)));
+
+        if (BaseApplication.getUserInfo()!=null){
+            if (BaseApplication.getUserInfo().name!=null){
+                String name=BaseApplication.getUserInfo().name;
+                tvUserName.setText(name);
+                tvHead.setText(UiUtils.getPinYinHeadChar(name.substring(0,1)));
+            }
+
+            if (BaseApplication.getUserInfo().userType==4){
+                tvAttendance.setText("考勤查询");
+            }else {
+                tvAttendance.setText("我的考勤");
+            }
+
+            if (BaseApplication.getUserInfo().areaCount!=null&&BaseApplication.getUserInfo().deptNameCount!=null){
+                tvDescription.setText(BaseApplication.getUserInfo().areaCount+"/"+BaseApplication.getUserInfo().deptNameCount);
+            }
         }
 
-        if (BaseApplication.getUserInfo().userType==4){
-            tvAttendance.setText("考勤查询");
-        }else {
-            tvAttendance.setText("我的考勤");
-        }
 
 
 /*        int type =BaseApplication.getUserInfo().userType;

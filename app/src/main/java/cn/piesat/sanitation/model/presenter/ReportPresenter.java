@@ -19,14 +19,10 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
     private CommonPresenter commonPresenter;
     private ReportContract.getViolateReportIView reportIView;
     private ReportContract.getReportAddIView reportAddIView;
-
-
     public ReportPresenter(ReportContract.getReportAddIView reportAddIView) {
         this.reportAddIView = reportAddIView;
         commonPresenter=new CommonPresenter(this);
-
     }
-
     public ReportPresenter(ReportContract.getViolateReportIView reportIView) {
         this.reportIView = reportIView;
         commonPresenter=new CommonPresenter(this);
@@ -76,7 +72,7 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex){
-            //列表
+            //违章列表
             case UrlContant.MySourcePart.violate_report_list:
                 if (status==REQUEST_SUCCESS){
                     reportIView.SuccessOnReportList((ViolateReportBean) data);
@@ -94,7 +90,7 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
                     reportAddIView.Error(Msg);
                 }
                 break;
-              //查询指定详情
+              //查询指定违章详情
             case UrlContant.MySourcePart.violate_report_select_id:
                 if (status==REQUEST_SUCCESS){
                     reportAddIView.SuccessOnViolateReportDetail((ViolateReportBean.ViolateListBean) data);
@@ -103,7 +99,7 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
                 }
                 break;
 
-            //删除指定详情
+            //删除指定违章详情
             case UrlContant.MySourcePart.violate_report_delete:
                 if (status==REQUEST_SUCCESS){
                     reportIView.SuccessOnReportDelete(Msg);
@@ -111,6 +107,7 @@ public class ReportPresenter implements ICommonAction, ReportContract.ReportViol
                     reportAddIView.Error(Msg);
                 }
                 break;
+
         }
     }
 }

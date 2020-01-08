@@ -83,6 +83,10 @@ public class UrlContant {
         String gasoline_report_add="OilReport/save";
         String gasoline_report_list="OilReport/list";
 
+        String accident_report_get="api/AccidentReport";
+        String accident_report_add="save";
+        String accident_report_list="list";
+        String accident_report_select_id="selectbyid";
 
     }
 
