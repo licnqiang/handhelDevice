@@ -55,6 +55,7 @@ public class AccidentReportActivity extends BaseActivity implements AccidentRepo
     @Override
     protected void initView() {
         tv_title.setText("事故上报");
+        findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
         iv_right.setVisibility(View.VISIBLE);
         iv_right.setOnClickListener(v -> startActivity(new Intent(this,AddAccidentReportActivity.class).putExtra("isEdit",true)));

@@ -298,6 +298,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.GasoLineReportActivity"/>
         <activity android:name=".ui.activity.GasoLineReportDetailActivity"/>
+        <activity android:name=".ui.activity.EventReportActivity"/>
+        <activity android:name=".ui.activity.StationHeaderApproveActivity"/>
         <activity android:name=".ui.activity.AddGasoLineReportActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"

@@ -16,9 +16,10 @@ import cn.piesat.sanitation.ui.activity.AccidentReportActivity;
 import cn.piesat.sanitation.ui.activity.AssignOrderActivity;
 import cn.piesat.sanitation.ui.activity.CarBreakDownActivity;
 import cn.piesat.sanitation.ui.activity.CarMaintenanceActivity;
-import cn.piesat.sanitation.ui.activity.ExpenseAccountActivity;
+import cn.piesat.sanitation.ui.activity.EventReportActivity;
 import cn.piesat.sanitation.ui.activity.GasoLineReportActivity;
 import cn.piesat.sanitation.ui.activity.OrderListActivity;
+import cn.piesat.sanitation.ui.activity.StationHeaderApproveActivity;
 import cn.piesat.sanitation.ui.activity.ViolateReportActivity;
 import cn.piesat.sanitation.ui.view.MyWorkModul;
 
@@ -48,30 +49,21 @@ public class WorkStationHeaderFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.money_report, R.id.refuse_transport, R.id.record_driver_mody,R.id.record_car_breakdown,R.id.add_gaso_line})
+
+    @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.event_report, R.id.xingzhegn_shenpi})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.refuse_transport:     //审批 违章上报
-                toActivity(ViolateReportActivity.class);
-                break;
-            case R.id.bai_dan:              //运单
+            case R.id.bai_dan:
                 toActivity(AssignOrderActivity.class);
                 break;
-            case R.id.money_report://事故上报
-                toActivity(AccidentReportActivity.class);
-//                toActivity(ExpenseAccountActivity.class); //行政报销
-                break;
-            case R.id.yun_dan:              //运单
+            case R.id.yun_dan:
                 toActivity(OrderListActivity.class);
                 break;
-            case R.id.record_driver_mody:              //记录  设备维护
-                toActivity(CarMaintenanceActivity.class);  //车辆维保列表
+            case R.id.event_report:
+                toActivity(EventReportActivity.class);
                 break;
-            case R.id.record_car_breakdown:              //记录  车辆故障
-                toActivity(CarBreakDownActivity.class);  //车辆故障列表
-                break;
-            case R.id.add_gaso_line:              //记录  加油上报
-                toActivity(GasoLineReportActivity.class);  //加油列表
+            case R.id.xingzhegn_shenpi:
+                toActivity(StationHeaderApproveActivity.class);
                 break;
         }
     }
