@@ -244,6 +244,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
         }*/
         showLoadingDialog();
         Map<String,String> map =new HashMap<>();
+        map.put("id",BaseApplication.getIns().getUserId());
         map.put("administrativeArea",violateDistrict);//行政区划
         map.put("siteName",station);//站点名称
         map.put("carNumber",carNumber);//车牌号

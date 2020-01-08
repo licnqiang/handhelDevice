@@ -58,6 +58,7 @@ public class SysContant {
      */
     public interface userInfo {
         String USER_TOKEN = "user_token";
+        String USER_ID="userId";
 
     }
 

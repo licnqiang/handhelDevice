@@ -24,6 +24,7 @@ import cn.jpush.android.cache.Sp;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.util.SpHelper;
 
 public class SplashActivity extends BaseActivity {
@@ -117,7 +118,7 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                String token=SpHelper.getStringValue("token");
+                String token=BaseApplication.getIns().getUserToken();
                 if (!TextUtils.isEmpty(token)) {
                     toActivity(MainActivity.class);
                 } else {
