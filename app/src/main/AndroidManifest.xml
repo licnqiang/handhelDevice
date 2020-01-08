@@ -223,11 +223,11 @@
         <activity android:name=".ui.activity.ForgetPswActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.ChangPswActivity" />
-
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -279,31 +279,33 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.ImageDetailActivity" />
         <activity android:name=".ui.activity.StationAllUserActivity" />
-
-        <activity android:name=".ui.activity.ViolateReportActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".ui.activity.AddViolateReportActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.ViolateReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AddViolateReportActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.EventListActivity" />
         <activity android:name=".ui.activity.CarMaintenanceActivity" />
-        <activity android:name=".ui.activity.CarBreakDownActivity"></activity>
-        <activity android:name=".ui.activity.CarSerViceDetailShowActivity"></activity>
-        <activity android:name=".ui.activity.CarFaultDetailShowActivity"></activity>
-
-        <activity android:name=".ui.activity.AccidentReportActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".ui.activity.AddAccidentReportActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.GasoLineReportActivity"/>
-        <activity android:name=".ui.activity.GasoLineReportDetailActivity"/>
-        <activity android:name=".ui.activity.EventReportActivity"/>
-        <activity android:name=".ui.activity.StationHeaderApproveActivity"/>
-        <activity android:name=".ui.activity.AddGasoLineReportActivity"
+        <activity android:name=".ui.activity.CarBreakDownActivity" />
+        <activity android:name=".ui.activity.CarSerViceDetailShowActivity" />
+        <activity android:name=".ui.activity.CarFaultDetailShowActivity" />
+        <activity
+            android:name=".ui.activity.AccidentReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AddAccidentReportActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.GasoLineReportActivity" />
+        <activity android:name=".ui.activity.GasoLineReportDetailActivity" />
+        <activity android:name=".ui.activity.EventReportActivity" />
+        <activity android:name=".ui.activity.StationHeaderApproveActivity" />
+        <activity
+            android:name=".ui.activity.AddGasoLineReportActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.activity.UpkeepActivity"></activity>
     </application>
 
 </manifest>
