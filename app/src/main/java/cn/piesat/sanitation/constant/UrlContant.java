@@ -88,6 +88,17 @@ public class UrlContant {
         String accident_report_list="list";
         String accident_report_select_id="selectbyid";
 
+        //启动流程
+        String start_report="api/flow/startFlow";
+
+        //添加保养审批
+        String add_upkeep_report="api/MaintenanceApproval/save";
+
+        //保养未审批列表
+        String upkeep_approval_no="api/MaintenanceApproval/pendinglist";
+        //保养已审批列表
+        String upkeep_approval_is="api/MaintenanceApproval/auditedlist";
+
     }
 
 

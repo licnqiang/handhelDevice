@@ -58,6 +58,7 @@ public class MainActivity extends BaseActivity {
      */
     private BaseFragment switcheWork() {
         int type = BaseApplication.getUserInfo().userType;
+        SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_ID, type+""); //保存角色id
         if (type == 4) {                       //4站长
             return workStationHeaderFragment;
         } else if (type == 5) {                //5操作工

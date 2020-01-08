@@ -55,6 +55,19 @@ public class PhotoTool {
         activity.startActivityForResult(intent, GET_IMAGE_BY_CAMERA);
     }
 
+
+    public static void openCameraImage(final Activity activity,int code) {
+        imageUriFromCamera = createImagePathUri(activity);
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // MediaStore.EXTRA_OUTPUT参数不设置时,系统会自动生成一个uri,但是只会返回一个缩略图
+        // 返回图片在onActivityResult中通过以下代码获取
+        // Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
+        activity.startActivityForResult(intent, code);
+    }
+
+
     public static void openCameraImage(final Fragment fragment) {
         imageUriFromCamera = createImagePathUri(fragment.getContext());
 
@@ -71,6 +84,13 @@ public class PhotoTool {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         activity.startActivityForResult(intent, GET_IMAGE_FROM_PHONE);
+    }
+
+    public static void openLocalImage(final Activity activity,int code) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        activity.startActivityForResult(intent, code);
     }
 
     public static void openLocalImage(final Fragment fragment) {

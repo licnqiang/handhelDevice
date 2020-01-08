@@ -37,6 +37,8 @@ import cn.piesat.sanitation.networkdriver.upLoadFile.UpLoadFileControl;
 import cn.piesat.sanitation.ui.view.CommentItemInputModul;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
 import cn.piesat.sanitation.util.PhotoTool;
+import cn.piesat.sanitation.util.SpHelper;
+import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
@@ -242,6 +244,8 @@ public class AddGasoLineReportActivity extends BaseActivity implements GasonLine
         map.put("oilPrice", s_gosoLineMoney);//加油金额
         map.put("oilLitre", s_gosoLineLitre);//加油升数
         map.put("oilPhoto", picPath);//加油升数
+        map.put("userId", BaseApplication.getIns().getUserId());//加油升数
+        map.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID));//加油升数
         if (!s_orderBz.isEmpty()) {
             map.put("remark", s_orderBz);
         }

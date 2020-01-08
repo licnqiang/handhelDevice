@@ -306,8 +306,19 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".ui.activity.UpkeepActivity"></activity>
-
+        <activity android:name=".ui.activity.AddUpKeepReportActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        <activity android:name=".ui.activity.AddMaintainReportActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity android:name=".ui.activity.InsuranceActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.MaintainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.UpKeepReportDetailActivity"
             android:screenOrientation="portrait"/>
     </application>
 
