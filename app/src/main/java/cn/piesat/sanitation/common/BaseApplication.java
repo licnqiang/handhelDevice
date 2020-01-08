@@ -29,6 +29,7 @@ import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.piesat.sanitation.common.netchange.receiver.NetWorkChangReceiver;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.database.InitDBUtil;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.util.SpHelper;
@@ -48,6 +49,10 @@ public class BaseApplication extends DefaultApplicationLike {
     public static final String TAG = "Tinker.BaseApplication";
     public static Map<String, Activity> activityMap = new HashMap<String, Activity>();        //管理activity 的容器
     public static Context ApplicationContext;
+    private static BaseApplication singleton;
+    public static BaseApplication  getIns(){
+        return singleton;
+    }
 
     public BaseApplication(Application application, int tinkerFlags,
                            boolean tinkerLoadVerifyFlag, long applicationStartElapsedTime,
@@ -60,6 +65,7 @@ public class BaseApplication extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
+        singleton=this;
         ApplicationContext = getApplication().getApplicationContext();
         SpHelper.init(getApplication().getApplicationContext());
         registerMessageReceiver();
@@ -72,6 +78,14 @@ public class BaseApplication extends DefaultApplicationLike {
         JPushInterface.init(ApplicationContext);
         initLicense();
     }
+
+    public  String getUserId(){
+        return SpHelper.getStringValue(SysContant.userInfo.USER_ID);
+    }
+    public String getUserToken(){
+        return SpHelper.getStringValue(SysContant.userInfo.USER_TOKEN);
+    }
+
 
     public static UserInfo_Tab getUserInfo() {
         return new Select().from(UserInfo_Tab.class).querySingle();
@@ -100,6 +114,7 @@ public class BaseApplication extends DefaultApplicationLike {
         super.onTerminate();
         Beta.unInit();
     }
+
 
 
     /**

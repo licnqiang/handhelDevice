@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.ui.activity.MyAttendanceListActivity;
 import cn.piesat.sanitation.ui.activity.MyDetailActivity;
 import cn.piesat.sanitation.ui.activity.SplashActivity;
@@ -105,7 +106,7 @@ public class MeFragment extends BaseFragment {
                 DialogUtils.generalDialog(getActivity(), "确认退出当前账号吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SpHelper.setStringValue("token","");
+                        SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN,"");
                         startActivity(new Intent(getActivity(), SplashActivity.class));
                         getActivity().finish();
                     }

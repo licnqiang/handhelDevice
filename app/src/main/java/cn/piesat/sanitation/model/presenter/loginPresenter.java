@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.LoginInfo_Respose;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
@@ -57,8 +58,8 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
             new Delete().from(UserInfo_Tab.class).execute();
             //保存用户基本信息
             loginInfo_respose.user.save();
-            SpHelper.setStringValue("token", loginInfo_respose.token);
-            SpHelper.setStringValue("userId", loginInfo_respose.user.id); //保存该id主要用于开启数据库
+            SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, loginInfo_respose.token);
+            SpHelper.setStringValue(SysContant.userInfo.USER_ID, loginInfo_respose.user.id); //保存该id主要用于开启数据库
             mLoginView.jumpToMain();
         } else {
             mLoginView.loginError(Msg);

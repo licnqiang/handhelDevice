@@ -11,6 +11,7 @@ import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.model.presenter.loginPresenter;
 import cn.piesat.sanitation.ui.fragment.CheckingFragment;
 import cn.piesat.sanitation.ui.fragment.WorkCompressFragment;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void initView() {
-        String userId = SpHelper.getStringValue("userId");
+        String userId = BaseApplication.getIns().getUserId();
         //通过userId开启数据库   在这里开启数据库是因为只有在这里userId 才能确定
         BaseApplication.initDB(userId);
     }

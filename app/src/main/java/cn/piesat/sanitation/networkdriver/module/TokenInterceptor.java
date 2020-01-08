@@ -6,6 +6,8 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
+import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.networkdriver.upLoadFile.UploadListener;
 import cn.piesat.sanitation.util.SpHelper;
 import okhttp3.Interceptor;
@@ -36,7 +38,7 @@ public class TokenInterceptor implements Interceptor {
                 .addHeader("Accept-Encoding", "UTF-8")
                 .addHeader("Accept", "application/json")
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Token", SpHelper.getStringValue("token"))//添加请求头信息，服务器进行token有效性验证
+                .addHeader("Token", BaseApplication.getIns().getUserToken())//添加请求头信息，服务器进行token有效性验证
                 .method(originalRequest.method(), originalRequest.body());
         Request request = requestBuilder.build();
         return chain.proceed(request);

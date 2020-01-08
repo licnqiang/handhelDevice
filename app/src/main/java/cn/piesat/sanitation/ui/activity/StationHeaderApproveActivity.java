@@ -42,7 +42,8 @@ public class StationHeaderApproveActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.baoxian_nianjian:
-                ToastUtil.show(this,"保险");
+                toActivity(InsuranceActivity.class);
+//                ToastUtil.show(this,"保险");
                 break;
             case R.id.weixiu_shenpi:
                 ToastUtil.show(this,"维修");
