@@ -99,6 +99,13 @@ public class UrlContant {
         //保养已审批列表
         String upkeep_approval_is="api/MaintenanceApproval/auditedlist";
 
+        //添加维修审批
+        String add_maintain_report="api/RepairApproval/save";
+        //保养未审批列表
+        String maintain_approval_no="api/RepairApproval/pendinglist";
+        //保养已审批列表
+        String maintain_approval_is="api/RepairApproval/auditedlist";
+
     }
 
 

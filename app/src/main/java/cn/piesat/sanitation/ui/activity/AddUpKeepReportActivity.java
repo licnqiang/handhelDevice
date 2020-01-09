@@ -219,6 +219,7 @@ public class AddUpKeepReportActivity extends BaseActivity implements UpKeepRepor
         map.put("userType", BaseApplication.getUserInfo().userType + "");//站点名称
         map.put("roleName", "站长");//车牌号
         map.put("flowCode", "1001");//站长上报审批 固定1001
+        map.put("userId", BaseApplication.getUserInfo().id);//用户id
         upkeepReportPresenter.getApporveIdReport(map);
     }
 

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray5"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="常用功能"
+        android:textColor="@color/color_black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/event_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/zhixingdingdan"
+            app:work_modul_title="事件上报"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/xingzhegn_shenpi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/station_apply"
+            app:work_modul_title="行政审批"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            app:work_modul_icon="@mipmap/ic_launcher"
+            app:work_modul_title="设备维护"></cn.piesat.sanitation.ui.view.MyWorkModul>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="其他功能"
+        android:textColor="@color/color_black"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        android:orientation="horizontal">
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/zhixingdingdan"
+            app:work_modul_title=""></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/station_apply"
+            app:work_modul_title=""></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            app:work_modul_icon="@mipmap/yundan"
+            app:work_modul_title="运单"></cn.piesat.sanitation.ui.view.MyWorkModul>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="记录"
+        android:textColor="@color/color_black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        android:orientation="horizontal">
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/record_driver_mody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/device_service"
+            app:work_modul_title="设备维护"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/record_car_breakdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/car_fault"
+            app:work_modul_title="车辆故障"></cn.piesat.sanitation.ui.view.MyWorkModul>
+
+        <cn.piesat.sanitation.ui.view.MyWorkModul
+            android:id="@+id/add_gaso_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:work_modul_icon="@mipmap/station_send"
+            app:work_modul_title="加油上报"></cn.piesat.sanitation.ui.view.MyWorkModul>
+    </LinearLayout>
+
+
+</LinearLayout>
