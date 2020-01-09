@@ -67,7 +67,7 @@ public class UpKeepReportDetailActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_upkeep_report_add;
+        return R.layout.activity_upkeep_report_detail;
     }
 
     @Override
@@ -118,70 +118,5 @@ public class UpKeepReportDetailActivity extends BaseActivity {
                 break;
         }
     }
-
-
-
-
-    private void uploadFile(String path, int type) {
-        List<String> paths = new ArrayList<>();
-        paths.add(path);
-        UpLoadFileControl.uploadFile(false, UrlContant.OutSourcePart.part, UrlContant.OutSourcePart.upload, paths, null, new UpLoadFileControl.ResultCallBack() {
-            @Override
-            public void succeed(Object str) {
-
-                dismiss();
-                //显示图片
-                RequestOptions requestOptions = new RequestOptions()
-                        .placeholder(R.mipmap.paizhao)
-                        .error(R.mipmap.paizhao)
-                        .fallback(R.mipmap.paizhao);
-                Glide.with(UpKeepReportDetailActivity.this)
-                        .load(IPConfig.getOutSourceURLPreFix() + str)
-                        .apply(requestOptions)
-                        .into(type == 1 ? ivPaizhaoXianchang : ivPaizhaoOrder);
-            }
-
-            @Override
-            public void faild() {
-                ToastUtil.show(UpKeepReportDetailActivity.this, "图片上传失败，请重新上传");
-                dismiss();
-            }
-        });
-
-    }
-
-
-    /**
-     * 提交审批信息
-     */
-    private void getReport(String approval) {
-        String station = stationName.getText().toString().trim();
-        String s_carNumber = carNum.getText().toString().trim();
-        String s_reportPerson = reportPerson.getText().toString().trim();
-        String s_maintainCompany = maintainCompany.getText().toString().trim();
-        String s_maintainPrice = maintainPrice.getText().toString().trim();
-        String s_area = area.getText().toString().trim();
-        String s_orderBz = orderBz.getText().toString().trim();
-
-        showLoadingDialog();
-        Map<String, String> addMap = new HashMap<>();
-        addMap.put("approval", approval);//审批流程id
-        addMap.put("roleId", BaseApplication.getUserInfo().userType + "");//站点名称
-        addMap.put("userId", BaseApplication.getUserInfo().id);//站点名称
-        addMap.put("administrativeArea", s_area);//行政区划
-        addMap.put("siteName", station);//站点名称
-        addMap.put("carNumber", s_carNumber);//车牌号
-        addMap.put("reportperson", s_reportPerson);//上报人
-        addMap.put("maintainUnit", s_maintainCompany);//保养单位
-        addMap.put("maintainPrice", s_maintainPrice);//保养价格
-        addMap.put("userId", BaseApplication.getIns().getUserId());//加油升数
-        addMap.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID));//加油升数
-        if (!s_orderBz.isEmpty()) {
-            addMap.put("maintainDescribe", s_orderBz);
-            addMap.put("remark", s_orderBz);
-        }
-    }
-
-
 
 }

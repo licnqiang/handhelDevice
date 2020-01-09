@@ -18,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.GasonLines;
 import cn.piesat.sanitation.data.OrderList;
@@ -59,7 +60,7 @@ public class GasoLineReportActivity extends BaseActivity implements GasonLineOrd
         tv_title.setText("加油上报");
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
-        iv_right.setVisibility(View.VISIBLE);
+        iv_right.setVisibility(3!= BaseApplication.getUserInfo().userType?View.VISIBLE:View.GONE); //判断用户类型是否是集团人员  目前集团人员仅仅开放查看功能
         iv_right.setOnClickListener(v -> startActivity(new Intent(this,AddGasoLineReportActivity.class)));
 
         rowsBeans = new ArrayList<>();

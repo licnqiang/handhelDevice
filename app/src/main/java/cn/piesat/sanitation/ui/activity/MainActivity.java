@@ -19,6 +19,7 @@ import cn.piesat.sanitation.ui.fragment.HomeFragment;
 import cn.piesat.sanitation.ui.fragment.MeFragment;
 import cn.piesat.sanitation.ui.fragment.WorkDriverFragment;
 import cn.piesat.sanitation.ui.fragment.WorkDustmanFragment;
+import cn.piesat.sanitation.ui.fragment.WorkGroupFragment;
 import cn.piesat.sanitation.ui.fragment.WorkStationHeaderFragment;
 import cn.piesat.sanitation.ui.view.BottomBar;
 import cn.piesat.sanitation.util.SpHelper;
@@ -30,10 +31,11 @@ public class MainActivity extends BaseActivity {
     private CheckingFragment checkingFragment = new CheckingFragment();
     private MeFragment meFragment = new MeFragment();
 
-    private WorkCompressFragment workCompressFragment = new WorkCompressFragment(); //操作工
-    private WorkStationHeaderFragment workStationHeaderFragment = new WorkStationHeaderFragment(); //站长
-    private WorkDriverFragment workDriverFragment = new WorkDriverFragment(); //司机
-    private WorkDustmanFragment workDustmanFragment = new WorkDustmanFragment(); //扫保
+    private WorkCompressFragment workCompressFragment = new WorkCompressFragment(); //操作工人员工作模块
+    private WorkStationHeaderFragment workStationHeaderFragment = new WorkStationHeaderFragment(); //站长人员工作模块
+    private WorkDriverFragment workDriverFragment = new WorkDriverFragment(); //司机人员工作模块
+    private WorkDustmanFragment workDustmanFragment = new WorkDustmanFragment(); //扫保人员工作模块
+    private WorkGroupFragment workGroupFragment = new WorkGroupFragment(); //集团人员工作模块
 
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
@@ -67,7 +69,10 @@ public class MainActivity extends BaseActivity {
             return workDustmanFragment;
         } else if (type == 7) {                //7司机
             return workDriverFragment;
-        } else {
+        } else if(type == 3){
+            return workGroupFragment;
+        }else
+            {
             return workDustmanFragment;
         }
     }
@@ -125,6 +130,10 @@ public class MainActivity extends BaseActivity {
 
         if (workDustmanFragment == null && fragment instanceof WorkCompressFragment) {
             workDustmanFragment = (WorkDustmanFragment) fragment;
+        }
+
+        if (workGroupFragment == null && fragment instanceof WorkGroupFragment) {
+            workGroupFragment = (WorkGroupFragment) fragment;
         }
         super.onAttachFragment(fragment);
     }

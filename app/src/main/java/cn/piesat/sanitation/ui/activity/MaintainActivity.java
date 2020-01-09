@@ -14,6 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.ui.adapter.TabPagerAdapter;
 import cn.piesat.sanitation.ui.fragment.FragmentMaintainIs;
 import cn.piesat.sanitation.ui.fragment.FragmentMaintainNo;
@@ -44,7 +45,7 @@ public class MaintainActivity extends BaseActivity {
         tv_title.setText("维修审批");
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
-        iv_right.setVisibility(View.VISIBLE);
+        iv_right.setVisibility(3!= BaseApplication.getUserInfo().userType?View.VISIBLE:View.GONE); //判断用户类型是否是集团人员  目前集团人员仅仅开放查看功能
         iv_right.setOnClickListener(v -> toActivity(AddMaintainReportActivity.class));
         listFragment =new ArrayList<>();
         listFragment.add(new FragmentMaintainNo());

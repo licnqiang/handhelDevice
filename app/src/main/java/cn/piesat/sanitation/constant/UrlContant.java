@@ -102,6 +102,13 @@ public class UrlContant {
         String insuracne_add="api/InsuranceYear/save";
         String insuracne_list="api/InsuranceYear/list";
         String insuracne_detail="api/InsuranceYear/selectbyid";
+        //添加维修审批
+        String add_maintain_report="api/RepairApproval/save";
+        //保养未审批列表
+        String maintain_approval_no="api/RepairApproval/pendinglist";
+        //保养已审批列表
+        String maintain_approval_is="api/RepairApproval/auditedlist";
+
     }
 
 

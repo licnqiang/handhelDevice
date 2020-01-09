@@ -1,5 +1,6 @@
 package cn.piesat.sanitation.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,21 +15,32 @@ import java.util.List;
 import butterknife.BindView;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.GasonLines;
+import cn.piesat.sanitation.data.MaintainList;
+import cn.piesat.sanitation.data.UpKeepList;
 import cn.piesat.sanitation.model.contract.GasonLineReportContract;
+import cn.piesat.sanitation.model.contract.MaintainReportContract;
+import cn.piesat.sanitation.model.contract.UpKeepReportContract;
 import cn.piesat.sanitation.model.presenter.GasonLineReportPresenter;
+import cn.piesat.sanitation.model.presenter.MaintainReportPresenter;
+import cn.piesat.sanitation.model.presenter.UpkeepReportPresenter;
+import cn.piesat.sanitation.ui.activity.MaintainReportDetailActivity;
+import cn.piesat.sanitation.ui.activity.UpKeepReportDetailActivity;
 import cn.piesat.sanitation.ui.adapter.GasonLineOrderAdapter;
+import cn.piesat.sanitation.ui.adapter.MaintainOrderAdapter;
+import cn.piesat.sanitation.ui.adapter.UpKeepOrderAdapter;
 import cn.piesat.sanitation.util.ToastUtil;
 
-public class FragmentMaintainNo extends BaseFragment implements GasonLineOrderAdapter.OnRecyclerViewItemClickListener,GasonLineReportContract.getGasonLineReportSIView{
+public class FragmentMaintainNo extends BaseFragment implements MaintainOrderAdapter.OnRecyclerViewItemClickListener,MaintainReportContract.getMaintainNoReportSIView{
     @BindView(R.id.RecylerView)
     RecyclerView RecylerView;
     @BindView(R.id.springView)
     SpringView springView;
 
-    private GasonLineOrderAdapter adapter;
-    List<GasonLines.RecordsBean> rowsBeans;
-    GasonLineReportPresenter gasonLineReportPresenter;
+    private MaintainOrderAdapter adapter;
+    List<MaintainList.RecordsBean> rowsBeans;
+    MaintainReportPresenter maintainReportPresenter;
     private int pageNum=1;
 
     @Override
@@ -39,7 +51,7 @@ public class FragmentMaintainNo extends BaseFragment implements GasonLineOrderAd
     @Override
     protected void initView() {
         rowsBeans = new ArrayList<>();
-        adapter = new GasonLineOrderAdapter(getActivity(), rowsBeans);
+        adapter = new MaintainOrderAdapter(getActivity(), rowsBeans);
         adapter.setOnItemClickListener(this);
         RecylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         RecylerView.setAdapter(adapter);
@@ -49,13 +61,13 @@ public class FragmentMaintainNo extends BaseFragment implements GasonLineOrderAd
             @Override
             public void onRefresh() {
                 pageNum=1;
-                gasonLineReportPresenter.getGosolineReportList(pageNum);
+                maintainReportPresenter.getMaintainNoReportList(pageNum);
             }
 
             @Override
             public void onLoadmore() {
                 pageNum++;
-                gasonLineReportPresenter.getGosolineReportList(pageNum);
+                maintainReportPresenter.getMaintainNoReportList(pageNum);
             }
         });
 
@@ -63,7 +75,7 @@ public class FragmentMaintainNo extends BaseFragment implements GasonLineOrderAd
 
     @Override
     protected void initData() {
-        gasonLineReportPresenter=new GasonLineReportPresenter(this);
+        maintainReportPresenter=new MaintainReportPresenter(this);
     }
 
     @Override
@@ -71,27 +83,28 @@ public class FragmentMaintainNo extends BaseFragment implements GasonLineOrderAd
         super.onResume();
         showLoadingDialog("加载中", false);
         pageNum=1;
-        gasonLineReportPresenter.getGosolineReportList(pageNum);
+        maintainReportPresenter.getMaintainNoReportList(pageNum);
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        GasonLines.RecordsBean rowsBean = rowsBeans.get(position);
-//        startActivity(new Intent(this, GasoLineReportDetailActivity.class).putExtra(SysContant.CommentTag.comment_key, rowsBean));
+        MaintainList.RecordsBean rowsBean = rowsBeans.get(position);
+        startActivity(new Intent(getActivity(), MaintainReportDetailActivity.class).putExtra(SysContant.CommentTag.comment_key, rowsBean));
     }
 
+
     @Override
-    public void SuccessOnReportList(GasonLines gasonLines) {
+    public void SuccessOnReportList(MaintainList maintainList) {
         if (null!=springView){
             springView.onFinishFreshAndLoad();
         }
         dismiss();
-        if (null!=gasonLines.records&&gasonLines.records.size()>0){
+        if (null!=maintainList.records&&maintainList.records.size()>0){
 
             if (pageNum==1){
-                adapter.refreshData(gasonLines.records);
+                adapter.refreshData(maintainList.records);
             }else {
-                adapter.addAll(gasonLines.records);
+                adapter.addAll(maintainList.records);
             }
         }else {
             ToastUtil.show(getActivity(),"没有更多数据咯!");

@@ -21,6 +21,7 @@ import java.util.Map;
 import butterknife.BindView;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.ViolateReportBean;
 import cn.piesat.sanitation.model.contract.ReportContract;
@@ -61,7 +62,7 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
         tv_title.setText("违章上报");
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
-        iv_right.setVisibility(View.VISIBLE);
+        iv_right.setVisibility(3!= BaseApplication.getUserInfo().userType?View.VISIBLE:View.GONE); //判断用户类型是否是集团人员  目前集团人员仅仅开放查看功能
         iv_right.setOnClickListener(v -> startActivityForResult(new Intent(this,AddViolateReportActivity.class).putExtra("isEdit",true),0));
 
 
@@ -110,7 +111,8 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
         lvViolate.setOnItemClickListener((parent, view, position, id) ->
                         startActivity(new Intent(this,AddViolateReportActivity.class)
                                 .putExtra("isEdit",false)
-                        .putExtra("report_id",violateListBeans.get(position).id)));
+                        .putExtra("report_id",violateListBeans.get(position).id))
+                );
 
     }
 
