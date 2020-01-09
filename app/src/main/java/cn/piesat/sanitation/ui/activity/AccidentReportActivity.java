@@ -58,7 +58,7 @@ public class AccidentReportActivity extends BaseActivity implements AccidentRepo
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
         iv_right.setVisibility(View.VISIBLE);
-        iv_right.setOnClickListener(v -> startActivity(new Intent(this,AddAccidentReportActivity.class).putExtra("isEdit",true)));
+        iv_right.setOnClickListener(v -> startActivityForResult(new Intent(this,AddAccidentReportActivity.class).putExtra("isEdit",true),0));
 
 
         accidentReportPresenter=new AccidentReportPresenter(this);
@@ -135,5 +135,14 @@ public class AccidentReportActivity extends BaseActivity implements AccidentRepo
     @Override
     public void successOnAccidentDelete(String msg) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==0){
+            pageNumber=1;
+            initData();
+        }
     }
 }

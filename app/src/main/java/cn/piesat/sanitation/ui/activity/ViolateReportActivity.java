@@ -62,7 +62,7 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
         iv_right.setVisibility(View.VISIBLE);
-        iv_right.setOnClickListener(v -> startActivity(new Intent(this,AddViolateReportActivity.class).putExtra("isEdit",true)));
+        iv_right.setOnClickListener(v -> startActivityForResult(new Intent(this,AddViolateReportActivity.class).putExtra("isEdit",true),0));
 
 
         reportPresenter=new ReportPresenter(this);
@@ -110,8 +110,7 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
         lvViolate.setOnItemClickListener((parent, view, position, id) ->
                         startActivity(new Intent(this,AddViolateReportActivity.class)
                                 .putExtra("isEdit",false)
-                        .putExtra("report_id",violateListBeans.get(position).id))
-                );
+                        .putExtra("report_id",violateListBeans.get(position).id)));
 
     }
 
@@ -148,6 +147,9 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
     public void Error(String msg) {
         ToastUtil.show(ViolateReportActivity.this,msg);
         dismiss();
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
     }
 
 
@@ -161,5 +163,14 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
             violateReportAdapter.notifyDataSetChanged();
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==0){
+            pageNumber=1;
+            initData();
+        }
     }
 }

@@ -2,7 +2,10 @@ package cn.piesat.sanitation.ui.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +15,14 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.hb.dialog.myDialog.ActionSheetDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -76,6 +84,8 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
     Button btReport;
 
     private String picPath; //图片url
+    private String imageFilePath; //图片本地url
+
     private ReportPresenter reportPresenter;
 
 
@@ -244,7 +254,8 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
         }*/
         showLoadingDialog();
         Map<String,String> map =new HashMap<>();
-        map.put("id",BaseApplication.getIns().getUserId());
+        map.put("userId",BaseApplication.getIns().getUserId());
+        map.put("roleId", String.valueOf(BaseApplication.getUserInfo().userType));
         map.put("administrativeArea",violateDistrict);//行政区划
         map.put("siteName",station);//站点名称
         map.put("carNumber",carNumber);//车牌号
@@ -256,7 +267,9 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
         if (!etRemark.getText().toString().isEmpty()){
             map.put("remark",etRemark.getText().toString());
         }
-
+        if (!picPath.isEmpty()){
+            map.put("illegalPhoto",picPath);
+        }
         reportPresenter.getViolateReportAdd(map);
     }
 
@@ -271,6 +284,8 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
     public void SuccessOnReportAdd(String msg) {
          ToastUtil.show(AddViolateReportActivity.this,msg);
         dismiss();
+        setResult(0);
+        finish();
 
     }
 
@@ -289,8 +304,11 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
 
             if (violateListBean.illegalPhoto!=null){
                 detailPhoto=violateListBean.illegalPhoto;
+                 RequestOptions requestOptions = new RequestOptions()
+                        .placeholder(R.drawable.image_rotate);
                 Glide.with(AddViolateReportActivity.this)
-                        .load(violateListBean.illegalPhoto)
+                        .load(IPConfig.getOutSourceURLPreFix()+violateListBean.illegalPhoto)
+                        .apply(requestOptions)
                         .into(imgPhoto);
             }
 
@@ -317,16 +335,24 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //选择照相机之后的处理
-        if (requestCode==PhotoTool.GET_IMAGE_BY_CAMERA){
-            if (resultCode == RESULT_OK) {
-                String path = PhotoTool.getImageAbsolutePath(this, PhotoTool.imageUriFromCamera);
-                showLoadingDialog("上传图片", false);
-                uploadFile(path);
-            }
+        switch (requestCode) {
+            //选择相册之后的处理
+            case PhotoTool.GET_IMAGE_FROM_PHONE:
+                if (resultCode == RESULT_OK) {
+                    String path = PhotoTool.getImageAbsolutePath(this, data.getData());
+                    showLoadingDialog("上传图片", false);
+                    uploadFile(path);
+                }
 
+                break;
+            //选择照相机之后的处理
+            case PhotoTool.GET_IMAGE_BY_CAMERA:
+                if (resultCode == RESULT_OK) {
+                    String path = PhotoTool.getImageAbsolutePath(this, PhotoTool.imageUriFromCamera);
+                    showLoadingDialog("上传图片", false);
+                    uploadFile(path);
+                }
         }
-
 
         switch (resultCode) {
 
@@ -347,19 +373,6 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 driverRowsBean = (DriverInfo.RowsBean) bundledriver.getSerializable(SysContant.QueryType.query_type);
                 etViolatePerson.setText(driverRowsBean.name);
                 break;
-
-            //选择相册之后的处理
-            case PhotoTool.GET_IMAGE_FROM_PHONE:
-                if (resultCode == RESULT_OK) {
-                    String path = PhotoTool.getImageAbsolutePath(this, data.getData());
-                    showLoadingDialog("上传图片", false);
-                    uploadFile(path);
-                }
-
-                break;
-
-
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -372,14 +385,16 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
                 picPath = str + "";
                 dismiss();
                 //显示图片
-                RequestOptions requestOptions = new RequestOptions()
+               /* RequestOptions requestOptions = new RequestOptions()
                         .placeholder(R.mipmap.paizhao)
                         .error(R.mipmap.paizhao)
                         .fallback(R.mipmap.paizhao);
                 Glide.with(AddViolateReportActivity.this)
                         .load(IPConfig.getOutSourceURLPreFix() + picPath)
                         .apply(requestOptions)
-                        .into(imgPhoto);
+                        .into(imgPhoto);*/
+               ToastUtil.show(AddViolateReportActivity.this,"图片上传成功，请点击上报按钮");
+               Glide.with(AddViolateReportActivity.this).load(Uri.fromFile(new File(path))).into(imgPhoto);
             }
 
             @Override

@@ -20,8 +20,6 @@ import butterknife.BindView;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.ui.adapter.TabPagerAdapter;
-import cn.piesat.sanitation.ui.fragment.FragmentOne;
-import cn.piesat.sanitation.ui.fragment.FragmentTwo;
 import cn.piesat.sanitation.ui.fragment.FragmentUpkeepIs;
 import cn.piesat.sanitation.ui.fragment.FragmentUpkeepNo;
 

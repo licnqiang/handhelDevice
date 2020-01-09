@@ -99,6 +99,9 @@ public class UrlContant {
         //保养已审批列表
         String upkeep_approval_is="api/MaintenanceApproval/auditedlist";
 
+        String insuracne_add="api/InsuranceYear/save";
+        String insuracne_list="api/InsuranceYear/list";
+        String insuracne_detail="api/InsuranceYear/selectbyid";
     }
 
 
