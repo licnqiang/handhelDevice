@@ -90,6 +90,9 @@ public class UrlContant {
 
         //启动流程
         String start_report="api/flow/startFlow";
+        //审批流程
+        String approval_hanlder="api/flow/apprFlow";
+
 
         //添加保养审批
         String add_upkeep_report="api/MaintenanceApproval/save";
@@ -97,14 +100,19 @@ public class UrlContant {
         //保养未审批列表
         String upkeep_approval_no="api/MaintenanceApproval/pendinglist";
         //保养已审批列表
-        String upkeep_approval_is="api/MaintenanceApproval/auditedlist";
+        String upkeep_approval_is="api/MaintenanceApproval/auditedlistddd";
+        //保养已审批列表
+        String upkeep_approval_list="api/MaintenanceApproval/auditedlist";
 
         //添加维修审批
         String add_maintain_report="api/RepairApproval/save";
-        //保养未审批列表
+        //维修未审批列表
         String maintain_approval_no="api/RepairApproval/pendinglist";
-        //保养已审批列表
-        String maintain_approval_is="api/RepairApproval/auditedlist";
+        //维修已审批列表
+        String maintain_approval_is="api/RepairApproval/auditedlists";
+
+        //维修列表
+        String maintain_approval_list="api/RepairApproval/auditedlist";
 
     }
 

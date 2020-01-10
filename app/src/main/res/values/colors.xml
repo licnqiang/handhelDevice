@@ -13,6 +13,7 @@
     <color name="gray_DBE0E6">#DBE0E6</color>
     <color name="color_black">#000000</color>
     <color name="bule">#2BB2E9</color>
+    <color name="translight_bottom_bule">#330CC3FF</color>
     <color name="bule_gray">#10A9E7</color>
     <color name="color_222222">#222222</color>
     <color name="color_background">#F5F5F5</color>
@@ -26,6 +27,7 @@
     <color name="color_F8F0ED">#F8F0ED</color>
     <color name="color_2A83E9">#2A83E9</color>
     <color name="color_E95E28">#E95E28</color>
+    <color name="red">#ff0000</color>
     <!--<color name="bg_title">#FF4081</color>-->
     <!--<color name="transparent">#00000000</color>-->
     <!--<color name="transparent_blue">#99D8DFEF</color>-->

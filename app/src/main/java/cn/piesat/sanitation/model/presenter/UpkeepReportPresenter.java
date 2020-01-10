@@ -24,112 +24,156 @@ public class UpkeepReportPresenter implements ICommonAction, UpKeepReportContrac
     private UpKeepReportContract.getUpkeepReportAddIView UpkeepReportAddIView;
     private UpKeepReportContract.getUpkeepIsReportSIView UpkeepIsReportSIView;
     private UpKeepReportContract.getUpkeepNoReportSIView UpkeepNoReportSIView;
+    private UpKeepReportContract.getUpkeepReportSIView UpkeepReportSIView;
 
 
     public UpkeepReportPresenter(UpKeepReportContract.getUpkeepReportAddIView getUpkeepReportAddIView) {
         this.UpkeepReportAddIView = getUpkeepReportAddIView;
-        commonPresenter=new CommonPresenter(this);
+        commonPresenter = new CommonPresenter(this);
     }
 
     public UpkeepReportPresenter(UpKeepReportContract.getUpkeepIsReportSIView UpkeepIsReportSIView) {
         this.UpkeepIsReportSIView = UpkeepIsReportSIView;
-        commonPresenter=new CommonPresenter(this);
+        commonPresenter = new CommonPresenter(this);
     }
 
     public UpkeepReportPresenter(UpKeepReportContract.getUpkeepNoReportSIView getUpkeepNoReportSIView) {
         this.UpkeepNoReportSIView = getUpkeepNoReportSIView;
-        commonPresenter=new CommonPresenter(this);
+        commonPresenter = new CommonPresenter(this);
     }
 
 
+    public UpkeepReportPresenter(UpKeepReportContract.getUpkeepReportSIView getUpkeepReportSIView) {
+        this.UpkeepReportSIView = getUpkeepReportSIView;
+        commonPresenter = new CommonPresenter(this);
+    }
 
 
     /**
      * 新增保养上报
+     *
      * @param map
      */
     @Override
     public void getUpkeepReportAdd(Map<String, String> map) {
-        commonPresenter.invokeInterfaceObtainData(true, false, true,true, "",UrlContant.MySourcePart.add_upkeep_report
-                ,map,new TypeToken<Object>(){});
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.add_upkeep_report
+                , map, new TypeToken<Object>() {
+                });
     }
 
     /**
      * 获取未审批列表
+     *
      * @param curren
      */
     @Override
     public void getUpkeepNoReportList(int curren) {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("curren", curren+"");
+        hashMap.put("curren", curren + "");
         hashMap.put("size", "20"); //每页显示20条
         hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
-        hashMap.put("roleId", BaseApplication.getUserInfo().userType+""); //角色id
+        hashMap.put("roleId", BaseApplication.getUserInfo().userType + ""); //角色id
         hashMap.put("userId", BaseApplication.getUserInfo().id); //用户id
-        commonPresenter.invokeInterfaceObtainData(true, false, true,true, "",UrlContant.MySourcePart.upkeep_approval_no
-                ,hashMap,new TypeToken<UpKeepList>(){});
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.upkeep_approval_no
+                , hashMap, new TypeToken<UpKeepList>() {
+                });
     }
 
     /**
-     * 获取审批列表
+     * 获取已审批列表
+     *
      * @param curren
      */
     @Override
     public void getUpkeepIsReportList(int curren) {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("curren", curren+"");
+        hashMap.put("curren", curren + "");
         hashMap.put("size ", "20"); //每页显示20条
-        commonPresenter.invokeInterfaceObtainData(true, false, true,true, "",UrlContant.MySourcePart.upkeep_approval_is
-                ,hashMap,new TypeToken<UpKeepList>(){});
+        hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        hashMap.put("roleId", BaseApplication.getUserInfo().userType + ""); //角色id
+        hashMap.put("userId", BaseApplication.getUserInfo().id); //用户id
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.upkeep_approval_is
+                , hashMap, new TypeToken<UpKeepList>() {
+                });
+    }
+
+
+    /**
+     * 获取列表
+     *
+     * @param curren
+     */
+    @Override
+    public void getUpkeepReportList(int curren) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("curren", curren + "");
+        hashMap.put("size ", "20"); //每页显示20条
+        hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        hashMap.put("roleId", BaseApplication.getUserInfo().userType + ""); //角色id
+        hashMap.put("userId", BaseApplication.getUserInfo().id); //用户id
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.upkeep_approval_list
+                , hashMap, new TypeToken<UpKeepList>() {
+                });
     }
 
 
     /**
      * 获取审批id
+     *
      * @param map
      */
     @Override
     public void getApporveIdReport(Map<String, String> map) {
-        commonPresenter.invokeInterfaceObtainData(true, false, true,true, "",UrlContant.MySourcePart.start_report
-                ,map,new TypeToken<String>(){});
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.start_report
+                , map, new TypeToken<String>() {
+                });
     }
 
 
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
-        switch (methodIndex){
+        switch (methodIndex) {
             //保养新增
             case UrlContant.MySourcePart.add_upkeep_report:
-                if (status==REQUEST_SUCCESS){
+                if (status == REQUEST_SUCCESS) {
                     UpkeepReportAddIView.SuccessOnReportAdd(data);
-                }else {
+                } else {
                     UpkeepReportAddIView.Error(Msg);
                 }
                 break;
             //保养未审批列表
             case UrlContant.MySourcePart.upkeep_approval_no:
-                if (status==REQUEST_SUCCESS){
-                    UpKeepList upKeepList=(UpKeepList)data;
+                if (status == REQUEST_SUCCESS) {
+                    UpKeepList upKeepList = (UpKeepList) data;
                     UpkeepNoReportSIView.SuccessOnReportList(upKeepList);
-                }else {
+                } else {
                     UpkeepNoReportSIView.Error(Msg);
                 }
                 break;
             //保养已审批列表
             case UrlContant.MySourcePart.upkeep_approval_is:
-                if (status==REQUEST_SUCCESS){
-                    UpKeepList upKeepList=(UpKeepList)data;
+                if (status == REQUEST_SUCCESS) {
+                    UpKeepList upKeepList = (UpKeepList) data;
                     UpkeepIsReportSIView.SuccessOnReportList(upKeepList);
-                }else {
+                } else {
                     UpkeepIsReportSIView.Error(Msg);
+                }
+                break;
+            //保养列表
+            case UrlContant.MySourcePart.upkeep_approval_list:
+                if (status == REQUEST_SUCCESS) {
+                    UpKeepList upKeepList = (UpKeepList) data;
+                    UpkeepReportSIView.SuccessOnReportList(upKeepList);
+                } else {
+                    UpkeepReportSIView.Error(Msg);
                 }
                 break;
             //获取审批id
             case UrlContant.MySourcePart.start_report:
-                if (status==REQUEST_SUCCESS){
-                    String approveId=(String)data;
+                if (status == REQUEST_SUCCESS) {
+                    String approveId = (String) data;
                     UpkeepReportAddIView.ApproveSuccess(approveId);
-                }else {
+                } else {
                     UpkeepReportAddIView.ApproveError(Msg);
                 }
                 break;

@@ -21,6 +21,10 @@ public interface UpKeepReportContract {
 
     }
 
+    interface getUpkeepReportSIView{
+        void SuccessOnReportList(UpKeepList upKeepList);
+        void Error(String msg);
+    }
 
     interface getUpkeepIsReportSIView{
         void SuccessOnReportList(UpKeepList upKeepList);
@@ -37,6 +41,7 @@ public interface UpKeepReportContract {
         void getUpkeepReportAdd(Map<String, String> map);
         void getUpkeepNoReportList(int curren);
         void getUpkeepIsReportList(int curren);
+        void getUpkeepReportList(int curren);
         void getApporveIdReport(Map<String, String> map); //获取审批id
     }
 }

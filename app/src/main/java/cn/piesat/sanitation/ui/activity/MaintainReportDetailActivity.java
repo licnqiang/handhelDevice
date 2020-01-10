@@ -5,25 +5,34 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hb.dialog.myDialog.MyAlertInputDialog;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.MaintainList;
+import cn.piesat.sanitation.model.contract.ApprovalContract;
+import cn.piesat.sanitation.model.presenter.ApprovalPresenter;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
+import cn.piesat.sanitation.util.SpHelper;
+import cn.piesat.sanitation.util.ToastUtil;
 
 /**
  * 站长 新增维修上报
  * Created by sen.luo on 2020/1/2.
  */
-public class MaintainReportDetailActivity extends BaseActivity {
+public class MaintainReportDetailActivity extends BaseActivity implements ApprovalContract.ApprovalView{
 
     @BindView(R.id.tv_title)
     TextView tv_title;
@@ -51,6 +60,10 @@ public class MaintainReportDetailActivity extends BaseActivity {
     ImageView ivPaizhaoOrder;
     private MaintainList.RecordsBean rowsBean;
 
+    @BindView(R.id.approval_state)
+    LinearLayout approvalState;
+
+    ApprovalPresenter approvalPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -66,6 +79,7 @@ public class MaintainReportDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         GetIntentValue();
+        approvalPresenter=new ApprovalPresenter(this);
     }
 
     private void GetIntentValue() {
@@ -79,11 +93,17 @@ public class MaintainReportDetailActivity extends BaseActivity {
 
     private void showBaseInfo(MaintainList.RecordsBean rowsBean) {
 
+        String roleTyep= SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
+
+        if (roleTyep == "3") {                             //判断若需要当前用户审批时，显示审批按钮
+            approvalState.setVisibility(View.VISIBLE);
+        }
+
         carNum.setText(rowsBean.carNumber);
         deriverPerson.setText(rowsBean.driver);
         weixiudanwei.setText(rowsBean.maintenanceUnit);
         weixiujiage.setText(rowsBean.maintenancePrice + "");
-        reportPerson.setText(null!=rowsBean.appFlowInst?rowsBean.appFlowInst.sendUser:"");
+//        reportPerson.setText(null!=rowsBean.appFlowInst?rowsBean.appFlowInst.sendUser:"");
         area.setText(rowsBean.administrativeArea);
         stationName.setText(rowsBean.siteName);
         orderBz.setText(rowsBean.maintenanceReason);
@@ -100,7 +120,7 @@ public class MaintainReportDetailActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.img_back, R.id.iv_paizhao_xianchang, R.id.iv_paizhao_weixiu, R.id.iv_paizhao_order})
+    @OnClick({R.id.img_back, R.id.iv_paizhao_xianchang, R.id.iv_paizhao_weixiu, R.id.iv_paizhao_order,R.id.btn_pass,R.id.btn_del})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -114,6 +134,14 @@ public class MaintainReportDetailActivity extends BaseActivity {
                 break;
             case R.id.iv_paizhao_order:
                 lookImageOrder();
+                break;
+                //审批通过
+            case R.id.btn_pass:
+                approvalPresenter.approvalHandlePass(rowsBean.approval);
+                break;
+                //审批驳回
+            case R.id.btn_del:
+                showDialog();
                 break;
         }
     }
@@ -170,5 +198,38 @@ public class MaintainReportDetailActivity extends BaseActivity {
             startActivity(intent);
             overridePendingTransition(0, 0);
         }
+    }
+
+    private void showDialog() {
+        final MyAlertInputDialog myAlertInputDialog = new MyAlertInputDialog(this).builder()
+                .setTitle("请输入")
+                .setEditText("");
+        myAlertInputDialog.setPositiveButton("确认", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myAlertInputDialog.dismiss();
+                approvalPresenter.approvalHandleTurn(rowsBean.approval,myAlertInputDialog.getResult());
+            }
+        }).setNegativeButton("取消", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myAlertInputDialog.dismiss();
+            }
+        });
+        myAlertInputDialog.show();
+    }
+
+
+    @Override
+    public void Error(String msg) {
+        dismiss();
+        ToastUtil.show(this, msg);
+    }
+
+    @Override
+    public void SuccessOnReport(Object object) {
+        approvalState.setVisibility(View.GONE);
+        dismiss();
+        ToastUtil.show(this, "审批成功");
     }
 }

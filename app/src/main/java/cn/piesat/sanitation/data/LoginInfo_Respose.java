@@ -2,6 +2,7 @@ package cn.piesat.sanitation.data;
 
 import java.util.List;
 
+import cn.piesat.sanitation.database.dbTab.RolesInfo_Tab;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 
 /**
@@ -11,6 +12,7 @@ import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
  * @describe TODO
  */
 public class LoginInfo_Respose {
+    public List<RolesInfo_Tab> roles;
     public String power;
     public UserInfo_Tab user;
     public String token;

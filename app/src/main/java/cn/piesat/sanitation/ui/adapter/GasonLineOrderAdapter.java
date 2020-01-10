@@ -93,7 +93,7 @@ public class GasonLineOrderAdapter extends RecyclerView.Adapter<GasonLineOrderAd
             GasonLines.RecordsBean rowsBean = mData.get(position);
             orderNum.setText("订单号:  " + rowsBean.id);
             orderSendAddress.setText(rowsBean.administrativeArea);
-            time.setText(rowsBean.siteName);
+            time.setText(rowsBean.createtime);
 //            if (rowsBean.status == 0) {             //0 -指派取消
 //                orderState.setText("已取消");
 //                orderState.setTextColor(Color.parseColor("#888888"));

@@ -24,6 +24,7 @@ public class MaintainReportPresenter implements ICommonAction, MaintainReportCon
     private MaintainReportContract.getMaintainReportAddIView MaintainReportAddIView;
     private MaintainReportContract.getMaintainIsReportSIView MaintainIsReportSIView;
     private MaintainReportContract.getMaintainNoReportSIView MaintainNoReportSIView;
+    private MaintainReportContract.getMaintainReportSIView MaintainReportSIView;
 
 
     public MaintainReportPresenter(MaintainReportContract.getMaintainReportAddIView getMaintainReportAddIView) {
@@ -38,6 +39,11 @@ public class MaintainReportPresenter implements ICommonAction, MaintainReportCon
 
     public MaintainReportPresenter(MaintainReportContract.getMaintainNoReportSIView getMaintainNoReportSIView) {
         this.MaintainNoReportSIView = getMaintainNoReportSIView;
+        commonPresenter=new CommonPresenter(this);
+    }
+
+    public MaintainReportPresenter(MaintainReportContract.getMaintainReportSIView MaintainReportSIView) {
+        this.MaintainReportSIView = MaintainReportSIView;
         commonPresenter=new CommonPresenter(this);
     }
 
@@ -88,6 +94,23 @@ public class MaintainReportPresenter implements ICommonAction, MaintainReportCon
 
 
     /**
+     * 获取列表
+     * @param curren
+     */
+    @Override
+    public void getMaintainReportList(int curren) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("curren", curren+"");
+        hashMap.put("size", "20"); //每页显示20条
+        hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        hashMap.put("roleId", BaseApplication.getUserInfo().userType+""); //角色id
+        hashMap.put("userId", BaseApplication.getUserInfo().id); //用户id
+        commonPresenter.invokeInterfaceObtainData(true, false, true,true, "",UrlContant.MySourcePart.maintain_approval_list
+                ,hashMap,new TypeToken<MaintainList>(){});
+    }
+
+
+    /**
      * 获取审批id
      * @param map
      */
@@ -125,6 +148,15 @@ public class MaintainReportPresenter implements ICommonAction, MaintainReportCon
                     MaintainIsReportSIView.SuccessOnReportList(maintainList);
                 }else {
                     MaintainIsReportSIView.Error(Msg);
+                }
+                break;
+            //维修列表
+            case UrlContant.MySourcePart.maintain_approval_list:
+                if (status==REQUEST_SUCCESS){
+                    MaintainList maintainList=(MaintainList)data;
+                    MaintainReportSIView.SuccessOnReportList(maintainList);
+                }else {
+                    MaintainReportSIView.Error(Msg);
                 }
                 break;
             //获取审批id

@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,27 +94,28 @@ public class MaintainOrderAdapter extends RecyclerView.Adapter<MaintainOrderAdap
             orderNum.setText("订单号:  " + rowsBean.id);
             orderSendAddress.setText(rowsBean.administrativeArea);
             time.setText(rowsBean.createtime);
-//            if (rowsBean.status == 0) {             //0 -指派取消
-//                orderState.setText("已取消");
-//                orderState.setTextColor(Color.parseColor("#888888"));
+
+            if (rowsBean.approvalstatus == "01") {             //01 -审核中
+                orderState.setText("审核中");
+                orderState.setTextColor(Color.parseColor("#2A83E9"));
+                orderState.setBackgroundResource(R.drawable.blue_frame);
+                tv_tag.setBackgroundResource(R.mipmap.ing);
+            } else if (rowsBean.approvalstatus == "02") {      //02-驳回
+                orderState.setText("已驳回");
+                orderState.setTextColor(Color.parseColor("#888888"));
                 orderState.setVisibility(View.GONE);
                 tv_tag.setVisibility(View.GONE);
-//            } else if (rowsBean.status == 1) {      //1-已指派未接单
-//                orderState.setText("未接单");
-//                orderState.setTextColor(Color.parseColor("#E95E28"));
-//                orderState.setBackgroundResource(R.drawable.orange_frame);
-//                tv_tag.setBackgroundResource(R.mipmap.start);
-//            } else if (rowsBean.status == 5) {      //2-已完成
-//                orderState.setText("已完成");
-//                orderState.setTextColor(Color.parseColor("#888888"));
-//                orderState.setBackgroundResource(R.drawable.gay_frame);
-//                tv_tag.setBackgroundResource(R.mipmap.end);
-//            } else {
-//                orderState.setText("进行中");
-//                orderState.setTextColor(Color.parseColor("#2A83E9"));
-//                orderState.setBackgroundResource(R.drawable.blue_frame);
-//                tv_tag.setBackgroundResource(R.mipmap.ing);
-//            }
+            } else if (rowsBean.approvalstatus == "03") {      //03-审核完成了
+                orderState.setText("已完成");
+                orderState.setTextColor(Color.parseColor("#888888"));
+                orderState.setBackgroundResource(R.drawable.gay_frame);
+                tv_tag.setBackgroundResource(R.mipmap.end);
+            } else {
+                orderState.setText("审核中");
+                orderState.setTextColor(Color.parseColor("#2A83E9"));
+                orderState.setBackgroundResource(R.drawable.blue_frame);
+                tv_tag.setBackgroundResource(R.mipmap.ing);
+            }
 
         }
 

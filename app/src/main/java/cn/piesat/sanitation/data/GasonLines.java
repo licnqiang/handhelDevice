@@ -31,6 +31,7 @@ public class GasonLines implements Serializable{
         public String oilLitre;
         public String oilPhoto;
         public String remark;
-        
+        public String createtime;
+
     }
 }

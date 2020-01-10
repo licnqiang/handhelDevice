@@ -27,7 +27,13 @@ public interface MaintainReportContract {
         void Error(String msg);
     }
 
-    interface getMaintainNoReportSIView{
+    interface getMaintainNoReportSIView {
+        void SuccessOnReportList(MaintainList maintainList);
+
+        void Error(String msg);
+    }
+
+    interface getMaintainReportSIView{
         void SuccessOnReportList(MaintainList maintainList);
         void Error(String msg);
     }
@@ -37,6 +43,8 @@ public interface MaintainReportContract {
         void getMaintainReportAdd(Map<String, String> map);
         void getMaintainNoReportList(int curren);
         void getMaintainIsReportList(int curren);
+        void getMaintainReportList(int curren);
         void getApporveIdReport(Map<String, String> map); //获取审批id
     }
 }
+

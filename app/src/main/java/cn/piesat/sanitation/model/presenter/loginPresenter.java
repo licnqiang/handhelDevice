@@ -58,6 +58,8 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
             new Delete().from(UserInfo_Tab.class).execute();
             //保存用户基本信息
             loginInfo_respose.user.save();
+            //保存用户角色，因暂时用户角色唯一 所以只取第一条数据，
+            loginInfo_respose.roles.get(0).save();
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, loginInfo_respose.token);
             SpHelper.setStringValue(SysContant.userInfo.USER_ID, loginInfo_respose.user.id); //保存该id主要用于开启数据库
             mLoginView.jumpToMain();
