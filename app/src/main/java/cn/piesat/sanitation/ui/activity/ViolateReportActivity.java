@@ -63,7 +63,7 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
         iv_right.setVisibility(3!= BaseApplication.getUserInfo().userType?View.VISIBLE:View.GONE); //判断用户类型是否是集团人员  目前集团人员仅仅开放查看功能
-        iv_right.setOnClickListener(v -> startActivity(new Intent(this,AddViolateReportActivity.class).putExtra("isEdit",true)));
+        iv_right.setOnClickListener(v -> startActivityForResult(new Intent(this,AddViolateReportActivity.class).putExtra("isEdit",true),0));
 
 
         reportPresenter=new ReportPresenter(this);
@@ -149,6 +149,9 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
     public void Error(String msg) {
         ToastUtil.show(ViolateReportActivity.this,msg);
         dismiss();
+        if (null!=springView){
+            springView.onFinishFreshAndLoad();
+        }
     }
 
 
@@ -162,5 +165,14 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
             violateReportAdapter.notifyDataSetChanged();
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==0){
+            pageNumber=1;
+            initData();
+        }
     }
 }

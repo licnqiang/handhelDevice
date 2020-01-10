@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray5"
+    android:orientation="vertical"
+    tools:context=".ui.activity.AssignOrderActivity">
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/layoutReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/text_10dp"
+                    >
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="当前审核状态:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvReviewStatus"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/color_E95E28"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutOverrule"
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:visibility="gone">
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="驳回理由:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvOverrule"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/color_E95E28"
+                        android:gravity="right" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/dp_1"
+                    >
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="当前审角色:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvReviewRole"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/dp_1">
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="当前审核人:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvReviewPerson"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_10dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="压缩站:"
+                    />
+
+                <EditText
+                    android:id="@+id/etStation"
+                    style="@style/edit_14_33"
+                    android:focusable="false"
+                    android:hint=""
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_1dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="车牌号:"
+
+                    />
+
+                <EditText
+                    android:id="@+id/etCarNumber"
+                    style="@style/edit_14_33"
+                    android:focusable="false"
+                    android:hint="请选择"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_1dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="申请人:"
+                    />
+
+                <EditText
+                    android:id="@+id/etReportPerson"
+                    style="@style/edit_14_33"
+                    android:focusable="false"
+                    android:hint=""
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_1dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="险种:"
+                    />
+
+                <EditText
+                    android:id="@+id/etInsurance"
+                    style="@style/edit_14_33"
+                    android:hint="请输入"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_1dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="行政区域:"
+                    />
+
+                <EditText
+                    android:id="@+id/etViolateDistrict"
+                    style="@style/edit_14_33"
+                    android:focusable="false"
+                    android:hint="请选择"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_1dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="旧保险起始时间:"
+                    />
+
+                <EditText
+                    android:id="@+id/etInsStartDate"
+                    style="@style/edit_14_33"
+                    android:focusable="false"
+                    android:hint="请选择"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_1dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="旧保险结束时间:"
+                    />
+
+                <EditText
+                    android:id="@+id/etInsEndDate"
+                    style="@style/edit_14_33"
+                    android:focusable="false"
+                    android:hint="请选择"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linear_layout_current"
+                android:layout_marginTop="@dimen/text_1dp"
+                >
+                <TextView
+                    style="@style/text_14_5b"
+                    android:text="采购结束时间:"
+                    />
+
+                <EditText
+                    android:id="@+id/etInsBuyDate"
+                    style="@style/edit_14_33"
+                    android:focusable="false"
+                    android:hint="请选择"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注"
+                    android:textColor="@color/them_black_font"
+                    android:textSize="@dimen/text_14dp" />
+
+                <EditText
+                    android:id="@+id/etRemark"
+                    android:layout_width="match_parent"
+                    style="@style/edit_14_33"
+                    android:lines="3"
+                    android:gravity="left"
+                    android:paddingTop="@dimen/dp_5"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/comment_click_state"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:text="保险标志时间照片"
+                        android:textColor="@color/them_black_font"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/imgPhoto"
+                        android:layout_width="80dp"
+                        android:scaleType="fitXY"
+                        android:layout_height="80dp"
+                        android:src="@mipmap/paizhao" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btReport"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/user_edit"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_click_state"
+                android:text="申请"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/text_20dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

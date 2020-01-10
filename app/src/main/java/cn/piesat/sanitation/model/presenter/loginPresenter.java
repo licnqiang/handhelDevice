@@ -62,6 +62,7 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
             loginInfo_respose.roles.get(0).save();
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, loginInfo_respose.token);
             SpHelper.setStringValue(SysContant.userInfo.USER_ID, loginInfo_respose.user.id); //保存该id主要用于开启数据库
+            SpHelper.setStringValue(SysContant.userInfo.USER_SITE_NAME, loginInfo_respose.user.deptNameCount);//站点
             mLoginView.jumpToMain();
         } else {
             mLoginView.loginError(Msg);

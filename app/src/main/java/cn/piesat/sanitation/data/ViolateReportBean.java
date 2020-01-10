@@ -20,6 +20,8 @@ public class ViolateReportBean {
         public String illegalPhoto;
         public String remark;
 
+        public String createtime;
+
     }
 
 }

@@ -320,6 +320,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.UpKeepReportDetailActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddInsuranceActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.MaintainReportDetailActivity"
             android:screenOrientation="portrait"/>
     </application>

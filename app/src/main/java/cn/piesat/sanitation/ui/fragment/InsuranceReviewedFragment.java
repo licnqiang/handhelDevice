@@ -3,10 +3,13 @@ package cn.piesat.sanitation.ui.fragment;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseFragment;
 
-public class FragmentTwo extends BaseFragment {
+/**
+ * 保险年检-已审核
+ */
+public class InsuranceReviewedFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_two;
+        return R.layout.fragment_one;
     }
 
     @Override

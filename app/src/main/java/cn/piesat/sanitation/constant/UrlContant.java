@@ -104,6 +104,9 @@ public class UrlContant {
         //保养已审批列表
         String upkeep_approval_list="api/MaintenanceApproval/auditedlist";
 
+        String insuracne_add="api/InsuranceYear/save";
+        String insuracne_list="api/InsuranceYear/auditedlist";
+        String insuracne_detail="api/InsuranceYear/selectbyid";
         //添加维修审批
         String add_maintain_report="api/RepairApproval/save";
         //维修未审批列表

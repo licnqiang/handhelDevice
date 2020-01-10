@@ -37,6 +37,7 @@ import cn.piesat.sanitation.model.contract.AccidentReportContract;
 import cn.piesat.sanitation.model.presenter.AccidentReportPresenter;
 import cn.piesat.sanitation.networkdriver.upLoadFile.UpLoadFileControl;
 import cn.piesat.sanitation.util.DialogUtils;
+import cn.piesat.sanitation.util.LogUtil;
 import cn.piesat.sanitation.util.PhotoTool;
 import cn.piesat.sanitation.util.TimeUtils;
 import cn.piesat.sanitation.util.ToastUtil;
@@ -149,7 +150,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
                 intentcar.putExtras(bundlecar);
                 startActivityForResult(intentcar, 0);
                 break;
-            //选择违章人\司机
+            //选择事故人\司机
             case R.id.etViolatePerson:
                 if (!isEdit){
                     return;
@@ -162,7 +163,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
                 startActivityForResult(intentDriver, 0);
                 break;
 
-            //违章区域
+            //事故区域
             case R.id.etViolateDistrict:
                 if (!isEdit){
                     return;
@@ -176,7 +177,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
                 });
 
                 break;
-            //违章时间
+            //事故时间
             case R.id.etViolateDate:
                 if (!isEdit){
                     return;
@@ -200,7 +201,6 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
 
 
     private void getReport() {
-        etCarNumber.setText("陕A92k0V");//TODO test
         String station=etStation.getText().toString().trim();
         String carNumber=etCarNumber.getText().toString().trim();
         String violatePerson=etViolatePerson.getText().toString().trim();
@@ -243,7 +243,8 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
         }*/
         showLoadingDialog();
         Map<String,String> map =new HashMap<>();
-        map.put("id",BaseApplication.getIns().getUserId());
+        map.put("userId",BaseApplication.getIns().getUserId());
+        map.put("roleId", String.valueOf(BaseApplication.getUserInfo().userType));
         map.put("administrativeArea",violateDistrict);//行政区划
         map.put("siteName",station);//站点名称
         map.put("carNumber",carNumber);//车牌号
@@ -259,6 +260,9 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
             map.put("accidentDescription",etDescription.getText().toString());
         }
 
+        if (!picPath.isEmpty()){
+          map.put("scenePhotos",picPath);
+        }
         accidentReportPresenter.getAccidentReportAdd(map);
     }
 
@@ -272,6 +276,8 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
     public void successOnAccidentAdd(String msg) {
         ToastUtil.show(AddAccidentReportActivity.this,msg);
         dismiss();
+        setResult(0);
+        finish();
 
 
     }
@@ -293,7 +299,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
             if (accidentListBean.scenePhotos!=null){
                 detailPhoto=accidentListBean.scenePhotos;
                 Glide.with(AddAccidentReportActivity.this)
-                        .load(accidentListBean.scenePhotos)
+                        .load(IPConfig.getOutSourceURLPreFix()+accidentListBean.scenePhotos)
                         .into(imgPhoto);
             }
 
@@ -308,14 +314,23 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //选择照相机之后的处理
-        if (requestCode== PhotoTool.GET_IMAGE_BY_CAMERA){
-            if (resultCode == RESULT_OK) {
-                String path = PhotoTool.getImageAbsolutePath(this, PhotoTool.imageUriFromCamera);
-                showLoadingDialog("上传图片", false);
-                uploadFile(path);
-            }
+        switch (requestCode) {
+            //选择相册之后的处理
+            case PhotoTool.GET_IMAGE_FROM_PHONE:
+                if (resultCode == RESULT_OK) {
+                    String path = PhotoTool.getImageAbsolutePath(this, data.getData());
+                    showLoadingDialog("上传图片", false);
+                    uploadFile(path);
+                }
 
+                break;
+            //选择照相机之后的处理
+            case PhotoTool.GET_IMAGE_BY_CAMERA:
+                if (resultCode == RESULT_OK) {
+                    String path = PhotoTool.getImageAbsolutePath(this, PhotoTool.imageUriFromCamera);
+                    showLoadingDialog("上传图片", false);
+                    uploadFile(path);
+                }
         }
 
         switch (resultCode) {
@@ -337,18 +352,6 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
                 driverRowsBean = (DriverInfo.RowsBean) bundledriver.getSerializable(SysContant.QueryType.query_type);
                 etViolatePerson.setText(driverRowsBean.name);
                 break;
-
-            //选择相册之后的处理
-            case PhotoTool.GET_IMAGE_FROM_PHONE:
-                if (resultCode == RESULT_OK) {
-                    String path = PhotoTool.getImageAbsolutePath(this, data.getData());
-                    showLoadingDialog("上传图片", false);
-                    uploadFile(path);
-                }
-
-                break;
-
-
 
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -407,7 +410,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
 //      pvTime.setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR));//要在setTime 之前才有效果哦
         pvTime.setTime(new Date());
         pvTime.setCyclic(false);
-        pvTime.setTitle("选择起运时间");
+        pvTime.setTitle("选择时间");
         pvTime.setCancelable(true);
         //时间选择后回调
         pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
@@ -425,6 +428,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
      * 查看大图
      */
     private void lookImage(String picUrl){
+        LogUtil.e("查看大图url",picUrl);
         if ( !TextUtils.isEmpty(picUrl)) {
             Intent intent = new Intent(this, ImageDetailActivity.class);
             intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + picUrl);//非必须

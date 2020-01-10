@@ -20,6 +20,7 @@ public class AccidentReportBean {
         public String scenePhotos;
         public String accidentDescription;
         public String remark;
+        public String createtime;
 
 
     }
