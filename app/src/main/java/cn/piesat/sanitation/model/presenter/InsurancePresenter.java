@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Map;
 
 import cn.piesat.sanitation.constant.UrlContant;
+import cn.piesat.sanitation.data.InsuranceBean;
 import cn.piesat.sanitation.model.contract.InsuranceContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
@@ -45,6 +46,8 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
      */
     @Override
     public void getInsuranceDetail(Map<String, String> map) {
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, "",UrlContant.MySourcePart.insuracne_detail
+                ,map,new TypeToken<InsuranceBean.InsuranceListBean>(){});
 
     }
 
@@ -55,7 +58,8 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
 
     @Override
     public void getInsuranceList(Map<String, String> map) {
-
+        commonPresenter.invokeInterfaceObtainData(true, false, true,false, "",UrlContant.MySourcePart.insuracne_list
+                ,map,new TypeToken<InsuranceBean>(){});
     }
 
     /**
@@ -83,6 +87,22 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
             case UrlContant.MySourcePart.insuracne_add:
                 if (status==REQUEST_SUCCESS){
                     insuranceAddIView.getAddInsuranceSuccess(Msg);
+                }else {
+                    insuranceAddIView.insuranceError(Msg);
+                }
+                break;
+                //列表
+            case  UrlContant.MySourcePart.insuracne_list:
+                if (status==REQUEST_SUCCESS){
+                    insuranceListIView.getInsuranceListOnSuccess((InsuranceBean) data);
+                }else {
+                    insuranceListIView.error(Msg);
+                }
+                break;
+                //详情
+            case UrlContant.MySourcePart.insuracne_detail:
+                if (status==REQUEST_SUCCESS){
+                    insuranceAddIView.getInsuranceDetailSuccess((InsuranceBean.InsuranceListBean) data);
                 }else {
                     insuranceAddIView.insuranceError(Msg);
                 }

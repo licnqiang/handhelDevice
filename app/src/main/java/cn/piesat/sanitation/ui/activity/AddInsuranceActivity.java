@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
@@ -15,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hb.dialog.myDialog.ActionSheetDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,6 +35,7 @@ import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.CarInfo;
 import cn.piesat.sanitation.data.CompressStations;
 import cn.piesat.sanitation.data.DriverInfo;
+import cn.piesat.sanitation.data.InsuranceBean;
 import cn.piesat.sanitation.model.contract.InsuranceContract;
 import cn.piesat.sanitation.model.contract.UpKeepReportContract;
 import cn.piesat.sanitation.model.presenter.InsurancePresenter;
@@ -73,13 +77,26 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
     @BindView(R.id.btReport)
     Button btReport;
 
+    @BindView(R.id.layoutReview)
+    LinearLayout layoutReview; //审核布局
+    @BindView(R.id.layoutOverrule)
+    LinearLayout layoutOverrule;//驳回布局
+    @BindView(R.id.tvOverrule)
+    TextView tvOverrule;//驳回理由
+    @BindView(R.id.tvReviewPerson)
+    TextView tvReviewPerson;//当前审核人
+    @BindView(R.id.tvReviewStatus)
+    TextView tvReviewStatus;//当前审核状态
+    @BindView(R.id.tvReviewRole)
+    TextView tvReviewRole;//当前审核角色
+
 
 
     private CarInfo.RowsBean carRowsBean; //车辆
     private InsurancePresenter insurancePresenter;
     private String  reportId="";//请求详情Id
     private boolean isEdit=false;//是否可编辑 用于详情页展示
-    private String picPath; //图片url
+    private String picPath=""; //图片url
     private String detailPhoto="";
 
 
@@ -93,6 +110,7 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
         isEdit=getIntent().getBooleanExtra("isEdit",false);
         reportId=getIntent().getStringExtra("report_id");
         tv_title.setText(isEdit?"新增保险年检申请":"保险年奖详情");
+        layoutReview.setVisibility(isEdit?View.GONE:View.VISIBLE);//审核状态布局
         btReport.setVisibility(isEdit? View.VISIBLE:View.GONE);
 
         insurancePresenter =new InsurancePresenter(this);
@@ -107,7 +125,17 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
 
     @Override
     protected void initData() {
-
+        if (!isEdit){
+            etRemark.setFocusable(false);
+            etStation.setFocusable(false);
+            etReportPerson.setFocusable(false);
+            etInsurance.setFocusable(false);
+            etDistrict.setFocusable(false);
+            Map<String,String>map =new HashMap<>();
+            map.put("id",reportId);
+            showLoadingDialog();
+            insurancePresenter.getInsuranceDetail(map);
+        }
     }
 
 
@@ -176,8 +204,50 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
     }
 
     @Override
-    public void getInsuranceDetailSuccess(Object o) {
+    public void getInsuranceDetailSuccess(InsuranceBean.InsuranceListBean bean) {
         dismiss();
+        if (bean!=null){
+            if (bean.approvalstatus!=null){
+                switch (bean.approvalstatus){
+                    //审核中
+                    case "01":
+                        tvReviewStatus.setText("审核中");
+                        break;
+                    //驳回
+                    case "02":
+                        tvReviewStatus.setText("驳回");
+                        tvOverrule.setVisibility(View.VISIBLE);
+                        tvOverrule.setText(bean.appFlowInst.appContent);//驳回信息
+                        break;
+                    //审核完成
+                    case "03":
+                        tvReviewStatus.setText("审核完成");
+                        break;
+                }
+
+            }
+
+            tvReviewPerson.setText(bean.check_name.isEmpty()?"空":bean.check_name);
+            tvReviewRole.setText(bean.check_role.isEmpty()?"空":bean.check_role);
+            etCarNumber.setText(bean.carNumber.isEmpty()?"空":bean.carNumber);
+            etInsurance.setText(bean.coverage.isEmpty()?"空":bean.coverage);
+            etInsStartDate.setText(bean.oldInsuranceStarttime.isEmpty()?"空":bean.oldInsuranceStarttime);
+            etInsEndDate.setText(bean.oldInsuranceEndtime.isEmpty()?"空":bean.oldInsuranceEndtime);
+            etInsBuyDate.setText(bean.purchaseEndtime.isEmpty()?"空":bean.purchaseEndtime);
+            etRemark.setText(bean.remark.isEmpty()?"空":bean.remark);
+
+
+            if (!bean.insuranceSign.isEmpty()){
+                detailPhoto=bean.insuranceSign;
+                RequestOptions requestOptions = new RequestOptions()
+                        .placeholder(R.drawable.image_rotate);
+                Glide.with(AddInsuranceActivity.this)
+                        .load(IPConfig.getOutSourceURLPreFix()+bean.insuranceSign)
+                        .apply(requestOptions)
+                        .into(imgPhoto);
+            }
+        }
+
     }
 
     @Override
@@ -252,7 +322,8 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
         showLoadingDialog();
         Map<String,String> map =new HashMap<>();
         map.put("userId",BaseApplication.getIns().getUserId());
-        map.put("roleId", String.valueOf(BaseApplication.getUserInfo().userType));
+        map.put("roleId", String.valueOf(BaseApplication.getIns().getUserRoleId()));
+        map.put("siteName", BaseApplication.getIns().getSiteName());
         map.put("administrativeArea",violateDistrict);//行政区划
         map.put("applicant",reportPerson);//申请人
         map.put("coverage",insurance);//险种
@@ -312,14 +383,16 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
                 picPath = str + "";
                 dismiss();
                 //显示图片
-                RequestOptions requestOptions = new RequestOptions()
+             /*   RequestOptions requestOptions = new RequestOptions()
                         .placeholder(R.mipmap.paizhao)
                         .error(R.mipmap.paizhao)
                         .fallback(R.mipmap.paizhao);
                 Glide.with(AddInsuranceActivity.this)
                         .load(IPConfig.getOutSourceURLPreFix() + picPath)
                         .apply(requestOptions)
-                        .into(imgPhoto);
+                        .into(imgPhoto);*/
+
+                Glide.with(AddInsuranceActivity.this).load(Uri.fromFile(new File(path))).into(imgPhoto);
             }
 
             @Override

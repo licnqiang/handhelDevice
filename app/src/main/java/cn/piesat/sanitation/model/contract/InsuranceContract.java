@@ -2,17 +2,19 @@ package cn.piesat.sanitation.model.contract;
 
 import java.util.Map;
 
+import cn.piesat.sanitation.data.InsuranceBean;
+
 public interface InsuranceContract {
 
     interface GetInsuranceAddIView{
         void insuranceError(String msg);
-        void getInsuranceDetailSuccess(Object o);
+        void getInsuranceDetailSuccess(InsuranceBean.InsuranceListBean bean);
         void getAddInsuranceSuccess(String msg);
         void getReportProcessId(Object o);
     }
     interface GetInsuranceListIView{
         void error(String msg);
-        void getInsuranceListOnSuccess(Object o);
+        void getInsuranceListOnSuccess(InsuranceBean insuranceBean);
     }
 
 

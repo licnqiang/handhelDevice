@@ -86,6 +86,16 @@ public class BaseApplication extends DefaultApplicationLike {
         return SpHelper.getStringValue(SysContant.userInfo.USER_TOKEN);
     }
 
+    //角色id UserType
+    public String getUserRoleId(){
+        return SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID);
+    }
+
+    //站点名称
+    public String getSiteName(){
+        return SpHelper.getStringValue(SysContant.userInfo.USER_SITE_NAME);
+    }
+
 
     public static UserInfo_Tab getUserInfo() {
         return new Select().from(UserInfo_Tab.class).querySingle();

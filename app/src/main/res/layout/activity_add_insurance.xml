@@ -14,10 +14,92 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/layoutReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/text_10dp"
+                    >
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="当前审核状态:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvReviewStatus"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/color_E95E28"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutOverrule"
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:visibility="gone">
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="驳回理由:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvOverrule"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/color_E95E28"
+                        android:gravity="right" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/dp_1"
+                    >
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="当前审角色:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvReviewRole"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/linear_layout_current"
+                    android:layout_marginTop="@dimen/dp_1">
+                    <TextView
+                        style="@style/text_14_5b"
+                        android:text="当前审核人:"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvReviewPerson"
+                        style="@style/text_14_33"
+                        android:layout_width="match_parent"
+                        android:gravity="right"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 style="@style/linear_layout_current"

@@ -100,7 +100,7 @@ public class UrlContant {
         String upkeep_approval_is="api/MaintenanceApproval/auditedlist";
 
         String insuracne_add="api/InsuranceYear/save";
-        String insuracne_list="api/InsuranceYear/list";
+        String insuracne_list="api/InsuranceYear/auditedlist";
         String insuracne_detail="api/InsuranceYear/selectbyid";
         //添加维修审批
         String add_maintain_report="api/RepairApproval/save";
