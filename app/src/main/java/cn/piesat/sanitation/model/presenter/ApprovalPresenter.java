@@ -2,15 +2,16 @@ package cn.piesat.sanitation.model.presenter;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
-import cn.piesat.sanitation.data.MaintainList;
+import cn.piesat.sanitation.data.ApprovalStateBean;
 import cn.piesat.sanitation.model.contract.ApprovalContract;
-import cn.piesat.sanitation.model.contract.MaintainReportContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
 import cn.piesat.sanitation.util.SpHelper;
@@ -29,6 +30,7 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
         this.approvalView = approvalView;
         commonPresenter = new CommonPresenter(this);
     }
+
 
 
     @Override
@@ -62,6 +64,15 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
                 });
     }
 
+    @Override
+    public void approvalStateById(String appFlowInstId) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("appFlowInstId", appFlowInstId); //审批id
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_state
+                , hashMap, new TypeToken<List<ApprovalStateBean>>() {
+                });
+    }
+
 
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
@@ -72,6 +83,15 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
                     approvalView.SuccessOnReport("");
                 } else {
                     approvalView.Error(Msg);
+                }
+                break;
+            //审批情况
+            case UrlContant.MySourcePart.approval_state:
+                if (status == REQUEST_SUCCESS) {
+                    List<ApprovalStateBean> approvalStates=(List<ApprovalStateBean>)data;
+                    approvalView.ApprovalStateSuccess(approvalStates);
+                } else {
+                    approvalView.ApprovalStateError(Msg);
                 }
                 break;
         }

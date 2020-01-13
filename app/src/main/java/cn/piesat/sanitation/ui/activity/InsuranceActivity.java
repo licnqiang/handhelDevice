@@ -25,6 +25,7 @@ import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.InsuranceBean;
+import cn.piesat.sanitation.data.MaintainList;
 import cn.piesat.sanitation.model.contract.InsuranceContract;
 import cn.piesat.sanitation.model.presenter.InsurancePresenter;
 import cn.piesat.sanitation.ui.adapter.InsuranceAdapter;
@@ -67,7 +68,8 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
 
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
         iv_right.setVisibility(View.VISIBLE);
-        iv_right.setOnClickListener(v -> startActivityForResult(new Intent(this,AddInsuranceActivity.class).putExtra("isEdit",true),0));
+        iv_right.setVisibility(3 != BaseApplication.getUserInfo().userType ? View.VISIBLE : View.GONE); //判断用户类型是否是集团人员  目前集团人员仅仅开放查看功能
+        iv_right.setOnClickListener(v -> toActivity(AddInsuranceReportActivity.class));
 
 /*
         listFragment =new ArrayList<>();
@@ -97,9 +99,11 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
             }
         });
         lvInsurance.setOnItemClickListener((parent, view, position, id) -> {
-            startActivity(new Intent(this,AddInsuranceActivity.class)
-                    .putExtra("isEdit",false)
-                    .putExtra("report_id",insuranceList.get(position).id));
+//            startActivity(new Intent(this,AddInsuranceActivity.class)
+//                    .putExtra("isEdit",false)
+//                    .putExtra("report_id",insuranceList.get(position).id));
+            InsuranceBean.InsuranceListBean rowsBean = insuranceList.get(position);
+            startActivity(new Intent(this, InsuranceDetailActivity.class).putExtra(SysContant.CommentTag.comment_key, rowsBean));
         });
     }
 

@@ -155,12 +155,30 @@ public class AddMaintainReportActivity extends BaseActivity implements MaintainR
      * 获取审批流程
      */
     private void getApprovalId() {
+        String station = stationName.getText().toString().trim();
+        String s_carNumber = carNum.getText().toString().trim();
+        String s_reportPerson = reportPerson.getText().toString().trim();
+        String s_weixiudanwei = weixiudanwei.getText().toString().trim();
+        String s_deriverPerson = deriverPerson.getText().toString().trim();
+        String s_weixiujiage = weixiujiage.getText().toString().trim();
+        String s_area = area.getText().toString().trim();
+        String s_orderBz = orderBz.getText().toString().trim();
+
+        if (TextUtils.isEmpty(station) || TextUtils.isEmpty(s_carNumber) || TextUtils.isEmpty(s_reportPerson) ||
+                TextUtils.isEmpty(s_weixiudanwei) || TextUtils.isEmpty(s_deriverPerson)|| TextUtils.isEmpty(s_weixiujiage) || TextUtils.isEmpty(s_area) ||
+                TextUtils.isEmpty(s_orderBz) || TextUtils.isEmpty(picPath_xianchang) || TextUtils.isEmpty(picPath_order)|| TextUtils.isEmpty(picPath_maintain)) {
+            ToastUtil.show(AddMaintainReportActivity.this, "请补全所有信息，再次提交");
+            return;
+        }
+
+
         Map<String, String> map = new HashMap<>();
         map.put("userName", BaseApplication.getUserInfo().name);//行政区划
         map.put("userType", BaseApplication.getUserInfo().userType + "");//站点名称
         map.put("userId", BaseApplication.getUserInfo().id);//用户id
         map.put("roleName", "站长");//车牌号
         map.put("flowCode", "1001");//站长上报审批 固定1001
+        map.put("money", s_weixiujiage);//审批金额
         maintainReportPresenter.getApporveIdReport(map);
     }
 
@@ -363,8 +381,8 @@ public class AddMaintainReportActivity extends BaseActivity implements MaintainR
             addMap.put("remark", s_orderBz);
         }
 
-        addMap.put("scenePhoto", picPath_xianchang);//现场照片
-        addMap.put("maintainPhoto", picPath_maintain);//维修照片
+        addMap.put("scenePhoto", IPConfig.getOutSourceURLPreFix() +picPath_xianchang);//现场照片
+        addMap.put("maintainPhoto", IPConfig.getOutSourceURLPreFix() +picPath_maintain);//维修照片
         addMap.put("maintainBillPhoto", picPath_order);//维修单照片
         maintainReportPresenter.getMaintainReportAdd(addMap);
     }

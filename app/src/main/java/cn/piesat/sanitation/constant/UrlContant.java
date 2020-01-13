@@ -90,9 +90,10 @@ public class UrlContant {
 
         //启动流程
         String start_report="api/flow/startFlow";
-        //审批流程
+        //审批流程 通过/不通过
         String approval_hanlder="api/flow/apprFlow";
-
+        //审批情况
+        String approval_state="api/flow/apprNodeList";
 
         //添加保养审批
         String add_upkeep_report="api/MaintenanceApproval/save";

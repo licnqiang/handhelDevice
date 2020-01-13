@@ -214,12 +214,27 @@ public class AddUpKeepReportActivity extends BaseActivity implements UpKeepRepor
      * 获取审批流程
      */
     private void getApprovalId() {
+        String station = stationName.getText().toString().trim();
+        String s_carNumber = carNum.getText().toString().trim();
+        String s_reportPerson = reportPerson.getText().toString().trim();
+        String s_maintainCompany = maintainCompany.getText().toString().trim();
+        String s_maintainPrice = maintainPrice.getText().toString().trim();
+        String s_area = area.getText().toString().trim();
+        String s_orderBz = orderBz.getText().toString().trim();
+
+        if (TextUtils.isEmpty(station) || TextUtils.isEmpty(s_carNumber) || TextUtils.isEmpty(s_reportPerson) ||
+                TextUtils.isEmpty(s_maintainCompany) || TextUtils.isEmpty(s_maintainPrice) || TextUtils.isEmpty(s_area) ||
+                TextUtils.isEmpty(s_orderBz) || TextUtils.isEmpty(picPath_xianchang) || TextUtils.isEmpty(picPath_order)) {
+            ToastUtil.show(AddUpKeepReportActivity.this, "请补全所有信息，再次提交");
+            return;
+        }
         Map<String, String> map = new HashMap<>();
         map.put("userName", BaseApplication.getUserInfo().name);//行政区划
         map.put("userType", BaseApplication.getUserInfo().userType + "");//站点名称
         map.put("roleName", "站长");//车牌号
         map.put("flowCode", "1001");//站长上报审批 固定1001
         map.put("userId", BaseApplication.getUserInfo().id);//用户id
+        map.put("money", s_maintainPrice);//审批金额
         upkeepReportPresenter.getApporveIdReport(map);
     }
 
@@ -253,6 +268,8 @@ public class AddUpKeepReportActivity extends BaseActivity implements UpKeepRepor
         addMap.put("maintainUnit", s_maintainCompany);//保养单位
         addMap.put("maintainPrice", s_maintainPrice);//保养价格
         addMap.put("userId", BaseApplication.getIns().getUserId());//加油升数
+        addMap.put("maintainPhoto", IPConfig.getOutSourceURLPreFix() +picPath_xianchang);//保养照片
+        addMap.put("maintainBillPhoto", IPConfig.getOutSourceURLPreFix() +picPath_order);//保养单照片
         addMap.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID));//加油升数
         if (!s_orderBz.isEmpty()) {
             addMap.put("maintainDescribe", s_orderBz);

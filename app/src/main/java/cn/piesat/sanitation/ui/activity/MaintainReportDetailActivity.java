@@ -3,6 +3,7 @@ package cn.piesat.sanitation.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.hb.dialog.myDialog.MyAlertInputDialog;
 
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,9 +23,11 @@ import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.constant.SysContant;
+import cn.piesat.sanitation.data.ApprovalStateBean;
 import cn.piesat.sanitation.data.MaintainList;
 import cn.piesat.sanitation.model.contract.ApprovalContract;
 import cn.piesat.sanitation.model.presenter.ApprovalPresenter;
+import cn.piesat.sanitation.ui.view.ApprovalDialog;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
 import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
@@ -65,6 +69,8 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
 
     ApprovalPresenter approvalPresenter;
 
+    ApprovalDialog approvalDialog;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_maintain_report_detail;
@@ -79,7 +85,11 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     @Override
     protected void initData() {
         GetIntentValue();
-        approvalPresenter=new ApprovalPresenter(this);
+        approvalPresenter = new ApprovalPresenter(this);
+        if(null==approvalDialog){
+            approvalDialog=new ApprovalDialog(this);
+        }
+
     }
 
     private void GetIntentValue() {
@@ -92,35 +102,35 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     }
 
     private void showBaseInfo(MaintainList.RecordsBean rowsBean) {
-
-        String roleTyep= SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
-
-        if (roleTyep == "3") {                             //判断若需要当前用户审批时，显示审批按钮
-            approvalState.setVisibility(View.VISIBLE);
+        String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
+        if(null!=rowsBean.appFlowInst){
+            approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
         }
-
         carNum.setText(rowsBean.carNumber);
         deriverPerson.setText(rowsBean.driver);
         weixiudanwei.setText(rowsBean.maintenanceUnit);
         weixiujiage.setText(rowsBean.maintenancePrice + "");
-//        reportPerson.setText(null!=rowsBean.appFlowInst?rowsBean.appFlowInst.sendUser:"");
+        reportPerson.setText(rowsBean.applicant);
         area.setText(rowsBean.administrativeArea);
         stationName.setText(rowsBean.siteName);
         orderBz.setText(rowsBean.maintenanceReason);
         Glide.with(MaintainReportDetailActivity.this)
-                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.scenePhoto)
+//                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.scenePhoto)
+                .load(rowsBean.scenePhoto)
                 .into(ivPaizhaoXianchang);
 
         Glide.with(MaintainReportDetailActivity.this)
-                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.maintainPhoto)
+//                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.maintainPhoto)
+                .load(rowsBean.maintainPhoto)
                 .into(ivPaizhaoWeixiu);
         Glide.with(MaintainReportDetailActivity.this)
-                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.maintainBillPhoto)
+//                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.maintainBillPhoto)
+                .load(rowsBean.maintainBillPhoto)
                 .into(ivPaizhaoOrder);
     }
 
 
-    @OnClick({R.id.img_back, R.id.iv_paizhao_xianchang, R.id.iv_paizhao_weixiu, R.id.iv_paizhao_order,R.id.btn_pass,R.id.btn_del})
+    @OnClick({R.id.img_back, R.id.iv_paizhao_xianchang, R.id.iv_paizhao_weixiu, R.id.iv_paizhao_order, R.id.btn_pass, R.id.btn_del, R.id.approval_state_show})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -135,13 +145,17 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
             case R.id.iv_paizhao_order:
                 lookImageOrder();
                 break;
-                //审批通过
+            //审批通过
             case R.id.btn_pass:
                 approvalPresenter.approvalHandlePass(rowsBean.approval);
                 break;
-                //审批驳回
+            //审批驳回
             case R.id.btn_del:
                 showDialog();
+                break;
+            //当前审批情况
+            case R.id.approval_state_show:
+                approvalPresenter.approvalStateById(rowsBean.approval);
                 break;
         }
     }
@@ -208,7 +222,7 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
             @Override
             public void onClick(View v) {
                 myAlertInputDialog.dismiss();
-                approvalPresenter.approvalHandleTurn(rowsBean.approval,myAlertInputDialog.getResult());
+                approvalPresenter.approvalHandleTurn(rowsBean.approval, myAlertInputDialog.getResult());
             }
         }).setNegativeButton("取消", new View.OnClickListener() {
             @Override
@@ -231,5 +245,17 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
         approvalState.setVisibility(View.GONE);
         dismiss();
         ToastUtil.show(this, "审批成功");
+    }
+
+    @Override
+    public void ApprovalStateError(String msg) {
+        dismiss();
+        ToastUtil.show(this, "流程获取成功");
+    }
+
+    @Override
+    public void ApprovalStateSuccess(List<ApprovalStateBean> approvalStates) {
+        dismiss();
+        approvalDialog.showTaskDialog(approvalStates);
     }
 }

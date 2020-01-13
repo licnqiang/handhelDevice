@@ -22,38 +22,39 @@
             android:paddingBottom="20dp">
 
             <cn.piesat.sanitation.ui.view.CommentItemModul
-                android:id="@+id/approval_state_show"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="1dp"
-                app:comment_item_title="审批流程：" />
-
-            <cn.piesat.sanitation.ui.view.CommentItemModul
                 android:id="@+id/car_num"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
                 app:comment_item_title="车牌：" />
 
-            <cn.piesat.sanitation.ui.view.CommentItemModul
-                android:id="@+id/deriver_person"
+            <cn.piesat.sanitation.ui.view.CommentItemInputModul
+                android:id="@+id/insurance_type"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
-                app:comment_item_title="司机：" />
+                app:comment_item_title="险种：" />
 
             <cn.piesat.sanitation.ui.view.CommentItemModul
-                android:id="@+id/weixiudanwei"
+                android:id="@+id/etInsStartDate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
-                app:comment_item_title="维修单位：" />
+                app:comment_item_title="旧保险起始时间：" />
+
             <cn.piesat.sanitation.ui.view.CommentItemModul
-                android:id="@+id/weixiujiage"
+                android:id="@+id/etInsEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="1dp"
-                app:comment_item_title="维修价格：" />
+                app:comment_item_title="旧保险结束时间：" />
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/etInsBuyDate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                app:comment_item_title="采购结束时间：" />
 
 
             <cn.piesat.sanitation.ui.view.CommentItemModul
@@ -90,11 +91,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="维修原因描述"
+                    android:text="备注"
                     android:textColor="@color/them_black_font"
                     android:textSize="14sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/order_bz"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,7 +108,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:text="现场照片"
+                    android:text="保险标志时间照片"
                     android:textColor="@color/them_black_font"
                     android:textSize="14sp" />
 
@@ -134,95 +134,18 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <Button
+                android:id="@+id/btReport"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/comment_click_state"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:text="维修照片"
-                    android:textColor="@color/them_black_font"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:id="@+id/iv_paizhao_weixiu"
-                    android:layout_width="80dp"
-                    android:scaleType="fitXY"
-                    android:layout_height="80dp"
-                    android:src="@mipmap/paizhao" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/comment_click_state"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:text="维修单照片"
-                    android:textColor="@color/them_black_font"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:id="@+id/iv_paizhao_order"
-                    android:layout_width="80dp"
-                    android:scaleType="fitXY"
-                    android:layout_height="80dp"
-                    android:src="@mipmap/paizhao" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/approval_state"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingBottom="5dp"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:paddingTop="5dp">
-
-                <Button
-                    android:id="@+id/btn_pass"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_frame_selector"
-                    android:text="通过"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/btn_del"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_frame_red_selector"
-                    android:text="驳回"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+                android:layout_height="40dp"
+                android:layout_below="@+id/user_edit"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_click_state"
+                android:text="上报"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/text_20dp"/>
 
         </LinearLayout>
 

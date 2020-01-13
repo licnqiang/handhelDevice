@@ -227,7 +227,7 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
 
             }
 
-            tvReviewPerson.setText(bean.check_name.isEmpty()?"空":bean.check_name);
+            tvReviewPerson.setText(bean.applicant.isEmpty()?"空":bean.check_name);
             tvReviewRole.setText(bean.check_role.isEmpty()?"空":bean.check_role);
             etCarNumber.setText(bean.carNumber.isEmpty()?"空":bean.carNumber);
             etInsurance.setText(bean.coverage.isEmpty()?"空":bean.coverage);

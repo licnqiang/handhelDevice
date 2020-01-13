@@ -22,6 +22,13 @@
             android:paddingBottom="20dp">
 
             <cn.piesat.sanitation.ui.view.CommentItemModul
+                android:id="@+id/approval_state_show"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                app:comment_item_title="审批流程：" />
+
+            <cn.piesat.sanitation.ui.view.CommentItemModul
                 android:id="@+id/car_num"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
