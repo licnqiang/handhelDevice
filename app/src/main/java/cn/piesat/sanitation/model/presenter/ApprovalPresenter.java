@@ -49,7 +49,7 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
     @Override
     public void approvalHandleTurn(String appFlowInstId, String msg) {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("userName", "集团经理2");
+        hashMap.put("userName", BaseApplication.getUserInfo().name);
         hashMap.put("userType", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
         hashMap.put("roleName", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_NAME)); //角色名
         hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
