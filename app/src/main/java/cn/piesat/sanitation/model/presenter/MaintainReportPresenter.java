@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.MaintainList;
 import cn.piesat.sanitation.data.UpKeepList;
@@ -13,6 +14,7 @@ import cn.piesat.sanitation.model.contract.MaintainReportContract;
 import cn.piesat.sanitation.model.contract.UpKeepReportContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
+import cn.piesat.sanitation.util.SpHelper;
 
 import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;
 
@@ -102,9 +104,9 @@ public class MaintainReportPresenter implements ICommonAction, MaintainReportCon
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("curren", curren+"");
         hashMap.put("size", "20"); //每页显示20条
-        hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
-        hashMap.put("roleId", BaseApplication.getUserInfo().userType+""); //角色id
-        hashMap.put("userId", BaseApplication.getUserInfo().id); //用户id
+        hashMap.put("siteName", SpHelper.getStringValue(SysContant.userInfo.USER_SITE_NAME)); //站点名称
+        hashMap.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
+        hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
         commonPresenter.invokeInterfaceObtainData(true, false, true,true, "",UrlContant.MySourcePart.maintain_approval_list
                 ,hashMap,new TypeToken<MaintainList>(){});
     }

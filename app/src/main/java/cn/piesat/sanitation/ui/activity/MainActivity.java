@@ -70,6 +70,8 @@ public class MainActivity extends BaseActivity {
         } else if (type == 7) {                //7司机
             return workDriverFragment;
         } else if(type == 3){
+            SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_ID, BaseApplication.getUserRoleInfo().identity);////保存角色id
+            SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_NAME, BaseApplication.getUserRoleInfo().roleName);////保存角色名
             return workGroupFragment;
         }else
             {

@@ -31,6 +31,7 @@ import cn.jpush.android.api.JPushInterface;
 import cn.piesat.sanitation.common.netchange.receiver.NetWorkChangReceiver;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.database.InitDBUtil;
+import cn.piesat.sanitation.database.dbTab.RolesInfo_Tab;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.faceUtil.FaceSDKManager;
@@ -99,6 +100,10 @@ public class BaseApplication extends DefaultApplicationLike {
 
     public static UserInfo_Tab getUserInfo() {
         return new Select().from(UserInfo_Tab.class).querySingle();
+    }
+
+    public static RolesInfo_Tab getUserRoleInfo() {
+        return new Select().from(RolesInfo_Tab.class).querySingle();
     }
 
 

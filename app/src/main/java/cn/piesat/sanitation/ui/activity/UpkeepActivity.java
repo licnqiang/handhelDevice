@@ -31,8 +31,6 @@ import cn.piesat.sanitation.model.contract.UpKeepReportContract;
 import cn.piesat.sanitation.model.presenter.UpkeepReportPresenter;
 import cn.piesat.sanitation.ui.adapter.TabPagerAdapter;
 import cn.piesat.sanitation.ui.adapter.UpKeepOrderAdapter;
-import cn.piesat.sanitation.ui.fragment.FragmentOne;
-import cn.piesat.sanitation.ui.fragment.FragmentTwo;
 import cn.piesat.sanitation.ui.fragment.FragmentUpkeepIs;
 import cn.piesat.sanitation.ui.fragment.FragmentUpkeepNo;
 import cn.piesat.sanitation.util.ToastUtil;

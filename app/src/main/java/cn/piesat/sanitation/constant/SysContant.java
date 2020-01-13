@@ -60,6 +60,7 @@ public class SysContant {
         String USER_TOKEN = "user_token";
         String USER_ID="userId";
         String USER_ROLE_ID="roleId";
+        String USER_ROLE_NAME="role_name";
         String USER_SITE_NAME="site_name";
 
     }
