@@ -109,7 +109,7 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
     protected void initView() {
         isEdit=getIntent().getBooleanExtra("isEdit",false);
         reportId=getIntent().getStringExtra("report_id");
-        tv_title.setText(isEdit?"新增保险年检申请":"保险年奖详情");
+        tv_title.setText(isEdit?"新增保险年检申请":"保险年检详情");
         layoutReview.setVisibility(isEdit?View.GONE:View.VISIBLE);//审核状态布局
         btReport.setVisibility(isEdit? View.VISIBLE:View.GONE);
 
@@ -134,6 +134,7 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
             Map<String,String>map =new HashMap<>();
             map.put("id",reportId);
             showLoadingDialog();
+            //1-13 修改，详情调列表接口，返回list永远为1
             insurancePresenter.getInsuranceDetail(map);
         }
     }
@@ -154,12 +155,21 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
                 }
                 break;
             case R.id.etInsStartDate:
+                if (!isEdit){
+                    return;
+                }
                 seleTimePicker(etInsStartDate);
                 break;
             case R.id.etInsEndDate:
+                if (!isEdit){
+                    return;
+                }
                 seleTimePicker(etInsEndDate);
                 break;
             case R.id.etInsBuyDate:
+                if (!isEdit){
+                    return;
+                }
                 seleTimePicker(etInsBuyDate);
                 break;
 
@@ -204,9 +214,11 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
     }
 
     @Override
-    public void getInsuranceDetailSuccess(InsuranceBean.InsuranceListBean bean) {
+    public void getInsuranceDetailSuccess(InsuranceBean insuranceBean) {
         dismiss();
-        if (bean!=null){
+        if (insuranceBean!=null){
+            InsuranceBean.InsuranceListBean bean = insuranceBean.records.get(0);
+
             if (bean.approvalstatus!=null){
                 switch (bean.approvalstatus){
                     //审核中
@@ -227,17 +239,17 @@ public class AddInsuranceActivity extends BaseActivity implements  InsuranceCont
 
             }
 
-            tvReviewPerson.setText(bean.check_name.isEmpty()?"空":bean.check_name);
-            tvReviewRole.setText(bean.check_role.isEmpty()?"空":bean.check_role);
-            etCarNumber.setText(bean.carNumber.isEmpty()?"空":bean.carNumber);
-            etInsurance.setText(bean.coverage.isEmpty()?"空":bean.coverage);
-            etInsStartDate.setText(bean.oldInsuranceStarttime.isEmpty()?"空":bean.oldInsuranceStarttime);
-            etInsEndDate.setText(bean.oldInsuranceEndtime.isEmpty()?"空":bean.oldInsuranceEndtime);
-            etInsBuyDate.setText(bean.purchaseEndtime.isEmpty()?"空":bean.purchaseEndtime);
-            etRemark.setText(bean.remark.isEmpty()?"空":bean.remark);
+            tvReviewPerson.setText(bean.check_name==null?"空":bean.check_name);
+            tvReviewRole.setText(bean.check_role==null?"空":bean.check_role);
+            etCarNumber.setText(bean.carNumber==null?"空":bean.carNumber);
+            etInsurance.setText(bean.coverage==null?"空":bean.coverage);
+            etInsStartDate.setText(bean.oldInsuranceStarttime==null?"空":bean.oldInsuranceStarttime);
+            etInsEndDate.setText(bean.oldInsuranceEndtime==null?"空":bean.oldInsuranceEndtime);
+            etInsBuyDate.setText(bean.purchaseEndtime==null?"空":bean.purchaseEndtime);
+            etRemark.setText(bean.remark==null?"空":bean.remark);
 
 
-            if (!bean.insuranceSign.isEmpty()){
+            if (bean.insuranceSign!=null){
                 detailPhoto=bean.insuranceSign;
                 RequestOptions requestOptions = new RequestOptions()
                         .placeholder(R.drawable.image_rotate);

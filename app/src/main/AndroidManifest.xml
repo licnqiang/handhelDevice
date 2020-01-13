@@ -321,9 +321,11 @@
         <activity android:name=".ui.activity.UpKeepReportDetailActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.AddInsuranceActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity android:name=".ui.activity.MaintainReportDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

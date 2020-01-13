@@ -8,7 +8,7 @@ public interface InsuranceContract {
 
     interface GetInsuranceAddIView{
         void insuranceError(String msg);
-        void getInsuranceDetailSuccess(InsuranceBean.InsuranceListBean bean);
+        void getInsuranceDetailSuccess(InsuranceBean bean);
         void getAddInsuranceSuccess(String msg);
         void getReportProcessId(Object o);
     }
