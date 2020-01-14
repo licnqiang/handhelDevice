@@ -72,8 +72,10 @@ public class UpkeepReportPresenter implements ICommonAction, UpKeepReportContrac
     public void getUpkeepNoReportList(int curren) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("curren", curren + "");
-        hashMap.put("size", "20"); //每页显示20条
-        hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        hashMap.put("size", SysContant.CommentTag.pageSize); //每页显示20条
+        if("3".equals(SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID))){
+            hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        }
         hashMap.put("roleId", BaseApplication.getUserInfo().userType + ""); //角色id
         hashMap.put("userId", BaseApplication.getUserInfo().id); //用户id
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.upkeep_approval_no
@@ -91,7 +93,9 @@ public class UpkeepReportPresenter implements ICommonAction, UpKeepReportContrac
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("curren", curren + "");
         hashMap.put("size ", "20"); //每页显示20条
-        hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        if("3".equals(SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID))){
+            hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        }
         hashMap.put("roleId", BaseApplication.getUserInfo().userType + ""); //角色id
         hashMap.put("userId", BaseApplication.getUserInfo().id); //用户id
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.upkeep_approval_is
@@ -110,7 +114,9 @@ public class UpkeepReportPresenter implements ICommonAction, UpKeepReportContrac
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("curren", curren + "");
         hashMap.put("size ", "20"); //每页显示20条
-        hashMap.put("siteName", SpHelper.getStringValue(SysContant.userInfo.USER_SITE_NAME)); //站点名称
+        if("3".equals(SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID))){
+            hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        }
         hashMap.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
         hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.upkeep_approval_list

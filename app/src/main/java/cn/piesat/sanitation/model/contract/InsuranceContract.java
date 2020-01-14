@@ -21,7 +21,7 @@ public interface InsuranceContract {
     interface GetInsurancePresenter{
         void getInsuranceAdd(Map<String,String>map);
         void getInsuranceDetail(Map<String,String>map);
-        void getInsuranceList(Map<String,String>map);
+        void getInsuranceList(int a);
         void getReportProcess(Map<String,String>map);
     }
 

@@ -2,13 +2,17 @@ package cn.piesat.sanitation.model.presenter;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.InsuranceBean;
 import cn.piesat.sanitation.model.contract.InsuranceContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
+import cn.piesat.sanitation.util.SpHelper;
 
 import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;
 
@@ -53,11 +57,18 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
 
     /**
      * 保险年检列表
-     * @param map
      */
 
     @Override
-    public void getInsuranceList(Map<String, String> map) {
+    public void getInsuranceList(int curren) {
+        Map<String,String> map =new HashMap<>();
+        map.put("curren", curren+"");
+        map.put("size", SysContant.CommentTag.pageSize);
+        map.put("userId", BaseApplication.getIns().getUserId());
+        if("3".equals(SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID))){
+            map.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        }
+        map.put("roleId", BaseApplication.getIns().getUserRoleId());
         commonPresenter.invokeInterfaceObtainData(true, false, true,false, "",UrlContant.MySourcePart.insuracne_list
                 ,map,new TypeToken<InsuranceBean>(){});
     }

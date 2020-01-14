@@ -1,15 +1,11 @@
 package cn.piesat.sanitation.ui.activity;
 
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.liaoinstan.springview.container.DefaultFooter;
@@ -17,9 +13,7 @@ import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import cn.piesat.sanitation.R;
@@ -27,10 +21,8 @@ import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.InsuranceBean;
-import cn.piesat.sanitation.data.MaintainList;
 import cn.piesat.sanitation.model.contract.InsuranceContract;
 import cn.piesat.sanitation.model.presenter.InsurancePresenter;
-import cn.piesat.sanitation.ui.adapter.InsuranceAdapter;
 import cn.piesat.sanitation.ui.adapter.InsuranceOrderAdapter;
 import cn.piesat.sanitation.util.ToastUtil;
 
@@ -108,14 +100,15 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
 
     @Override
     protected void initData() {
-        Map<String,String> map =new HashMap<>();
-        map.put("curren", String.valueOf(pageNumber));
-        map.put("size", SysContant.CommentTag.pageSize);
-        map.put("userId", BaseApplication.getIns().getUserId());
-        map.put("siteName", BaseApplication.getIns().getSiteName());
-        map.put("roleId", BaseApplication.getIns().getUserRoleId());
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         showLoadingDialog();
-        insurancePresenter.getInsuranceList(map);
+        pageNumber = 1;
+        insurancePresenter.getInsuranceList(pageNumber);
     }
 
     @Override

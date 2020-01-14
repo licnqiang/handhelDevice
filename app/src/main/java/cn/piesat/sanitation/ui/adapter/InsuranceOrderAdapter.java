@@ -95,17 +95,17 @@ public class InsuranceOrderAdapter extends RecyclerView.Adapter<InsuranceOrderAd
             orderSendAddress.setText(rowsBean.administrativeArea);
             time.setText(rowsBean.createtime);
 
-            if (rowsBean.approvalstatus == "01") {             //01 -审核中
+            if (rowsBean.approvalstatus.equals("01")) {             //01 -审核中
                 orderState.setText("审核中");
                 orderState.setTextColor(Color.parseColor("#2A83E9"));
                 orderState.setBackgroundResource(R.drawable.blue_frame);
                 tv_tag.setBackgroundResource(R.mipmap.ing);
-            } else if (rowsBean.approvalstatus == "02") {      //02-驳回
+            } else if (rowsBean.approvalstatus.equals("02")) {      //02-驳回
                 orderState.setText("已驳回");
                 orderState.setTextColor(Color.parseColor("#888888"));
                 orderState.setVisibility(View.GONE);
                 tv_tag.setVisibility(View.GONE);
-            } else if (rowsBean.approvalstatus == "03") {      //03-审核完成了
+            } else if (rowsBean.approvalstatus.equals("03")) {      //03-审核完成了
                 orderState.setText("已完成");
                 orderState.setTextColor(Color.parseColor("#888888"));
                 orderState.setBackgroundResource(R.drawable.gay_frame);

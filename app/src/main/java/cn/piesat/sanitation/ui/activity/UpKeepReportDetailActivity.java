@@ -129,10 +129,6 @@ public class UpKeepReportDetailActivity extends BaseActivity implements Approval
                 .load( rowsBean.maintainBillPhoto)
                 .apply(requestOptions)
                 .into(ivPaizhaoOrder);
-
-
-        ImageView ivPaizhaoXianchang;
-        ImageView ivPaizhaoOrder;
     }
 
 
