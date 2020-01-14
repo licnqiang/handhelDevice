@@ -5,6 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,13 +31,14 @@ import cn.piesat.sanitation.data.MaintainList;
 import cn.piesat.sanitation.model.contract.InsuranceContract;
 import cn.piesat.sanitation.model.presenter.InsurancePresenter;
 import cn.piesat.sanitation.ui.adapter.InsuranceAdapter;
+import cn.piesat.sanitation.ui.adapter.InsuranceOrderAdapter;
 import cn.piesat.sanitation.util.ToastUtil;
 
 
 /**
  * 保险年检
  */
-public class InsuranceActivity extends BaseActivity implements InsuranceContract.GetInsuranceListIView {
+public class InsuranceActivity extends BaseActivity implements InsuranceContract.GetInsuranceListIView ,InsuranceOrderAdapter.OnRecyclerViewItemClickListener{
 
     @BindView(R.id.tv_title)
     TextView tv_title;
@@ -47,14 +50,14 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
     ViewPager viewPager;*/
 
     @BindView(R.id.lvInsurance)
-    ListView lvInsurance;
+    RecyclerView lvInsurance;
     @BindView(R.id.springView)
     SpringView springView;
 
 
     private int pageNumber=1;
     private List<InsuranceBean.InsuranceListBean>insuranceList;
-    private InsuranceAdapter insuranceAdapter;
+    private InsuranceOrderAdapter insuranceAdapter;
     private InsurancePresenter insurancePresenter;
     @Override
     protected int getLayoutId() {
@@ -79,9 +82,12 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
         viewPager.setAdapter(new TabPagerAdapter(getSupportFragmentManager(),title,listFragment));
         tabLayout.setupWithViewPager(viewPager);*/
 
+        lvInsurance.setLayoutManager(new LinearLayoutManager(this));
+
         insurancePresenter=new InsurancePresenter(this);
         insuranceList=new ArrayList<>();
-        insuranceAdapter =new InsuranceAdapter(this,insuranceList);
+        insuranceAdapter =new InsuranceOrderAdapter(this,insuranceList);
+        insuranceAdapter.setOnItemClickListener(this);
         lvInsurance.setAdapter(insuranceAdapter);
         springView.setHeader(new DefaultHeader(this));
         springView.setFooter(new DefaultFooter(this));
@@ -97,13 +103,6 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
                 pageNumber++;
                 initData();
             }
-        });
-        lvInsurance.setOnItemClickListener((parent, view, position, id) -> {
-//            startActivity(new Intent(this,AddInsuranceActivity.class)
-//                    .putExtra("isEdit",false)
-//                    .putExtra("report_id",insuranceList.get(position).id));
-            InsuranceBean.InsuranceListBean rowsBean = insuranceList.get(position);
-            startActivity(new Intent(this, InsuranceDetailActivity.class).putExtra(SysContant.CommentTag.comment_key, rowsBean));
         });
     }
 
@@ -153,5 +152,11 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
             pageNumber=1;
             initData();
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        InsuranceBean.InsuranceListBean rowsBean = insuranceList.get(position);
+        startActivity(new Intent(this, InsuranceDetailActivity.class).putExtra(SysContant.CommentTag.comment_key, rowsBean));
     }
 }

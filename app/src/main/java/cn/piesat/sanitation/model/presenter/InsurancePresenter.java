@@ -46,8 +46,8 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
      */
     @Override
     public void getInsuranceDetail(Map<String, String> map) {
-        commonPresenter.invokeInterfaceObtainData(true, false, false,false, "",UrlContant.MySourcePart.insuracne_detail
-                ,map,new TypeToken<InsuranceBean.InsuranceListBean>(){});
+        commonPresenter.invokeInterfaceObtainData(true, false, false,false, UrlContant.MySourcePart.insuracne_get,UrlContant.MySourcePart.insuracne_detail
+                ,map,new TypeToken<InsuranceBean>(){});
 
     }
 
@@ -102,7 +102,7 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
                 //详情
             case UrlContant.MySourcePart.insuracne_detail:
                 if (status==REQUEST_SUCCESS){
-                    insuranceAddIView.getInsuranceDetailSuccess((InsuranceBean.InsuranceListBean) data);
+                    insuranceAddIView.getInsuranceDetailSuccess((InsuranceBean) data);
                 }else {
                     insuranceAddIView.insuranceError(Msg);
                 }

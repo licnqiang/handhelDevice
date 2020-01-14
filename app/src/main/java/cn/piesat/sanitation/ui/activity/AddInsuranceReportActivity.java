@@ -241,8 +241,10 @@ public class AddInsuranceReportActivity extends BaseActivity implements Insuranc
     }
 
     @Override
-    public void getInsuranceDetailSuccess(InsuranceBean.InsuranceListBean bean) {
+    public void getInsuranceDetailSuccess(InsuranceBean bean) {
+
     }
+
 
     @Override
     public void getAddInsuranceSuccess(String msg) {

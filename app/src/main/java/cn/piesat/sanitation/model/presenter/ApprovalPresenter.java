@@ -32,7 +32,6 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
     }
 
 
-
     @Override
     public void approvalHandlePass(String appFlowInstId) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -44,7 +43,7 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
         hashMap.put("apprResult", "T"); //T 通过 F 未通过 R 驳回
         hashMap.put("appFlowInstId", appFlowInstId); //审批id
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_hanlder
-                , hashMap, new TypeToken<Object>() {
+                , hashMap, new TypeToken<String>() {
                 });
     }
 
@@ -60,7 +59,7 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
         hashMap.put("appFlowInstId", appFlowInstId); //审批id
 
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_hanlder
-                , hashMap, new TypeToken<Object>() {
+                , hashMap, new TypeToken<String>() {
                 });
     }
 
@@ -73,14 +72,63 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
                 });
     }
 
+    /**
+     * 保养更新
+     *
+     * @param appFlowInstId
+     * @param Id
+     */
+    @Override
+    public void upKeepUpDate(String appFlowInstId, String Id) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", Id); //审批id
+        hashMap.put("approval", appFlowInstId); //审批id
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_upkeep_update
+                , hashMap, new TypeToken<List<ApprovalStateBean>>() {
+                });
+    }
+
+    /**
+     * 维修更新
+     *
+     * @param appFlowInstId
+     * @param Id
+     */
+    @Override
+    public void maintainUpDate(String appFlowInstId, String Id) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", Id); //审批id
+        hashMap.put("approval", appFlowInstId); //审批id
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_maintain_update
+                , hashMap, new TypeToken<List<ApprovalStateBean>>() {
+                });
+    }
+
+    /**
+     * 年检更新
+     *
+     * @param appFlowInstId
+     * @param Id
+     */
+    @Override
+    public void insuranceUpDate(String appFlowInstId, String Id) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", Id); //审批id
+        hashMap.put("approval", appFlowInstId); //审批id
+        commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_insuracne_update
+                , hashMap, new TypeToken<List<ApprovalStateBean>>() {
+                });
+    }
+
 
     @Override
     public void obtainData(Object data, String methodIndex, int status, Map<String, String> parameterMap, String Msg) {
         switch (methodIndex) {
             //审批
             case UrlContant.MySourcePart.approval_hanlder:
+                String approid=(String)data;
                 if (status == REQUEST_SUCCESS) {
-                    approvalView.SuccessOnReport("");
+                    approvalView.SuccessOnReport(approid);
                 } else {
                     approvalView.Error(Msg);
                 }
@@ -88,10 +136,35 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
             //审批情况
             case UrlContant.MySourcePart.approval_state:
                 if (status == REQUEST_SUCCESS) {
-                    List<ApprovalStateBean> approvalStates=(List<ApprovalStateBean>)data;
+                    List<ApprovalStateBean> approvalStates = (List<ApprovalStateBean>) data;
                     approvalView.ApprovalStateSuccess(approvalStates);
                 } else {
                     approvalView.ApprovalStateError(Msg);
+                }
+                break;
+
+            //年检更新
+            case UrlContant.MySourcePart.approval_insuracne_update:
+                if (status == REQUEST_SUCCESS) {
+                    approvalView.UpdateSuccess(null);
+                } else {
+                    approvalView.Error(Msg);
+                }
+                break;
+            //维修更新
+            case UrlContant.MySourcePart.approval_maintain_update:
+                if (status == REQUEST_SUCCESS) {
+                    approvalView.UpdateSuccess(null);
+                } else {
+                    approvalView.Error(Msg);
+                }
+                break;
+            //保养更新
+            case UrlContant.MySourcePart.approval_upkeep_update:
+                if (status == REQUEST_SUCCESS) {
+                    approvalView.UpdateSuccess(null);
+                } else {
+                    approvalView.Error(Msg);
                 }
                 break;
         }

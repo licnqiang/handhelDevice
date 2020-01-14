@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,11 +54,11 @@ public class InsuranceAdapter extends BaseAdapter {
         ViolateViewHolder holder=null;
         if (convertView==null){
             holder=new ViolateViewHolder();
-            convertView= LayoutInflater.from(context).inflate(R.layout.item_violate_report,null);
+            convertView= LayoutInflater.from(context).inflate(R.layout.item_gason_line,null);
             holder.tvCarNumber=convertView.findViewById(R.id.tvCarNumber);
             holder.tvPerson=convertView.findViewById(R.id.tvPerson);
             holder.tvDate=convertView.findViewById(R.id.tvDate);
-            holder.tvStation=convertView.findViewById(R.id.tvStation);
+            holder.tvStation=convertView.findViewById(R.id.order_send_address);
             holder.tv_tag=convertView.findViewById(R.id.tv_tag);
 //            holder.imgDelete=convertView.findViewById(R.id.imgDelete);
             convertView.setTag(holder);
@@ -68,7 +69,7 @@ public class InsuranceAdapter extends BaseAdapter {
         InsuranceBean.InsuranceListBean bean =insuranceListBeans.get(position);
 
         holder.tvPerson.setText(bean.applicant==null?"空":bean.applicant);
-        holder.tvDate.setText(bean.appFlowInst.sendDate==null?"空":bean.appFlowInst.sendDate);
+        holder.tvDate.setText(bean.appFlowInst==null?"空":bean.appFlowInst.sendDate);
         holder.tvStation.setText(bean.coverage==null?"险种：空":"险种："+bean.coverage);
 
         if (bean.approvalstatus!=null){

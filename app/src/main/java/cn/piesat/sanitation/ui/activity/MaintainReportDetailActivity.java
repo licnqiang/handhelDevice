@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.hb.dialog.myDialog.MyAlertInputDialog;
 
 import java.util.HashMap;
@@ -103,6 +104,7 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
 
     private void showBaseInfo(MaintainList.RecordsBean rowsBean) {
         String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
+
         if(null!=rowsBean.appFlowInst){
             approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
         }
@@ -114,18 +116,27 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
         area.setText(rowsBean.administrativeArea);
         stationName.setText(rowsBean.siteName);
         orderBz.setText(rowsBean.maintenanceReason);
+
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.mipmap.loading)
+                .error(R.mipmap.loading)
+                .fallback(R.mipmap.loading);
+
         Glide.with(MaintainReportDetailActivity.this)
 //                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.scenePhoto)
                 .load(rowsBean.scenePhoto)
+                .apply(requestOptions)
                 .into(ivPaizhaoXianchang);
 
         Glide.with(MaintainReportDetailActivity.this)
 //                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.maintainPhoto)
                 .load(rowsBean.maintainPhoto)
+                .apply(requestOptions)
                 .into(ivPaizhaoWeixiu);
         Glide.with(MaintainReportDetailActivity.this)
 //                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.maintainBillPhoto)
                 .load(rowsBean.maintainBillPhoto)
+                .apply(requestOptions)
                 .into(ivPaizhaoOrder);
     }
 
@@ -242,9 +253,7 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
 
     @Override
     public void SuccessOnReport(Object object) {
-        approvalState.setVisibility(View.GONE);
-        dismiss();
-        ToastUtil.show(this, "审批成功");
+        approvalPresenter.maintainUpDate(object.toString(),rowsBean.id);
     }
 
     @Override
@@ -256,6 +265,15 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     @Override
     public void ApprovalStateSuccess(List<ApprovalStateBean> approvalStates) {
         dismiss();
-        approvalDialog.showTaskDialog(approvalStates);
+        if(null!=rowsBean){
+            approvalDialog.showTaskDialog(approvalStates,rowsBean.approvalstatus,null!=rowsBean.appFlowInst?rowsBean.appFlowInst.appContent:"");
+        }
+    }
+
+    @Override
+    public void UpdateSuccess(Object object) {
+        approvalState.setVisibility(View.GONE);
+        dismiss();
+        ToastUtil.show(this, "审批成功");
     }
 }

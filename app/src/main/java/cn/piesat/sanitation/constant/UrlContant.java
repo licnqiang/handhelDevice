@@ -105,18 +105,24 @@ public class UrlContant {
         //保养已审批列表
         String upkeep_approval_list="api/MaintenanceApproval/auditedlist";
 
+        String insuracne_get="api/InsuranceYear";
         String insuracne_add="api/InsuranceYear/save";
         String insuracne_list="api/InsuranceYear/auditedlist";
-        String insuracne_detail="api/InsuranceYear/selectbyid";
+        String insuracne_detail="auditedlist";//详情也用列表
         //添加维修审批
         String add_maintain_report="api/RepairApproval/save";
         //维修未审批列表
         String maintain_approval_no="api/RepairApproval/pendinglist";
         //维修已审批列表
         String maintain_approval_is="api/RepairApproval/auditedlists";
-
         //维修列表
         String maintain_approval_list="api/RepairApproval/auditedlist";
+        //保养更新
+        String approval_upkeep_update="api/MaintenanceApproval/update";
+        //维修更新
+        String approval_maintain_update="api/RepairApproval/update";
+        //年检更新
+        String approval_insuracne_update="api/InsuranceYear/update";
 
     }
 

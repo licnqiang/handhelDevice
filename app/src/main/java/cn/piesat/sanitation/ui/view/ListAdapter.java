@@ -14,6 +14,7 @@ import java.util.List;
 
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.data.ApprovalStateBean;
+import cn.piesat.sanitation.data.MaintainList;
 
 /**
  * @author lq
@@ -23,9 +24,11 @@ import cn.piesat.sanitation.data.ApprovalStateBean;
  */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<ApprovalStateBean> mDataList;
+    private String approvalstatuss;
 
-    public ListAdapter(List<ApprovalStateBean> listDatas) {
+    public ListAdapter(List<ApprovalStateBean> listDatas,String approvalstatus) {
         mDataList = listDatas;
+        approvalstatuss = approvalstatus;
     }
 
 
@@ -43,12 +46,27 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         if (position == mDataList.size() - 1) {
             holder.tvXian.setVisibility(View.GONE);   //最后一位 隐藏横线
         }
-        //判断该节点是否审核 显示图标
 
+        //判断该节点是否审核 显示图标
         if(data.TT==1){    //1 为 已审核 2为未审核
             holder.ivImage.setImageResource(R.mipmap.pass_person);
         }else {
             holder.ivImage.setImageResource(R.mipmap.norm_person);
+        }
+
+        /**
+         * 判断详情是否审批驳回，显示红色图标
+         */
+        if(approvalstatuss.equals("02")){   //审核状态 01 审核中  02 驳回 03 审核完成了
+            //判断list下条数据如果是未审批就是 目前这个角色驳回的
+            if(mDataList.size()-1<=position){
+                holder.ivImage.setImageResource(R.mipmap.no_person);
+            }else {
+                ApprovalStateBean approvalStateBean = mDataList.get(position + 1);
+                if (approvalStateBean.TT == 2) {
+                    holder.ivImage.setImageResource(R.mipmap.no_person);
+                }
+            }
         }
 
         holder.tvName.setText(data.NODE_NAME);

@@ -115,13 +115,24 @@ public class UpKeepReportDetailActivity extends BaseActivity implements Approval
         area.setText(rowsBean.administrativeArea);
         stationName.setText(rowsBean.siteName);
         orderBz.setText(rowsBean.maintainDescribe);
-//        ImageView ivPaizhaoXianchang;
-//        ImageView ivPaizhaoOrder;
-//
-//
-//        Glide.with(UpKeepReportDetailActivity.this)
-//                .load( rowsBean.oilPhoto)
-//                .into(ivPaizhao);
+
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.mipmap.loading)
+                .error(R.mipmap.loading)
+                .fallback(R.mipmap.loading);
+
+        Glide.with(UpKeepReportDetailActivity.this)
+                .load( rowsBean.maintainPhoto)
+                .apply(requestOptions)
+                .into(ivPaizhaoXianchang);
+        Glide.with(UpKeepReportDetailActivity.this)
+                .load( rowsBean.maintainBillPhoto)
+                .apply(requestOptions)
+                .into(ivPaizhaoOrder);
+
+
+        ImageView ivPaizhaoXianchang;
+        ImageView ivPaizhaoOrder;
     }
 
 
@@ -176,9 +187,7 @@ public class UpKeepReportDetailActivity extends BaseActivity implements Approval
 
     @Override
     public void SuccessOnReport(Object object) {
-        approvalState.setVisibility(View.GONE);
-        dismiss();
-        ToastUtil.show(this, "审批成功");
+        approvalPresenter.upKeepUpDate(object.toString(),rowsBean.id);
     }
 
     @Override
@@ -190,7 +199,14 @@ public class UpKeepReportDetailActivity extends BaseActivity implements Approval
     @Override
     public void ApprovalStateSuccess(List<ApprovalStateBean> approvalStates) {
         dismiss();
-        approvalDialog.showTaskDialog(approvalStates);
+        approvalDialog.showTaskDialog(approvalStates,rowsBean.approvalstatus,null!=rowsBean.appFlowInst?rowsBean.appFlowInst.appContent:"");
+    }
+
+    @Override
+    public void UpdateSuccess(Object object) {
+        approvalState.setVisibility(View.GONE);
+        dismiss();
+        ToastUtil.show(this, "审批成功");
     }
 
 }

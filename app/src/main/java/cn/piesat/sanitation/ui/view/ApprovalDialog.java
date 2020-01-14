@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.data.ApprovalStateBean;
+import cn.piesat.sanitation.data.MaintainList;
 
 
 /**
@@ -49,7 +51,7 @@ public class ApprovalDialog {
         }
     }
 
-    public void showTaskDialog(List<ApprovalStateBean> approvalStates) {
+    public void showTaskDialog(List<ApprovalStateBean> approvalStates,String approvalstatus,String appContent) {
         final LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.approval_dialog, null);
         mTaskDialogWindow = new Dialog(context, R.style.Dialog);
@@ -60,6 +62,17 @@ public class ApprovalDialog {
         mTaskDialogWindow.getWindow().setAttributes(params);
 
         ImageView imageView = view.findViewById(R.id.iv_colse);
+        TextView tvInfo = view.findViewById(R.id.tv_info);
+
+        /**
+         * 显示驳回信息
+         */
+        if(approvalstatus.equals("02")){   //审核状态 01 审核中  02 驳回 03 审核完成了
+            if(null!=appContent&&!appContent.isEmpty()){
+                tvInfo.setText("驳回理由："+appContent);
+            }
+        }
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +87,7 @@ public class ApprovalDialog {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        ListAdapter listAdapter = new ListAdapter(approvalStates);
+        ListAdapter listAdapter = new ListAdapter(approvalStates,approvalstatus);
         recyclerView.setAdapter(listAdapter);
 
 

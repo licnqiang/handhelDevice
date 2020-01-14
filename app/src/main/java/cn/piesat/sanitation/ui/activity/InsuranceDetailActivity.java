@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.hb.dialog.myDialog.MyAlertInputDialog;
 
 import java.util.List;
@@ -118,9 +119,15 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
 
         orderBz.setText(rowsBean.remark);
 
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.mipmap.loading)
+                .error(R.mipmap.loading)
+                .fallback(R.mipmap.loading);
+
         Glide.with(InsuranceDetailActivity.this)
 //                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.maintainBillPhoto)
                 .load(rowsBean.insuranceSign)
+                .apply(requestOptions)
                 .into(ivPaizhaoXianchang);
     }
 
@@ -133,9 +140,7 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
 
     @Override
     public void SuccessOnReport(Object object) {
-        approvalState.setVisibility(View.GONE);
-        dismiss();
-        ToastUtil.show(this, "审批成功");
+        approvalPresenter.insuranceUpDate(object.toString(),rowsBean.id);
     }
 
     @Override
@@ -147,7 +152,14 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
     @Override
     public void ApprovalStateSuccess(List<ApprovalStateBean> approvalStates) {
         dismiss();
-        approvalDialog.showTaskDialog(approvalStates);
+        approvalDialog.showTaskDialog(approvalStates,rowsBean.approvalstatus,null!=rowsBean.appFlowInst?rowsBean.appFlowInst.appContent:"");
+    }
+
+    @Override
+    public void UpdateSuccess(Object object) {
+        approvalState.setVisibility(View.GONE);
+        dismiss();
+        ToastUtil.show(this, "审批成功");
     }
 
 
