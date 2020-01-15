@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -97,8 +98,17 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
 
     private void showBaseInfo(InsuranceBean.InsuranceListBean rowsBean) {
         String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
+
+        /**
+         * 判断信息是否审核中，
+         * 若订单结束不显示审批按钮
+         */
         if (null != rowsBean.appFlowInst) {
-            approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
+            if (rowsBean.approvalstatus.equals("01")) {             //01 -审核中
+                approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
+            }else {
+                approvalState.setVisibility(View.GONE);
+            }
         }
 
         carNum.setText(rowsBean.carNumber);

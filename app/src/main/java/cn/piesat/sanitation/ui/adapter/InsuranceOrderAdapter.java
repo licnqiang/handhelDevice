@@ -103,8 +103,8 @@ public class InsuranceOrderAdapter extends RecyclerView.Adapter<InsuranceOrderAd
             } else if (rowsBean.approvalstatus.equals("02")) {      //02-驳回
                 orderState.setText("已驳回");
                 orderState.setTextColor(Color.parseColor("#888888"));
-                orderState.setVisibility(View.GONE);
-                tv_tag.setVisibility(View.GONE);
+                orderState.setBackgroundResource(R.drawable.gay_frame);
+                tv_tag.setBackgroundResource(R.mipmap.end);
             } else if (rowsBean.approvalstatus.equals("03")) {      //03-审核完成了
                 orderState.setText("已完成");
                 orderState.setTextColor(Color.parseColor("#888888"));

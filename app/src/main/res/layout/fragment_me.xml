@@ -130,6 +130,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutModify"
+                android:visibility="gone"
                 style="@style/linear_layout_default"
 
                 >

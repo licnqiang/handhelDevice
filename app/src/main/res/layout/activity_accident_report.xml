@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:divider="@color/gray5"
             android:dividerHeight="@dimen/dp_10"
+            android:scrollbars="none"
             android:paddingTop="@dimen/dp_10"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"

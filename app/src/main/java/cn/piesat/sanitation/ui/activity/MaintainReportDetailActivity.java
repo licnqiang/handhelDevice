@@ -105,8 +105,16 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     private void showBaseInfo(MaintainList.RecordsBean rowsBean) {
         String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
 
-        if(null!=rowsBean.appFlowInst){
-            approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
+        /**
+         * 判断信息是否审核中，
+         * 若订单结束不显示审批按钮
+         */
+        if (null != rowsBean.appFlowInst) {
+            if (rowsBean.approvalstatus.equals("01")) {             //01 -审核中
+                approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
+            }else {
+                approvalState.setVisibility(View.GONE);
+            }
         }
         carNum.setText(rowsBean.carNumber);
         deriverPerson.setText(rowsBean.driver);
