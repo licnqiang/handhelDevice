@@ -261,7 +261,7 @@ public class AddAccidentReportActivity extends BaseActivity implements AccidentR
         }
 
         if (!picPath.isEmpty()){
-          map.put("scenePhotos",picPath);
+          map.put("scenePhotos",IPConfig.getOutSourceURLPreFix()+picPath);
         }
         accidentReportPresenter.getAccidentReportAdd(map);
     }

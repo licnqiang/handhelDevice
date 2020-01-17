@@ -12,6 +12,7 @@ import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.constant.UrlContant;
 import cn.piesat.sanitation.data.LoginInfo_Respose;
+import cn.piesat.sanitation.database.dbTab.RolesInfo_Tab;
 import cn.piesat.sanitation.database.dbTab.UserInfo_Tab;
 import cn.piesat.sanitation.model.contract.LoginContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
@@ -62,6 +63,13 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
             if(null!=loginInfo_respose.roles&&loginInfo_respose.roles.size()>0){
                 loginInfo_respose.roles.get(0).save();
             }
+
+//            if (null != loginInfo_respose.roles && loginInfo_respose.roles.size() > 0) {
+//                for (RolesInfo_Tab tab : loginInfo_respose.roles) {
+//                    tab.save();
+//                }
+//            }
+
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, loginInfo_respose.token);
             SpHelper.setStringValue(SysContant.userInfo.USER_ID, loginInfo_respose.user.id); //保存该id主要用于开启数据库
             SpHelper.setStringValue(SysContant.userInfo.USER_SITE_NAME, loginInfo_respose.user.deptNameCount);//站点

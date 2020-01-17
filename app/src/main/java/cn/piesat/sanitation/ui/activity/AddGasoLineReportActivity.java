@@ -243,7 +243,7 @@ public class AddGasoLineReportActivity extends BaseActivity implements GasonLine
         map.put("oldMileage", s_beforeMileage);//加油前里程数
         map.put("oilPrice", s_gosoLineMoney);//加油金额
         map.put("oilLitre", s_gosoLineLitre);//加油升数
-        map.put("oilPhoto", picPath);//加油升数
+        map.put("oilPhoto", IPConfig.getOutSourceURLPreFix()+picPath);//加油升数
         map.put("userId", BaseApplication.getIns().getUserId());//加油升数
         map.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID));//加油升数
         if (!s_orderBz.isEmpty()) {

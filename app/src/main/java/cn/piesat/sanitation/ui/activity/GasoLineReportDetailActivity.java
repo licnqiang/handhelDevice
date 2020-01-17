@@ -114,7 +114,7 @@ public class GasoLineReportDetailActivity extends BaseActivity {
                 .error(R.mipmap.paizhao)
                 .fallback(R.mipmap.paizhao);
         Glide.with(GasoLineReportDetailActivity.this)
-                .load(IPConfig.getOutSourceURLPreFix() + rowsBean.oilPhoto)
+                .load(rowsBean.oilPhoto)
                 .apply(requestOptions)
                 .into(ivPaizhao);
     }
@@ -138,7 +138,7 @@ public class GasoLineReportDetailActivity extends BaseActivity {
     private void lookImage() {
         if (null != rowsBean.oilPhoto && !TextUtils.isEmpty(rowsBean.oilPhoto)) {
             Intent intent = new Intent(this, ImageDetailActivity.class);
-            intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + rowsBean.oilPhoto);//非必须
+            intent.putExtra("images", rowsBean.oilPhoto);//非必须
             int[] location = new int[2];
             ivPaizhao.getLocationOnScreen(location);
             intent.putExtra("locationX", location[0]);//必须

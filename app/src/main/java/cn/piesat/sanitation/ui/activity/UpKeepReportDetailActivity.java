@@ -136,7 +136,7 @@ public class UpKeepReportDetailActivity extends BaseActivity implements Approval
                 .apply(requestOptions)
                 .into(ivPaizhaoXianchang);
         Glide.with(UpKeepReportDetailActivity.this)
-                .load( rowsBean.maintainBillPhoto)
+                .load(rowsBean.maintainBillPhoto)
                 .apply(requestOptions)
                 .into(ivPaizhaoOrder);
     }

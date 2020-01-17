@@ -201,7 +201,7 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
     private void lookImageOrder() {
         if (null != rowsBean.insuranceSign && !TextUtils.isEmpty(rowsBean.insuranceSign)) {
             Intent intent = new Intent(this, ImageDetailActivity.class);
-            intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + rowsBean.insuranceSign);//非必须
+            intent.putExtra("images", rowsBean.insuranceSign);//非必须
             int[] location = new int[2];
             ivPaizhaoXianchang.getLocationOnScreen(location);
             intent.putExtra("locationX", location[0]);//必须

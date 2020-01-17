@@ -15,6 +15,9 @@
         android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecylerView"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
     </com.liaoinstan.springview.widget.SpringView>

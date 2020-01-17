@@ -255,7 +255,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
         showLoadingDialog();
         Map<String,String> map =new HashMap<>();
         map.put("userId",BaseApplication.getIns().getUserId());
-        map.put("roleId", String.valueOf(BaseApplication.getUserInfo().userType));
+        map.put("roleId", String.valueOf(BaseApplication.getUserInfo().userType));  //用户角色
         map.put("administrativeArea",violateDistrict);//行政区划
         map.put("siteName",station);//站点名称
         map.put("carNumber",carNumber);//车牌号
@@ -268,7 +268,7 @@ public class AddViolateReportActivity extends BaseActivity implements ReportCont
             map.put("remark",etRemark.getText().toString());
         }
         if (!picPath.isEmpty()){
-            map.put("illegalPhoto",picPath);
+            map.put("illegalPhoto",IPConfig.getOutSourceURLPreFix()+picPath);
         }
         reportPresenter.getViolateReportAdd(map);
     }

@@ -185,7 +185,7 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     private void lookImageWeixiu() {
         if (null != rowsBean.maintainPhoto && !TextUtils.isEmpty(rowsBean.maintainPhoto)) {
             Intent intent = new Intent(this, ImageDetailActivity.class);
-            intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + rowsBean.maintainPhoto);//非必须
+            intent.putExtra("images",rowsBean.maintainPhoto);//非必须
             int[] location = new int[2];
             ivPaizhaoWeixiu.getLocationOnScreen(location);
             intent.putExtra("locationX", location[0]);//必须
@@ -203,7 +203,7 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     private void lookImageXianchang() {
         if (null != rowsBean.scenePhoto && !TextUtils.isEmpty(rowsBean.scenePhoto)) {
             Intent intent = new Intent(this, ImageDetailActivity.class);
-            intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + rowsBean.scenePhoto);//非必须
+            intent.putExtra("images",rowsBean.scenePhoto);//非必须
             int[] location = new int[2];
             ivPaizhaoXianchang.getLocationOnScreen(location);
             intent.putExtra("locationX", location[0]);//必须
@@ -221,7 +221,7 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     private void lookImageOrder() {
         if (null != rowsBean.maintainBillPhoto && !TextUtils.isEmpty(rowsBean.maintainBillPhoto)) {
             Intent intent = new Intent(this, ImageDetailActivity.class);
-            intent.putExtra("images", IPConfig.getOutSourceURLPreFix() + rowsBean.maintainBillPhoto);//非必须
+            intent.putExtra("images", rowsBean.maintainBillPhoto);//非必须
             int[] location = new int[2];
             ivPaizhaoOrder.getLocationOnScreen(location);
             intent.putExtra("locationX", location[0]);//必须

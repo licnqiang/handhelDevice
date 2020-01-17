@@ -52,7 +52,7 @@ public class GasonLineOrderAdapter extends RecyclerView.Adapter<GasonLineOrderAd
 
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SelectedPicViewHolder(mInflater.inflate(R.layout.item_gason_line, parent, false));
+        return new SelectedPicViewHolder(mInflater.inflate(R.layout.item_violate_report, parent, false));
     }
 
     @Override
@@ -67,16 +67,14 @@ public class GasonLineOrderAdapter extends RecyclerView.Adapter<GasonLineOrderAd
 
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.order_num)
-        TextView orderNum;
-        @BindView(R.id.order_state)
-        TextView orderState;
-        @BindView(R.id.order_send_address)
-        TextView orderSendAddress;
-        @BindView(R.id.time)
-        TextView time;
-        @BindView(R.id.tv_tag)
-        TextView tv_tag;
+        @BindView(R.id.tvCarNumber)
+        TextView tvCarNumber;
+        @BindView(R.id.tvPerson)
+        TextView tvPerson;
+        @BindView(R.id.tvDate)
+        TextView tvDate;
+        @BindView(R.id.tvStation)
+        TextView tvStation;
 
         private int clickPosition;
 
@@ -91,14 +89,15 @@ public class GasonLineOrderAdapter extends RecyclerView.Adapter<GasonLineOrderAd
             //运单状态：0 -指派取消、1-已指派未接单、2-已接单未起运、3-已起运未过磅、4-已过磅未确认、5- 已完成
             itemView.setOnClickListener(this);
             GasonLines.RecordsBean rowsBean = mData.get(position);
-            orderNum.setText("订单号:  " + rowsBean.id);
-            orderSendAddress.setText(rowsBean.administrativeArea);
-            time.setText(rowsBean.createtime);
+            tvCarNumber.setText(rowsBean.carNumber);
+            tvPerson.setText(rowsBean.refuelingPerson);
+            tvDate.setText(rowsBean.createtime);
+            tvStation.setText("订单编号："+rowsBean.id);
 //            if (rowsBean.status == 0) {             //0 -指派取消
 //                orderState.setText("已取消");
 //                orderState.setTextColor(Color.parseColor("#888888"));
-                orderState.setVisibility(View.GONE);
-                tv_tag.setVisibility(View.GONE);
+//                orderState.setVisibility(View.GONE);
+//                tv_tag.setVisibility(View.GONE);
 //            } else if (rowsBean.status == 1) {      //1-已指派未接单
 //                orderState.setText("未接单");
 //                orderState.setTextColor(Color.parseColor("#E95E28"));
