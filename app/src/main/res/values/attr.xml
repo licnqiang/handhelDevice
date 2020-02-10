@@ -11,6 +11,12 @@
         <attr name="work_modul_title" format="string" />  
     </declare-styleable>
 
+    <declare-styleable name="WorkModulNew">
+        <attr name="new_work_modul_icon" format="integer" />
+        <attr name="new_work_modul_title" format="string" />  
+    </declare-styleable>
+
+
     <declare-styleable name="CommentItemModul">   
         <attr name="comment_item_title" format="string" />
         <attr name="comment_item_value" format="string" />  

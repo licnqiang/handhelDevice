@@ -26,7 +26,7 @@ public class InitDBUtil {
 
         String dbName = FileConstant.getDBPath(userId);
 
-//      FlowManager.init(new DatabaseContext(context, new File(dbName), false));
+      FlowManager.init(new DatabaseContext(context, new File(dbName), false));
 
         /**
          * 方式二：加密dbFlow数据库
@@ -34,14 +34,14 @@ public class InitDBUtil {
          *  加密情况下，找到路径下db，打开为空，表结构和表字段完全隐藏。
          *  pwd: walker789
          */
-        FlowManager.init(new FlowConfig.Builder(new DatabaseContext(context, new File(dbName), true))
-                .addDatabaseConfig(new DatabaseConfig.Builder(AppDatabase.class)
-                        .openHelper(new DatabaseConfig.OpenHelperCreator() {
-                            @Override
-                            public OpenHelper createHelper(DatabaseDefinition databaseDefinition, DatabaseHelperListener helperListener) {
-                                return new SQLiteCiperHelperImpl(databaseDefinition, helperListener);
-                            }
-                        }).build()).build());
+//        FlowManager.init(new FlowConfig.Builder(new DatabaseContext(context, new File(dbName), true))
+//                .addDatabaseConfig(new DatabaseConfig.Builder(AppDatabase.class)
+//                        .openHelper(new DatabaseConfig.OpenHelperCreator() {
+//                            @Override
+//                            public OpenHelper createHelper(DatabaseDefinition databaseDefinition, DatabaseHelperListener helperListener) {
+//                                return new SQLiteCiperHelperImpl(databaseDefinition, helperListener);
+//                            }
+//                        }).build()).build());
 
     }
 }

@@ -18,8 +18,11 @@ import cn.piesat.sanitation.ui.activity.CarBreakDownActivity;
 import cn.piesat.sanitation.ui.activity.CarMaintenanceActivity;
 import cn.piesat.sanitation.ui.activity.EventReportActivity;
 import cn.piesat.sanitation.ui.activity.GasoLineReportActivity;
+import cn.piesat.sanitation.ui.activity.InsuranceActivity;
+import cn.piesat.sanitation.ui.activity.MaintainActivity;
 import cn.piesat.sanitation.ui.activity.OrderListActivity;
 import cn.piesat.sanitation.ui.activity.StationHeaderApproveActivity;
+import cn.piesat.sanitation.ui.activity.UpkeepActivity;
 import cn.piesat.sanitation.ui.activity.ViolateReportActivity;
 import cn.piesat.sanitation.ui.view.MyWorkModul;
 
@@ -28,15 +31,10 @@ import cn.piesat.sanitation.ui.view.MyWorkModul;
  */
 public class WorkStationHeaderFragment extends BaseFragment {
 
-    @BindView(R.id.bai_dan)
-    MyWorkModul baiDan;
-    @BindView(R.id.yun_dan)
-    MyWorkModul yunDan;
-
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_work_station_header;
+        return R.layout.fragment_work_station_header_new;
     }
 
     @Override
@@ -50,20 +48,51 @@ public class WorkStationHeaderFragment extends BaseFragment {
 
 
 
-    @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.event_report, R.id.xingzhegn_shenpi})
+//    @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.event_report, R.id.xingzhegn_shenpi})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.bai_dan:
+//                toActivity(AssignOrderActivity.class);
+//                break;
+//            case R.id.yun_dan:
+//                toActivity(OrderListActivity.class);
+//                break;
+//            case R.id.event_report:
+//                toActivity(EventReportActivity.class);
+//                break;
+//            case R.id.xingzhegn_shenpi:
+//                toActivity(StationHeaderApproveActivity.class);
+//                break;
+//        }
+//    }
+
+
+    @OnClick({R.id.ll_paidan, R.id.ll_yundan, R.id.item_weigui, R.id.item_shigu, R.id.item_jiayou, R.id.item_nianjian, R.id.item_weixiu, R.id.item_baoyang})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.bai_dan:
+            case R.id.ll_paidan:
                 toActivity(AssignOrderActivity.class);
                 break;
-            case R.id.yun_dan:
+            case R.id.ll_yundan:
                 toActivity(OrderListActivity.class);
                 break;
-            case R.id.event_report:
-                toActivity(EventReportActivity.class);
+            case R.id.item_weigui:
+                toActivity(ViolateReportActivity.class);
                 break;
-            case R.id.xingzhegn_shenpi:
-                toActivity(StationHeaderApproveActivity.class);
+            case R.id.item_shigu:
+                toActivity(AccidentReportActivity.class);
+                break;
+            case R.id.item_jiayou:
+                toActivity(GasoLineReportActivity.class);  //加油列表
+                break;
+            case R.id.item_nianjian:
+                toActivity(InsuranceActivity.class);
+                break;
+            case R.id.item_weixiu:
+                toActivity(MaintainActivity.class);
+                break;
+            case R.id.item_baoyang:
+                toActivity(UpkeepActivity.class);
                 break;
         }
     }

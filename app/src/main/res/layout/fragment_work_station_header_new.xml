@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray5"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="工作"
+        android:textColor="@color/color_black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_paidan"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/dark_blue_frame">
+            <ImageView
+                android:layout_width="40dp"
+                android:src="@mipmap/iv1"
+                android:layout_height="40dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="派单"
+                android:paddingTop="5dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="将工作派送到员工"
+                android:textColor="@color/gray5"
+                android:textSize="14sp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_yundan"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/dark_blue_frame">
+            <ImageView
+                android:layout_width="40dp"
+                android:src="@mipmap/iv2"
+                android:layout_height="40dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="运单"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="3dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="查看运单详情列表"
+                android:textColor="@color/gray5"
+                android:textSize="14sp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="15dp"
+            android:paddingTop="10dp"
+            android:text="事件上报"
+            android:textColor="@color/color_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/item_weigui"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:new_work_modul_icon="@mipmap/iv3"
+                app:new_work_modul_title="违规上报"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/item_shigu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:new_work_modul_icon="@mipmap/iv4"
+                app:new_work_modul_title="事故上报"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/item_jiayou"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:new_work_modul_icon="@mipmap/iv5"
+                app:new_work_modul_title="加油上报"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:new_work_modul_icon="@mipmap/iv3"
+                app:new_work_modul_title=""></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:new_work_modul_icon="@mipmap/iv3"
+                app:new_work_modul_title=""></cn.piesat.sanitation.ui.view.ItemWorkModul>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="15dp"
+            android:paddingTop="10dp"
+            android:text="行政审批"
+            android:textColor="@color/color_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/item_nianjian"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:new_work_modul_icon="@mipmap/iv6"
+                app:new_work_modul_title="保险年检"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/item_weixiu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:new_work_modul_icon="@mipmap/iv7"
+                app:new_work_modul_title="维修审批"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/item_baoyang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:new_work_modul_icon="@mipmap/iv8"
+                app:new_work_modul_title="保养审批"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:new_work_modul_icon="@mipmap/ic_launcher_round"
+                app:new_work_modul_title="加油上报"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+
+            <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:new_work_modul_icon="@mipmap/ic_launcher_round"
+                app:new_work_modul_title="加油上报"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
