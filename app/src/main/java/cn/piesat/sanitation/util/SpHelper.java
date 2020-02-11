@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,32 @@ public class SpHelper {
         Editor editor = sp.edit();
         editor.putFloat(key, value);
         editor.commit();
+    }
+
+    public static  <T> void setDataList(String tag,List<T> dataList){
+        if (null == dataList || dataList.size() <= 0)
+            return;
+
+        Gson gson = new Gson();
+        //转换成json数据，再保存
+        String strJson = gson.toJson(dataList);
+        Editor editor = sp.edit();
+        editor.putString(tag, strJson);
+        editor.commit();
+
+    }
+
+    public  static <T> List<T> getDataList(String tag){
+        List<T> datalist=new ArrayList<T>();
+        String strJson = sp.getString(tag, null);
+        if (null == strJson) {
+            return datalist;
+        }
+        Gson gson = new Gson();
+        datalist = gson.fromJson(strJson, new TypeToken<List<T>>() {}.getType());
+
+        return datalist;
+
     }
 
     public static void clearAllValue(Context context) {

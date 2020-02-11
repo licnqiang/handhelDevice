@@ -30,7 +30,7 @@ import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 新增保险年检
+ * 保险年检详情
  */
 public class InsuranceDetailActivity extends BaseActivity implements ApprovalContract.ApprovalView {
 

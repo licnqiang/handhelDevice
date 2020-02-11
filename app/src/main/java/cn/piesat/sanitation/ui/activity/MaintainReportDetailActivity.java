@@ -34,7 +34,7 @@ import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 站长 新增维修上报
+ * 维修审批详情
  * Created by sen.luo on 2020/1/2.
  */
 public class MaintainReportDetailActivity extends BaseActivity implements ApprovalContract.ApprovalView{

@@ -44,7 +44,7 @@ import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 站长 新增违章上报
+ * 站长 保养审批
  * Created by sen.luo on 2020/1/2.
  */
 public class UpKeepReportDetailActivity extends BaseActivity implements ApprovalContract.ApprovalView {
@@ -83,7 +83,7 @@ public class UpKeepReportDetailActivity extends BaseActivity implements Approval
 
     @Override
     protected void initView() {
-        tv_title.setText("保养上报");
+        tv_title.setText("保养审批");
     }
 
     @Override

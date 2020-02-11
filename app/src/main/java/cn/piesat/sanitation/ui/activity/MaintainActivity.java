@@ -36,7 +36,7 @@ import cn.piesat.sanitation.ui.fragment.FragmentUpkeepNo;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
- * 维修
+ * 维修审批
  */
 public class MaintainActivity extends BaseActivity implements MaintainOrderAdapter.OnRecyclerViewItemClickListener, MaintainReportContract.getMaintainReportSIView {
     @BindView(R.id.tv_title)

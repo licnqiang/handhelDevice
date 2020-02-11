@@ -24,6 +24,7 @@ import com.tencent.tinker.entry.DefaultApplicationLike;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -90,6 +91,11 @@ public class BaseApplication extends DefaultApplicationLike {
     //角色id UserType
     public String getUserRoleId(){
         return SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID);
+    }
+
+    // 角色Id List
+    public List<RolesInfo_Tab> getUserRoleIdList(){
+        return  SpHelper.getDataList(SysContant.userInfo.USER_ROLE_ID_LIST);
     }
 
     //站点名称
