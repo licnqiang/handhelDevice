@@ -14,20 +14,12 @@ public class RoleIdSortUtil {
 
     /**
      * 依次取最小的角色
-     * @param roleIdList
+     * @param idList
      * @return
      */
-    public static String getMinRoleId(List<RolesInfo_Tab>roleIdList){
-        if (roleIdList.size()<1){
+    public static String getMinRoleId(List<String>idList){
+        if (idList.size()<1){
             return "";
-        }
-        List<String>idList=new ArrayList<>();
-
-        for (int i = 0; i < roleIdList.size(); i++) {
-            if (roleIdList.get(i).identity!=null){
-                idList.add(roleIdList.get(i).identity);
-            }
-
         }
 
 

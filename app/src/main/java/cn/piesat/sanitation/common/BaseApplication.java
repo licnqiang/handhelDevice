@@ -97,12 +97,12 @@ public class BaseApplication extends DefaultApplicationLike {
     }
 
     // 角色Id List
-    public List<RolesInfo_Tab> getUserRoleIdList(){
+    public List<String> getUserRoleIdList(){
 
         String dada =SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID_LIST);
         Gson gson =new Gson();
-        Type listType = new TypeToken<List<RolesInfo_Tab>>() {}.getType();
-        List<RolesInfo_Tab> rolesInfoTabs =gson.fromJson(dada,listType);
+        Type listType = new TypeToken<List<String>>() {}.getType();
+        List<String> rolesInfoTabs =gson.fromJson(dada,listType);
 
         return rolesInfoTabs;
 

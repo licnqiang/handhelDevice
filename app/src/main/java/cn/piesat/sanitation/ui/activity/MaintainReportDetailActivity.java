@@ -15,6 +15,7 @@ import com.hb.dialog.myDialog.MyAlertInputDialog;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,7 +104,7 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
     }
 
     private void showBaseInfo(MaintainList.RecordsBean rowsBean) {
-        String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
+//        String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
 
         /**
          * 判断信息是否审核中，
@@ -111,7 +112,9 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
          */
         if (null != rowsBean.appFlowInst) {
             if (rowsBean.approvalstatus.equals("01")) {             //01 -审核中
-                approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
+                //如果角色数组里包含当前角色id，显示审批按钮
+                approvalState.setVisibility(BaseApplication.getIns().getUserRoleIdList().contains(rowsBean.check_role) ? View.VISIBLE : View.GONE);
+//                approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
             }else {
                 approvalState.setVisibility(View.GONE);
             }
@@ -166,7 +169,16 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
                 break;
             //审批通过
             case R.id.btn_pass:
-                approvalPresenter.approvalHandlePass(rowsBean.approval);
+                Map<String, String> map = new HashMap<>();
+                map.put("userName", BaseApplication.getUserInfo().name);
+                map.put("userType", rowsBean.check_role); //角色id
+                map.put("roleName", rowsBean.check_name); //角色名
+                map.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
+                map.put("apprContent", ""); //内容
+                map.put("apprResult", "T"); //T 通过 F 未通过 R 驳回
+                map.put("appFlowInstId", rowsBean.approval); //审批id
+                showLoadingDialog();
+                approvalPresenter.approvalHandlePass(map);
                 break;
             //审批驳回
             case R.id.btn_del:
@@ -241,7 +253,17 @@ public class MaintainReportDetailActivity extends BaseActivity implements Approv
             @Override
             public void onClick(View v) {
                 myAlertInputDialog.dismiss();
-                approvalPresenter.approvalHandleTurn(rowsBean.approval, myAlertInputDialog.getResult());
+
+                Map<String, String> hashMap = new HashMap<>();
+                hashMap.put("userName", BaseApplication.getUserInfo().name);
+                hashMap.put("userType", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
+                hashMap.put("roleName", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_NAME)); //角色名
+                hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
+                hashMap.put("apprContent", myAlertInputDialog.getResult()); //内容
+                hashMap.put("apprResult", "R"); //T 通过 F 未通过 R 驳回
+                hashMap.put("appFlowInstId", rowsBean.approval); //审批id
+                showLoadingDialog();
+                approvalPresenter.approvalHandleTurn(hashMap);
             }
         }).setNegativeButton("取消", new View.OnClickListener() {
             @Override

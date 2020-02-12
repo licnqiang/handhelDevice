@@ -17,7 +17,9 @@ import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import cn.piesat.sanitation.R;
@@ -33,6 +35,8 @@ import cn.piesat.sanitation.ui.fragment.FragmentMaintainIs;
 import cn.piesat.sanitation.ui.fragment.FragmentMaintainNo;
 import cn.piesat.sanitation.ui.fragment.FragmentUpkeepIs;
 import cn.piesat.sanitation.ui.fragment.FragmentUpkeepNo;
+import cn.piesat.sanitation.util.RoleIdSortUtil;
+import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
 
 /**
@@ -61,6 +65,7 @@ public class MaintainActivity extends BaseActivity implements MaintainOrderAdapt
     @Override
     protected void initView() {
         tv_title.setText("维修审批");
+        maintainReportPresenter = new MaintainReportPresenter(this);
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
         iv_right.setImageDrawable(ContextCompat.getDrawable(this, R.mipmap.icon_add));
         iv_right.setVisibility(3 != BaseApplication.getUserInfo().userType ? View.VISIBLE : View.GONE); //判断用户类型是否是集团人员  目前集团人员仅仅开放查看功能
@@ -77,13 +82,13 @@ public class MaintainActivity extends BaseActivity implements MaintainOrderAdapt
             @Override
             public void onRefresh() {
                 pageNum = 1;
-                maintainReportPresenter.getMaintainReportList(pageNum);
+                initData();
             }
 
             @Override
             public void onLoadmore() {
                 pageNum++;
-                maintainReportPresenter.getMaintainReportList(pageNum);
+                initData();
             }
         });
 
@@ -91,16 +96,21 @@ public class MaintainActivity extends BaseActivity implements MaintainOrderAdapt
 
     @Override
     protected void initData() {
-        maintainReportPresenter = new MaintainReportPresenter(this);
+        Map<String, String> hashMap = new HashMap<>();
+        hashMap.put("curren", String.valueOf(pageNum));
+        hashMap.put("size", "20"); //每页显示20条
+
+        if(BaseApplication.getUserInfo().userType!=3){
+            hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
+        }
+        hashMap.put("roleId", RoleIdSortUtil.getMinRoleId(BaseApplication.getIns().getUserRoleIdList())); //角色id 取最小角色
+        hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
+
+        showLoadingDialog("加载中", false);
+        maintainReportPresenter.getMaintainReportList(hashMap);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        showLoadingDialog("加载中", false);
-        pageNum = 1;
-        maintainReportPresenter.getMaintainReportList(pageNum);
-    }
+
 
     @Override
     public void onItemClick(View view, int position) {

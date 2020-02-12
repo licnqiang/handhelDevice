@@ -12,12 +12,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hb.dialog.myDialog.MyAlertInputDialog;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.constant.IPConfig;
 import cn.piesat.sanitation.constant.SysContant;
 import cn.piesat.sanitation.data.ApprovalStateBean;
@@ -26,6 +29,7 @@ import cn.piesat.sanitation.model.contract.ApprovalContract;
 import cn.piesat.sanitation.model.presenter.ApprovalPresenter;
 import cn.piesat.sanitation.ui.view.ApprovalDialog;
 import cn.piesat.sanitation.ui.view.CommentItemModul;
+import cn.piesat.sanitation.util.RoleIdSortUtil;
 import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
 
@@ -97,15 +101,18 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
 
 
     private void showBaseInfo(InsuranceBean.InsuranceListBean rowsBean) {
-        String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
+//        String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
 
         /**
          * 判断信息是否审核中，
          * 若订单结束不显示审批按钮
          */
         if (null != rowsBean.appFlowInst) {
-            if (rowsBean.approvalstatus.equals("01")) {             //01 -审核中
-                approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
+            if (rowsBean.approvalstatus.equals("01")) {
+                //01 -审核中
+//                approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
+                //如果角色数组里包含当前角色id，显示审批按钮
+                approvalState.setVisibility(BaseApplication.getIns().getUserRoleIdList().contains(rowsBean.check_role) ? View.VISIBLE : View.GONE);
             }else {
                 approvalState.setVisibility(View.GONE);
             }
@@ -182,10 +189,19 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
             case R.id.iv_paizhao_xianchang:
                 lookImageOrder();
                 break;
-            case R.id.btn_pass:
-                approvalPresenter.approvalHandlePass(rowsBean.approval);
+            case R.id.btn_pass: //通过
+                Map<String, String> map = new HashMap<>();
+                map.put("userName", BaseApplication.getUserInfo().name);
+                map.put("userType", rowsBean.check_role); //角色id
+                map.put("roleName", rowsBean.check_name); //角色名
+                map.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
+                map.put("apprContent", ""); //内容
+                map.put("apprResult", "T"); //T 通过 F 未通过 R 驳回
+                map.put("appFlowInstId", rowsBean.approval); //审批id
+                showLoadingDialog();
+                approvalPresenter.approvalHandlePass(map);
                 break;
-            case R.id.btn_del:
+            case R.id.btn_del://驳回
                 showDialog();
                 break;
             //当前审批情况
@@ -222,7 +238,18 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
             @Override
             public void onClick(View v) {
                 myAlertInputDialog.dismiss();
-                approvalPresenter.approvalHandleTurn(rowsBean.approval, myAlertInputDialog.getResult());
+
+
+                Map<String, String> hashMap = new HashMap<>();
+                hashMap.put("userName", BaseApplication.getUserInfo().name);
+                hashMap.put("userType", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
+                hashMap.put("roleName", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_NAME)); //角色名
+                hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
+                hashMap.put("apprContent", myAlertInputDialog.getResult()); //内容
+                hashMap.put("apprResult", "R"); //T 通过 F 未通过 R 驳回
+                hashMap.put("appFlowInstId", rowsBean.approval); //审批id
+                showLoadingDialog();
+                approvalPresenter.approvalHandleTurn(hashMap);
             }
         }).setNegativeButton("取消", new View.OnClickListener() {
             @Override

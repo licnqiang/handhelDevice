@@ -32,34 +32,27 @@ public class ApprovalPresenter implements ICommonAction, ApprovalContract.Approv
     }
 
 
+    /**
+     * 审批通过
+     * @param map
+     */
     @Override
-    public void approvalHandlePass(String appFlowInstId) {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("userName", BaseApplication.getUserInfo().name);
-        hashMap.put("userType", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
-        hashMap.put("roleName", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_NAME)); //角色名
-        hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
-        hashMap.put("apprContent", ""); //内容
-        hashMap.put("apprResult", "T"); //T 通过 F 未通过 R 驳回
-        hashMap.put("appFlowInstId", appFlowInstId); //审批id
+    public void approvalHandlePass(Map<String,String>map) {
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_hanlder
-                , hashMap, new TypeToken<String>() {
+                , map, new TypeToken<String>() {
                 });
     }
 
+    /**
+     * 审批驳回
+     * @param map
+     */
     @Override
-    public void approvalHandleTurn(String appFlowInstId, String msg) {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("userName", BaseApplication.getUserInfo().name);
-        hashMap.put("userType", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
-        hashMap.put("roleName", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_NAME)); //角色名
-        hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
-        hashMap.put("apprContent", msg); //内容
-        hashMap.put("apprResult", "R"); //T 通过 F 未通过 R 驳回
-        hashMap.put("appFlowInstId", appFlowInstId); //审批id
+    public void approvalHandleTurn(Map<String,String> map) {
+
 
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.approval_hanlder
-                , hashMap, new TypeToken<String>() {
+                , map, new TypeToken<String>() {
                 });
     }
 

@@ -7,7 +7,9 @@ import com.google.gson.reflect.TypeToken;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.piesat.sanitation.common.BaseApplication;
@@ -82,7 +84,15 @@ public class loginPresenter implements ICommonAction, LoginContract.LoginPresent
                         tab.save();
                     }*/
                     Gson gson =new Gson();
-                    SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_ID_LIST,gson.toJson(loginInfo_respose.roles));
+                    List<String>roleList =new ArrayList<>();
+
+                    for (int i = 0; i <loginInfo_respose.roles.size() ; i++) {
+                        if (loginInfo_respose.roles.get(i).identity!=null){
+                            roleList.add(loginInfo_respose.roles.get(i).identity);
+                        }
+
+                    }
+                    SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_ID_LIST,gson.toJson(roleList));
 
                 }
 

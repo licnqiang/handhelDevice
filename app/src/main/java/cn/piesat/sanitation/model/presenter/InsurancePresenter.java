@@ -67,7 +67,7 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
         map.put("size", SysContant.CommentTag.pageSize);
         map.put("userId", BaseApplication.getIns().getUserId());
 
-        if(BaseApplication.getUserInfo().userType==3){
+        if(BaseApplication.getUserInfo().userType!=3){
             map.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
         }
         //取最小角色
