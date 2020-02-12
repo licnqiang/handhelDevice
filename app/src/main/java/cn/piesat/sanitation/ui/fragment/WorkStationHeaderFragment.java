@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.piesat.sanitation.R;
+import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.common.BaseFragment;
 import cn.piesat.sanitation.ui.activity.AccidentReportActivity;
 import cn.piesat.sanitation.ui.activity.AssignOrderActivity;
@@ -31,6 +33,10 @@ import cn.piesat.sanitation.ui.view.MyWorkModul;
  */
 public class WorkStationHeaderFragment extends BaseFragment {
 
+    @BindView(R.id.ll_paidan)
+    LinearLayout ll_paidan;
+    @BindView(R.id.ll_yundan)
+    LinearLayout ll_yundan;
 
     @Override
     protected int getLayoutId() {
@@ -39,14 +45,17 @@ public class WorkStationHeaderFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+
+        //目前，集团员工不显示运单和派单
+        ll_paidan.setVisibility(BaseApplication.getUserInfo().userType==3? View.GONE:View.VISIBLE);
+        ll_yundan.setVisibility(BaseApplication.getUserInfo().userType==3? View.GONE:View.VISIBLE);
+
     }
 
     @Override
     protected void initData() {
 
     }
-
-
 
 //    @OnClick({R.id.bai_dan, R.id.yun_dan, R.id.event_report, R.id.xingzhegn_shenpi})
 //    public void onViewClicked(View view) {
