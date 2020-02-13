@@ -1,6 +1,7 @@
 package cn.piesat.sanitation.model.contract;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.piesat.sanitation.data.ApprovalStateBean;
 
@@ -23,8 +24,8 @@ public interface ApprovalContract {
 
 
     interface ApprovalPresenter{
-        void approvalHandlePass(String appFlowInstId);
-        void approvalHandleTurn(String appFlowInstId,String msg);
+        void approvalHandlePass(Map<String,String> map);
+        void approvalHandleTurn(Map<String,String> map);
         void approvalStateById(String appFlowInstId);
         void upKeepUpDate(String appFlowInstId,String Id); //保养更新
         void maintainUpDate(String appFlowInstId,String Id); //维修更新

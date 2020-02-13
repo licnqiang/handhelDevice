@@ -43,7 +43,7 @@ public interface MaintainReportContract {
         void getMaintainReportAdd(Map<String, String> map);
         void getMaintainNoReportList(int curren);
         void getMaintainIsReportList(int curren);
-        void getMaintainReportList(int curren);
+        void getMaintainReportList(Map<String, String> map);
         void getApporveIdReport(Map<String, String> map); //获取审批id
     }
 }

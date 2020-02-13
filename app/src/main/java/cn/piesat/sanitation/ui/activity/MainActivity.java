@@ -70,9 +70,8 @@ public class MainActivity extends BaseActivity {
         } else if (type == 7) {                //7司机
             return workDriverFragment;
         } else if(type == 3){ //集团人员
-            //TODO 这两行要注掉 不影响使用暂时放开
-            SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_ID, BaseApplication.getUserRoleInfo().identity);//保存角色id （保存的是userType）
-            SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_NAME, BaseApplication.getUserRoleInfo().roleName);////保存角色名
+           /* SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_ID, BaseApplication.getUserRoleInfo().identity);//保存角色id （保存的是userType）
+            SpHelper.setStringValue(SysContant.userInfo.USER_ROLE_NAME, BaseApplication.getUserRoleInfo().roleName);////保存角色名*/
             return workGroupFragment;
         }else
             {

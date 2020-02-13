@@ -12,6 +12,7 @@ import cn.piesat.sanitation.data.InsuranceBean;
 import cn.piesat.sanitation.model.contract.InsuranceContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
+import cn.piesat.sanitation.util.RoleIdSortUtil;
 import cn.piesat.sanitation.util.SpHelper;
 
 import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;
@@ -65,10 +66,14 @@ public class InsurancePresenter implements ICommonAction, InsuranceContract.GetI
         map.put("curren", curren+"");
         map.put("size", SysContant.CommentTag.pageSize);
         map.put("userId", BaseApplication.getIns().getUserId());
-        if("3".equals(SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID))){
+
+        if(BaseApplication.getUserInfo().userType!=3){
             map.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
         }
-        map.put("roleId", BaseApplication.getIns().getUserRoleId());
+        //取最小角色
+        String roleId = RoleIdSortUtil.getMinRoleId(BaseApplication.getIns().getUserRoleIdList());
+        map.put("roleId",roleId);
+//        map.put("roleId", BaseApplication.getIns().getUserRoleId());
         commonPresenter.invokeInterfaceObtainData(true, false, true,false, "",UrlContant.MySourcePart.insuracne_list
                 ,map,new TypeToken<InsuranceBean>(){});
     }

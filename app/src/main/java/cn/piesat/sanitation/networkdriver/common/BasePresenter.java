@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,10 +42,14 @@ public abstract class BasePresenter extends RetrofitUtils {
 
     public <T> void TransmitCommonApi(boolean switchService, boolean TestSwitch, boolean isPost, boolean isBody, String part, String methodName, Map<String, String> parameterMap, TypeToken<?> typeToken) {
 
+        GsonBuilder gsonBuilder =new GsonBuilder();
+        gsonBuilder.serializeNulls();
+        Gson gson =gsonBuilder.create();
+
         LogUtil.e("http", "http--url==" + (switchService ? IPConfig.getURLPreFix() : IPConfig.getOutSourceURLPreFix()) + part + "/" + methodName);
         LogUtil.e("http", "http--requestMethod==" + (isPost ? "post" : "get"));
         LogUtil.e("http", "http--requestMethod==" + (isBody ? "body" : "params"));
-        LogUtil.e("http", "http--parameter==" + new Gson().toJson(parameterMap));
+        LogUtil.e("http", "http--parameter==" + gson.toJson(parameterMap));
         BaseReseponseInfo baseResponse = null;
         /**
          * 判断是否是测试模式
@@ -55,7 +60,7 @@ public abstract class BasePresenter extends RetrofitUtils {
                 in = BaseApplication.ApplicationContext.getAssets().open(methodName + ".txt");
                 String result = FileUtil.ToString(in);
                 LogUtil.e("http", "Http--本地响应===" + result);
-                baseResponse = new Gson().fromJson(result, BaseReseponseInfo.class);
+                baseResponse = gson.fromJson(result, BaseReseponseInfo.class);
                 responseData(baseResponse, methodName, parameterMap, typeToken);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -83,6 +88,12 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @param typeToken    返回值类型
      */
     public void commonApi(boolean isBody, boolean isPost, final String part, final String methodName, final Map<String, String> parameterMap, final TypeToken<?> typeToken) {
+
+
+        GsonBuilder gsonBuilder =new GsonBuilder();
+        gsonBuilder.serializeNulls();
+        Gson gson =gsonBuilder.create();
+
         Observable<BaseReseponseInfo> observable;
         if (isPost) {
             if (isBody) {
@@ -115,7 +126,7 @@ public abstract class BasePresenter extends RetrofitUtils {
                     //获取数据
                     @Override
                     public void onNext(BaseReseponseInfo baseResponse) {
-                        LogUtil.e("http", "网络响应" + new Gson().toJson(baseResponse));
+                        LogUtil.e("http", "网络响应" + gson.toJson(baseResponse));
                         responseData(baseResponse, methodName, parameterMap, typeToken);
                     }
                 });
@@ -130,10 +141,14 @@ public abstract class BasePresenter extends RetrofitUtils {
      * @return
      */
     public Object requestServer(Object receivedStr, TypeToken<?> typeToken) {
+        GsonBuilder gsonBuilder =new GsonBuilder();
+        gsonBuilder.serializeNulls();
+        Gson gson =gsonBuilder.create();
+
         try {
             Object result = null;
             if (!TextUtils.isEmpty(receivedStr + "")) {
-                result = new Gson().fromJson(new Gson().toJson(receivedStr), typeToken.getType());
+                result = gson.fromJson(gson.toJson(receivedStr), typeToken.getType());
             }
             return result;
         } catch (Exception e) {

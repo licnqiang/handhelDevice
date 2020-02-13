@@ -13,6 +13,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 //import com.meituan.android.walle.WalleChannelReader;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -21,6 +23,7 @@ import com.tencent.tinker.entry.DefaultApplicationLike;
 
 import com.tencent.tinker.entry.DefaultApplicationLike;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -94,8 +97,15 @@ public class BaseApplication extends DefaultApplicationLike {
     }
 
     // 角色Id List
-    public List<RolesInfo_Tab> getUserRoleIdList(){
-        return  SpHelper.getDataList(SysContant.userInfo.USER_ROLE_ID_LIST);
+    public List<String> getUserRoleIdList(){
+
+        String dada =SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID_LIST);
+        Gson gson =new Gson();
+        Type listType = new TypeToken<List<String>>() {}.getType();
+        List<String> rolesInfoTabs =gson.fromJson(dada,listType);
+
+        return rolesInfoTabs;
+
     }
 
     //站点名称

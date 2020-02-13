@@ -101,20 +101,13 @@ public class MaintainReportPresenter implements ICommonAction, MaintainReportCon
 
     /**
      * 获取列表
-     * @param curren
+     * @param map
      */
     @Override
-    public void getMaintainReportList(int curren) {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("curren", curren+"");
-        hashMap.put("size", "20"); //每页显示20条
-        if("3".equals(SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID))){
-            hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
-        }
-        hashMap.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
-        hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
+    public void getMaintainReportList(Map<String, String> map) {
+
         commonPresenter.invokeInterfaceObtainData(true, false, true,true, "",UrlContant.MySourcePart.maintain_approval_list
-                ,hashMap,new TypeToken<MaintainList>(){});
+                ,map,new TypeToken<MaintainList>(){});
     }
 
 

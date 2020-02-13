@@ -100,16 +100,10 @@ public class InsuranceActivity extends BaseActivity implements InsuranceContract
 
     @Override
     protected void initData() {
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         showLoadingDialog();
-        pageNumber = 1;
         insurancePresenter.getInsuranceList(pageNumber);
     }
+
 
     @Override
     public void error(String msg) {

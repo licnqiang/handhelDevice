@@ -79,7 +79,7 @@ public class SpHelper {
         editor.commit();
     }
 
-    public static  <T> void setDataList(String tag,List<T> dataList){
+/*    public static  <T> void setDataList(String tag,List<T> dataList){
         if (null == dataList || dataList.size() <= 0)
             return;
 
@@ -90,9 +90,9 @@ public class SpHelper {
         editor.putString(tag, strJson);
         editor.commit();
 
-    }
+    }*/
 
-    public  static <T> List<T> getDataList(String tag){
+  /*  public  static <T> List<T> getDataList(String tag){
         List<T> datalist=new ArrayList<T>();
         String strJson = sp.getString(tag, null);
         if (null == strJson) {
@@ -103,7 +103,7 @@ public class SpHelper {
 
         return datalist;
 
-    }
+    }*/
 
     public static void clearAllValue(Context context) {
         SharedPreferences sharedData = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);

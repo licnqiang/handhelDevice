@@ -14,6 +14,7 @@ import cn.piesat.sanitation.model.contract.GasonLineReportContract;
 import cn.piesat.sanitation.model.contract.UpKeepReportContract;
 import cn.piesat.sanitation.networkdriver.common.CommonPresenter;
 import cn.piesat.sanitation.networkdriver.common.ICommonAction;
+import cn.piesat.sanitation.util.RoleIdSortUtil;
 import cn.piesat.sanitation.util.SpHelper;
 
 import static cn.piesat.sanitation.networkdriver.common.BasePresenter.REQUEST_SUCCESS;
@@ -114,10 +115,13 @@ public class UpkeepReportPresenter implements ICommonAction, UpKeepReportContrac
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("curren", curren + "");
         hashMap.put("size ", "20"); //每页显示20条
-        if("3".equals(SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID))){
+
+        if(BaseApplication.getUserInfo().userType!=3){
             hashMap.put("siteName", BaseApplication.getUserInfo().deptNameCount); //站点名称
         }
-        hashMap.put("roleId", SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID)); //角色id
+
+        String roleId = RoleIdSortUtil.getMinRoleId(BaseApplication.getIns().getUserRoleIdList());
+        hashMap.put("roleId", roleId); //角色id
         hashMap.put("userId", SpHelper.getStringValue(SysContant.userInfo.USER_ID)); //用户id
         commonPresenter.invokeInterfaceObtainData(true, false, true, true, "", UrlContant.MySourcePart.upkeep_approval_list
                 , hashMap, new TypeToken<UpKeepList>() {

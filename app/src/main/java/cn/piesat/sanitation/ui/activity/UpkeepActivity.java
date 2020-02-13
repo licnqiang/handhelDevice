@@ -64,6 +64,7 @@ public class UpkeepActivity extends BaseActivity implements UpKeepOrderAdapter.O
     protected void initView() {
         tv_title.setText("保养审批");
         findViewById(R.id.img_back).setOnClickListener(v -> finish());
+        upkeepReportPresenter=new UpkeepReportPresenter(this);
         iv_right.setImageDrawable(ContextCompat.getDrawable(this,R.mipmap.icon_add));
         iv_right.setVisibility(3!= BaseApplication.getUserInfo().userType?View.VISIBLE:View.GONE); //判断用户类型是否是集团人员  目前集团人员仅仅开放查看功能
         iv_right.setOnClickListener(v -> toActivity(AddUpKeepReportActivity.class));
@@ -79,29 +80,22 @@ public class UpkeepActivity extends BaseActivity implements UpKeepOrderAdapter.O
             @Override
             public void onRefresh() {
                 pageNum=1;
-                upkeepReportPresenter.getUpkeepReportList(pageNum);
+                initData();
             }
 
             @Override
             public void onLoadmore() {
                 pageNum++;
-                upkeepReportPresenter.getUpkeepReportList(pageNum);
+                initData();
             }
         });
     }
 
     @Override
     protected void initData() {
-        upkeepReportPresenter=new UpkeepReportPresenter(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-//        showLoadingDialog("加载中", false);
-        pageNum=1;
         upkeepReportPresenter.getUpkeepReportList(pageNum);
     }
+
 
     @Override
     public void onItemClick(View view, int position) {
