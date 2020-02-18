@@ -75,7 +75,7 @@ public class ViolateReportActivity extends BaseActivity implements ReportContrac
             @Override
             public void getReportDelete(int position, String id) {
 
-                DialogUtils.generalDialog(ViolateReportActivity.this, "确定删除当前条目吗？", new DialogInterface.OnClickListener() {
+                DialogUtils.generalDialog(ViolateReportActivity.this, "提示","确定删除当前条目吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (TextUtils.isEmpty(violateListBeans.get(position).id)){

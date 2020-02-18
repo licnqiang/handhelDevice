@@ -47,6 +47,8 @@ public class UrlContant {
         String car_break_down_audit_par="carfault";  //车辆故障审批
         String car_break_down_audit="approvalFault";  //车辆故障审批
 
+        String check_version_update="appUpdaeteConfigure";//版本更新
+
     }
 
 

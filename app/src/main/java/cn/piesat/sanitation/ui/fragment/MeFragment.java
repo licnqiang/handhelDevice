@@ -103,7 +103,7 @@ public class MeFragment extends BaseFragment {
     public void onViewClick(View view){
         switch (view.getId()){
             case R.id.imgExit:
-                DialogUtils.generalDialog(getActivity(), "确认退出当前账号吗？", new DialogInterface.OnClickListener() {
+                DialogUtils.generalDialog(getActivity(), "提示","确认退出当前账号吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN,"");

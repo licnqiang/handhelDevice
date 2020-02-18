@@ -1,5 +1,7 @@
 package cn.piesat.sanitation.model.contract;
 
+import cn.piesat.sanitation.data.CheckUpdateBean;
+
 /**
  * @author lq
  * @fileName LoginContract
@@ -13,7 +15,13 @@ public interface LoginContract {
         void jumpToMain();
     }
 
+    interface CheckVersionUpdate{
+        void checkSuccess(CheckUpdateBean checkBean);
+        void checkError(String msg);
+    }
+
     interface LoginPresenter {
         void login(String userName, String passWord);
+        void checkUpdate();
     }
 }

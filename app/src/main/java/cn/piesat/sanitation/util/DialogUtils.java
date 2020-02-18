@@ -136,10 +136,10 @@ public class DialogUtils {
         builder.create().show();
     }
 
-    public static void generalDialog(Context context, String message, DialogInterface.OnClickListener negativeClickListener){
+    public static void generalDialog(Context context,String titile, String message, DialogInterface.OnClickListener negativeClickListener){
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
         builder.setCancelable(false);
-        builder.setTitle("提示");
+        builder.setTitle(titile);
         builder.setMessage(message);
         builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
             @Override

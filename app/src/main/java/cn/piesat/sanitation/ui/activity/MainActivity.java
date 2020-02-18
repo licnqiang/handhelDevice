@@ -1,17 +1,34 @@
 package cn.piesat.sanitation.ui.activity;
 
+import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.io.File;
+
 import butterknife.BindView;
+import cn.piesat.sanitation.BuildConfig;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.common.BaseApplication;
 import cn.piesat.sanitation.common.BaseFragment;
+import cn.piesat.sanitation.constant.FileConstant;
+import cn.piesat.sanitation.constant.FileDownLoader;
 import cn.piesat.sanitation.constant.SysContant;
+import cn.piesat.sanitation.data.CheckUpdateBean;
+import cn.piesat.sanitation.model.contract.LoginContract;
 import cn.piesat.sanitation.model.presenter.loginPresenter;
 import cn.piesat.sanitation.ui.fragment.CheckingFragment;
 import cn.piesat.sanitation.ui.fragment.WorkCompressFragment;
@@ -22,11 +39,13 @@ import cn.piesat.sanitation.ui.fragment.WorkDustmanFragment;
 import cn.piesat.sanitation.ui.fragment.WorkGroupFragment;
 import cn.piesat.sanitation.ui.fragment.WorkStationHeaderFragment;
 import cn.piesat.sanitation.ui.view.BottomBar;
+import cn.piesat.sanitation.util.DialogUtils;
+import cn.piesat.sanitation.util.LogUtil;
 import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements LoginContract.CheckVersionUpdate{
     private HomeFragment mapFragment = new HomeFragment();
     private CheckingFragment checkingFragment = new CheckingFragment();
     private MeFragment meFragment = new MeFragment();
@@ -40,6 +59,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
 
+    private loginPresenter loginPresenter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -51,6 +72,7 @@ public class MainActivity extends BaseActivity {
         String userId = BaseApplication.getIns().getUserId();
         //通过userId开启数据库   在这里开启数据库是因为只有在这里userId 才能确定
         BaseApplication.initDB(userId);
+        loginPresenter=new loginPresenter(this);
     }
 
     /**
@@ -103,7 +125,16 @@ public class MainActivity extends BaseActivity {
                         R.mipmap.main_wode,
                         R.mipmap.main_wode_sel)
                 .build();
+
+        //检查版本更新
+        if (loginPresenter!=null){
+            loginPresenter.checkUpdate();
+        }
+
     }
+
+
+
 
 
     @Override
@@ -158,4 +189,167 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    public void checkSuccess(CheckUpdateBean checkBean) {
+        if (checkBean!=null){
+            if (Integer.parseInt(checkBean.version)> BuildConfig.VERSION_CODE){
+                downloadApk(checkBean.versionDesc,checkBean.url);
+            }
+
+        }else {
+            ToastUtil.show(MainActivity.this,"版本更新检查失败");
+
+        }
+    }
+
+    @Override
+    public void checkError(String msg) {
+        ToastUtil.show(MainActivity.this,msg);
+    }
+    private ProgressDialog downProgressDialog;
+    /**
+     * 下载APK
+     */
+    private void downloadApk(String message,String apkUrl) {
+
+        DialogUtils.generalDialog(MainActivity.this, "更新提示",message, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new DownloadApplicationTask().execute(new String[]{apkUrl});
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+
+
+
+    private class DownloadApplicationTask extends AsyncTask<String, Void, Integer> {
+
+        @Override
+        protected void onPreExecute() {
+            showDownLoadProgress();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            return FileDownLoader.downloadFile(updateHandler, params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+
+
+            if (result==FileDownLoader.DOWN_FILE_ERROR){
+                closeDownLoadProgress();
+                ToastUtil.show(MainActivity.this,"更新包下载失败");
+
+                return;
+            }
+            closeDownLoadProgress();
+            File file = new File(FileConstant.getFileDownloadPath(), "xxhuanwei.apk");
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            if (result == FileDownLoader.DOWN_FILE_SUCCESS) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    Uri photoURI = FileProvider.getUriForFile(MainActivity.this, "cn.piesat.sanitation.provider", file);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    intent.setDataAndType(photoURI, "application/vnd.android.package-archive");
+
+                    //8.0适配
+                    if (Build.VERSION.SDK_INT>26) {
+                        boolean hasInstallPermission = getPackageManager().canRequestPackageInstalls();
+                        if (!hasInstallPermission) {
+                            //请求安装未知应用来源的权限
+                            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.REQUEST_INSTALL_PACKAGES}, 6666);
+
+                        }
+
+                    }
+
+                } else {
+                    intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+                }
+            }
+            startActivity(intent);
+        }
+
+    }
+
+    private Handler updateHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case FileDownLoader.DOWN_FILE_ERROR:
+                    ToastUtil.show(MainActivity.this,"更新包下载失败");
+                    closeDownLoadProgress();
+                    break;
+
+                case FileDownLoader.CLOSE_PROGRESSDIALOG:
+                    closeDownLoadProgress();
+                    break;
+                case FileDownLoader.START_DOWNLOAD:
+                    if (null != downProgressDialog) {
+                        if (msg.arg2!=0){
+                            downProgressDialog.setMax(msg.arg2);
+                        }
+                        downProgressDialog.setProgressNumberFormat("");
+                        downProgressDialog.setProgress(0);
+                        downProgressDialog.setMessage("下载中" + "\t" + msg.arg1 / 1024 + "Kb / " + msg.arg2 / 1024 + "Kb");
+                    }
+                    break;
+                case FileDownLoader.UPDATE_DOWNLOAD_PROGRESS:
+                    LogUtil.e("msg.arg1", msg.arg1 + "/msg.arg2:" + msg.arg2);
+                    if (null != downProgressDialog) {
+                        if (msg.arg2 != 0) {
+                            downProgressDialog.setProgress(msg.arg1 );
+
+                        }
+                        downProgressDialog.setMessage("下载中" + "\t" + msg.arg1 / 1024 + "Kb / " + msg.arg2 / 1024 + "Kb");
+                    }
+                    break;
+
+            }
+        }
+
+    };
+
+    public void closeDownLoadProgress() {
+        try {
+            if (downProgressDialog != null) {
+                downProgressDialog.dismiss();
+                downProgressDialog = null;
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void showDownLoadProgress() {
+
+        try {
+            if (downProgressDialog == null) {
+                downProgressDialog = new ProgressDialog(this);
+            }
+            if (!downProgressDialog.isShowing()) {
+                downProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                downProgressDialog.setMessage("正在下载中....");
+//                downProgressDialog.setIcon(R.mipmap.login_logo);
+                downProgressDialog.setProgress(0);
+
+//                downProgressDialog.setMax(fileLenght);
+                downProgressDialog.setIndeterminate(false);
+                downProgressDialog.setCancelable(false);
+                downProgressDialog.show();
+            }
+        } catch (Exception e) {
+        }
+    }
 }
