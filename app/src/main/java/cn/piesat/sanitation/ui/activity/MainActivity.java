@@ -43,6 +43,7 @@ import cn.piesat.sanitation.util.DialogUtils;
 import cn.piesat.sanitation.util.LogUtil;
 import cn.piesat.sanitation.util.SpHelper;
 import cn.piesat.sanitation.util.ToastUtil;
+import cn.piesat.sanitation.util.location.LocationService;
 
 
 public class MainActivity extends BaseActivity implements LoginContract.CheckVersionUpdate{
@@ -131,6 +132,9 @@ public class MainActivity extends BaseActivity implements LoginContract.CheckVer
             loginPresenter.checkUpdate();
         }
 
+        //启动定位服务
+        startService(new Intent(this, LocationService.class));
+
     }
 
 
@@ -183,6 +187,7 @@ public class MainActivity extends BaseActivity implements LoginContract.CheckVer
             ToastUtil.show(this, "再按一次退出程序");
             lastTime = System.currentTimeMillis();
         } else {
+            stopService(new Intent(this,LocationService.class));
             finish();
             super.onBackPressed();
             System.exit(0);

@@ -344,6 +344,10 @@
         <activity android:name=".ui.activity.AddGoodsApprovalActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+
+        <service android:name=".util.location.LocationService"/>
+        <receiver android:name=".util.location.UpdateReceiver"/>
+
     </application>
 
 </manifest>

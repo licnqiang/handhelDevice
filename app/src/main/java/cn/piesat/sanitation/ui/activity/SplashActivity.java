@@ -44,7 +44,11 @@ import cn.piesat.sanitation.model.presenter.loginPresenter;
 import cn.piesat.sanitation.util.ToastUtil;
 
 public class SplashActivity extends BaseActivity {
-    String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
+    private String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO};
     private int mRequestCode = 0x1;
     /*界面跳转时间*/
     private long DELAY_TIME = 1000;
@@ -97,7 +101,7 @@ public class SplashActivity extends BaseActivity {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
 //                    starMain();
                     j++;
-                    if (j == 4) {
+                    if (j == permissions.length) {
                         starMain();
                     }
                 } else {
