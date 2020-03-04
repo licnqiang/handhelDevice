@@ -18,7 +18,8 @@ public class RoleIdSortUtil {
      * @return
      */
     public static String getMinRoleId(List<String>idList){
-        if (idList.size()<1){
+
+        if (idList==null||idList.size()<1){
             return "";
         }
 

@@ -370,7 +370,7 @@ public class AddMaintainReportActivity extends BaseActivity implements MaintainR
         addMap.put("administrativeArea", s_area);//行政区划
         addMap.put("siteName", station);//站点名称
         addMap.put("carNumber", s_carNumber);//车牌号
-        addMap.put("reportperson", s_reportPerson);//上报人
+        addMap.put("applicant", s_reportPerson);//上报人
         addMap.put("maintenanceUnit", s_weixiudanwei);//维修单位
         addMap.put("maintenancePrice", s_weixiujiage);//维修价格
         addMap.put("driver", s_deriverPerson);//车辆司机

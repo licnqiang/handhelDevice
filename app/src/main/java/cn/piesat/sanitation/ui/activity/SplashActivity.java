@@ -3,15 +3,20 @@ package cn.piesat.sanitation.ui.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -20,18 +25,34 @@ import android.view.WindowManager;
 import com.hb.dialog.dialog.ConfirmDialog;
 import com.hb.dialog.myDialog.MyAlertDialog;
 
+import java.io.File;
+
 import cn.jpush.android.cache.Sp;
+import cn.piesat.sanitation.BuildConfig;
 import cn.piesat.sanitation.R;
 import cn.piesat.sanitation.common.BaseActivity;
 import cn.piesat.sanitation.common.BaseApplication;
+import cn.piesat.sanitation.constant.FileConstant;
+import cn.piesat.sanitation.constant.FileDownLoader;
 import cn.piesat.sanitation.constant.SysContant;
+import cn.piesat.sanitation.data.CheckUpdateBean;
+import cn.piesat.sanitation.model.contract.LoginContract;
+import cn.piesat.sanitation.util.DialogUtils;
+import cn.piesat.sanitation.util.LogUtil;
 import cn.piesat.sanitation.util.SpHelper;
+import cn.piesat.sanitation.model.presenter.loginPresenter;
+import cn.piesat.sanitation.util.ToastUtil;
 
 public class SplashActivity extends BaseActivity {
-    String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
+    private String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO};
     private int mRequestCode = 0x1;
     /*界面跳转时间*/
     private long DELAY_TIME = 1000;
+
 
     @Override
     protected int getLayoutId() {
@@ -45,12 +66,15 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        requestPer();
+
+
     }
 
     @Override
     protected void initData() {
+        requestPer();
     }
+
 
     /**
      * 请求权限
@@ -61,7 +85,7 @@ public class SplashActivity extends BaseActivity {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
-            starMain();
+                 starMain();
         } else {
             ActivityCompat.requestPermissions(this, mPerms, 1);
         }
@@ -77,7 +101,7 @@ public class SplashActivity extends BaseActivity {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
 //                    starMain();
                     j++;
-                    if (j == 4) {
+                    if (j == permissions.length) {
                         starMain();
                     }
                 } else {
@@ -129,5 +153,7 @@ public class SplashActivity extends BaseActivity {
             }
         }, DELAY_TIME);
     }
+
+
 
 }

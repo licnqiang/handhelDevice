@@ -20,12 +20,15 @@ import cn.piesat.sanitation.ui.activity.CarBreakDownActivity;
 import cn.piesat.sanitation.ui.activity.CarMaintenanceActivity;
 import cn.piesat.sanitation.ui.activity.EventReportActivity;
 import cn.piesat.sanitation.ui.activity.GasoLineReportActivity;
+import cn.piesat.sanitation.ui.activity.GoodsApprovalActivity;
+import cn.piesat.sanitation.ui.activity.GoodsUseActivity;
 import cn.piesat.sanitation.ui.activity.InsuranceActivity;
 import cn.piesat.sanitation.ui.activity.MaintainActivity;
 import cn.piesat.sanitation.ui.activity.OrderListActivity;
 import cn.piesat.sanitation.ui.activity.StationHeaderApproveActivity;
 import cn.piesat.sanitation.ui.activity.UpkeepActivity;
 import cn.piesat.sanitation.ui.activity.ViolateReportActivity;
+import cn.piesat.sanitation.ui.activity.WareHouseActivity;
 import cn.piesat.sanitation.ui.view.MyWorkModul;
 
 /**
@@ -76,7 +79,8 @@ public class WorkStationHeaderFragment extends BaseFragment {
 //    }
 
 
-    @OnClick({R.id.ll_paidan, R.id.ll_yundan, R.id.item_weigui, R.id.item_shigu, R.id.item_jiayou, R.id.item_nianjian, R.id.item_weixiu, R.id.item_baoyang})
+    @OnClick({R.id.ll_paidan, R.id.ll_yundan, R.id.item_weigui, R.id.item_shigu, R.id.item_jiayou, R.id.item_nianjian, R.id.item_weixiu, R.id.item_baoyang,
+            R.id.imgWareHouse,R.id.imgGoodsUse,R.id.imgGoodsApproval})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_paidan:
@@ -102,6 +106,15 @@ public class WorkStationHeaderFragment extends BaseFragment {
                 break;
             case R.id.item_baoyang:
                 toActivity(UpkeepActivity.class);
+                break;
+            case R.id.imgWareHouse://入库
+                toActivity(WareHouseActivity.class);
+                break;
+            case R.id.imgGoodsUse: //领用
+                toActivity(GoodsUseActivity.class);
+                break;
+            case R.id.imgGoodsApproval: //耗材审批
+                toActivity(GoodsApprovalActivity.class);
                 break;
         }
     }

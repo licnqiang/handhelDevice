@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cn.piesat.sanitation">
 
     <!-- Required  一些系统要求的权限，如访问网络等 -->
@@ -50,7 +51,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon, android:label, android:theme">
+
 
         <!-- 极光配置开始 -->
 
@@ -326,8 +329,25 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.AddInsuranceReportActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.WareHouseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddWareHouseActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.GoodsUseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddGoodsUseActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.GoodsApprovalActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.AddGoodsApprovalActivity"
             android:screenOrientation="portrait"
-            />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+
+        <service android:name=".util.location.LocationService"/>
+        <receiver android:name=".util.location.UpdateReceiver"/>
+
     </application>
 
 </manifest>

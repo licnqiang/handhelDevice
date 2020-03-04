@@ -144,20 +144,22 @@
                 app:new_work_modul_title="加油上报"></cn.piesat.sanitation.ui.view.ItemWorkModul>
 
             <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/imgWareHouse"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:new_work_modul_icon="@mipmap/iv3"
-                app:new_work_modul_title=""></cn.piesat.sanitation.ui.view.ItemWorkModul>
+                app:new_work_modul_title="入库"></cn.piesat.sanitation.ui.view.ItemWorkModul>
 
             <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/imgGoodsUse"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:new_work_modul_icon="@mipmap/iv3"
-                app:new_work_modul_title=""></cn.piesat.sanitation.ui.view.ItemWorkModul>
+                app:new_work_modul_title="领用"></cn.piesat.sanitation.ui.view.ItemWorkModul>
         </LinearLayout>
 
 
@@ -214,12 +216,13 @@
                 app:new_work_modul_title="保养审批"></cn.piesat.sanitation.ui.view.ItemWorkModul>
 
             <cn.piesat.sanitation.ui.view.ItemWorkModul
+                android:id="@+id/imgGoodsApproval"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                app:new_work_modul_icon="@mipmap/ic_launcher_round"
-                app:new_work_modul_title="加油上报"></cn.piesat.sanitation.ui.view.ItemWorkModul>
+                android:visibility="visible"
+                app:new_work_modul_icon="@mipmap/iv8"
+                app:new_work_modul_title="耗件"></cn.piesat.sanitation.ui.view.ItemWorkModul>
 
             <cn.piesat.sanitation.ui.view.ItemWorkModul
                 android:layout_width="0dp"

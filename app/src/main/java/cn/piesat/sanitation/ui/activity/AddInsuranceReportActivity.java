@@ -319,7 +319,7 @@ public class AddInsuranceReportActivity extends BaseActivity implements Insuranc
         map.put("roleId", String.valueOf(BaseApplication.getIns().getUserRoleId()));
         map.put("siteName", BaseApplication.getIns().getSiteName());
         map.put("administrativeArea", violateDistrict);//行政区划
-        map.put("reportperson", e_reportPerson);//申请人
+        map.put("applicant", e_reportPerson);//申请人
         map.put("coverage", insurance);//险种
         map.put("carNumber", carNumber);//车牌号
         map.put("oldInsuranceStarttime", insStartDate);//旧保险起始时间
