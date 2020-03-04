@@ -74,8 +74,8 @@ dependencies {
     implementation "com.bigkoo:pickerview:$rootProject.pickerview_version"
     //配置数据库
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.dbflow_version"
-    implementation "net.zetetic:android-database-sqlcipher:$rootProject.sqlcipher_version@aar"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:$rootProject.dbflow_version"
+//    implementation "net.zetetic:android-database-sqlcipher:$rootProject.sqlcipher_version@aar"
+//    implementation "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:$rootProject.dbflow_version"
     implementation "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.dbflow_version"
     implementation "com.github.Raizlabs.DBFlow:dbflow:$rootProject.dbflow_version"
 

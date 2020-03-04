@@ -264,7 +264,7 @@ public class AddUpKeepReportActivity extends BaseActivity implements UpKeepRepor
         addMap.put("administrativeArea", s_area);//行政区划
         addMap.put("siteName", station);//站点名称
         addMap.put("carNumber", s_carNumber);//车牌号
-        addMap.put("reportperson", s_reportPerson);//上报人
+        addMap.put("applicant", s_reportPerson);//上报人
         addMap.put("maintainUnit", s_maintainCompany);//保养单位
         addMap.put("maintainPrice", s_maintainPrice);//保养价格
         addMap.put("userId", BaseApplication.getIns().getUserId());//加油升数

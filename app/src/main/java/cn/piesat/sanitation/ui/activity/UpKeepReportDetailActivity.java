@@ -112,7 +112,7 @@ public class UpKeepReportDetailActivity extends BaseActivity implements Approval
          * 若订单结束不显示审批按钮
          */
         if (null != rowsBean.appFlowInst) {
-            if (rowsBean.approvalstatus.equals("01")) {             //01 -审核中
+            if (rowsBean.approvalstatus.equals("01")&&BaseApplication.getUserInfo().userType!=4) {             //01 -审核中
 //              approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
                 //如果角色数组里包含当前角色id，显示审批按钮
                 approvalState.setVisibility(BaseApplication.getIns().getUserRoleIdList().contains(rowsBean.check_role) ? View.VISIBLE : View.GONE);

@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity implements LoginContract.CheckVer
         return R.layout.activity_main;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void initView() {
         String userId = BaseApplication.getIns().getUserId();

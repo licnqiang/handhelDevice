@@ -104,11 +104,12 @@ public class InsuranceDetailActivity extends BaseActivity implements ApprovalCon
 //        String roleTyep = SpHelper.getStringValue(SysContant.userInfo.USER_ROLE_ID); //保存角色id
 
         /**
-         * 判断信息是否审核中，
+         * 判断信息是否审核中，或者是否司机角色
          * 若订单结束不显示审批按钮
          */
         if (null != rowsBean.appFlowInst) {
-            if (rowsBean.approvalstatus.equals("01")) {
+
+            if (rowsBean.approvalstatus.equals("01")&&BaseApplication.getUserInfo().userType!=4) {
                 //01 -审核中
 //                approvalState.setVisibility(roleTyep.equals(rowsBean.appFlowInst.roleId) ? View.VISIBLE : View.GONE);   //判断若需要当前用户审批时，显示审批按钮
                 //如果角色数组里包含当前角色id，显示审批按钮
